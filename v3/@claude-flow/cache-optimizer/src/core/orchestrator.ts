@@ -220,6 +220,7 @@ export class CacheOptimizer {
     const toDemote: string[] = [];
     let freedTokens = 0;
 
+    // First pass: prune low relevance entries
     for (const entry of sortedEntries) {
       if (freedTokens >= tokensToFree) break;
 
@@ -239,6 +240,32 @@ export class CacheOptimizer {
         // Estimate savings from compression
         const savings = entryTokens * (1 - this.config.temporal.tiers.warm.compressionRatio);
         freedTokens += savings;
+      }
+    }
+
+    // Second pass: if still need to free tokens, use LRU eviction (oldest entries first)
+    if (freedTokens < tokensToFree && urgency !== 'none') {
+      // Sort remaining entries by age (oldest first for LRU eviction)
+      const remainingEntries = sortedEntries
+        .filter(e => !toPrune.includes(e.id) && !toCompress.includes(e.id))
+        .sort((a, b) => a.lastAccessedAt - b.lastAccessedAt);
+
+      for (const entry of remainingEntries) {
+        if (freedTokens >= tokensToFree) break;
+
+        const entryTokens = entry.compressed?.compressedTokens ?? entry.tokens;
+
+        // For emergency, prune even higher relevance entries (LRU based)
+        if (urgency === 'emergency' || entry.relevance.overall < 0.7) {
+          toPrune.push(entry.id);
+          freedTokens += entryTokens;
+        } else if (entry.tier !== 'cold') {
+          // Otherwise, just compress
+          toDemote.push(entry.id);
+          toCompress.push(entry.id);
+          const savings = entryTokens * (1 - this.config.temporal.tiers.cold.compressionRatio);
+          freedTokens += savings;
+        }
       }
     }
 
