@@ -191,7 +191,273 @@ export class HandoffManager {
         return !!provider?.apiKey || !!process.env.OPENAI_API_KEY;
       },
       send: async (request, config) => this.sendToOpenAI(request, config),
+      stream: async (request, config, options) => this.streaming.streamFromOpenAI(request, config, options),
     });
+
+    // OpenRouter adapter
+    this.adapters.set('openrouter', {
+      name: 'openrouter',
+      healthCheck: async () => {
+        const provider = this.config.providers.find(p => p.type === 'openrouter');
+        return !!provider?.apiKey || !!process.env.OPENROUTER_API_KEY;
+      },
+      send: async (request, config) => this.sendToOpenRouter(request, config),
+    });
+
+    // Custom adapter (for user-defined endpoints)
+    this.adapters.set('custom', {
+      name: 'custom',
+      healthCheck: async () => true, // Custom endpoints are assumed healthy
+      send: async (request, config) => this.sendToCustom(request, config),
+    });
+  }
+
+  /**
+   * Send request to OpenRouter API
+   */
+  private async sendToOpenRouter(
+    request: HandoffRequest,
+    config: HandoffProviderConfig
+  ): Promise<HandoffResponse> {
+    const startTime = Date.now();
+    const apiKey = config.apiKey || process.env.OPENROUTER_API_KEY;
+
+    if (!apiKey) {
+      return {
+        requestId: request.id,
+        provider: config.name,
+        model: config.model,
+        content: '',
+        tokens: { prompt: 0, completion: 0, total: 0 },
+        durationMs: Date.now() - startTime,
+        status: 'failed',
+        error: 'No OpenRouter API key configured',
+        completedAt: Date.now(),
+      };
+    }
+
+    const messages = this.buildMessages(request);
+
+    try {
+      const response = await fetch(config.endpoint || 'https://openrouter.ai/api/v1/chat/completions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${apiKey}`,
+          'HTTP-Referer': config.options?.referer || 'https://github.com/ruvnet/claude-flow',
+          'X-Title': config.options?.title || 'Claude Flow',
+        },
+        body: JSON.stringify({
+          model: config.model || 'anthropic/claude-3.5-sonnet',
+          messages: messages.map(m => ({ role: m.role, content: m.content })),
+          max_tokens: request.options.maxTokens ?? 2048,
+          temperature: request.options.temperature ?? 0.7,
+        }),
+        signal: AbortSignal.timeout(this.config.timeout.request),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`OpenRouter error: ${response.status} - ${errorText}`);
+      }
+
+      const data = await response.json() as {
+        choices: Array<{ message: { content: string } }>;
+        usage: { prompt_tokens: number; completion_tokens: number; total_tokens: number };
+      };
+
+      return {
+        requestId: request.id,
+        provider: config.name,
+        model: config.model,
+        content: data.choices[0]?.message?.content || '',
+        tokens: {
+          prompt: data.usage.prompt_tokens,
+          completion: data.usage.completion_tokens,
+          total: data.usage.total_tokens,
+          estimatedCost: this.estimateCost('openrouter', data.usage.prompt_tokens, data.usage.completion_tokens),
+        },
+        durationMs: Date.now() - startTime,
+        status: 'completed',
+        injectedInstructions: request.callbackInstructions,
+        completedAt: Date.now(),
+      };
+    } catch (error) {
+      return {
+        requestId: request.id,
+        provider: config.name,
+        model: config.model,
+        content: '',
+        tokens: { prompt: 0, completion: 0, total: 0 },
+        durationMs: Date.now() - startTime,
+        status: 'failed',
+        error: error instanceof Error ? error.message : String(error),
+        completedAt: Date.now(),
+      };
+    }
+  }
+
+  /**
+   * Send request to custom endpoint
+   */
+  private async sendToCustom(
+    request: HandoffRequest,
+    config: HandoffProviderConfig
+  ): Promise<HandoffResponse> {
+    const startTime = Date.now();
+
+    if (!config.endpoint) {
+      return {
+        requestId: request.id,
+        provider: config.name,
+        model: config.model || 'custom',
+        content: '',
+        tokens: { prompt: 0, completion: 0, total: 0 },
+        durationMs: Date.now() - startTime,
+        status: 'failed',
+        error: 'No endpoint configured for custom provider',
+        completedAt: Date.now(),
+      };
+    }
+
+    const messages = this.buildMessages(request);
+
+    // Build headers from config options
+    const headers: Record<string, string> = {
+      'Content-Type': 'application/json',
+    };
+
+    if (config.apiKey) {
+      headers['Authorization'] = `Bearer ${config.apiKey}`;
+    }
+
+    // Add custom headers from options
+    if (config.options) {
+      for (const [key, value] of Object.entries(config.options)) {
+        if (typeof value === 'string' && key.startsWith('header_')) {
+          headers[key.replace('header_', '')] = value;
+        }
+      }
+    }
+
+    try {
+      // Support both OpenAI-compatible and custom formats
+      const requestFormat = config.options?.format || 'openai';
+
+      let body: string;
+      if (requestFormat === 'openai') {
+        body = JSON.stringify({
+          model: config.model || 'custom',
+          messages: messages.map(m => ({ role: m.role, content: m.content })),
+          max_tokens: request.options.maxTokens ?? 2048,
+          temperature: request.options.temperature ?? 0.7,
+        });
+      } else if (requestFormat === 'ollama') {
+        body = JSON.stringify({
+          model: config.model || 'llama3.2',
+          messages,
+          stream: false,
+          options: {
+            temperature: request.options.temperature ?? 0.7,
+            num_predict: request.options.maxTokens ?? 2048,
+          },
+        });
+      } else {
+        // Raw format - pass through
+        body = JSON.stringify({
+          prompt: request.prompt,
+          system: request.systemPrompt,
+          context: request.context,
+          options: request.options,
+        });
+      }
+
+      const response = await fetch(config.endpoint, {
+        method: 'POST',
+        headers,
+        body,
+        signal: AbortSignal.timeout(this.config.timeout.request),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Custom endpoint error: ${response.status} - ${errorText}`);
+      }
+
+      const data = await response.json() as Record<string, unknown>;
+
+      // Try to extract content from various formats
+      let content = '';
+      let tokens = { prompt: 0, completion: 0, total: 0 };
+
+      // OpenAI format
+      if (data.choices && Array.isArray(data.choices)) {
+        const choices = data.choices as Array<{ message?: { content?: string } }>;
+        content = choices[0]?.message?.content || '';
+        const usage = data.usage as { prompt_tokens?: number; completion_tokens?: number; total_tokens?: number } | undefined;
+        if (usage) {
+          tokens = {
+            prompt: usage.prompt_tokens || 0,
+            completion: usage.completion_tokens || 0,
+            total: usage.total_tokens || 0,
+          };
+        }
+      }
+      // Ollama format
+      else if (data.message && typeof (data.message as { content?: string }).content === 'string') {
+        content = (data.message as { content: string }).content;
+        tokens = {
+          prompt: (data.prompt_eval_count as number) || 0,
+          completion: (data.eval_count as number) || 0,
+          total: ((data.prompt_eval_count as number) || 0) + ((data.eval_count as number) || 0),
+        };
+      }
+      // Anthropic format
+      else if (data.content && Array.isArray(data.content)) {
+        const contentBlocks = data.content as Array<{ text?: string }>;
+        content = contentBlocks[0]?.text || '';
+        const usage = data.usage as { input_tokens?: number; output_tokens?: number } | undefined;
+        if (usage) {
+          tokens = {
+            prompt: usage.input_tokens || 0,
+            completion: usage.output_tokens || 0,
+            total: (usage.input_tokens || 0) + (usage.output_tokens || 0),
+          };
+        }
+      }
+      // Raw response
+      else if (typeof data.response === 'string') {
+        content = data.response;
+      } else if (typeof data.text === 'string') {
+        content = data.text;
+      } else if (typeof data.output === 'string') {
+        content = data.output;
+      }
+
+      return {
+        requestId: request.id,
+        provider: config.name,
+        model: config.model || 'custom',
+        content,
+        tokens,
+        durationMs: Date.now() - startTime,
+        status: 'completed',
+        injectedInstructions: request.callbackInstructions,
+        completedAt: Date.now(),
+      };
+    } catch (error) {
+      return {
+        requestId: request.id,
+        provider: config.name,
+        model: config.model || 'custom',
+        content: '',
+        tokens: { prompt: 0, completion: 0, total: 0 },
+        durationMs: Date.now() - startTime,
+        status: 'failed',
+        error: error instanceof Error ? error.message : String(error),
+        completedAt: Date.now(),
+      };
+    }
   }
 
   /**
