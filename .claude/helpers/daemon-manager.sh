@@ -265,6 +265,15 @@ case "${1:-status}" in
     "start-metrics")
         start_metrics_daemon "${2:-5}"
         ;;
+    "start-cache"|"start-cache-optimizer")
+        start_cache_optimizer "${2:-multi-agent}"
+        ;;
+    "cache-status"|"gnn-status")
+        "$SCRIPT_DIR/cache-optimizer-hooks.sh" status
+        ;;
+    "cache-report"|"gnn-report")
+        "$SCRIPT_DIR/cache-optimizer-hooks.sh" report "${2:-terminal}"
+        ;;
     "help"|"-h"|"--help")
         echo "Claude Flow V3 Daemon Manager"
         echo ""
