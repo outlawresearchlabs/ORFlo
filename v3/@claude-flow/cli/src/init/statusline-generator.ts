@@ -661,18 +661,19 @@ function generateStatusline() {
     \`\${c.brightYellow}⚡ 1.0x\${c.reset} \${c.dim}→\${c.reset} \${c.brightYellow}2.49x-7.47x\${c.reset}\`
   );
 
-  // Line 2: Swarm + CVE + Memory + Context + Intelligence
+  // Line 2: Swarm + Hooks + CVE + Memory + Context + Intelligence
   const swarmIndicator = swarm.coordinationActive ? \`\${c.brightGreen}◉\${c.reset}\` : \`\${c.dim}○\${c.reset}\`;
   const agentsColor = swarm.activeAgents > 0 ? c.brightGreen : c.red;
   let securityIcon = security.status === 'CLEAN' ? '🟢' : security.status === 'IN_PROGRESS' ? '🟡' : '🔴';
   let securityColor = security.status === 'CLEAN' ? c.brightGreen : security.status === 'IN_PROGRESS' ? c.brightYellow : c.brightRed;
+  const hooksColor = hooks.enabled > 0 ? c.brightGreen : c.dim;
 
   lines.push(
     \`\${c.brightYellow}🤖 Swarm\${c.reset}  \${swarmIndicator} [\${agentsColor}\${String(swarm.activeAgents).padStart(2)}\${c.reset}/\${c.brightWhite}\${swarm.maxAgents}\${c.reset}]  \` +
     \`\${c.brightPurple}👥 \${system.subAgents}\${c.reset}    \` +
+    \`\${c.brightBlue}🪝 \${hooksColor}\${hooks.enabled}\${c.reset}/\${c.brightWhite}\${hooks.total}\${c.reset}    \` +
     \`\${securityIcon} \${securityColor}CVE \${security.cvesFixed}\${c.reset}/\${c.brightWhite}\${security.totalCves}\${c.reset}    \` +
     \`\${c.brightCyan}💾 \${system.memoryMB}MB\${c.reset}    \` +
-    \`\${c.brightGreen}📂 \${String(system.contextPct).padStart(3)}%\${c.reset}    \` +
     \`\${c.dim}🧠 \${String(system.intelligencePct).padStart(3)}%\${c.reset}\`
   );
 
