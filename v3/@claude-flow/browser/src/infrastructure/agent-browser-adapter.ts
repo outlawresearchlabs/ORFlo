@@ -267,14 +267,14 @@ export class AgentBrowserAdapter {
     if (options.compact) args.push('-c');
     if (options.depth) args.push('-d', String(options.depth));
     if (options.selector) args.push('-s', options.selector);
-    return this.exec(args);
+    return this.exec<Snapshot>(args);
   }
 
   async screenshot(input: ScreenshotInput = {}): Promise<ActionResult<string>> {
     const args = ['screenshot'];
     if (input.path) args.push(input.path);
     if (input.fullPage) args.push('--full');
-    return this.exec(args);
+    return this.exec<string>(args);
   }
 
   async pdf(path: string): Promise<ActionResult> {
