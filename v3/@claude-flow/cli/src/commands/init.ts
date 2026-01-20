@@ -678,18 +678,33 @@ const upgradeCommand: Command = {
       type: 'boolean',
       default: false,
     },
+    {
+      name: 'add-missing',
+      short: 'a',
+      description: 'Add any new skills, agents, and commands that are missing',
+      type: 'boolean',
+      default: false,
+    },
   ],
   action: async (ctx: CommandContext): Promise<CommandResult> => {
+    const addMissing = ctx.flags['add-missing'] as boolean;
+
     output.writeln();
     output.writeln(output.bold('Upgrading Claude Flow'));
-    output.writeln(output.dim('Updates helpers while preserving your existing data'));
+    if (addMissing) {
+      output.writeln(output.dim('Updates helpers and adds any missing skills/agents/commands'));
+    } else {
+      output.writeln(output.dim('Updates helpers while preserving your existing data'));
+    }
     output.writeln();
 
-    const spinner = output.createSpinner({ text: 'Upgrading...' });
+    const spinner = output.createSpinner({ text: addMissing ? 'Upgrading and adding missing assets...' : 'Upgrading...' });
     spinner.start();
 
     try {
-      const result = await executeUpgrade(ctx.cwd);
+      const result = addMissing
+        ? await executeUpgradeWithMissing(ctx.cwd)
+        : await executeUpgrade(ctx.cwd);
 
       if (!result.success) {
         spinner.fail('Upgrade failed');
