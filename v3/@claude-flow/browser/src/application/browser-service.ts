@@ -150,9 +150,22 @@ export class BrowserService {
   // ===========================================================================
 
   /**
-   * Navigate to URL with trajectory tracking
+   * Navigate to URL with trajectory tracking and security scanning
    */
-  async open(url: string, options?: { waitUntil?: 'load' | 'domcontentloaded' | 'networkidle'; headers?: Record<string, string> }): Promise<ActionResult> {
+  async open(url: string, options?: { waitUntil?: 'load' | 'domcontentloaded' | 'networkidle'; headers?: Record<string, string>; skipSecurityCheck?: boolean }): Promise<ActionResult> {
+    // Security check before navigation
+    if (this.securityScanner && !options?.skipSecurityCheck) {
+      const scanResult = await this.securityScanner.scanUrl(url);
+      if (!scanResult.safe) {
+        const threats = scanResult.threats.map(t => `${t.type}: ${t.description}`).join('; ');
+        return {
+          success: false,
+          error: `Security scan failed: ${threats}`,
+          data: { scanResult },
+        };
+      }
+    }
+
     const result = await this.adapter.open({
       url,
       waitUntil: options?.waitUntil,
@@ -160,6 +173,16 @@ export class BrowserService {
     });
     this.recordStep('open', { url, ...options }, result);
     return result;
+  }
+
+  /**
+   * Scan URL for security threats without navigating
+   */
+  async scanUrl(url: string): Promise<ThreatScanResult> {
+    if (!this.securityScanner) {
+      return { safe: true, threats: [], pii: [], score: 1, scanDuration: 0 };
+    }
+    return this.securityScanner.scanUrl(url);
   }
 
   /**
