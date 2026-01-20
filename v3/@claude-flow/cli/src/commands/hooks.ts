@@ -3379,7 +3379,56 @@ const statuslineCommand: Command = {
         // Ignore
       }
 
-      const intelligencePct = Math.min(100, Math.floor((learning.patterns / 10) * 1));
+      // Calculate intelligence from multiple sources (matching statusline-generator.ts)
+      let intelligencePct = 0;
+
+      // 1. Check learning.json for REAL intelligence metrics first
+      const learningJsonPaths = [
+        path.join(process.cwd(), '.claude-flow', 'learning.json'),
+        path.join(process.cwd(), '.claude', '.claude-flow', 'learning.json'),
+        path.join(process.cwd(), '.swarm', 'learning.json'),
+      ];
+      for (const lPath of learningJsonPaths) {
+        if (fs.existsSync(lPath)) {
+          try {
+            const data = JSON.parse(fs.readFileSync(lPath, 'utf-8'));
+            if (data.intelligence?.score !== undefined) {
+              intelligencePct = Math.min(100, Math.floor(data.intelligence.score));
+              break;
+            }
+          } catch { /* ignore */ }
+        }
+      }
+
+      // 2. Fallback: calculate from patterns and vectors
+      if (intelligencePct === 0) {
+        const fromPatterns = learning.patterns > 0 ? Math.min(100, Math.floor(learning.patterns / 10)) : 0;
+        // Will be updated later with vector count
+        intelligencePct = fromPatterns;
+      }
+
+      // 3. Fallback: calculate maturity score from project indicators
+      if (intelligencePct === 0) {
+        let maturityScore = 0;
+        // Check for key project files/dirs
+        if (fs.existsSync(path.join(process.cwd(), '.claude'))) maturityScore += 15;
+        if (fs.existsSync(path.join(process.cwd(), '.claude-flow'))) maturityScore += 15;
+        if (fs.existsSync(path.join(process.cwd(), 'CLAUDE.md'))) maturityScore += 10;
+        if (fs.existsSync(path.join(process.cwd(), 'claude-flow.config.json'))) maturityScore += 10;
+        if (fs.existsSync(path.join(process.cwd(), '.swarm'))) maturityScore += 10;
+        // Check for test files
+        const testDirs = ['tests', '__tests__', 'test', 'v3/__tests__'];
+        for (const dir of testDirs) {
+          if (fs.existsSync(path.join(process.cwd(), dir))) {
+            maturityScore += 10;
+            break;
+          }
+        }
+        // Check for hooks config
+        if (fs.existsSync(path.join(process.cwd(), '.claude', 'settings.json'))) maturityScore += 10;
+        intelligencePct = Math.min(100, maturityScore);
+      }
+
       const contextPct = Math.min(100, Math.floor(learning.sessions * 5));
 
       return { memoryMB, contextPct, intelligencePct, subAgents };
