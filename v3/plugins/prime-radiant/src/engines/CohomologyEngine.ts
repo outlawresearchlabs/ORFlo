@@ -13,7 +13,7 @@ import type {
   CoherenceEnergy,
   Sheaf,
   WasmModule
-} from '../types';
+} from '../types.js';
 
 /**
  * CohomologyEngine - WASM wrapper for sheaf Laplacian coherence checking
