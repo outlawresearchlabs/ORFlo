@@ -933,17 +933,17 @@ export interface TestResult {
  */
 export interface AQEPluginConfig {
   /** Plugin version */
-  version: string;
+  version?: string;
   /** Memory namespace prefix */
-  namespacePrefix: string;
+  namespacePrefix?: string;
   /** Enabled bounded contexts */
-  enabledContexts: BoundedContext[];
+  enabledContexts?: BoundedContext[];
   /** Security sandbox config */
-  sandbox: SandboxConfig;
+  sandbox?: SandboxConfig;
   /** Model routing config */
-  modelRouting: ModelRoutingConfig;
+  modelRouting?: ModelRoutingConfig;
   /** Performance targets */
-  performanceTargets: QEPerformanceTargets;
+  performanceTargets?: QEPerformanceTargets;
 }
 
 /**
