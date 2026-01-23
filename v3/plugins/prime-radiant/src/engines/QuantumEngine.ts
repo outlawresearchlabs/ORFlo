@@ -291,11 +291,13 @@ export class QuantumEngine implements IQuantumEngine {
 
         if (p1 !== p2) {
           // Merge - older component survives
-          const older = birthTime[p1] <= birthTime[p2] ? p1 : p2;
+          const birthP1 = birthTime[p1] ?? 0;
+          const birthP2 = birthTime[p2] ?? 0;
+          const older = birthP1 <= birthP2 ? p1 : p2;
           const younger = older === p1 ? p2 : p1;
 
           // Death of younger component
-          const birth = birthTime[younger];
+          const birth = birthTime[younger] ?? 0;
           const death = value;
 
           if (death > birth) {
