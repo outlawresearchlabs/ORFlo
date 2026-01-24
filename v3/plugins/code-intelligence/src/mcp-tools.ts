@@ -1019,22 +1019,22 @@ function generateRecommendations(patterns: LearnedPattern[]): string[] {
  * All Code Intelligence MCP Tools
  */
 export const codeIntelligenceTools: MCPTool[] = [
-  semanticSearchTool,
-  architectureAnalyzeTool,
-  refactorImpactTool,
-  splitSuggestTool,
-  learnPatternsTool,
+  semanticSearchTool as unknown as MCPTool,
+  architectureAnalyzeTool as unknown as MCPTool,
+  refactorImpactTool as unknown as MCPTool,
+  splitSuggestTool as unknown as MCPTool,
+  learnPatternsTool as unknown as MCPTool,
 ];
 
 /**
  * Tool name to handler map
  */
 export const toolHandlers = new Map<string, MCPTool['handler']>([
-  ['code/semantic-search', semanticSearchTool.handler],
-  ['code/architecture-analyze', architectureAnalyzeTool.handler],
-  ['code/refactor-impact', refactorImpactTool.handler],
-  ['code/split-suggest', splitSuggestTool.handler],
-  ['code/learn-patterns', learnPatternsTool.handler],
+  ['code/semantic-search', semanticSearchTool.handler as MCPTool['handler']],
+  ['code/architecture-analyze', architectureAnalyzeTool.handler as MCPTool['handler']],
+  ['code/refactor-impact', refactorImpactTool.handler as MCPTool['handler']],
+  ['code/split-suggest', splitSuggestTool.handler as MCPTool['handler']],
+  ['code/learn-patterns', learnPatternsTool.handler as MCPTool['handler']],
 ]);
 
 /**
