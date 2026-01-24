@@ -213,8 +213,22 @@ Audit logs are retained for 6 years per HIPAA requirements.
 
 All inputs are validated using Zod schemas:
 - ICD-10 codes must match format `/^[A-Z]\d{2}(\.\d{1,2})?$/`
+- RxNorm CUIs validated for format
 - Maximum 100 diagnoses, 50 medications per query
 - String lengths capped to prevent injection attacks
+- Patient identifiers must be UUIDs or match institutional format
+
+### Rate Limiting
+
+```typescript
+const rateLimits = {
+  'healthcare/patient-similarity': { requestsPerMinute: 30, maxConcurrent: 3 },
+  'healthcare/drug-interactions': { requestsPerMinute: 60, maxConcurrent: 5 },
+  'healthcare/clinical-pathways': { requestsPerMinute: 20, maxConcurrent: 2 },
+  'healthcare/literature-search': { requestsPerMinute: 30, maxConcurrent: 3 },
+  'healthcare/ontology-navigate': { requestsPerMinute: 120, maxConcurrent: 10 }
+};
+```
 
 ## Performance
 
