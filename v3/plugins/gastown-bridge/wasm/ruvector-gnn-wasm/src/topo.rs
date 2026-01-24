@@ -1,15 +1,24 @@
-//! Topological Sort
+//! Ultra-Optimized Topological Sort
 //!
-//! Topological sorting for bead dependency resolution.
-//! 150x faster than JavaScript implementation.
+//! Target: <0.3ms for 1000 nodes (500x faster than JavaScript)
+//!
+//! Optimizations:
+//! - Kahn's algorithm with pre-allocated queues
+//! - FxHash for O(1) lookups
+//! - Cache-friendly iteration order
+//! - Parallel-ready execution levels
 
 use wasm_bindgen::prelude::*;
 use petgraph::algo::toposort;
-use std::collections::HashMap;
+use gastown_shared::{FxHashMap, pool::SmallBuffer};
 use crate::{BeadNode, TopoSortResult};
 use crate::dag::build_graph;
 
 /// Perform topological sort on beads
+///
+/// # Performance
+/// Target: <0.3ms for 1000 nodes
+#[inline]
 pub fn topo_sort_impl(beads_json: &str) -> Result<String, JsValue> {
     let beads: Vec<BeadNode> = serde_json::from_str(beads_json)
         .map_err(|e| JsValue::from_str(&format!("Parse error: {}", e)))?;
@@ -21,7 +30,30 @@ pub fn topo_sort_impl(beads_json: &str) -> Result<String, JsValue> {
 }
 
 /// Internal topological sort implementation
-fn topo_sort_internal(beads: &[BeadNode]) -> TopoSortResult {
+///
+/// Uses Kahn's algorithm for better cache locality on large graphs
+#[inline]
+pub fn topo_sort_internal(beads: &[BeadNode]) -> TopoSortResult {
+    if beads.is_empty() {
+        return TopoSortResult {
+            sorted: vec![],
+            has_cycle: false,
+            cycle_nodes: vec![],
+        };
+    }
+
+    // For small graphs, use petgraph's optimized implementation
+    if beads.len() <= 100 {
+        return topo_sort_petgraph(beads);
+    }
+
+    // For larger graphs, use our optimized Kahn's algorithm
+    topo_sort_kahn(beads)
+}
+
+/// Topological sort using petgraph (optimized for small graphs)
+#[inline]
+fn topo_sort_petgraph(beads: &[BeadNode]) -> TopoSortResult {
     let graph = build_graph(beads);
 
     match toposort(&graph, None) {
@@ -37,7 +69,6 @@ fn topo_sort_internal(beads: &[BeadNode]) -> TopoSortResult {
             }
         }
         Err(cycle) => {
-            // Cycle detected - find all nodes in the cycle
             let cycle_node = graph[cycle.node_id()].clone();
 
             TopoSortResult {
@@ -49,7 +80,84 @@ fn topo_sort_internal(beads: &[BeadNode]) -> TopoSortResult {
     }
 }
 
+/// Topological sort using Kahn's algorithm (optimized for large graphs)
+///
+/// Kahn's algorithm has better cache locality for large graphs
+/// because it processes nodes in BFS order rather than DFS.
+#[inline]
+fn topo_sort_kahn(beads: &[BeadNode]) -> TopoSortResult {
+    let n = beads.len();
+
+    // Build index mappings
+    let mut id_to_index: FxHashMap<&str, usize> = FxHashMap::default();
+    id_to_index.reserve(n);
+
+    for (i, bead) in beads.iter().enumerate() {
+        id_to_index.insert(&bead.id, i);
+    }
+
+    // Compute in-degrees
+    let mut in_degree: Vec<usize> = vec![0; n];
+    let mut successors: Vec<SmallBuffer<usize, 8>> = vec![SmallBuffer::new(); n];
+
+    for (i, bead) in beads.iter().enumerate() {
+        in_degree[i] = bead.blocked_by.len();
+
+        for blocked in &bead.blocks {
+            if let Some(&j) = id_to_index.get(blocked.as_str()) {
+                successors[i].push(j);
+            }
+        }
+    }
+
+    // Initialize queue with nodes that have no dependencies
+    let mut queue: std::collections::VecDeque<usize> = std::collections::VecDeque::with_capacity(n);
+
+    for i in 0..n {
+        if in_degree[i] == 0 {
+            queue.push_back(i);
+        }
+    }
+
+    // Process nodes in topological order
+    let mut sorted: Vec<String> = Vec::with_capacity(n);
+
+    while let Some(i) = queue.pop_front() {
+        sorted.push(beads[i].id.clone());
+
+        for &j in &successors[i] {
+            in_degree[j] -= 1;
+            if in_degree[j] == 0 {
+                queue.push_back(j);
+            }
+        }
+    }
+
+    // Check for cycles
+    if sorted.len() != n {
+        // Find nodes that weren't processed (they're in a cycle)
+        let sorted_set: std::collections::HashSet<_> = sorted.iter().collect();
+        let cycle_nodes: Vec<String> = beads.iter()
+            .filter(|b| !sorted_set.contains(&b.id))
+            .map(|b| b.id.clone())
+            .collect();
+
+        TopoSortResult {
+            sorted: vec![],
+            has_cycle: true,
+            cycle_nodes,
+        }
+    } else {
+        TopoSortResult {
+            sorted,
+            has_cycle: false,
+            cycle_nodes: vec![],
+        }
+    }
+}
+
 /// Get beads in execution order with parallel groups
+#[inline]
 pub fn get_execution_order_impl(beads_json: &str) -> Result<String, JsValue> {
     let beads: Vec<BeadNode> = serde_json::from_str(beads_json)
         .map_err(|e| JsValue::from_str(&format!("Parse error: {}", e)))?;
@@ -61,6 +169,7 @@ pub fn get_execution_order_impl(beads_json: &str) -> Result<String, JsValue> {
 }
 
 /// Group beads into parallel execution waves
+#[inline]
 fn get_execution_order_internal(beads: &[BeadNode]) -> Result<Vec<Vec<String>>, JsValue> {
     let result = topo_sort_internal(beads);
 
@@ -68,16 +177,24 @@ fn get_execution_order_internal(beads: &[BeadNode]) -> Result<Vec<Vec<String>>, 
         return Err(JsValue::from_str("Cannot compute execution order: cycle detected"));
     }
 
+    if beads.is_empty() {
+        return Ok(vec![]);
+    }
+
     // Build level map
-    let mut id_to_bead: HashMap<&str, &BeadNode> = HashMap::new();
+    let mut id_to_bead: FxHashMap<&str, &BeadNode> = FxHashMap::default();
+    id_to_bead.reserve(beads.len());
+
     for bead in beads {
         id_to_bead.insert(&bead.id, bead);
     }
 
-    let mut levels: HashMap<String, usize> = HashMap::new();
+    let mut levels: FxHashMap<String, usize> = FxHashMap::default();
+    levels.reserve(beads.len());
+
     let mut max_level = 0;
 
-    // Compute level for each bead
+    // Compute level for each bead in topological order
     for id in &result.sorted {
         if let Some(bead) = id_to_bead.get(id.as_str()) {
             let level = if bead.blocked_by.is_empty() {
@@ -244,5 +361,33 @@ mod tests {
         assert!(waves[0].contains(&"a".to_string()));
         assert!(waves[0].contains(&"b".to_string()));
         assert_eq!(waves[1], vec!["c".to_string()]);
+    }
+
+    #[test]
+    fn test_topo_sort_cycle() {
+        let beads = vec![
+            BeadNode {
+                id: "a".to_string(),
+                title: "A".to_string(),
+                status: "open".to_string(),
+                priority: 0,
+                blocked_by: vec!["b".to_string()],
+                blocks: vec!["b".to_string()],
+                duration: None,
+            },
+            BeadNode {
+                id: "b".to_string(),
+                title: "B".to_string(),
+                status: "open".to_string(),
+                priority: 0,
+                blocked_by: vec!["a".to_string()],
+                blocks: vec!["a".to_string()],
+                duration: None,
+            },
+        ];
+
+        let result = topo_sort_kahn(&beads);
+        assert!(result.has_cycle);
+        assert!(!result.cycle_nodes.is_empty());
     }
 }
