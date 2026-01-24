@@ -81,7 +81,7 @@ export async function rateItem(
     throw new Error(`Rating failed: ${error}`);
   }
 
-  return response.json();
+  return response.json() as Promise<RatingResponse>;
 }
 
 /**
