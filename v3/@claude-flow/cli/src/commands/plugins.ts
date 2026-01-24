@@ -313,10 +313,36 @@ const uninstallCommand: Command = {
     output.writeln();
     const spinner = output.createSpinner({ text: `Uninstalling ${name}...`, spinner: 'dots' });
     spinner.start();
-    await new Promise(r => setTimeout(r, 500));
-    spinner.succeed(`Uninstalled ${name}`);
 
-    return { success: true };
+    try {
+      const manager = getPluginManager();
+      await manager.initialize();
+
+      // Check if installed
+      const plugin = await manager.getPlugin(name);
+      if (!plugin) {
+        spinner.fail(`Plugin ${name} is not installed`);
+        return { success: false, exitCode: 1 };
+      }
+
+      // Uninstall
+      const result = await manager.uninstall(name);
+
+      if (!result.success) {
+        spinner.fail(`Failed to uninstall: ${result.error}`);
+        return { success: false, exitCode: 1 };
+      }
+
+      spinner.succeed(`Uninstalled ${name}`);
+      output.writeln();
+      output.writeln(output.dim(`Removed ${plugin.version} from ${manager.getPluginsDir()}`));
+
+      return { success: true };
+    } catch (error) {
+      spinner.fail('Uninstall failed');
+      output.printError(`Error: ${String(error)}`);
+      return { success: false, exitCode: 1 };
+    }
   },
 };
 
