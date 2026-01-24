@@ -18,7 +18,53 @@ import { execFile } from 'child_process';
 import { promisify } from 'util';
 import { z } from 'zod';
 
+import {
+  LRUCache,
+  BatchDeduplicator,
+  Lazy,
+} from '../cache.js';
+
 const execFileAsync = promisify(execFile);
+
+// ============================================================================
+// Performance Caches
+// ============================================================================
+
+/** Result cache for memoizing expensive CLI calls */
+const resultCache = new LRUCache<string, GtResult<string>>({
+  maxEntries: 200,
+  ttlMs: 30 * 1000, // 30 sec TTL (gas prices change frequently)
+});
+
+/** Longer cache for static data like tx status */
+const staticCache = new LRUCache<string, unknown>({
+  maxEntries: 500,
+  ttlMs: 5 * 60 * 1000, // 5 min TTL
+});
+
+/** Deduplicator for concurrent identical CLI calls */
+const execDedup = new BatchDeduplicator<GtResult<string>>();
+
+/** Lazy parsed output cache */
+const parsedCache = new LRUCache<string, unknown>({
+  maxEntries: 500,
+  ttlMs: 60 * 1000, // 1 min TTL
+});
+
+/**
+ * FNV-1a hash for cache keys
+ */
+function hashArgs(args: string[]): string {
+  let hash = 2166136261;
+  for (const arg of args) {
+    for (let i = 0; i < arg.length; i++) {
+      hash ^= arg.charCodeAt(i);
+      hash = (hash * 16777619) >>> 0;
+    }
+    hash ^= 0xff; // separator
+  }
+  return hash.toString(36);
+}
 
 // ============================================================================
 // Zod Validation Schemas
