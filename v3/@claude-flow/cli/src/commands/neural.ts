@@ -792,7 +792,7 @@ const optimizeCommand: Command = {
       const path = await import('path');
 
       await initializeIntelligence();
-      const patterns = getAllPatterns();
+      const patterns = await getAllPatterns();
       const stats = getIntelligenceStats();
 
       // Get actual pattern storage size
