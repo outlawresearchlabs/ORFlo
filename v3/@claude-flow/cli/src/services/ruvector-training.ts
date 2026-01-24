@@ -603,6 +603,7 @@ export function getTrainingStats(): {
     totalForwardCount: bigint;
   };
   trajectoryStats?: ReturnType<typeof getTrajectoryStats>;
+  sonaStats?: ReturnType<typeof getSonaStats>;
   lastBenchmark?: BenchmarkResult[];
 } {
   const stats: ReturnType<typeof getTrainingStats> = {
@@ -629,6 +630,11 @@ export function getTrainingStats(): {
 
   if (trajectoryBuffer && !trajectoryBuffer.is_empty()) {
     stats.trajectoryStats = getTrajectoryStats();
+  }
+
+  // Include SONA stats if available
+  if (sonaAvailable) {
+    stats.sonaStats = getSonaStats();
   }
 
   if (lastBenchmark) {
