@@ -1039,5 +1039,10 @@ export * from './types.js';
 // Re-export bridges
 export * from './bridges/index.js';
 
+// Re-export security modules
+export * from './errors.js';
+export * from './validators.js';
+export * from './sanitizers.js';
+
 // Default export
 export default GasTownBridgePlugin;
