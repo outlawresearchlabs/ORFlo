@@ -373,6 +373,17 @@ Mixed hierarchy                      --> Adaptive curvature via SONA
 ### Neutral
 - Can fallback to Euclidean for non-hierarchical data
 
+## Related ADRs
+
+| ADR | Relationship |
+|-----|--------------|
+| ADR-004: Plugin Architecture | Foundation - Defines plugin structure |
+| ADR-017: RuVector Integration | Dependency - Provides WASM packages |
+| ADR-023: ONNX Hyperbolic Embeddings | Dependency - Embedding initialization |
+| ADR-032: Healthcare Clinical | Related - Medical ontology hierarchies |
+| ADR-034: Legal Contracts | Related - Legal taxonomy navigation |
+| ADR-035: Code Intelligence | Related - Code hierarchy analysis |
+
 ## References
 
 - Poincare Embeddings: https://arxiv.org/abs/1705.08039
