@@ -128,7 +128,7 @@ const RawFormulaSchema = z.object({
     metadata: z.record(z.unknown()).optional(),
   })).optional(),
   vars: z.record(z.object({
-    name: z.string(),
+    name: z.string().default(''),
     description: z.string().optional(),
     default: z.string().optional(),
     required: z.boolean().optional(),
@@ -136,7 +136,7 @@ const RawFormulaSchema = z.object({
     enum: z.array(z.string()).optional(),
   })).optional(),
   synthesis: z.object({
-    strategy: z.enum(['merge', 'sequential', 'parallel']),
+    strategy: z.enum(['merge', 'sequential', 'parallel']).default('merge'),
     format: z.string().optional(),
     description: z.string().optional(),
   }).optional(),
@@ -146,10 +146,10 @@ const RawFormulaSchema = z.object({
     outputPath: z.string().optional(),
   })).optional(),
   aspects: z.array(z.object({
-    name: z.string(),
-    pointcut: z.string(),
-    advice: z.string(),
-    type: z.enum(['before', 'after', 'around']),
+    name: z.string().default(''),
+    pointcut: z.string().default(''),
+    advice: z.string().default(''),
+    type: z.enum(['before', 'after', 'around']).default('after'),
   })).optional(),
   metadata: z.record(z.unknown()).optional(),
 }).passthrough();
