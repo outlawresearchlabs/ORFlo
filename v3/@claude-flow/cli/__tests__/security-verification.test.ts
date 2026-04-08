@@ -337,23 +337,9 @@ describe('Scenario 7: BoundedSet eviction under load', () => {
     expect(source).toContain('seenMessages: BoundedSet<string>');
   });
 
-  // Behavioral: test with FIFO semantics matching production code
-  it('BoundedSet FIFO eviction should work correctly', () => {
-    // Replicate exact production FIFO semantics (duplicates are no-ops)
-    class BoundedSet<T> {
-      private map = new Map<T, true>();
-      constructor(private maxSize: number) {}
-      add(value: T): void {
-        if (this.map.has(value)) return; // FIFO: duplicate is no-op
-        if (this.map.size >= this.maxSize) {
-          const oldest = this.map.keys().next().value;
-          if (oldest !== undefined) this.map.delete(oldest);
-        }
-        this.map.set(value, true);
-      }
-      has(value: T): boolean { return this.map.has(value); }
-      get size(): number { return this.map.size; }
-    }
+  // Behavioral: test production BoundedSet
+  it('BoundedSet FIFO eviction should work correctly', async () => {
+    const { BoundedSet } = await import('../../swarm/src/consensus/gossip.js');
 
     const set = new BoundedSet<number>(5);
 
@@ -506,7 +492,7 @@ describe('Scenario 10: PID injection prevention in mcp-server', () => {
     expect(usesProcRead || usesExecFileSync).toBe(true);
 
     // Must validate PID is numeric
-    expect(source).toMatch(/parseInt|Number\(|\/\\d|isNaN/);
+    expect(source).toMatch(/parseInt|Number\.|Number\(|\/\\d|isNaN/);
   });
 });
 

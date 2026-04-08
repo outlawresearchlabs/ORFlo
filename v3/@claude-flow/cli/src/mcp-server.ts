@@ -714,7 +714,8 @@ export class MCPServerManager extends EventEmitter {
     // DA-CRIT-3: Use execFileSync to prevent command injection via PID values
     try {
       const { execFileSync } = require('child_process') as typeof import('child_process');
-      const safePid = String(Math.floor(Math.abs(pid)));
+      if (!Number.isInteger(pid) || pid <= 0) return false;
+      const safePid = String(pid);
       let cmdline = '';
       try {
         // Try /proc on Linux

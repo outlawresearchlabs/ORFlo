@@ -20,9 +20,10 @@
   "overrides": [
     {
       "files": [
-        "v3/@claude-flow/security/src/safe-executor.ts",
         "src/commands/daemon.ts",
-        "src/mcp-server.ts"
+        "src/mcp-server.ts",
+        "src/commands/init.ts",
+        "src/commands/ruvector/import.ts"
       ],
       "rules": {
         "no-restricted-imports": "off",

@@ -1006,8 +1006,13 @@ export class AgentDBBackend extends EventEmitter implements IMemoryBackend {
       // HIGH-05: Collision detected — use linear probing fallback
       console.warn(`[HNSW] Hash collision detected: "${stringId}" collides with "${existing}" (numeric: ${numericId})`);
       let fallbackId = numericId + 1;
+      const MAX_PROBES = 1000;
+      let probes = 0;
       while (this.numericToStringIdMap.has(fallbackId)) {
         fallbackId++;
+        if (++probes >= MAX_PROBES) {
+          throw new Error(`[HNSW] Failed to resolve hash collision after ${MAX_PROBES} probes for "${stringId}"`);
+        }
       }
       this.numericToStringIdMap.set(fallbackId, stringId);
       this.stringToNumericIdMap.set(stringId, fallbackId);
