@@ -180,7 +180,7 @@ export class BackgroundExecutor extends EventEmitter {
       args.push('--max-tokens', options.maxTokens.toString());
     }
 
-    args.push('--dangerously-skip-permissions');
+    args.push('--allowedTools', 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch');
 
     return this.submitTask('claude-spawn', 'claude', args, {
       ...options,

@@ -486,8 +486,8 @@ export class TaskExecutor extends EventEmitter {
       args.push('--temperature', options.temperature.toString());
     }
 
-    // Skip permissions check for swarm execution
-    args.push('--dangerously-skip-permissions');
+    // Use safe permissions allowlist instead of --dangerously-skip-permissions
+    args.push('--allowedTools', 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch');
 
     // Add output format
     if (options.outputFormat) {

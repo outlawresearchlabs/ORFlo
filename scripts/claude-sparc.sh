@@ -269,7 +269,7 @@ build_allowed_tools() {
 
 # Build Claude command flags
 build_claude_flags() {
-    local flags="--mcp-config $MCP_CONFIG --dangerously-skip-permissions"
+    local flags="--mcp-config $MCP_CONFIG --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch"
     
     if [[ "$VERBOSE" == true ]]; then
         flags="$flags --verbose"

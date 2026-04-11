@@ -2288,8 +2288,8 @@ Ensure your implementation is complete, well-structured, and follows best practi
     // Build Claude arguments for non-interactive execution
     const claudeArgs = [prompt];
     
-    // Always skip permissions for swarm automation
-    claudeArgs.push("--dangerously-skip-permissions");
+    // Use safe permissions allowlist for swarm automation
+    claudeArgs.push("--allowedTools", "Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch");
     
     // Add non-interactive flags for automation
     claudeArgs.push("-p"); // Print mode

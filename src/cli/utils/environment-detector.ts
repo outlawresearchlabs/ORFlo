@@ -129,29 +129,26 @@ function checkRawModeSupport(): boolean {
 function generateRecommendations(env: ExecutionEnvironment): void {
   // VS Code specific recommendations
   if (env.isVSCode || env.isVSCodeInsiders) {
-    env.recommendedFlags.push('--dangerously-skip-permissions');
     env.recommendedFlags.push('--non-interactive');
     env.warnings.push('VS Code integrated terminal detected - interactive features may be limited');
   }
-  
+
   // CI environment recommendations
   if (env.isCI) {
-    env.recommendedFlags.push('--dangerously-skip-permissions');
     env.recommendedFlags.push('--non-interactive');
     env.recommendedFlags.push('--json');
     env.warnings.push('CI environment detected - running in non-interactive mode');
   }
-  
+
   // Docker recommendations
   if (env.isDocker && !env.isInteractive) {
-    env.recommendedFlags.push('--dangerously-skip-permissions');
     env.recommendedFlags.push('--non-interactive');
     env.warnings.push('Docker container without TTY - interactive features disabled');
   }
-  
+
   // SSH without TTY
   if (env.isSSH && !env.isInteractive) {
-    env.recommendedFlags.push('--dangerously-skip-permissions');
+    env.recommendedFlags.push('--non-interactive');
     env.warnings.push('SSH session without TTY - consider using ssh -t');
   }
   
@@ -197,12 +194,12 @@ export function applySmartDefaults<T extends Record<string, any>>(
   const appliedDefaults: string[] = [];
   const enhanced = { ...options, appliedDefaults };
   
-  // Apply defaults based on environment
-  if ((environment.isVSCode || environment.isCI || !environment.supportsRawMode) && 
+  // Apply defaults based on environment - use --non-interactive instead of --dangerously-skip-permissions
+  if ((environment.isVSCode || environment.isCI || !environment.supportsRawMode) &&
       !options.hasOwnProperty('skipPermissions')) {
-    enhanced.skipPermissions = true;
-    enhanced.dangerouslySkipPermissions = true;
-    appliedDefaults.push('--dangerously-skip-permissions');
+    enhanced.skipPermissions = false;
+    enhanced.nonInteractive = true;
+    appliedDefaults.push('--non-interactive');
   }
   
   if ((environment.isCI || !environment.isInteractive) && 

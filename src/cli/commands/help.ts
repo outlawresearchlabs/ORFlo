@@ -191,7 +191,7 @@ const HELP_TOPICS: HelpTopic[] = [
       {
         description: 'Spawn Claude without permission prompts',
         command: 'claude-flow claude spawn "fix payment bug" --no-permissions',
-        explanation: 'Runs Claude with --dangerously-skip-permissions flag to avoid interruptions'
+        explanation: 'Runs Claude with safe tool allowlist to avoid interruptions'
       },
       {
         description: 'Spawn Claude with custom tools',
@@ -214,7 +214,7 @@ const HELP_TOPICS: HelpTopic[] = [
       '',
       'Available Options:',
       '• --tools, -t: Specify allowed tools (default: View,Edit,Replace,GlobTool,GrepTool,LS,Bash)',
-      '• --no-permissions: Skip permission prompts with --dangerously-skip-permissions',
+      '• --no-permissions: Use safe tool allowlist instead of interactive permission prompts',
       '• --config, -c: Path to MCP configuration file',
       '• --mode, -m: Development mode (full, backend-only, frontend-only, api-only)',
       '• --parallel: Enable BatchTool and dispatch_agent for parallel execution',

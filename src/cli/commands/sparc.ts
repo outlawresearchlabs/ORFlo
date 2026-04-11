@@ -453,7 +453,7 @@ async function executeClaudeWithSparc(
   claudeArgs.push("--allowedTools", tools);
 
   if (flags.noPermissions || flags["no-permissions"]) {
-    claudeArgs.push("--dangerously-skip-permissions");
+    // Already using --allowedTools above, no need for --dangerously-skip-permissions
   }
 
   if (flags.config) {

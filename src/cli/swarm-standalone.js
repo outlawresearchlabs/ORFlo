@@ -169,9 +169,10 @@ Use all available tools including file operations, web search, and code executio
     
     const claudeArgs = [];
     
-    // Add auto-permission flag if requested
+    // Use safe permissions allowlist if requested
+    const { SWARM_ALLOWED_TOOLS } = require('./utils/allowed-tools');
     if (flags.auto || flags['dangerously-skip-permissions']) {
-      claudeArgs.push('--dangerously-skip-permissions');
+      claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
     }
     
     // Spawn claude process

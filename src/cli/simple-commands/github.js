@@ -236,9 +236,10 @@ Begin execution now. Create all necessary GitHub workflow files and configuratio
     
     const claudeArgs = [];
     
-    // Add auto-permission flag if requested
-    if (flags['auto-approve'] || flags['dangerously-skip-permissions']) {
-      claudeArgs.push('--dangerously-skip-permissions');
+    // Use safe permissions allowlist if requested
+    const { GITHUB_ALLOWED_TOOLS } = require('../utils/allowed-tools');
+    if (flags['auto-approve']) {
+      claudeArgs.push('--allowedTools', GITHUB_ALLOWED_TOOLS);
     }
     
     // Spawn claude process

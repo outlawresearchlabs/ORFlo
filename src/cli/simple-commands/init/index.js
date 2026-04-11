@@ -469,7 +469,7 @@ export async function initCommand(subArgs, flags) {
       console.log('1. Review and customize the generated files for your project');
       console.log('2. Run \'./claude-flow start\' to begin the orchestration system');
       console.log('3. Use \'./claude-flow\' instead of \'npx claude-flow\' for all commands');
-      console.log('4. Use \'claude --dangerously-skip-permissions\' for unattended operation');
+      console.log('4. Use \'claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch\' for unattended operation');
       
       if (initSparc) {
         console.log('5. Use Claude Code slash commands: /sparc, /sparc-architect, /sparc-tdd, etc.');

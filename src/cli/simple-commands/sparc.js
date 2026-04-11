@@ -218,7 +218,7 @@ async function runSparcMode(subArgs, flags) {
       
       const enablePermissions = subArgs.includes('--enable-permissions');
       if (!enablePermissions) {
-        console.log(`Tools: ALL (via --dangerously-skip-permissions)`);
+        console.log(`Tools: Restricted via safe allowlist (--allowedTools)`);
         console.log(`Permissions: Will be auto-skipped`);
       } else {
         console.log(`Tools: ${toolsList}`);
@@ -240,8 +240,8 @@ async function runSparcMode(subArgs, flags) {
     const enablePermissions = subArgs.includes('--enable-permissions');
     
     if (!enablePermissions) {
-      console.log(`🔧 Tools: ALL (including MCP and WebSearch via --dangerously-skip-permissions)`);
-      console.log(`⚡ Permissions: Auto-skipped (--dangerously-skip-permissions)`);
+      console.log(`🔧 Tools: Restricted via safe allowlist (--allowedTools)`);
+      console.log(`🔒 Permissions: Safe allowlist (no --dangerously-skip-permissions)`);
     } else {
       console.log(`🔧 Tools: ${toolsList}`);
       console.log(`✅ Permissions: Enabled (will prompt for actions)`);
@@ -338,9 +338,10 @@ async function executeClaude(enhancedTask, toolsList, instanceId, memoryNamespac
   const claudeArgs = [];
   claudeArgs.push(enhancedTask);
   
-  // Add --dangerously-skip-permissions by default unless --enable-permissions is set
+  // Use granular tool allowlist instead of --dangerously-skip-permissions
   if (!enablePermissions) {
-    claudeArgs.push('--dangerously-skip-permissions');
+    const { SPARC_ALLOWED_TOOLS } = require('../utils/allowed-tools');
+    claudeArgs.push('--allowedTools', SPARC_ALLOWED_TOOLS);
   }
   
   if (isNonInteractive) {
@@ -355,9 +356,8 @@ async function executeClaude(enhancedTask, toolsList, instanceId, memoryNamespac
     }
   }
   
-  // When using --dangerously-skip-permissions, we don't need to specify individual tools
-  // as it enables ALL tools including mcp and websearch
-  // Only add --allowedTools if permissions are enabled
+  // When permissions are enabled, use the provided tools list
+  // When using safe allowlist, tools are already specified above
   if (enablePermissions) {
     claudeArgs.push('--allowedTools', toolsList);
   }
@@ -371,8 +371,8 @@ async function executeClaude(enhancedTask, toolsList, instanceId, memoryNamespac
   if (isNonInteractive || subArgs.includes('--verbose') || subArgs.includes('-v')) {
     console.log('\n🔍 Debug: Executing claude with:');
     console.log('Command: claude');
-    console.log('Permissions:', enablePermissions ? '✅ Enabled (will prompt)' : '⚡ Skipped (--dangerously-skip-permissions)');
-    console.log('Tools:', enablePermissions ? `Specified: ${toolsList}` : 'ALL tools enabled (MCP, WebSearch, etc.)');
+    console.log('Permissions:', enablePermissions ? '✅ Enabled (will prompt)' : '🔒 Safe allowlist (restricted tool set)');
+    console.log('Tools:', enablePermissions ? `Specified: ${toolsList}` : 'Allowed tools via --allowedTools');
     console.log('Mode:', isNonInteractive ? '🤖 Non-interactive' : '💬 Interactive');
     console.log('Args array length:', claudeArgs.length);
     console.log('First arg (prompt) length:', claudeArgs[0].length, 'characters');
@@ -491,12 +491,12 @@ function showSparcHelp() {
   console.log('  --config <path>          Use custom MCP configuration file');
   console.log();
   console.log('Permission Behavior:');
-  console.log('  By default, SPARC runs with --dangerously-skip-permissions for efficiency');
-  console.log('  Use --enable-permissions to restore permission prompts if needed');
+  console.log('  By default, SPARC uses a safe tool allowlist for autonomous execution');
+  console.log('  Use --enable-permissions to restore full permission prompts if needed');
   console.log();
   console.log('Non-Interactive Mode:');
   console.log('  When using --non-interactive, claude will be executed with:');
-  console.log('  - --dangerously-skip-permissions (unless --enable-permissions is set)');
+  console.log('  - --allowedTools with safe tool allowlist (unless --enable-permissions is set)');
   console.log('  - -p (print mode for streaming output)');
   console.log('  - --output-format stream-json (structured output format)');
   console.log('  - --verbose (detailed execution logs)');

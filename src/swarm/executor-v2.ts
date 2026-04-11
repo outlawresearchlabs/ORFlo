@@ -71,7 +71,8 @@ export class TaskExecutorV2 extends TaskExecutor {
         
         // Force non-interactive mode and retry
         enhancedOptions.nonInteractive = true;
-        enhancedOptions.dangerouslySkipPermissions = true;
+        enhancedOptions.dangerouslySkipPermissions = false;
+        enhancedOptions.useAllowedTools = true;
         
         return await this.executeClaudeWithTimeoutV2(
           generateId('claude-execution-retry'),
@@ -339,10 +340,10 @@ export class TaskExecutorV2 extends TaskExecutor {
       args.push('--temperature', options.temperature.toString());
     }
 
-    // Skip permissions check for non-interactive environments
-    if (options.nonInteractive || options.dangerouslySkipPermissions || 
-        this.environment.recommendedFlags.includes('--dangerously-skip-permissions')) {
-      args.push('--dangerously-skip-permissions');
+    // Use safe permissions allowlist instead of --dangerously-skip-permissions
+    if (options.nonInteractive || options.useAllowedTools ||
+        this.environment.recommendedFlags.includes('--non-interactive')) {
+      args.push('--allowedTools', 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch');
     }
 
     // Add non-interactive flag if needed

@@ -76,7 +76,7 @@ OPTIONS:
   --dry-run                  Show configuration without executing
   --executor                 Use built-in executor instead of Claude Code
   --auto                     (Deprecated: auto-permissions enabled by default)
-  --no-auto-permissions      Disable automatic --dangerously-skip-permissions
+  --no-auto-permissions      Disable automatic permissions allowlist
 
 ADVANCED OPTIONS:
   --quality-threshold <n>    Quality threshold 0-1 (default: 0.8)
@@ -496,11 +496,12 @@ The swarm should be self-documenting - use memory_store to save all important in
 
       // Pass the prompt directly as an argument to claude
       const claudeArgs = [swarmPrompt];
-      
-      // Add auto-permission flag by default for swarm mode (unless explicitly disabled)
-      if (flags['dangerously-skip-permissions'] !== false && !flags['no-auto-permissions']) {
-        claudeArgs.push('--dangerously-skip-permissions');
-        console.log('🔓 Using --dangerously-skip-permissions by default for seamless swarm execution');
+
+      // Use granular tool allowlist instead of --dangerously-skip-permissions
+      const { SWARM_ALLOWED_TOOLS } = require('../utils/allowed-tools');
+      if (!flags['enable-permissions']) {
+        claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
+        console.log('🔒 Using safe permissions allowlist for swarm execution');
       }
       
       // Spawn claude with the prompt as the first argument
@@ -957,11 +958,12 @@ Begin execution now. Create all necessary files and provide a complete, working 
         
         const claudeArgs = [];
         
-        // Add auto-permission flag by default for swarm mode (unless explicitly disabled)
-        if (flags['dangerously-skip-permissions'] !== false && !flags['no-auto-permissions']) {
-          claudeArgs.push('--dangerously-skip-permissions');
+        // Use granular tool allowlist instead of --dangerously-skip-permissions
+        const { SWARM_ALLOWED_TOOLS } = require('../utils/allowed-tools');
+        if (!flags['enable-permissions']) {
+          claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
         }
-        
+
         // Spawn claude process
         const claudeProcess = spawn('claude', claudeArgs, {
           stdio: ['pipe', 'inherit', 'inherit'],
@@ -1065,7 +1067,7 @@ OPTIONS:
   --dry-run                  Show configuration without executing
   --executor                 Use built-in executor instead of Claude Code
   --auto                     (Deprecated: auto-permissions enabled by default)
-  --no-auto-permissions      Disable automatic --dangerously-skip-permissions
+  --no-auto-permissions      Disable automatic permissions allowlist
 
 ADVANCED OPTIONS:
   --quality-threshold <n>    Quality threshold 0-1 (default: 0.8)

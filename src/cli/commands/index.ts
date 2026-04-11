@@ -162,7 +162,7 @@ export function setupCommands(cli: CLI): void {
         console.log("\nNext steps:");
         console.log("1. Review and customize the generated files for your project");
         console.log("2. Run 'npx claude-flow start' to begin the orchestration system");
-        console.log("3. Use 'claude --dangerously-skip-permissions' for unattended operation");
+        console.log("3. Use 'claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch' for safe unattended operation");
         console.log("\nNote: Persistence database initialized at memory/claude-flow-data.json");
         
       } catch (err) {
@@ -938,7 +938,7 @@ export function setupCommands(cli: CLI): void {
       },
       {
         name: "no-permissions",
-        description: "Use --dangerously-skip-permissions flag",
+        description: "Use safe tool allowlist instead of interactive permission prompts",
         type: "boolean",
       },
       {
@@ -1114,7 +1114,7 @@ Now, please proceed with the task: ${task}`;
             claudeCmd.push("--allowedTools", tools);
             
             if (ctx.flags.noPermissions || ctx.flags["skip-permissions"]) {
-              claudeCmd.push("--dangerously-skip-permissions");
+              // Already using --allowedTools above, no --dangerously-skip-permissions
             }
             
             if (ctx.flags.config) {
@@ -1224,7 +1224,8 @@ Now, please proceed with the task: ${task}`;
               
               // Add flags
               if (task.skipPermissions || task.dangerouslySkipPermissions) {
-                claudeCmd.push("--dangerously-skip-permissions");
+                // Use --allowedTools instead of --dangerously-skip-permissions
+                // Tools already specified above
               }
               
               if (task.config) {
@@ -1944,7 +1945,7 @@ Now, please proceed with the task: ${task}`;
         console.log();
         console.log(bold("Spawn Options:"));
         console.log("  -t, --tools <tools>        Allowed tools (comma-separated)");
-        console.log("  --no-permissions           Use --dangerously-skip-permissions flag");
+        console.log("  --no-permissions           Use safe tool allowlist instead of permission prompts");
         console.log("  -c, --config <file>        MCP config file path");
         console.log("  -m, --mode <mode>          Development mode (full/backend-only/frontend-only/api-only)");
         console.log("  --parallel                 Enable parallel execution with BatchTool");
@@ -2025,7 +2026,7 @@ Now, please proceed with the task: ${task}`;
         console.log();
         console.log(bold("Options:"));
         console.log("  -n, --namespace <ns>     Memory namespace for this session");
-        console.log("  --no-permissions         Skip permission prompts");
+        console.log("  --no-permissions         Use safe tool allowlist");
         console.log("  -c, --config <file>      MCP configuration file");
         console.log("  -v, --verbose            Enable verbose output");
         console.log("  -d, --dry-run            Preview what would be executed");
@@ -2334,7 +2335,7 @@ This is a Claude-Flow AI agent orchestration system with the following component
 - **Agent Coordination**: Multi-agent task distribution and management
 
 ## Important Notes
-- Use \`claude --dangerously-skip-permissions\` for unattended operation
+- Use `--allowedTools` with a safe tool allowlist for unattended operation
 - The system supports both daemon and interactive modes
 - Memory persistence is handled automatically
 - All components are event-driven for scalability

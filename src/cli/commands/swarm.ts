@@ -408,7 +408,6 @@ When you're done, please end with "TASK COMPLETED" on its own line.`;
       const claudeArgs = [
         '-p',  // Non-interactive print mode
         task.description,  // The prompt
-        '--dangerously-skip-permissions',
         '--allowedTools', tools
       ];
       

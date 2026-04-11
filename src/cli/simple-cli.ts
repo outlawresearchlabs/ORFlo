@@ -1379,7 +1379,7 @@ ${flags.mode === 'full' || !flags.mode ? `Full-stack development covering all as
             console.log(`Args count: ${claudeArgs.length}`);
             
             if (flags.noPermissions) {
-              claudeArgs.push('--dangerously-skip-permissions');
+              // Already using --allowedTools above, no --dangerously-skip-permissions needed
             }
             
             if (flags.config) {

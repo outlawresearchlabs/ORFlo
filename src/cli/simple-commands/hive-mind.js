@@ -86,7 +86,7 @@ ${chalk.bold('OPTIONS:')}
   --auto-spawn           Automatically spawn Claude Code instances
   --execute              Execute Claude Code spawn commands immediately
   --auto                 (Deprecated: auto-permissions enabled by default)
-  --no-auto-permissions  Disable automatic --dangerously-skip-permissions
+  --no-auto-permissions  Disable automatic permissions allowlist
 
 ${chalk.bold('For more information:')}
 ${chalk.blue('https://github.com/ruvnet/claude-code-flow/docs/hive-mind.md')}
@@ -1496,10 +1496,11 @@ async function spawnClaudeCodeInstances(swarmId, swarmName, objective, workers, 
         // Pass the prompt directly as an argument to claude
         const claudeArgs = [hiveMindPrompt];
         
-        // Add auto-permission flag by default for hive-mind mode (unless explicitly disabled)
-        if (flags['dangerously-skip-permissions'] !== false && !flags['no-auto-permissions']) {
-          claudeArgs.push('--dangerously-skip-permissions');
-          console.log(chalk.yellow('🔓 Using --dangerously-skip-permissions by default for seamless hive-mind execution'));
+        // Use granular tool allowlist instead of --dangerously-skip-permissions
+        const { SWARM_ALLOWED_TOOLS } = require('../utils/allowed-tools');
+        if (!flags['enable-permissions']) {
+          claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
+          console.log(chalk.yellow('🔒 Using safe permissions allowlist for hive-mind execution'));
         }
         
         // Spawn claude with the prompt as the first argument
@@ -1536,8 +1537,8 @@ async function spawnClaudeCodeInstances(swarmId, swarmName, objective, workers, 
         console.log(chalk.green(`   claude < ${promptFile}`));
         console.log(chalk.gray('\n3. Or copy the prompt manually:'));
         console.log(chalk.green(`   cat ${promptFile} | claude`));
-        console.log(chalk.gray('\n4. With auto-permissions:'));
-        console.log(chalk.green(`   claude --dangerously-skip-permissions < ${promptFile}`));
+        console.log(chalk.gray('\n4. With safe permissions:'));
+        console.log(chalk.green(`   claude --allowedTools "Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch" < ${promptFile}`));
       }
       
     } catch (error) {

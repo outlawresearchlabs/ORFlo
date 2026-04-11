@@ -1408,7 +1408,7 @@ If this task requires complex coordination, memory persistence, or multi-agent c
    - For parallelizable work, consider multi-agent approaches
    ${flags.parallel ? '   - Parallel capabilities are enabled for this task' : ''}
    ${flags.research ? '   - Research tools are available if needed' : ''}
-   ${flags.noPermissions ? '   - Running with --no-permissions mode' : ''}
+   ${flags.noPermissions ? '   - Running with safe tool allowlist' : ''}
    ${flags.verbose ? '   - Verbose mode enabled for detailed output' : ''}
 
 ## Getting Started
@@ -1449,7 +1449,7 @@ ${flags.mode === 'full' || !flags.mode ? `Full-stack development covering all as
             console.log(`Args count: ${claudeArgs.length}`);
             
             if (flags.noPermissions) {
-              claudeArgs.push('--dangerously-skip-permissions');
+              // Already using --allowedTools above, no --dangerously-skip-permissions needed
             }
             
             if (flags.config) {

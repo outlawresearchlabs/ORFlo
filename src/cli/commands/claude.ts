@@ -22,7 +22,7 @@ claudeCommand
   .description('Spawn a new Claude instance with specific configuration')
   .arguments('<task>')
   .option('-t, --tools <tools>', 'Allowed tools (comma-separated)', 'View,Edit,Replace,GlobTool,GrepTool,LS,Bash')
-  .option('--no-permissions', 'Use --dangerously-skip-permissions flag')
+  .option('--no-permissions', 'Use safe tool allowlist instead of interactive permission prompts')
   .option('-c, --config <config>', 'MCP config file path')
   .option('-m, --mode <mode>', 'Development mode (full, backend-only, frontend-only, api-only)', 'full')
   .option('--parallel', 'Enable parallel execution with BatchTool')
@@ -49,7 +49,8 @@ claudeCommand
         claudeArgs.push('--allowedTools', tools);
         
         if (options.noPermissions) {
-          claudeArgs.push('--dangerously-skip-permissions');
+          // Use safe allowlist - already set via --allowedTools above
+          // No longer uses --dangerously-skip-permissions
         }
         
         if (options.config) {
@@ -134,8 +135,10 @@ claudeCommand
         }
         
         // Add flags
-        if (task.skipPermissions) {
-          claudeArgs.push('--dangerously-skip-permissions');
+        if (task.skipPermissions && task.tools) {
+          // Already have --allowedTools set, no need for --dangerously-skip-permissions
+        } else if (task.skipPermissions) {
+          claudeArgs.push('--allowedTools', 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch');
         }
         
         if (task.config) {

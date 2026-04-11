@@ -55,7 +55,7 @@ This is a Claude-Flow AI agent orchestration system with the following component
 - **Agent Coordination**: Multi-agent task distribution and management
 
 ## Important Notes
-- Use \`claude --dangerously-skip-permissions\` for unattended operation
+- Use \`claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch\` for unattended operation
 - The system supports both daemon and interactive modes
 - Memory persistence is handled automatically
 - All components are event-driven for scalability
