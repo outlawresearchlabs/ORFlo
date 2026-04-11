@@ -269,7 +269,7 @@ build_allowed_tools() {
 
 # Build Claude command flags
 build_claude_flags() {
-    local flags="--mcp-config $MCP_CONFIG --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch"
+    local flags="--mcp-config $MCP_CONFIG --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch,mcp__claude-flow__memory_store,mcp__claude-flow__memory_query,mcp__claude-flow__sparc_mode,mcp__claude-flow__workflow_create,mcp__claude-flow__health_check"
     
     if [[ "$VERBOSE" == true ]]; then
         flags="$flags --verbose"

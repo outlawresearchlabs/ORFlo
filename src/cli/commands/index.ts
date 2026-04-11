@@ -1217,11 +1217,6 @@ Now, please proceed with the task: ${task}`;
                 const toolsList = Array.isArray(task.tools) ? task.tools.join(",") : task.tools;
                 claudeCmd.push("--allowedTools", toolsList);
               }
-              
-              // Add flags — --allowedTools already set above
-              if (task.skipPermissions || task.dangerouslySkipPermissions) {
-                // No additional flag needed; safe allowlist is active
-              }
 
               if (task.config) {
                 claudeCmd.push("--mcp-config", task.config);
