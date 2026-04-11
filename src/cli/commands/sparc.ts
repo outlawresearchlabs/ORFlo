@@ -452,10 +452,6 @@ async function executeClaudeWithSparc(
   const claudeArgs = [enhancedTask];
   claudeArgs.push("--allowedTools", tools);
 
-  if (flags.noPermissions || flags["no-permissions"]) {
-    // Already using --allowedTools above, no need for --dangerously-skip-permissions
-  }
-
   if (flags.config) {
     claudeArgs.push("--mcp-config", flags.config);
   }

@@ -169,14 +169,12 @@ Use all available tools including file operations, web search, and code executio
     const { spawn } = await import('child_process');
     
     const claudeArgs = [];
-    
-    // Use safe permissions allowlist if requested
-    if (flags.auto || flags['dangerously-skip-permissions']) {
-      if (flags['dangerously-skip-permissions']) {
-        console.log('⚠️  --dangerously-skip-permissions is deprecated. Using safe tool allowlist instead.');
-      }
-      claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
+
+    // Always use safe permissions allowlist
+    if (flags['dangerously-skip-permissions']) {
+      console.log('⚠️  --dangerously-skip-permissions is deprecated. Using safe tool allowlist instead.');
     }
+    claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
     
     // Spawn claude process
     const claudeProcess = spawn('claude', claudeArgs, {

@@ -11,6 +11,7 @@ import chalk from 'chalk';
 import { Logger } from '../core/logger.js';
 import { generateId } from '../utils/helpers.js';
 import { detectExecutionEnvironment, applySmartDefaults } from '../cli/utils/environment-detector.js';
+import { CORE_TOOLS } from '../cli/utils/allowed-tools.js';
 import {
   TaskDefinition, AgentState, TaskResult, SwarmEvent, EventType,
   SWARM_CONSTANTS
@@ -344,7 +345,6 @@ export class TaskExecutorV2 extends TaskExecutor {
     // Use safe permissions allowlist instead of --dangerously-skip-permissions
     if (options.nonInteractive || options.useAllowedTools ||
         this.environment.recommendedFlags.includes('--non-interactive')) {
-      const { CORE_TOOLS } = require('../cli/utils/allowed-tools.js');
       args.push('--allowedTools', CORE_TOOLS);
     }
 

@@ -10,6 +10,7 @@ import * as path from 'node:path';
 import * as os from 'node:os';
 import { Logger } from '../core/logger.js';
 import { generateId } from '../utils/helpers.js';
+import { CORE_TOOLS } from '../cli/utils/allowed-tools.js';
 import {
   TaskDefinition, AgentState, TaskResult, SwarmEvent, EventType,
   SWARM_CONSTANTS
@@ -487,7 +488,6 @@ export class TaskExecutor extends EventEmitter {
     }
 
     // Use safe permissions allowlist instead of --dangerously-skip-permissions
-    const { CORE_TOOLS } = require('../cli/utils/allowed-tools.js');
     args.push('--allowedTools', CORE_TOOLS);
 
     // Add output format

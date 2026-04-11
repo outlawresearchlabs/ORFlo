@@ -1447,11 +1447,7 @@ ${flags.mode === 'full' || !flags.mode ? `Full-stack development covering all as
             console.log(`First arg length: ${claudeArgs[0].length} chars`);
             console.log(`First 100 chars: ${claudeArgs[0].substring(0, 100)}...`);
             console.log(`Args count: ${claudeArgs.length}`);
-            
-            if (flags.noPermissions) {
-              // Already using --allowedTools above, no --dangerously-skip-permissions needed
-            }
-            
+
             if (flags.config) {
               claudeArgs.push('--mcp-config', flags.config);
             }

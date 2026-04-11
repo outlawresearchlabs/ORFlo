@@ -1,4 +1,5 @@
 import { getErrorMessage } from '../../utils/error-handler.js';
+import { SWARM_ALLOWED_TOOLS } from '../utils/allowed-tools.js';
 /**
  * Claude instance management commands
  */
@@ -131,7 +132,6 @@ claudeCommand
         
         // Add flags
         if (task.skipPermissions && !task.tools) {
-          const { SWARM_ALLOWED_TOOLS } = require('../utils/allowed-tools.js');
           claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
         }
         
