@@ -344,7 +344,7 @@ export class TaskExecutorV2 extends TaskExecutor {
     // Use safe permissions allowlist instead of --dangerously-skip-permissions
     if (options.nonInteractive || options.useAllowedTools ||
         this.environment.recommendedFlags.includes('--non-interactive')) {
-      const { CORE_TOOLS } = require('../cli/utils/allowed-tools');
+      const { CORE_TOOLS } = require('../cli/utils/allowed-tools.js');
       args.push('--allowedTools', CORE_TOOLS);
     }
 

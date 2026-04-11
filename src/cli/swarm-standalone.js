@@ -8,6 +8,7 @@ import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { existsSync } from 'node:fs';
+import { SWARM_ALLOWED_TOOLS } from './utils/allowed-tools.js';
 import { Deno, cwd, exit, existsSync } from '../node-compat.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -170,7 +171,6 @@ Use all available tools including file operations, web search, and code executio
     const claudeArgs = [];
     
     // Use safe permissions allowlist if requested
-    const { SWARM_ALLOWED_TOOLS } = require('./utils/allowed-tools');
     if (flags.auto || flags['dangerously-skip-permissions']) {
       if (flags['dangerously-skip-permissions']) {
         console.log('⚠️  --dangerously-skip-permissions is deprecated. Using safe tool allowlist instead.');

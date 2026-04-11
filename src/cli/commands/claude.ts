@@ -47,11 +47,7 @@ claudeCommand
         // Build Claude command
         const claudeArgs = [task];
         claudeArgs.push('--allowedTools', tools);
-        
-        if (options.noPermissions) {
-          // --allowedTools already set above — safe allowlist is active
-        }
-        
+
         if (options.config) {
           claudeArgs.push('--mcp-config', options.config);
         }
@@ -134,11 +130,9 @@ claudeCommand
         }
         
         // Add flags
-        if (task.skipPermissions && task.tools) {
-          // Already have --allowedTools set from task.tools
-        } else if (task.skipPermissions) {
-          const { CORE_TOOLS } = require('../utils/allowed-tools');
-          claudeArgs.push('--allowedTools', CORE_TOOLS);
+        if (task.skipPermissions && !task.tools) {
+          const { SWARM_ALLOWED_TOOLS } = require('../utils/allowed-tools.js');
+          claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
         }
         
         if (task.config) {

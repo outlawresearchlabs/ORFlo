@@ -180,7 +180,7 @@ export class BackgroundExecutor extends EventEmitter {
       args.push('--max-tokens', options.maxTokens.toString());
     }
 
-    const { CORE_TOOLS } = require('../cli/utils/allowed-tools');
+    const { CORE_TOOLS } = require('../cli/utils/allowed-tools.js');
     args.push('--allowedTools', CORE_TOOLS);
 
     return this.submitTask('claude-spawn', 'claude', args, {

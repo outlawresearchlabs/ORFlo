@@ -197,7 +197,7 @@ export function applySmartDefaults<T extends Record<string, any>>(
   // Apply defaults based on environment - use --non-interactive instead of --dangerously-skip-permissions
   if ((environment.isVSCode || environment.isCI || !environment.supportsRawMode) &&
       !options.hasOwnProperty('skipPermissions')) {
-    enhanced.skipPermissions = false;
+    // Don't override explicit skipPermissions: true — respect caller's intent
     enhanced.nonInteractive = true;
     appliedDefaults.push('--non-interactive');
   }

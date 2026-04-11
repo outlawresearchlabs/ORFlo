@@ -960,7 +960,7 @@ Begin execution now. Create all necessary files and provide a complete, working 
         const claudeArgs = [];
         
         // Use granular tool allowlist instead of --dangerously-skip-permissions
-          if (!flags['enable-permissions']) {
+        if (!flags['enable-permissions']) {
           claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
         }
 

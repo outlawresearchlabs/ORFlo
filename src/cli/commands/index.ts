@@ -1112,11 +1112,7 @@ Now, please proceed with the task: ${task}`;
             // Build Claude command with enhanced task
             const claudeCmd = ["claude", enhancedTask];
             claudeCmd.push("--allowedTools", tools);
-            
-            if (ctx.flags.noPermissions || ctx.flags["skip-permissions"]) {
-              // Already using --allowedTools above, no --dangerously-skip-permissions
-            }
-            
+
             if (ctx.flags.config) {
               claudeCmd.push("--mcp-config", ctx.flags.config as string);
             }
@@ -1222,12 +1218,11 @@ Now, please proceed with the task: ${task}`;
                 claudeCmd.push("--allowedTools", toolsList);
               }
               
-              // Add flags
+              // Add flags — --allowedTools already set above
               if (task.skipPermissions || task.dangerouslySkipPermissions) {
-                // Use --allowedTools instead of --dangerously-skip-permissions
-                // Tools already specified above
+                // No additional flag needed; safe allowlist is active
               }
-              
+
               if (task.config) {
                 claudeCmd.push("--mcp-config", task.config);
               }
