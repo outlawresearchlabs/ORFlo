@@ -8,6 +8,7 @@ import { existsSync, chmodSync, statSync } from 'fs';
 import { open } from 'fs/promises';
 import process from 'process';
 import path from 'path';
+import { SWARM_ALLOWED_TOOLS } from '../utils/allowed-tools.js';
 
 function showSwarmHelp() {
   console.log(`
@@ -77,6 +78,7 @@ OPTIONS:
   --executor                 Use built-in executor instead of Claude Code
   --auto                     (Deprecated: auto-permissions enabled by default)
   --no-auto-permissions      Disable automatic permissions allowlist
+  --enable-permissions        Enable interactive permission prompts
 
 ADVANCED OPTIONS:
   --quality-threshold <n>    Quality threshold 0-1 (default: 0.8)
@@ -498,7 +500,6 @@ The swarm should be self-documenting - use memory_store to save all important in
       const claudeArgs = [swarmPrompt];
 
       // Use granular tool allowlist instead of --dangerously-skip-permissions
-      const { SWARM_ALLOWED_TOOLS } = require('../utils/allowed-tools');
       if (!flags['enable-permissions']) {
         claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
         console.log('🔒 Using safe permissions allowlist for swarm execution');
@@ -959,8 +960,7 @@ Begin execution now. Create all necessary files and provide a complete, working 
         const claudeArgs = [];
         
         // Use granular tool allowlist instead of --dangerously-skip-permissions
-        const { SWARM_ALLOWED_TOOLS } = require('../utils/allowed-tools');
-        if (!flags['enable-permissions']) {
+          if (!flags['enable-permissions']) {
           claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
         }
 
@@ -1068,6 +1068,7 @@ OPTIONS:
   --executor                 Use built-in executor instead of Claude Code
   --auto                     (Deprecated: auto-permissions enabled by default)
   --no-auto-permissions      Disable automatic permissions allowlist
+  --enable-permissions        Enable interactive permission prompts
 
 ADVANCED OPTIONS:
   --quality-threshold <n>    Quality threshold 0-1 (default: 0.8)

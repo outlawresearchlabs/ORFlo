@@ -2289,7 +2289,8 @@ Ensure your implementation is complete, well-structured, and follows best practi
     const claudeArgs = [prompt];
     
     // Use safe permissions allowlist for swarm automation
-    claudeArgs.push("--allowedTools", "Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch");
+    const { CORE_TOOLS } = require('../cli/utils/allowed-tools');
+    claudeArgs.push("--allowedTools", CORE_TOOLS);
     
     // Add non-interactive flags for automation
     claudeArgs.push("-p"); // Print mode

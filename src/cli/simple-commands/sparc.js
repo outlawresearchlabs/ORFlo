@@ -3,6 +3,7 @@ import { printSuccess, printError, printWarning } from '../utils.js';
 import { createSparcPrompt } from './sparc-modes/index.js';
 import { Deno, cwd, exit, existsSync } from '../node-compat.js';
 import process from 'process';
+import { SPARC_ALLOWED_TOOLS } from '../utils/allowed-tools.js';
 
 export async function sparcCommand(subArgs, flags) {
   const sparcCmd = subArgs[0];
@@ -219,7 +220,7 @@ async function runSparcMode(subArgs, flags) {
       const enablePermissions = subArgs.includes('--enable-permissions');
       if (!enablePermissions) {
         console.log(`Tools: Restricted via safe allowlist (--allowedTools)`);
-        console.log(`Permissions: Will be auto-skipped`);
+        console.log(`Permissions: Safe allowlist applied (--allowedTools)`);
       } else {
         console.log(`Tools: ${toolsList}`);
         console.log(`Permissions: Will prompt for actions`);
@@ -340,7 +341,6 @@ async function executeClaude(enhancedTask, toolsList, instanceId, memoryNamespac
   
   // Use granular tool allowlist instead of --dangerously-skip-permissions
   if (!enablePermissions) {
-    const { SPARC_ALLOWED_TOOLS } = require('../utils/allowed-tools');
     claudeArgs.push('--allowedTools', SPARC_ALLOWED_TOOLS);
   }
   

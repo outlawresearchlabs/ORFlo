@@ -172,6 +172,9 @@ Use all available tools including file operations, web search, and code executio
     // Use safe permissions allowlist if requested
     const { SWARM_ALLOWED_TOOLS } = require('./utils/allowed-tools');
     if (flags.auto || flags['dangerously-skip-permissions']) {
+      if (flags['dangerously-skip-permissions']) {
+        console.log('⚠️  --dangerously-skip-permissions is deprecated. Using safe tool allowlist instead.');
+      }
       claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
     }
     

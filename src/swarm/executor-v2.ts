@@ -22,6 +22,7 @@ export interface ClaudeExecutionOptionsV2 extends ClaudeExecutionOptions {
   promptDefaults?: Record<string, any>;
   environmentOverride?: Record<string, string>;
   retryOnInteractiveError?: boolean;
+  useAllowedTools?: boolean;
 }
 
 export class TaskExecutorV2 extends TaskExecutor {
@@ -343,7 +344,8 @@ export class TaskExecutorV2 extends TaskExecutor {
     // Use safe permissions allowlist instead of --dangerously-skip-permissions
     if (options.nonInteractive || options.useAllowedTools ||
         this.environment.recommendedFlags.includes('--non-interactive')) {
-      args.push('--allowedTools', 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch');
+      const { CORE_TOOLS } = require('../cli/utils/allowed-tools');
+      args.push('--allowedTools', CORE_TOOLS);
     }
 
     // Add non-interactive flag if needed

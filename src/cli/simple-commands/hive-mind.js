@@ -13,6 +13,7 @@ import chalk from 'chalk';
 import ora from 'ora';
 import { args, cwd, exit, writeTextFile, readTextFile, mkdirAsync } from '../node-compat.js';
 import { isInteractive, isRawModeSupported, warnNonInteractive, checkNonInteractiveAuth } from '../utils/interactive-detector.js';
+import { SWARM_ALLOWED_TOOLS } from '../utils/allowed-tools.js';
 
 // Import SQLite for persistence
 import Database from 'better-sqlite3';
@@ -87,6 +88,7 @@ ${chalk.bold('OPTIONS:')}
   --execute              Execute Claude Code spawn commands immediately
   --auto                 (Deprecated: auto-permissions enabled by default)
   --no-auto-permissions  Disable automatic permissions allowlist
+  --enable-permissions   Enable interactive permission prompts
 
 ${chalk.bold('For more information:')}
 ${chalk.blue('https://github.com/ruvnet/claude-code-flow/docs/hive-mind.md')}
@@ -1497,7 +1499,6 @@ async function spawnClaudeCodeInstances(swarmId, swarmName, objective, workers, 
         const claudeArgs = [hiveMindPrompt];
         
         // Use granular tool allowlist instead of --dangerously-skip-permissions
-        const { SWARM_ALLOWED_TOOLS } = require('../utils/allowed-tools');
         if (!flags['enable-permissions']) {
           claudeArgs.push('--allowedTools', SWARM_ALLOWED_TOOLS);
           console.log(chalk.yellow('🔒 Using safe permissions allowlist for hive-mind execution'));

@@ -487,7 +487,8 @@ export class TaskExecutor extends EventEmitter {
     }
 
     // Use safe permissions allowlist instead of --dangerously-skip-permissions
-    args.push('--allowedTools', 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch');
+    const { CORE_TOOLS } = require('../cli/utils/allowed-tools');
+    args.push('--allowedTools', CORE_TOOLS);
 
     // Add output format
     if (options.outputFormat) {

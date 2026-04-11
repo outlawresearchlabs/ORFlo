@@ -5,6 +5,7 @@
  */
 
 import { printSuccess, printError, printWarning } from '../utils.js';
+import { GITHUB_ALLOWED_TOOLS } from '../utils/allowed-tools.js';
 
 const GITHUB_MODES = {
   'gh-coordinator': {
@@ -237,7 +238,6 @@ Begin execution now. Create all necessary GitHub workflow files and configuratio
     const claudeArgs = [];
     
     // Use safe permissions allowlist if requested
-    const { GITHUB_ALLOWED_TOOLS } = require('../utils/allowed-tools');
     if (flags['auto-approve']) {
       claudeArgs.push('--allowedTools', GITHUB_ALLOWED_TOOLS);
     }

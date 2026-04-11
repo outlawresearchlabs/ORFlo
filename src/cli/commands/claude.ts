@@ -49,8 +49,7 @@ claudeCommand
         claudeArgs.push('--allowedTools', tools);
         
         if (options.noPermissions) {
-          // Use safe allowlist - already set via --allowedTools above
-          // No longer uses --dangerously-skip-permissions
+          // --allowedTools already set above — safe allowlist is active
         }
         
         if (options.config) {
@@ -136,9 +135,10 @@ claudeCommand
         
         // Add flags
         if (task.skipPermissions && task.tools) {
-          // Already have --allowedTools set, no need for --dangerously-skip-permissions
+          // Already have --allowedTools set from task.tools
         } else if (task.skipPermissions) {
-          claudeArgs.push('--allowedTools', 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch');
+          const { CORE_TOOLS } = require('../utils/allowed-tools');
+          claudeArgs.push('--allowedTools', CORE_TOOLS);
         }
         
         if (task.config) {
