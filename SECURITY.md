@@ -36,12 +36,12 @@ The `.claude/settings.json` file defines which Bash commands and tools are pre-a
 - Package management: `npm`, `npx`, `node`, `bun`
 - Git operations: `git`, `gh`
 - File operations: `cat`, `ls`, `mkdir`, `cp`, `mv`, `diff`, `find`, etc.
-- `chmod` restricted to safe modes: `+x`, `+r`, `+w`, `755`, `644`
-- Network restricted to safe download: `curl -f`, `curl -fsSL`, `curl -o`, `wget -q`
+- `chmod` restricted to safe modes: `+x ./*` (project-relative only), `+r`, `+w`, `755`, `644`
+- Network restricted to fetch only (no file-save): `curl -f`, `curl -fsSL` — use `Write` tool to save downloaded content
 - Claude CLI: `claude` (for nested spawns)
 - Core tools: `Read`, `Write`, `Edit`, `Glob`, `Grep`, `WebSearch`, `WebFetch`
 
-**Deny list** (~16 patterns, expanded from 4):
+**Deny list** (~25 patterns, expanded from 4):
 - `rm -rf /`, `rm -rf *` — prevents mass deletion
 - `sudo *` — prevents privilege escalation
 - `curl * | bash`, `curl * | sh`, `curl * | fish` — prevents pipe-to-shell
@@ -50,9 +50,9 @@ The `.claude/settings.json` file defines which Bash commands and tools are pre-a
 - `eval *` — prevents arbitrary code evaluation
 - `chown *` — prevents ownership changes
 - `chmod 777 *`, `chmod 666 *`, `chmod a+rw *`, `chmod a+rwx *` — prevents permission escalation
-
-**Known limitation — download-then-execute chains:**
-The allow list permits `curl -o *` and `chmod +x *` separately. An agent could download a binary with `curl -o /tmp/x && chmod +x /tmp/x && /tmp/x` as three separate allowed commands. The deny list blocks pipe-to-shell (`curl | bash`) but not sequential download-execute chains. This is an inherent limitation of command-level allowlists. Mitigate by restricting `curl -o` to known hosts in production via custom settings.json overrides.
+- `node /tmp/*`, `node /var/tmp/*`, `node /dev/shm/*` — prevents execution from temp directories
+- `npx /tmp/*`, `npx /var/tmp/*`, `npx /dev/shm/*` — same
+- `bun /tmp/*`, `bun /var/tmp/*`, `bun /dev/shm/*` — same
 
 ### 3. `--non-interactive` for CI/Docker/SSH
 

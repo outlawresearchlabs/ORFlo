@@ -26,7 +26,7 @@
       "Bash(cp *)",
       "Bash(mv *)",
       "Bash(touch *)",
-      "Bash(chmod +x *)",
+      "Bash(chmod +x ./*)",
       "Bash(chmod +r *)",
       "Bash(chmod +w *)",
       "Bash(chmod 755 *)",
@@ -44,8 +44,6 @@
       "Bash(curl -f *)",
       "Bash(curl -sSf *)",
       "Bash(curl -fsSL *)",
-      "Bash(curl -o *)",
-      "Bash(wget -q *)",
       "Bash(docker *)",
       "Bash(claude *)",
       "Bash(which *)",
@@ -78,7 +76,16 @@
       "Bash(chmod 777 *)",
       "Bash(chmod 666 *)",
       "Bash(chmod a+rw *)",
-      "Bash(chmod a+rwx *)"
+      "Bash(chmod a+rwx *)",
+      "Bash(node /tmp/*)",
+      "Bash(node /var/tmp/*)",
+      "Bash(node /dev/shm/*)",
+      "Bash(npx /tmp/*)",
+      "Bash(npx /var/tmp/*)",
+      "Bash(npx /dev/shm/*)",
+      "Bash(bun /tmp/*)",
+      "Bash(bun /var/tmp/*)",
+      "Bash(bun /dev/shm/*)"
     ]
   },
   "hooks": {

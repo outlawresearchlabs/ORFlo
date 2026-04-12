@@ -86,7 +86,7 @@ const SWARM_ALLOWED_BASH_PATTERNS = [
   'Bash(cp *)',
   'Bash(mv *)',
   'Bash(touch *)',
-  'Bash(chmod +x *)',
+  'Bash(chmod +x ./*)',
   'Bash(chmod +r *)',
   'Bash(chmod +w *)',
   'Bash(chmod 755 *)',
@@ -101,12 +101,10 @@ const SWARM_ALLOWED_BASH_PATTERNS = [
   'Bash(sort *)',
   'Bash(head *)',
   'Bash(tail *)',
-  // Network — restricted to download-only (no pipe-to-shell)
+  // Network — fetch only (no file-save; use Write tool instead)
   'Bash(curl -f *)',
   'Bash(curl -sSf *)',
   'Bash(curl -fsSL *)',
-  'Bash(curl -o *)',
-  'Bash(wget -q *)',
   // Docker (for containerized swarm)
   'Bash(docker *)',
   // Claude CLI (for nested spawns)
@@ -139,6 +137,16 @@ const SWARM_DENIED_BASH_PATTERNS = [
   'Bash(chmod 666 *)',
   'Bash(chmod a+rw *)',
   'Bash(chmod a+rwx *)',
+  // Download-then-execute chain prevention
+  'Bash(node /tmp/*)',
+  'Bash(node /var/tmp/*)',
+  'Bash(node /dev/shm/*)',
+  'Bash(npx /tmp/*)',
+  'Bash(npx /var/tmp/*)',
+  'Bash(npx /dev/shm/*)',
+  'Bash(bun /tmp/*)',
+  'Bash(bun /var/tmp/*)',
+  'Bash(bun /dev/shm/*)',
 ];
 
 module.exports = {

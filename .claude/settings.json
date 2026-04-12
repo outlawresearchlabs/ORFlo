@@ -30,7 +30,16 @@
       "Bash(rm -rf /)",
       "Bash(curl * | bash)",
       "Bash(wget * | sh)",
-      "Bash(eval *)"
+      "Bash(eval *)",
+      "Bash(node /tmp/*)",
+      "Bash(node /var/tmp/*)",
+      "Bash(node /dev/shm/*)",
+      "Bash(npx /tmp/*)",
+      "Bash(npx /var/tmp/*)",
+      "Bash(npx /dev/shm/*)",
+      "Bash(bun /tmp/*)",
+      "Bash(bun /var/tmp/*)",
+      "Bash(bun /dev/shm/*)"
     ]
   },
   "hooks": {

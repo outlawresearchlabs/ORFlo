@@ -71,11 +71,11 @@ See [SECURITY.md](./SECURITY.md) for:
 
 - Full allowlist/deny list contents
 - Mode-specific tool breakdowns
-- Known limitations (download-then-execute chains)
+- Download-execute chain prevention details
 - Migration guide from `--dangerously-skip-permissions`
 - File-level change reference
 
-**Known limitation**: The allowlist permits `curl -o *` and `chmod +x *` as separate commands. A chain like `curl -o /tmp/x && chmod +x /tmp/x && /tmp/x` could download and execute a binary. The deny list blocks pipe-to-shell (`curl | bash`) but not sequential download-execute. Mitigate by restricting `curl -o` to known hosts in `.claude/settings.json` for production use.
+**Download-execute chain prevention**: `curl -o` and `wget -q` are removed from the allow list (use `curl -fsSL` to fetch + `Write` tool to save). `chmod +x` restricted to project-relative paths (`./*`). Runtime deny rules block `node`/`npx`/`bun` from executing files in `/tmp`, `/var/tmp`, `/dev/shm`.
 
 ## Contributing
 
