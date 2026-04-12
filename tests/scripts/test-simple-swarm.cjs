@@ -8,7 +8,7 @@ const simplePrompt = `Create a calculator module with add and subtract functions
 
 console.log('Testing simple swarm with prompt:', simplePrompt);
 
-const claudeProcess = spawn('claude', ['--dangerously-skip-permissions'], {
+const claudeProcess = spawn('claude', ['--allowedTools', 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch'], {
   stdio: ['pipe', 'pipe', 'pipe'],
   shell: false,
   cwd: process.cwd()
