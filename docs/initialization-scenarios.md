@@ -45,7 +45,7 @@ Next steps:
 1. Review and customize the generated files for your project
 2. Run './claude-flow start' to begin the orchestration system
 3. Use './claude-flow' instead of 'npx claude-flow' for all commands
-4. Use 'claude --dangerously-skip-permissions' for unattended operation
+4. Use 'claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch' for unattended operation
 5. Use Claude Code slash commands: /sparc, /sparc-architect, /sparc-tdd, etc.
 ```
 

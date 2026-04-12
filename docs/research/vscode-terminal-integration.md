@@ -255,7 +255,7 @@ Using `.vscode/tasks.json`:
   "tasks": [{
     "label": "Run Claude Code Automatically",
     "type": "shell",
-    "command": "/path/to/claude --dangerously-skip-permissions",
+    "command": "/path/to/claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch",
     "presentation": {
       "reveal": "always",
       "panel": "new",

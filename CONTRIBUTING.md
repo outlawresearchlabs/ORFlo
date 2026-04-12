@@ -95,7 +95,7 @@ Test that everything is working:
 
 ```bash
 # Activate Claude Code
-claude --dangerously-skip-permissions
+claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch
 
 # Initialize the project
 npx --y claude-flow@alpha init --force
@@ -297,7 +297,7 @@ npm install -g @anthropic-ai/claude-code
 #### "Permission denied"
 ```bash
 # Activate Claude Code with proper permissions
-claude --dangerously-skip-permissions
+claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch
 ```
 
 #### "Build fails"

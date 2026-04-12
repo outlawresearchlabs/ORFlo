@@ -73,7 +73,6 @@ export class TaskExecutorV2 extends TaskExecutor {
         
         // Force non-interactive mode and retry
         enhancedOptions.nonInteractive = true;
-        enhancedOptions.dangerouslySkipPermissions = false;
         enhancedOptions.useAllowedTools = true;
         
         return await this.executeClaudeWithTimeoutV2(
@@ -343,10 +342,7 @@ export class TaskExecutorV2 extends TaskExecutor {
     }
 
     // Use safe permissions allowlist instead of --dangerously-skip-permissions
-    if (options.nonInteractive || options.useAllowedTools ||
-        this.environment.recommendedFlags.includes('--non-interactive')) {
-      args.push('--allowedTools', CORE_TOOLS);
-    }
+    args.push('--allowedTools', CORE_TOOLS);
 
     // Add non-interactive flag if needed
     if (options.nonInteractive) {

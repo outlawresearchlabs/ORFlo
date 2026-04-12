@@ -338,12 +338,14 @@ async function executeClaude(enhancedTask, toolsList, instanceId, memoryNamespac
   // Build arguments array correctly
   const claudeArgs = [];
   claudeArgs.push(enhancedTask);
-  
-  // Use granular tool allowlist instead of --dangerously-skip-permissions
-  if (!enablePermissions) {
+
+  // Use allowlist: SPARC tools by default, user-specified list when permissions enabled
+  if (enablePermissions) {
+    claudeArgs.push('--allowedTools', toolsList);
+  } else {
     claudeArgs.push('--allowedTools', SPARC_ALLOWED_TOOLS);
   }
-  
+
   if (isNonInteractive) {
     // Non-interactive mode: add additional flags
     claudeArgs.push('-p'); // Use short form for print
@@ -354,12 +356,6 @@ async function executeClaude(enhancedTask, toolsList, instanceId, memoryNamespac
     if (subArgs.includes('--verbose') || subArgs.includes('-v')) {
       claudeArgs.push('--verbose');
     }
-  }
-  
-  // When permissions are enabled, use the provided tools list
-  // When using safe allowlist, tools are already specified above
-  if (enablePermissions) {
-    claudeArgs.push('--allowedTools', toolsList);
   }
   
   if (subArgs.includes('--config')) {

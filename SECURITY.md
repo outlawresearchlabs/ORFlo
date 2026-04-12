@@ -32,7 +32,7 @@ Plus MCP-specific tools for swarm coordination:
 
 The `.claude/settings.json` file defines which Bash commands and tools are pre-authorized:
 
-**Allow list** (~43 patterns, expanded from 16):
+**Allow list** (~52 patterns, expanded from 16):
 - Package management: `npm`, `npx`, `node`, `bun`
 - Git operations: `git`, `gh`
 - File operations: `cat`, `ls`, `mkdir`, `cp`, `mv`, `diff`, `find`, etc.

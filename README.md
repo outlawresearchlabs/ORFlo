@@ -116,7 +116,7 @@ v2.0.0 Alpha automatically configures MCP servers for seamless Claude Code integ
 ✅ claude-flow MCP server configured
 ✅ ruv-swarm MCP server configured  
 ✅ 87 tools available in Claude Code
-✅ --dangerously-skip-permissions set as default
+✅ --allowedTools safe allowlist set as default
 ```
 
 ### **Enhanced SPARC Workflows**

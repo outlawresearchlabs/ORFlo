@@ -3,7 +3,7 @@ import { EventEmitter } from 'events';
 import { promises as fs } from 'node:fs';
 import { Logger } from '../core/logger.js';
 import { generateId } from '../utils/helpers.js';
-import { CORE_TOOLS } from '../cli/utils/allowed-tools.js';
+import { SWARM_ALLOWED_TOOLS } from '../cli/utils/allowed-tools.js';
 import {
   SwarmId, AgentId, TaskId, AgentState, TaskDefinition, SwarmObjective,
   SwarmConfig, SwarmStatus, SwarmProgress, SwarmResults, SwarmMetrics,
@@ -2290,7 +2290,7 @@ Ensure your implementation is complete, well-structured, and follows best practi
     const claudeArgs = [prompt];
     
     // Use safe permissions allowlist for swarm automation
-    claudeArgs.push("--allowedTools", CORE_TOOLS);
+    claudeArgs.push("--allowedTools", SWARM_ALLOWED_TOOLS);
     
     // Add non-interactive flags for automation
     claudeArgs.push("-p"); // Print mode

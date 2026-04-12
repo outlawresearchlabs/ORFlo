@@ -135,8 +135,8 @@ RUN npx claude-flow@2.0.0 init
 ```json
 {
   "scripts": {
-    "claude:init": "claude-flow init --dangerously-skip-permissions",
-    "claude:swarm": "claude-flow swarm --dangerously-skip-permissions"
+    "claude:init": "claude-flow init",
+    "claude:swarm": "claude-flow swarm"
   }
 }
 ```
@@ -161,7 +161,7 @@ RUN npx claude-flow@2.0.0 init
 - `--yes` → `--auto-approve` (clearer intent)
 
 #### 2. Default Behavior Changes
-- v2 automatically applies `--dangerously-skip-permissions` in non-TTY environments
+- v2 automatically applies `--allowedTools` with safe allowlists in non-TTY environments
 - v2 automatically retries with `--non-interactive` on interactive errors
 - v2 provides sensible defaults for common prompts in non-interactive mode
 
@@ -344,7 +344,7 @@ npm install -g claude-flow@1.0.0
 
 # Add back manual flags
 export CLAUDE_V1_MODE=1
-alias claude-flow='claude-flow --dangerously-skip-permissions'
+alias claude-flow='claude-flow'
 ```
 
 ## Getting Help

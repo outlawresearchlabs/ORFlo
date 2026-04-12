@@ -26,7 +26,7 @@ npx claude-flow claude spawn <task> [options]
 | Option | Short | Description | Default |
 |--------|-------|-------------|---------|
 | `--tools` | `-t` | Comma-separated list of allowed tools | View,Edit,Replace,GlobTool,GrepTool,LS,Bash |
-| `--no-permissions` | | Use --dangerously-skip-permissions flag | false |
+| `--no-permissions` | | Use safe tool allowlist instead of permission prompts | false |
 | `--config` | `-c` | MCP config file path | |
 | `--mode` | `-m` | Development mode (full/backend-only/frontend-only/api-only) | full |
 | `--parallel` | | Enable parallel execution with BatchTool | false |
@@ -99,8 +99,8 @@ Execute multiple Claude instances based on a JSON workflow file.
 | `name` | string | Task name for display | No |
 | `description` | string | Task description (used as Claude prompt) | Yes |
 | `tools` | string/array | Allowed tools (comma-separated string or array) | No |
-| `skipPermissions` | boolean | Use --dangerously-skip-permissions flag | No |
-| `dangerouslySkipPermissions` | boolean | Alternative to skipPermissions | No |
+| `skipPermissions` | boolean | Use safe tool allowlist (deprecated — use `tools` instead) | No |
+| `dangerouslySkipPermissions` | boolean | Deprecated — safe allowlist always used | No |
 | `config` | string | MCP config file path | No |
 | `mode` | string | Development mode | No |
 | `coverage` | number | Test coverage target | No |

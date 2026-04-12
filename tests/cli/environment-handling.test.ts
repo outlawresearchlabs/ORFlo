@@ -35,11 +35,7 @@ describe('Environment Detection', () => {
       const env = detectExecutionEnvironment({ skipWarnings: true });
       
       expect(env.isVSCode).toBe(true);
-      expect(env.recommendedFlags).toContain('--dangerously-skip-permissions');
       expect(env.recommendedFlags).toContain('--non-interactive');
-    });
-
-    it('should detect VS Code without TTY', () => {
       process.env.TERM_PROGRAM = 'vscode';
       Object.defineProperty(process.stdout, 'isTTY', { value: false, writable: true });
       
@@ -68,7 +64,6 @@ describe('Environment Detection', () => {
         const env = detectExecutionEnvironment({ skipWarnings: true });
         
         expect(env.isCI).toBe(true);
-        expect(env.recommendedFlags).toContain('--dangerously-skip-permissions');
         expect(env.recommendedFlags).toContain('--non-interactive');
         expect(env.recommendedFlags).toContain('--json');
       });
@@ -89,7 +84,6 @@ describe('Environment Detection', () => {
       
       const env = detectExecutionEnvironment({ skipWarnings: true });
       
-      expect(env.recommendedFlags).toContain('--dangerously-skip-permissions');
       expect(env.recommendedFlags).toContain('--non-interactive');
     });
   });
@@ -147,37 +141,31 @@ describe('Smart Defaults Application', () => {
     
     const enhanced = applySmartDefaults(options);
     
-    expect(enhanced.dangerouslySkipPermissions).toBe(true);
     expect(enhanced.nonInteractive).toBe(true);
-    expect(enhanced.appliedDefaults).toContain('--dangerously-skip-permissions');
     expect(enhanced.appliedDefaults).toContain('--non-interactive');
   });
 
   it('should apply defaults for CI environment', () => {
     process.env.CI = 'true';
     const options = {};
-    
+
     const enhanced = applySmartDefaults(options);
-    
-    expect(enhanced.dangerouslySkipPermissions).toBe(true);
+
     expect(enhanced.nonInteractive).toBe(true);
     expect(enhanced.json).toBe(true);
   });
 
   it('should not override existing options', () => {
     process.env.CI = 'true';
-    const options = { 
-      dangerouslySkipPermissions: false,
+    const options = {
       nonInteractive: false,
-      json: false 
+      json: false
     };
-    
+
     const enhanced = applySmartDefaults(options);
-    
-    expect(enhanced.dangerouslySkipPermissions).toBe(false);
+
     expect(enhanced.nonInteractive).toBe(false);
     expect(enhanced.json).toBe(false);
-    expect(enhanced.appliedDefaults).toHaveLength(0);
   });
 
   it('should disable color for non-color terminals', () => {
@@ -254,7 +242,7 @@ describe('Task Executor v2 Environment Handling', () => {
     expect(buildCommandSpy).toHaveBeenCalled();
     const result = buildCommandSpy.mock.results[0].value;
     expect(result.args).toContain('--non-interactive');
-    expect(result.args).toContain('--dangerously-skip-permissions');
+    expect(result.args).toContain('--allowedTools');
   });
 });
 

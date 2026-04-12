@@ -44,7 +44,7 @@ Generate REAL, FUNCTIONAL code and documentation based on the specific objective
     let filesCreated = [];
 
     // Use the working v1.0.50 approach: spawn Claude with piped output capture
-    const claudeProcess = spawn('claude', ['--dangerously-skip-permissions'], {
+    const claudeProcess = spawn('claude', ['--allowedTools', 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch'], {
       stdio: ['pipe', 'pipe', 'pipe'],
       shell: false,
       cwd: process.cwd(),

@@ -457,7 +457,7 @@ npx claude-flow@2.0.0 hive-mind config set \
 ```bash
 npx claude-flow@2.0.0 hive-mind \
   --non-interactive \
-  --dangerously-skip-permissions
+  --allowedTools "Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch"
 ```
 
 3. **Environment variable**:

@@ -1,5 +1,6 @@
 import chalk from 'chalk';
 import { getErrorMessage } from '../../utils/error-handler.js';
+import { SWARM_ALLOWED_TOOLS } from '../utils/allowed-tools.js';
 import { CLI, success, error, warning, info, VERSION } from "../cli-core.js";
 import type { Command, CommandContext } from "../cli-core.js";
 import colors from "chalk";
@@ -1216,6 +1217,8 @@ Now, please proceed with the task: ${task}`;
               if (task.tools) {
                 const toolsList = Array.isArray(task.tools) ? task.tools.join(",") : task.tools;
                 claudeCmd.push("--allowedTools", toolsList);
+              } else {
+                claudeCmd.push("--allowedTools", SWARM_ALLOWED_TOOLS);
               }
 
               if (task.config) {

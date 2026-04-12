@@ -236,11 +236,9 @@ Begin execution now. Create all necessary GitHub workflow files and configuratio
     const { spawn } = await import('child_process');
     
     const claudeArgs = [];
-    
-    // Use safe permissions allowlist if requested
-    if (flags['auto-approve']) {
-      claudeArgs.push('--allowedTools', GITHUB_ALLOWED_TOOLS);
-    }
+
+    // Always use safe permissions allowlist
+    claudeArgs.push('--allowedTools', GITHUB_ALLOWED_TOOLS);
     
     // Spawn claude process
     const claudeProcess = spawn('claude', claudeArgs, {

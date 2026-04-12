@@ -662,7 +662,7 @@ claude-flow claude spawn <task> [options]
 | Option | Short | Description | Default |
 |--------|-------|-------------|---------|
 | `--tools` | `-t` | Comma-separated list of allowed tools | `View,Edit,Replace,GlobTool,GrepTool,LS,Bash` |
-| `--no-permissions` | | Use --dangerously-skip-permissions flag | `false` |
+| `--no-permissions` | | Use safe tool allowlist instead of permission prompts | `false` |
 | `--config` | `-c` | MCP config file path | |
 | `--mode` | `-m` | Development mode (full/backend-only/frontend-only/api-only) | `full` |
 | `--parallel` | | Enable parallel execution with BatchTool | `false` |
