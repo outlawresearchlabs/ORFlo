@@ -34,7 +34,7 @@ const SWARM_MCP_TOOLS = [
 ].join(',');
 
 // Tools allowed for swarm/hive-mind execution
-const SWARM_ALLOWED_TOOLS = [CORE_TOOLS, SWARM_MCP_TOOLS].join(',');
+const SWARM_ALLOWED_TOOLS = CORE_TOOLS + ',' + SWARM_MCP_TOOLS;
 
 // SPARC MCP tools (subset for focused development)
 const SPARC_MCP_TOOLS = [
@@ -46,7 +46,7 @@ const SPARC_MCP_TOOLS = [
 ].join(',');
 
 // Tools allowed for SPARC execution
-const SPARC_ALLOWED_TOOLS = [CORE_TOOLS, SPARC_MCP_TOOLS].join(',');
+const SPARC_ALLOWED_TOOLS = CORE_TOOLS + ',' + SPARC_MCP_TOOLS;
 
 // GitHub MCP tools
 const GITHUB_MCP_TOOLS = [
@@ -61,7 +61,7 @@ const GITHUB_MCP_TOOLS = [
 ].join(',');
 
 // Tools allowed for GitHub integration
-const GITHUB_ALLOWED_TOOLS = [CORE_TOOLS, GITHUB_MCP_TOOLS].join(',');
+const GITHUB_ALLOWED_TOOLS = CORE_TOOLS + ',' + GITHUB_MCP_TOOLS;
 
 // Bash patterns allowed via settings.json permissions.allow
 const SWARM_ALLOWED_BASH_PATTERNS = [
