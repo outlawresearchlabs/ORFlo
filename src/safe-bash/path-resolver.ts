@@ -181,8 +181,10 @@ function isInBlockedExecDir(resolved: string): boolean {
 
 /**
  * Heuristic: does a string look like a file path?
+ * Excludes URLs and option flags.
  */
 function looksLikePath(s: string): boolean {
   if (!s || s.startsWith('-')) return false;
+  if (s.startsWith('http://') || s.startsWith('https://') || s.startsWith('ftp://')) return false;
   return s.startsWith('/') || s.startsWith('./') || s.startsWith('../') || s.includes('/');
 }

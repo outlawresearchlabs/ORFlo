@@ -11,10 +11,11 @@ const BINARY_CATEGORIES = {
   runtimes: ['node', 'bun', 'deno'],
   git: ['git', 'gh'],
   file_ops: [
-    'cat', 'ls', 'pwd', 'mkdir', 'cp', 'mv', 'touch', 'chmod',
+    'cat', 'ls', 'pwd', 'echo', 'mkdir', 'cp', 'mv', 'touch', 'chmod',
     'diff', 'find', 'grep', 'sed', 'awk', 'tar', 'wc',
     'sort', 'head', 'tail', 'which', 'type', 'whoami',
     'realpath', 'readlink', 'file', 'stat', 'du', 'df',
+    'tee', 'tr', 'cut', 'xargs',
   ],
   network: ['curl'],
   docker: ['docker'],
@@ -67,7 +68,7 @@ export function checkBinary(parsed: ParsedCommand): BinaryCheckResult {
     }
     // Find the category
     for (const [category, binaries] of Object.entries(BINARY_CATEGORIES)) {
-      if (binaries.includes(binary as any)) {
+      if ((binaries as readonly string[]).includes(binary)) {
         return { allowed: true, reason: 'OK', category };
       }
     }

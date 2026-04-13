@@ -19,6 +19,7 @@ import { automationAction } from './simple-commands/automation.js';
 import { coordinationAction } from './simple-commands/coordination.js';
 import { hooksAction } from './simple-commands/hooks.js';
 import { hiveMindCommand } from './simple-commands/hive-mind.js';
+import { safeBashCommand } from './simple-commands/safe-bash.js';
 import { showUnifiedMetrics, fixTaskAttribution } from './simple-commands/swarm-metrics-integration.js';
 // Note: TypeScript imports commented out for Node.js compatibility
 // import { ruvSwarmAction } from './commands/ruv-swarm.ts';
@@ -162,6 +163,17 @@ First-time users should run: npx outlaw-flow@latest init --sparc`
       'mcp start --port 8080',
       'mcp tools --verbose',
       'mcp auth setup'
+    ]
+  });
+
+  commandRegistry.set('safe-bash', {
+    handler: safeBashCommand,
+    description: 'SafeBash MCP server — semantic command analysis with OS sandbox',
+    usage: 'safe-bash <start|check> [options]',
+    examples: [
+      'safe-bash start',
+      'safe-bash check "npm install"',
+      'safe-bash check "node --require /tmp/x app.js"'
     ]
   });
 

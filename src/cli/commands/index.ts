@@ -2328,7 +2328,7 @@ This is a Outlaw-Flow AI agent orchestration system with the following component
 - **Agent Coordination**: Multi-agent task distribution and management
 
 ## Important Notes
-- Use `--allowedTools` with a safe tool allowlist for unattended operation
+- Use --allowedTools with a safe tool allowlist for unattended operation
 - The system supports both daemon and interactive modes
 - Memory persistence is handled automatically
 - All components are event-driven for scalability

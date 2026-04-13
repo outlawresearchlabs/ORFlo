@@ -341,7 +341,7 @@ function executeCommand(
       resolve({
         stdout: stdout || '',
         stderr: stderr || '',
-        exitCode: error ? (error.exitCode ?? -1) : 0,
+        exitCode: error ? ((error as any).exitCode ?? -1) : 0,
       });
     });
   });
