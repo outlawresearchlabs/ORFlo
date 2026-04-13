@@ -1,10 +1,17 @@
 /**
  * Safe permissions configuration for outlaw-flow.
- * Replaces --dangerously-skip-permissions with granular tool allowlists.
+ *
+ * Bash tool is replaced by mcp__safe-bash__safe_bash which provides
+ * semantic command analysis and OS sandbox support.
+ * SWARM_ALLOWED_BASH_PATTERNS and SWARM_DENIED_BASH_PATTERNS are
+ * DEPRECATED — kept for backward compat, superseded by SafeBash.
  */
 
-// Core Claude Code tools available in all modes
-const CORE_TOOLS = 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch';
+// Core Claude Code tools available in all modes (no Bash — use safe_bash instead)
+const CORE_TOOLS = 'Read,Write,Edit,Glob,Grep,WebSearch,WebFetch';
+
+// SafeBash MCP tool — replaces Bash for command execution
+const SAFE_BASH_MCP_TOOL = 'mcp__safe-bash__safe_bash';
 
 // MCP tools for swarm coordination
 const SWARM_MCP_TOOLS = [
@@ -34,7 +41,7 @@ const SWARM_MCP_TOOLS = [
 ].join(',');
 
 // Tools allowed for swarm/hive-mind execution
-const SWARM_ALLOWED_TOOLS = CORE_TOOLS + ',' + SWARM_MCP_TOOLS;
+const SWARM_ALLOWED_TOOLS = CORE_TOOLS + ',' + SAFE_BASH_MCP_TOOL + ',' + SWARM_MCP_TOOLS;
 
 // SPARC MCP tools (subset for focused development)
 const SPARC_MCP_TOOLS = [
@@ -46,7 +53,7 @@ const SPARC_MCP_TOOLS = [
 ].join(',');
 
 // Tools allowed for SPARC execution
-const SPARC_ALLOWED_TOOLS = CORE_TOOLS + ',' + SPARC_MCP_TOOLS;
+const SPARC_ALLOWED_TOOLS = CORE_TOOLS + ',' + SAFE_BASH_MCP_TOOL + ',' + SPARC_MCP_TOOLS;
 
 // GitHub MCP tools
 const GITHUB_MCP_TOOLS = [
@@ -61,23 +68,20 @@ const GITHUB_MCP_TOOLS = [
 ].join(',');
 
 // Tools allowed for GitHub integration
-const GITHUB_ALLOWED_TOOLS = CORE_TOOLS + ',' + GITHUB_MCP_TOOLS;
+const GITHUB_ALLOWED_TOOLS = CORE_TOOLS + ',' + SAFE_BASH_MCP_TOOL + ',' + GITHUB_MCP_TOOLS;
 
-// Bash patterns allowed via settings.json permissions.allow
+// DEPRECATED: These Bash patterns are superseded by SafeBash semantic analysis.
+// Kept for backward compatibility with settings.json files that still use them.
 const SWARM_ALLOWED_BASH_PATTERNS = [
-  // outlaw-flow and ruv-swarm commands
   'Bash(npx outlaw-flow *)',
   'Bash(npx ruv-swarm *)',
   'Bash(npx outlaw-flow@alpha *)',
-  // Package management
   'Bash(npm *)',
   'Bash(npx *)',
   'Bash(node *)',
   'Bash(bun *)',
-  // Git operations
   'Bash(git *)',
   'Bash(gh *)',
-  // File operations
   'Bash(cat *)',
   'Bash(ls *)',
   'Bash(pwd)',
@@ -101,25 +105,19 @@ const SWARM_ALLOWED_BASH_PATTERNS = [
   'Bash(sort *)',
   'Bash(head *)',
   'Bash(tail *)',
-  // Network — fetch only (no file-save; use Write tool instead)
   'Bash(curl -f *)',
   'Bash(curl -sSf *)',
   'Bash(curl -fsSL *)',
-  // Docker (for containerized swarm)
   'Bash(docker *)',
-  // Claude CLI (for nested spawns)
   'Bash(claude *)',
-  // Testing
   'Bash(npm run lint)',
   'Bash(npm run test:*)',
   'Bash(npm test *)',
-  // Which/type commands
   'Bash(which *)',
   'Bash(type *)',
   'Bash(whoami)',
 ];
 
-// Bash patterns that are ALWAYS denied
 const SWARM_DENIED_BASH_PATTERNS = [
   'Bash(rm -rf /)',
   'Bash(rm -rf *)',
@@ -137,7 +135,6 @@ const SWARM_DENIED_BASH_PATTERNS = [
   'Bash(chmod 666 *)',
   'Bash(chmod a+rw *)',
   'Bash(chmod a+rwx *)',
-  // Download-then-execute chain prevention
   'Bash(node /tmp/*)',
   'Bash(node /var/tmp/*)',
   'Bash(node /dev/shm/*)',
@@ -151,6 +148,7 @@ const SWARM_DENIED_BASH_PATTERNS = [
 
 module.exports = {
   CORE_TOOLS,
+  SAFE_BASH_MCP_TOOL,
   SWARM_ALLOWED_TOOLS,
   SPARC_ALLOWED_TOOLS,
   GITHUB_ALLOWED_TOOLS,

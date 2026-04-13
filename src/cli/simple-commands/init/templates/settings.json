@@ -9,49 +9,7 @@
   },
   "permissions": {
     "allow": [
-      "Bash(npx outlaw-flow *)",
-      "Bash(npx outlaw-flow@alpha *)",
-      "Bash(npx ruv-swarm *)",
-      "Bash(npm *)",
-      "Bash(npx *)",
-      "Bash(node *)",
-      "Bash(bun *)",
-      "Bash(git *)",
-      "Bash(gh *)",
-      "Bash(cat *)",
-      "Bash(ls *)",
-      "Bash(pwd)",
-      "Bash(echo *)",
-      "Bash(mkdir *)",
-      "Bash(cp *)",
-      "Bash(mv *)",
-      "Bash(touch *)",
-      "Bash(chmod +x ./*)",
-      "Bash(chmod +r *)",
-      "Bash(chmod +w *)",
-      "Bash(chmod 755 *)",
-      "Bash(chmod 644 *)",
-      "Bash(diff *)",
-      "Bash(find *)",
-      "Bash(grep *)",
-      "Bash(sed *)",
-      "Bash(awk *)",
-      "Bash(tar *)",
-      "Bash(wc *)",
-      "Bash(sort *)",
-      "Bash(head *)",
-      "Bash(tail *)",
-      "Bash(curl -f *)",
-      "Bash(curl -sSf *)",
-      "Bash(curl -fsSL *)",
-      "Bash(docker *)",
-      "Bash(claude *)",
-      "Bash(which *)",
-      "Bash(type *)",
-      "Bash(whoami)",
-      "Bash(npm run lint)",
-      "Bash(npm run test:*)",
-      "Bash(npm test *)",
+      "mcp__safe-bash__safe_bash",
       "Read",
       "Write",
       "Edit",
@@ -60,33 +18,7 @@
       "WebSearch",
       "WebFetch"
     ],
-    "deny": [
-      "Bash(rm -rf /)",
-      "Bash(rm -rf *)",
-      "Bash(sudo *)",
-      "Bash(curl * | bash)",
-      "Bash(curl * | sh)",
-      "Bash(curl * | fish)",
-      "Bash(wget * | sh)",
-      "Bash(wget * | bash)",
-      "Bash(bash -c *)",
-      "Bash(sh -c *)",
-      "Bash(eval *)",
-      "Bash(chown *)",
-      "Bash(chmod 777 *)",
-      "Bash(chmod 666 *)",
-      "Bash(chmod a+rw *)",
-      "Bash(chmod a+rwx *)",
-      "Bash(node /tmp/*)",
-      "Bash(node /var/tmp/*)",
-      "Bash(node /dev/shm/*)",
-      "Bash(npx /tmp/*)",
-      "Bash(npx /var/tmp/*)",
-      "Bash(npx /dev/shm/*)",
-      "Bash(bun /tmp/*)",
-      "Bash(bun /var/tmp/*)",
-      "Bash(bun /dev/shm/*)"
-    ]
+    "deny": []
   },
   "hooks": {
     "preEditHook": {
@@ -133,6 +65,17 @@
         "OUTLAW_FLOW_TELEMETRY_ENABLED": "true",
         "OUTLAW_FLOW_REMOTE_READY": "true",
         "OUTLAW_FLOW_GITHUB_INTEGRATION": "true"
+      }
+    },
+    "safe-bash": {
+      "command": "npx",
+      "args": [
+        "outlaw-flow",
+        "safe-bash",
+        "start"
+      ],
+      "env": {
+        "OUTLAW_FLOW_SAFE_BASH_LOG_LEVEL": "info"
       }
     }
   },
