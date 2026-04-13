@@ -21,6 +21,8 @@ export interface ParsedCommand {
   envAssignments: Record<string, string>;
   /** Subshell expressions found: $(), backticks */
   subshells: string[];
+  /** Command separators found: ;, &&, || */
+  commandSeparators: string[];
   /** Original command string */
   raw: string;
 }
@@ -38,7 +40,7 @@ export interface ValidationResult {
   safe: boolean;
   reason: string;
   /** Which check failed, if any */
-  failedCheck?: 'subshell' | 'injection' | 'binary' | 'path' | 'redirect' | 'taint' | 'network';
+  failedCheck?: 'subshell' | 'command-separator' | 'injection' | 'binary' | 'path' | 'redirect' | 'taint' | 'network';
 }
 
 /** Injection flag check result */

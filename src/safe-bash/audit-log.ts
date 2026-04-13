@@ -23,8 +23,9 @@ export class AuditLog {
     try {
       const line = JSON.stringify(entry) + '\n';
       fs.appendFileSync(this.logPath, line, 'utf8');
-    } catch {
+    } catch (err) {
       // Audit logging is best-effort — don't block execution on failure
+      console.warn(`SafeBash audit log write failed: ${(err as Error).message}`);
     }
   }
 

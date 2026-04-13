@@ -35,7 +35,7 @@ const BLOCKED_BINARIES = new Set([
   'sudo', 'su',
   'chown',
   'eval', 'exec',
-  'socat', 'nc', 'ncat', 'ncat',
+  'socat', 'nc', 'ncat',
   'crontab', 'at',
   'systemctl', 'service',
   'wget', // Use curl -fsSL instead

@@ -214,7 +214,16 @@ export class SafeBashMCPServer {
       };
     }
 
-    // 2. Injection flag detection
+    // 2. Command separator check — block ;, &&, ||
+    if (parsed.commandSeparators.length > 0) {
+      return {
+        safe: false,
+        reason: `Command separators are not allowed: ${parsed.commandSeparators.join(', ')}. Use separate safe_bash calls for each command.`,
+        failedCheck: 'command-separator',
+      };
+    }
+
+    // 3. Injection flag detection
     const injectionResult = checkInjection(parsed);
     if (!injectionResult.safe) {
       return {
@@ -224,7 +233,7 @@ export class SafeBashMCPServer {
       };
     }
 
-    // 3. Binary allowlist check
+    // 4. Binary allowlist check
     const binaryResult = checkBinary(parsed);
     if (!binaryResult.allowed) {
       return {
@@ -234,7 +243,7 @@ export class SafeBashMCPServer {
       };
     }
 
-    // 4. Path resolution and bounds checking (includes redirect targets)
+    // 5. Path resolution and bounds checking (includes redirect targets)
     const pathResult = resolveAndCheckPaths(parsed, this.projectRoot, this.writablePaths);
     if (!pathResult.safe) {
       // Map redirect violations to the 'redirect' failedCheck, others to 'path'
@@ -246,7 +255,7 @@ export class SafeBashMCPServer {
       };
     }
 
-    // 5. Taint tracking check
+    // 6. Taint tracking check
     const taintResult = this.taintTracker.checkExecution(parsed);
     if (!taintResult.safe) {
       return {
@@ -256,7 +265,7 @@ export class SafeBashMCPServer {
       };
     }
 
-    // 6. Network check
+    // 7. Network check
     if (!allowNetwork && NETWORK_BINARIES.includes(parsed.binaryName.toLowerCase())) {
       return {
         safe: false,

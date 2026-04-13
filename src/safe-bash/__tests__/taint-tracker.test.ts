@@ -17,12 +17,12 @@ afterAll(() => {
 
 describe('taint-tracker', () => {
   test('allows interpreters to run existing files', async () => {
-    const tracker = new TaintTracker(tmpDir);
-    await tracker.snapshotProjectFiles();
-
-    // Create a file that predates the session
+    // Create a file before tracker init so it's in the initial snapshot
     const existingFile = path.join(tmpDir, 'existing.js');
     fs.writeFileSync(existingFile, 'console.log("ok")');
+
+    const tracker = new TaintTracker(tmpDir);
+    await tracker.snapshotProjectFiles();
 
     const result = tracker.checkExecution(parseShellCommand(`node ${existingFile}`));
     expect(result.safe).toBe(true);

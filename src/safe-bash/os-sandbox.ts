@@ -7,7 +7,6 @@
  * - Windows: no OS sandbox (SafeBash-only)
  */
 
-import { execSync } from 'child_process';
 import * as crypto from 'crypto';
 import * as fs from 'fs';
 import * as path from 'path';
@@ -185,7 +184,7 @@ function whichSync(binary: string): string | null {
   for (const dir of pathDirs) {
     const fullPath = path.join(dir, binary);
     try {
-      execSync(`test -x ${shellEscape(fullPath)}`, { stdio: 'ignore' });
+      fs.accessSync(fullPath, fs.constants.X_OK);
       return fullPath;
     } catch {
       continue;

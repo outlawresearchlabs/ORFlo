@@ -83,4 +83,24 @@ describe('shell-parser', () => {
     expect(result.redirects[0].type).toBe('write');
     expect(result.redirects[0].target).toBe('my output.txt');
   });
+
+  test('detects semicolon command separator', () => {
+    const result = parseShellCommand('npm install ; rm -rf /');
+    expect(result.commandSeparators).toContain(';');
+  });
+
+  test('detects && command separator', () => {
+    const result = parseShellCommand('npm install && rm -rf /');
+    expect(result.commandSeparators).toContain('&&');
+  });
+
+  test('detects || command separator', () => {
+    const result = parseShellCommand('npm install || echo failed');
+    expect(result.commandSeparators).toContain('||');
+  });
+
+  test('does not detect separators inside quotes', () => {
+    const result = parseShellCommand('git commit -m "fix; update"');
+    expect(result.commandSeparators).toHaveLength(0);
+  });
 });

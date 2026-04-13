@@ -17,6 +17,9 @@ export function parseShellCommand(command: string): ParsedCommand {
   // Detect subshells before any parsing
   const subshells = detectSubshells(raw);
 
+  // Detect command separators (;, &&, ||) outside quotes
+  const commandSeparators = detectCommandSeparators(raw);
+
   // Split on pipes (respecting quotes)
   const pipeSegments = splitOnPipes(raw);
   const pipeTargets: string[] = [];
@@ -55,6 +58,7 @@ export function parseShellCommand(command: string): ParsedCommand {
     pipeSegments,
     envAssignments,
     subshells,
+    commandSeparators,
     raw,
   };
 }
@@ -112,6 +116,63 @@ function detectSubshells(cmd: string): string[] {
   }
 
   return subshells;
+}
+
+/**
+ * Detect command separators (;, &&, ||) outside quotes.
+ * These allow multiple commands in a single exec() call, bypassing validation.
+ */
+function detectCommandSeparators(cmd: string): string[] {
+  const separators: string[] = [];
+  let inSingle = false;
+  let inDouble = false;
+  let i = 0;
+
+  while (i < cmd.length) {
+    const ch = cmd[i];
+
+    if (ch === "'" && !inDouble && (i === 0 || cmd[i - 1] !== '\\')) {
+      inSingle = !inSingle;
+      i++;
+      continue;
+    }
+
+    if (ch === '"' && !inSingle && (i === 0 || cmd[i - 1] !== '\\')) {
+      inDouble = !inDouble;
+      i++;
+      continue;
+    }
+
+    if (inSingle || inDouble) {
+      i++;
+      continue;
+    }
+
+    // && (before | check)
+    if (ch === '&' && cmd[i + 1] === '&') {
+      separators.push('&&');
+      i += 2;
+      continue;
+    }
+
+    // ||
+    if (ch === '|' && cmd[i + 1] === '|') {
+      separators.push('||');
+      i += 2;
+      continue;
+    }
+
+    // ; (but not inside a for-loop construct like ((; ))
+    if (ch === ';') {
+      separators.push(';');
+      i++;
+      continue;
+    }
+
+    i++;
+  }
+
+  return separators;
 }
 
 /**
