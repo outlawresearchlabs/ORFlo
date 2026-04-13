@@ -199,7 +199,7 @@ export class EnhancedProcessUI {
     console.clear();
     
     // Show enhanced welcome
-    printSuccess('🧠 Claude-Flow Enhanced UI v2.0.0');
+    printSuccess('🧠 Outlaw-Flow Enhanced UI v2.0.0');
     console.log(colors.dim('Enhanced with 71+ MCP tools and advanced features'));
     console.log('─'.repeat(80));
     console.log();
@@ -277,7 +277,7 @@ export class EnhancedProcessUI {
     const enhancedStatus = this.systemStats.enhancedMode ? 
       colors.green('ENHANCED') : colors.yellow('FALLBACK');
     
-    console.log(colors.cyan(colors.bold('🧠 Claude-Flow Enhanced Process Manager')));
+    console.log(colors.cyan(colors.bold('🧠 Outlaw-Flow Enhanced Process Manager')));
     console.log(colors.dim(`Mode: ${enhancedStatus} | Tools: ${this.systemStats.toolsAvailable}+ | Uptime: ${this.formatUptime(this.systemStats.uptime)}`));
     console.log(colors.gray('─'.repeat(80)));
     
@@ -512,8 +512,8 @@ export class EnhancedProcessUI {
     
     console.log();
     console.log(colors.cyan('📊 GitHub Integration Status:'));
-    console.log(`  Repository: ${colors.green('claude-code-flow')}`);
-    console.log(`  Branch: ${colors.yellow('claude-flow-v2.0.0')}`);
+    console.log(`  Repository: ${colors.green('outlaw-flow')}`);
+    console.log(`  Branch: ${colors.yellow('outlaw-flow-v2.0.0')}`);
     console.log(`  Status: ${colors.green('Connected')}`);
     console.log(`  Last Sync: ${colors.gray('Recently')}`);
   }

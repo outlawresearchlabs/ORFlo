@@ -239,7 +239,7 @@ class SwarmCoordinationTester {
     };
 
     fs.writeFile(
-      '/workspaces/claude-code-flow/swarm-coordination-test-results.json',
+      '/workspaces/outlaw-flow/swarm-coordination-test-results.json',
       JSON.stringify(reportData, null, 2)
     ).then(() => {
       console.log('\n📄 Full report saved to: swarm-coordination-test-results.json');

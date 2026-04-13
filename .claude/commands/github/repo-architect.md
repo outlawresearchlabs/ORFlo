@@ -31,7 +31,7 @@ mcp__ruv-swarm__agent_spawn { type: "optimizer", name: "Structure Optimizer" }
 mcp__ruv-swarm__agent_spawn { type: "coordinator", name: "Multi-Repo Coordinator" }
 
 // Analyze current repository structure
-LS("/workspaces/ruv-FANN/claude-code-flow/claude-code-flow")
+LS("/workspaces/ruv-FANN/outlaw-flow/outlaw-flow")
 LS("/workspaces/ruv-FANN/ruv-swarm/npm")
 
 // Search for related repositories
@@ -113,9 +113,9 @@ mcp__github__push_files {
 
 ## Quick Start
 \`\`\`bash
-npx claude-flow init --sparc
+npx outlaw-flow init --sparc
 npm install
-npx claude-flow start --ui
+npx outlaw-flow start --ui
 \`\`\`
 
 ## Features
@@ -136,7 +136,7 @@ See CLAUDE.md for complete integration instructions.`
 ```javascript
 // Synchronize structure across related repositories
 const repositories = [
-  "claude-code-flow", 
+  "outlaw-flow", 
   "ruv-swarm",
   "claude-extensions"
 ]
@@ -177,9 +177,9 @@ jobs:
   mcp__ruv-swarm__agent_spawn { type: "coordinator", name: "Multi-Repo Coordinator" }
   
   // Analyze current repository structures
-  LS("/workspaces/ruv-FANN/claude-code-flow/claude-code-flow")
+  LS("/workspaces/ruv-FANN/outlaw-flow/outlaw-flow")
   LS("/workspaces/ruv-FANN/ruv-swarm/npm") 
-  Read("/workspaces/ruv-FANN/claude-code-flow/claude-code-flow/package.json")
+  Read("/workspaces/ruv-FANN/outlaw-flow/outlaw-flow/package.json")
   Read("/workspaces/ruv-FANN/ruv-swarm/npm/package.json")
   
   // Search for architectural patterns
@@ -194,15 +194,15 @@ jobs:
     branch: "architecture/optimization",
     files: [
       {
-        path: "claude-code-flow/claude-code-flow/.github/ISSUE_TEMPLATE/integration.yml",
+        path: "outlaw-flow/outlaw-flow/.github/ISSUE_TEMPLATE/integration.yml",
         content: "[Integration issue template]"
       },
       {
-        path: "claude-code-flow/claude-code-flow/.github/PULL_REQUEST_TEMPLATE.md",
+        path: "outlaw-flow/outlaw-flow/.github/PULL_REQUEST_TEMPLATE.md",
         content: "[Standardized PR template]"
       },
       {
-        path: "claude-code-flow/claude-code-flow/docs/ARCHITECTURE.md",
+        path: "outlaw-flow/outlaw-flow/docs/ARCHITECTURE.md",
         content: "[Architecture documentation]"
       },
       {
@@ -228,7 +228,7 @@ jobs:
     key: "architecture/analysis/results",
     value: {
       timestamp: Date.now(),
-      repositories_analyzed: ["claude-code-flow", "ruv-swarm"],
+      repositories_analyzed: ["outlaw-flow", "ruv-swarm"],
       optimization_areas: ["structure", "workflows", "templates", "documentation"],
       recommendations: ["standardize_structure", "improve_workflows", "enhance_templates"],
       implementation_status: "in_progress"
@@ -242,7 +242,7 @@ jobs:
 ```
 ruv-FANN/
 ├── packages/
-│   ├── claude-code-flow/
+│   ├── outlaw-flow/
 │   │   ├── src/
 │   │   ├── .claude/
 │   │   └── package.json
@@ -295,7 +295,7 @@ ruv-FANN/
 ```javascript
 const integrationPattern = {
   packages: {
-    "claude-code-flow": {
+    "outlaw-flow": {
       role: "orchestration_layer",
       dependencies: ["ruv-swarm"],
       provides: ["CLI", "workflows", "commands"]

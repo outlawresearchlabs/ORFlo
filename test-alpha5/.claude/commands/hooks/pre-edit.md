@@ -4,7 +4,7 @@ Hook executed before file edits.
 
 ## Usage
 ```bash
-npx claude-flow hook pre-edit [options]
+npx outlaw-flow hook pre-edit [options]
 ```
 
 ## Options
@@ -15,11 +15,11 @@ npx claude-flow hook pre-edit [options]
 ## Examples
 ```bash
 # Pre-edit hook
-npx claude-flow hook pre-edit --file src/api.js
+npx outlaw-flow hook pre-edit --file src/api.js
 
 # With validation
-npx claude-flow hook pre-edit --file src/api.js --validate-syntax
+npx outlaw-flow hook pre-edit --file src/api.js --validate-syntax
 
 # Create backup
-npx claude-flow hook pre-edit --file src/api.js --backup
+npx outlaw-flow hook pre-edit --file src/api.js --backup
 ```

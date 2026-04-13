@@ -1,4 +1,4 @@
-# Claude Flow Project Structure
+# Outlaw Flow Project Structure
 
 ## 📁 Root Directory
 
@@ -18,7 +18,7 @@ The root directory has been cleaned and organized to contain only essential file
 - **CHANGELOG.md** - Version history
 - **CLAUDE.md** - Claude Code integration instructions (required in root)
 - **cli.js** - Main CLI entry point
-- **claude-flow** - Executable wrapper script
+- **outlaw-flow** - Executable wrapper script
 - **start-web-ui.js** - WebUI launcher
 
 ## 📚 Documentation Structure (docs/)
@@ -79,7 +79,7 @@ tests/
 
 - **src/** - Source code
 - **dist/** - Build output
-- **flow-2-init/** - Claude Flow v2 initialization templates
+- **flow-2-init/** - Outlaw Flow v2 initialization templates
 - **.claude/** - Claude Code configuration
 - **.roo/** - MCP configuration
 - **scripts/** - Utility scripts

@@ -2,7 +2,7 @@
 
 ## Overview
 
-Claude-Flow v2 uses a **safe permissions allowlist** instead of `--dangerously-skip-permissions`. This change replaces blanket permission bypass with granular tool and command restrictions.
+Outlaw-Flow v2 uses a **safe permissions allowlist** instead of `--dangerously-skip-permissions`. This change replaces blanket permission bypass with granular tool and command restrictions.
 
 ## Why `--dangerously-skip-permissions` Was Removed
 
@@ -25,7 +25,7 @@ Each execution mode (swarm, hive-mind, SPARC, GitHub) specifies exactly which Cl
 
 Plus MCP-specific tools for swarm coordination:
 ```
---allowedTools mcp__claude-flow__agent_spawn,mcp__claude-flow__task_create,...
+--allowedTools mcp__outlaw-flow__agent_spawn,mcp__outlaw-flow__task_create,...
 ```
 
 ### 2. `permissions.allow` / `permissions.deny` in Settings
@@ -73,30 +73,30 @@ Environment detection now recommends `--non-interactive` instead of `--dangerous
 
 ### Before (insecure):
 ```bash
-claude-flow swarm "build API" --dangerously-skip-permissions
-claude-flow sparc run code "implement feature"
+outlaw-flow swarm "build API" --dangerously-skip-permissions
+outlaw-flow sparc run code "implement feature"
 # All spawn paths defaulted to --dangerously-skip-permissions
 ```
 
 ### After (safe):
 ```bash
-claude-flow swarm "build API"
+outlaw-flow swarm "build API"
 # Uses --allowedTools with safe allowlist by default
 
-claude-flow sparc run code "implement feature"
+outlaw-flow sparc run code "implement feature"
 # Uses SPARC-specific allowlist by default
 
-claude-flow sparc run code "implement feature" --enable-permissions
+outlaw-flow sparc run code "implement feature" --enable-permissions
 # Interactive prompts for full control
 ```
 
 ### CI/CD:
 ```bash
 # Before
-claude-flow swarm "deploy" --dangerously-skip-permissions
+outlaw-flow swarm "deploy" --dangerously-skip-permissions
 
 # After — safe defaults for CI
-claude-flow swarm "deploy"
+outlaw-flow swarm "deploy"
 # Environment detector auto-applies --non-interactive + --allowedTools
 ```
 

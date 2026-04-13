@@ -4,12 +4,12 @@
 version: '3.8'
 
 services:
-  claude-flow-dev:
+  outlaw-flow-dev:
     # Override for local development
     volumes:
       - ../:/app:cached  # Use cached mounting for better performance on macOS
     environment:
-      - DEBUG=claude-flow:*,ruv-swarm:*
+      - DEBUG=outlaw-flow:*,ruv-swarm:*
       - LOG_LEVEL=debug
       - DEVELOPMENT_MODE=true
     ports:
@@ -30,7 +30,7 @@ services:
   # Additional development services
   redis:
     image: redis:alpine
-    container_name: claude-flow-redis
+    container_name: outlaw-flow-redis
     ports:
       - "6379:6379"
     volumes:
@@ -41,11 +41,11 @@ services:
   # Database admin interface
   db-admin:
     image: sqlitebrowser/sqlitebrowser:latest
-    container_name: claude-flow-db-admin
+    container_name: outlaw-flow-db-admin
     ports:
       - "8081:8080"
     volumes:
-      - claude-flow-db-data:/data
+      - outlaw-flow-db-data:/data
     networks:
       - claude-swarm-network
 

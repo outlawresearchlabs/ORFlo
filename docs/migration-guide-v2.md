@@ -1,7 +1,7 @@
-# Claude Flow v2.0.0 Migration Guide
+# Outlaw Flow v2.0.0 Migration Guide
 
 ## 🚀 Overview
-Claude Flow v2.0.0 introduces significant improvements and integrations with ruv-swarm. This guide helps you migrate from v1.x to v2.0.0.
+Outlaw Flow v2.0.0 introduces significant improvements and integrations with ruv-swarm. This guide helps you migrate from v1.x to v2.0.0.
 
 ## 🔄 Breaking Changes
 
@@ -12,16 +12,16 @@ Claude Flow v2.0.0 introduces significant improvements and integrations with ruv
 ### 2. Command Structure Changes
 ```bash
 # Old (v1.x)
-claude-flow init
-claude-flow swarm create mesh 5
+outlaw-flow init
+outlaw-flow swarm create mesh 5
 
 # New (v2.0.0)
-npx claude-flow init --topology=mesh --agents=5
+npx outlaw-flow init --topology=mesh --agents=5
 npx ruv-swarm init mesh 5 --claude
 ```
 
 ### 3. Configuration File Format
-- Configuration moved from `.claude-flow.json` to `.claude/settings.json`
+- Configuration moved from `.outlaw-flow.json` to `.claude/settings.json`
 - New hook-based architecture for automation
 
 ## 📦 Installation
@@ -29,22 +29,22 @@ npx ruv-swarm init mesh 5 --claude
 ### Fresh Installation
 ```bash
 # Global installation
-npm install -g claude-flow@2.0.0
+npm install -g outlaw-flow@2.0.0
 
 # Or use npx (recommended)
-npx claude-flow@latest init
+npx outlaw-flow@latest init
 ```
 
 ### Upgrading from v1.x
 ```bash
 # Backup your configuration
-cp .claude-flow.json .claude-flow.json.backup
+cp .outlaw-flow.json .outlaw-flow.json.backup
 
 # Upgrade
-npm update -g claude-flow
+npm update -g outlaw-flow
 
 # Migrate configuration
-npx claude-flow migrate-config
+npx outlaw-flow migrate-config
 ```
 
 ## 🛠️ New Features
@@ -57,10 +57,10 @@ npx claude-flow migrate-config
 ### 2. Enhanced CLI
 ```bash
 # New wizard mode
-npx claude-flow init --wizard
+npx outlaw-flow init --wizard
 
 # Preset configurations
-npx claude-flow swarm create --preset=development
+npx outlaw-flow swarm create --preset=development
 ```
 
 ### 3. Automated Hooks
@@ -71,7 +71,7 @@ npx claude-flow swarm create --preset=development
 
 ## 🔧 Configuration Migration
 
-### Old Format (.claude-flow.json)
+### Old Format (.outlaw-flow.json)
 ```json
 {
   "swarm": {
@@ -119,9 +119,9 @@ npm install -g ruv-swarm
 ```
 
 ## 📚 Additional Resources
-- [Full Documentation](https://github.com/ruvnet/claude-code-flow)
+- [Full Documentation](https://github.com/ruvnet/outlaw-flow)
 - [ruv-swarm Integration Guide](https://github.com/ruvnet/ruv-FANN/tree/main/ruv-swarm)
-- [Support & Issues](https://github.com/ruvnet/claude-code-flow/issues)
+- [Support & Issues](https://github.com/ruvnet/outlaw-flow/issues)
 
 ## 🆘 Getting Help
 - GitHub Issues: Report bugs or request features

@@ -2,7 +2,7 @@
 
 ## Usage
 ```bash
-claude-flow swarm "Analyze data" --strategy analysis --parallel --max-agents 8
+outlaw-flow swarm "Analyze data" --strategy analysis --parallel --max-agents 8
 ```
 
 ## Description

@@ -1,4 +1,4 @@
-# Claude-Flow Coordination System
+# Outlaw-Flow Coordination System
 
 A comprehensive, scalable, and fault-tolerant coordination system for multi-agent task execution and resource management.
 

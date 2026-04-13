@@ -546,7 +546,7 @@ class ConsoleTerminalTester {
       // Save report to file
       const fs = await import('fs/promises');
       await fs.writeFile(
-        '/workspaces/claude-code-flow/tests/console-terminal-test-report.json',
+        '/workspaces/outlaw-flow/tests/console-terminal-test-report.json',
         JSON.stringify(report, null, 2)
       );
       

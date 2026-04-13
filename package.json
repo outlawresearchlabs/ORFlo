@@ -1,10 +1,10 @@
 {
-  "name": "claude-flow",
+  "name": "outlaw-flow",
   "version": "2.0.0-alpha.13",
-  "description": "Enterprise-grade AI agent orchestration with ruv-swarm integration (Alpha Release)",
+  "description": "Security-hardened AI agent orchestration fork (based on claude-flow v2.0.0-alpha)",
   "main": "cli.mjs",
   "bin": {
-    "claude-flow": "./bin/claude-flow"
+    "outlaw-flow": "./bin/outlaw-flow"
   },
   "scripts": {
     "dev": "tsx src/cli/main.ts",
@@ -13,8 +13,8 @@
     "build:esm": "tsc",
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build:ts": "npm run build:esm && npm run build:cjs",
-    "build:binary": "pkg dist/cli/main.js --targets node20-linux-x64,node20-macos-x64,node20-win-x64 --output bin/claude-flow",
-    "build:simple": "npm run build:ts && pkg dist/cli/simple-cli.js --output bin/claude-flow-simple",
+    "build:binary": "pkg dist/cli/main.js --targets node20-linux-x64,node20-macos-x64,node20-win-x64 --output bin/outlaw-flow",
+    "build:simple": "npm run build:ts && pkg dist/cli/simple-cli.js --output bin/outlaw-flow-simple",
     "typecheck": "tsc --noEmit",
     "typecheck:watch": "tsc --noEmit --watch",
     "dev:build": "tsc --watch",
@@ -78,12 +78,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ruvnet/claude-code-flow.git"
+    "url": "https://github.com/outlawresearchlabs/ruflo.git"
   },
   "bugs": {
-    "url": "https://github.com/ruvnet/claude-code-flow/issues"
+    "url": "https://github.com/outlawresearchlabs/ruflo/issues"
   },
-  "homepage": "https://github.com/ruvnet/claude-code-flow#readme",
+  "homepage": "https://github.com/outlawresearchlabs/ruflo#readme",
   "engines": {
     "node": ">=20.0.0",
     "npm": ">=9.0.0"
@@ -122,6 +122,7 @@
     "ora": "^7.0.1",
     "p-queue": "^8.1.0",
     "ruv-swarm": "^1.0.14",
+    "shell-quote": "^1.8.3",
     "ws": "^8.18.3"
   },
   "devDependencies": {

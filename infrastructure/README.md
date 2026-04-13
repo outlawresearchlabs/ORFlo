@@ -1,11 +1,11 @@
 # Infrastructure
 
-This directory contains all infrastructure-related configurations and tools for Claude Flow.
+This directory contains all infrastructure-related configurations and tools for Outlaw Flow.
 
 ## Structure
 
 - **docker/**: Docker-related configurations and testing infrastructure
-  - `Dockerfile`: Main Docker image for Claude Flow
+  - `Dockerfile`: Main Docker image for Outlaw Flow
   - `docker-compose.yml`: Docker Compose configuration for the entire stack
   - **testing/**: Docker-based testing environment
     - Test-specific Docker configurations

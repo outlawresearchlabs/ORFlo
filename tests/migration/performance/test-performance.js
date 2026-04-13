@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Performance Tests for Claude Flow Migration
+ * Performance Tests for Outlaw Flow Migration
  * Validates performance is maintained or improved after migration
  */
 
@@ -12,8 +12,8 @@ const os = require('os');
 const { performance } = require('perf_hooks');
 
 // Test configuration
-const TEST_DIR = path.join(os.tmpdir(), 'claude-flow-perf-test-' + Date.now());
-const CLAUDE_FLOW_BIN = path.resolve(__dirname, '../../../bin/claude-flow');
+const TEST_DIR = path.join(os.tmpdir(), 'outlaw-flow-perf-test-' + Date.now());
+const OUTLAW_FLOW_BIN = path.resolve(__dirname, '../../../bin/outlaw-flow');
 
 // Performance thresholds (milliseconds)
 const THRESHOLDS = {
@@ -145,48 +145,48 @@ process.chdir(TEST_DIR);
 
 // Warm up Node.js
 console.log(`${colors.yellow}Warming up Node.js...${colors.reset}`);
-exec(`node ${CLAUDE_FLOW_BIN} --version`);
+exec(`node ${OUTLAW_FLOW_BIN} --version`);
 
 // Run performance tests
 (async () => {
   // Test 1: Help command performance
   await runPerfTest('Help Command', THRESHOLDS.help, async () => {
-    await execAsync('node', [CLAUDE_FLOW_BIN, '--help']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, '--help']);
   });
   
   // Test 2: Init command performance
   await runPerfTest('Init Command', THRESHOLDS.init, async () => {
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'init', '-y']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'init', '-y']);
   });
   
   // Test 3: Config operations performance
   await runPerfTest('Config Operations', THRESHOLDS.config, async () => {
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'config', 'set', 'test.perf', 'value']);
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'config', 'get', 'test.perf']);
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'config', 'list']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'config', 'set', 'test.perf', 'value']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'config', 'get', 'test.perf']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'config', 'list']);
   });
   
   // Test 4: Swarm initialization performance
   await runPerfTest('Swarm Init', THRESHOLDS.swarmInit, async () => {
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'swarm', 'init', '--topology', 'mesh']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'swarm', 'init', '--topology', 'mesh']);
   });
   
   // Test 5: Agent spawn performance
   await runPerfTest('Agent Spawn', THRESHOLDS.agentSpawn, async () => {
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'swarm', 'spawn', '--type', 'researcher']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'swarm', 'spawn', '--type', 'researcher']);
   });
   
   // Test 6: Memory operations performance
   await runPerfTest('Memory Operations', THRESHOLDS.memory, async () => {
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'memory', 'store', '--key', 'perf-test', '--value', 'test-data']);
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'memory', 'get', '--key', 'perf-test']);
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'memory', 'list']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'memory', 'store', '--key', 'perf-test', '--value', 'test-data']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'memory', 'get', '--key', 'perf-test']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'memory', 'list']);
   });
   
   // Test 7: Task operations performance
   await runPerfTest('Task Operations', THRESHOLDS.task, async () => {
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'task', 'create', '--name', 'Perf Test Task']);
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'task', 'list']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'task', 'create', '--name', 'Perf Test Task']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'task', 'list']);
   });
   
   // Test 8: Batch operations performance
@@ -210,15 +210,15 @@ exec(`node ${CLAUDE_FLOW_BIN} --version`);
       JSON.stringify(batchConfig, null, 2)
     );
     
-    await execAsync('node', [CLAUDE_FLOW_BIN, 'batch', 'execute', 'batch.json']);
+    await execAsync('node', [OUTLAW_FLOW_BIN, 'batch', 'execute', 'batch.json']);
   });
   
   // Test 9: Concurrent operations
   await runPerfTest('Concurrent Operations', THRESHOLDS.config * 3, async () => {
     const operations = [
-      execAsync('node', [CLAUDE_FLOW_BIN, 'config', 'list']),
-      execAsync('node', [CLAUDE_FLOW_BIN, 'memory', 'list']),
-      execAsync('node', [CLAUDE_FLOW_BIN, 'task', 'list'])
+      execAsync('node', [OUTLAW_FLOW_BIN, 'config', 'list']),
+      execAsync('node', [OUTLAW_FLOW_BIN, 'memory', 'list']),
+      execAsync('node', [OUTLAW_FLOW_BIN, 'task', 'list'])
     ];
     
     await Promise.all(operations);
@@ -230,7 +230,7 @@ exec(`node ${CLAUDE_FLOW_BIN} --version`);
     const largeData = 'x'.repeat(1024 * 1024);
     
     await execAsync('node', [
-      CLAUDE_FLOW_BIN, 
+      OUTLAW_FLOW_BIN, 
       'memory', 
       'store', 
       '--key', 

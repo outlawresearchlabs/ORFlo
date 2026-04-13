@@ -2,7 +2,7 @@ import { getErrorMessage } from '../utils/error-handler.js';
 /**
  * ruv-swarm integration helper for Claude Code configuration
  * 
- * This module bridges the main claude-flow configuration with
+ * This module bridges the main outlaw-flow configuration with
  * ruv-swarm specific settings and provides utility functions
  * for seamless integration.
  */
@@ -232,7 +232,7 @@ export function getRuvSwarmIntegration(): RuvSwarmIntegration {
 }
 
 /**
- * Initialize ruv-swarm integration with claude-flow
+ * Initialize ruv-swarm integration with outlaw-flow
  */
 export async function initializeRuvSwarmIntegration(): Promise<{ success: boolean; message: string }> {
   const integration = getRuvSwarmIntegration();

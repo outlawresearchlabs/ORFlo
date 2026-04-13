@@ -1,12 +1,12 @@
 # Docker Infrastructure
 
-This directory contains Docker configurations for Claude Flow.
+This directory contains Docker configurations for Outlaw Flow.
 
 ## Files
 
-- `Dockerfile`: Main Docker image definition for Claude Flow
+- `Dockerfile`: Main Docker image definition for Outlaw Flow
 - `docker-compose.yml`: Complete stack configuration including:
-  - Claude Flow main service
+  - Outlaw Flow main service
   - MCP Server
   - ruv-swarm integration
   - Development environment
@@ -56,19 +56,19 @@ Required environment variables:
 
 ## Services
 
-### claude-flow
-- Main Claude Flow service
+### outlaw-flow
+- Main Outlaw Flow service
 - Port: 3000
-- Volume: claude-flow-data
+- Volume: outlaw-flow-data
 
 ### mcp-server
-- MCP Server for Claude Flow
+- MCP Server for Outlaw Flow
 - Port: 3001
 - Volume: mcp-data
 
 ### ruv-swarm
 - ruv-swarm integration service
-- Depends on: claude-flow, mcp-server
+- Depends on: outlaw-flow, mcp-server
 - Volume: swarm-data
 
 ### dev

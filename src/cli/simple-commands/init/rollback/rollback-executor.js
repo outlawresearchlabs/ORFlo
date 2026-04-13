@@ -206,7 +206,7 @@ export class RollbackExecutor {
 
     try {
       const memoryItems = [
-        'memory/claude-flow-data.json',
+        'memory/outlaw-flow-data.json',
         'memory/agents',
         'memory/sessions'
       ];
@@ -294,13 +294,13 @@ export class RollbackExecutor {
     };
 
     try {
-      const executablePath = `${this.workingDir}/claude-flow`;
+      const executablePath = `${this.workingDir}/outlaw-flow`;
       
       try {
         await Deno.remove(executablePath);
-        result.actions.push('Removed claude-flow executable');
+        result.actions.push('Removed outlaw-flow executable');
       } catch {
-        result.actions.push('claude-flow executable was already clean');
+        result.actions.push('outlaw-flow executable was already clean');
       }
 
     } catch (error) {
@@ -361,7 +361,7 @@ export class RollbackExecutor {
         'CLAUDE.md',
         'memory-bank.md',
         'coordination.md',
-        'claude-flow',
+        'outlaw-flow',
         '.roomodes',
         '.roo',
         '.claude',
@@ -442,7 +442,7 @@ export class RollbackExecutor {
         'coordination.md',
         '.roomodes',
         '.roo',
-        'claude-flow'
+        'outlaw-flow'
       ];
 
       let foundArtifacts = 0;

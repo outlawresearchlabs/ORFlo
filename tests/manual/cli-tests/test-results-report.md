@@ -31,7 +31,7 @@
 
 ### 📋 Package Info
 
-**Name:** claude-flow
+**Name:** outlaw-flow
 **Version:** 1.0.71
 **Main:** cli.js
 
@@ -39,13 +39,13 @@
 
 ```
 
-🧠 Claude-Flow v1.0.71 - Advanced AI Agent Orchestration System
+🧠 Outlaw-Flow v1.0.71 - Advanced AI Agent Orchestration System
 
 USAGE:
-  claude-flow <command> [options]
+  outlaw-flow <command> [options]
 
 INSTALLATION & SETUP:
-  npx claude-flow@latest init --sparc  # Initialize SPARC development environment
+  npx outlaw-flow@latest init --sparc  # Initialize SPARC development environment
   
   The --sparc flag creates:
   • .roomodes file with 17 pre-configured SPARC modes

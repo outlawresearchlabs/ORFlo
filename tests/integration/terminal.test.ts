@@ -77,11 +77,11 @@ Deno.test('NativeAdapter - handles multiple shells', async () => {
   const platform = Deno.build.os;
   if (platform === 'windows') {
     // Windows specific test
-    const output = await terminal.executeCommand('echo %CLAUDE_FLOW_TERMINAL%');
+    const output = await terminal.executeCommand('echo %OUTLAW_FLOW_TERMINAL%');
     assertEquals(output.trim(), 'true');
   } else {
     // Unix-like specific test
-    const output = await terminal.executeCommand('echo $CLAUDE_FLOW_TERMINAL');
+    const output = await terminal.executeCommand('echo $OUTLAW_FLOW_TERMINAL');
     assertEquals(output.trim(), 'true');
   }
 

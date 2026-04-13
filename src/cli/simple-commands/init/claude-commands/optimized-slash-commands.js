@@ -1,7 +1,7 @@
 // optimized-slash-commands.js - Create batchtools-optimized Claude Code slash commands
 
 import { createOptimizedSparcSlashCommand, createOptimizedMainSparcCommand } from './optimized-sparc-commands.js';
-import { createOptimizedClaudeFlowCommands } from './optimized-claude-flow-commands.js';
+import { createOptimizedClaudeFlowCommands } from './optimized-outlaw-flow-commands.js';
 
 // Create batchtools-optimized Claude Code slash commands for SPARC modes
 export async function createOptimizedClaudeSlashCommands(workingDir, selectedModes = null) {
@@ -36,7 +36,7 @@ export async function createOptimizedClaudeSlashCommands(workingDir, selectedMod
     await Deno.writeTextFile(`${workingDir}/.claude/commands/sparc.md`, mainSparcCommand);
     console.log('  ✅ Created optimized main slash command: /sparc (Batchtools enhanced)');
     
-    // Create claude-flow specific commands with batchtools optimization
+    // Create outlaw-flow specific commands with batchtools optimization
     await createOptimizedClaudeFlowCommands(workingDir);
     
     // Create batchtools-specific commands
@@ -197,28 +197,28 @@ Chain operations with parallel execution at each stage:
 ### Full SPARC Pipeline with Batchtools
 \`\`\`bash
 # Execute complete SPARC workflow with parallel processing
-./claude-flow sparc pipeline "authentication system" --batch-optimize
+./outlaw-flow sparc pipeline "authentication system" --batch-optimize
 
 # Run multiple SPARC modes concurrently
-./claude-flow sparc batch architect,code,tdd "user management" --parallel
+./outlaw-flow sparc batch architect,code,tdd "user management" --parallel
 
 # Concurrent project analysis
-./claude-flow sparc concurrent-analyze project-requirements.json --parallel
+./outlaw-flow sparc concurrent-analyze project-requirements.json --parallel
 \`\`\`
 
 ### Performance Monitoring
 \`\`\`bash
 # Monitor batch operation performance
-./claude-flow batchtools monitor --real-time
+./outlaw-flow batchtools monitor --real-time
 
 # Analyze parallel processing metrics
-./claude-flow batchtools analyze --performance --detailed
+./outlaw-flow batchtools analyze --performance --detailed
 
 # Check system resource utilization
-./claude-flow batchtools resources --concurrent --verbose
+./outlaw-flow batchtools resources --concurrent --verbose
 \`\`\`
 
-For detailed documentation, see: https://github.com/ruvnet/claude-code-flow/docs/batchtools.md
+For detailed documentation, see: https://github.com/ruvnet/outlaw-flow/docs/batchtools.md
 `;
   
   await Deno.writeTextFile(`${workingDir}/.claude/commands/batchtools.md`, batchtoolsCommand);
@@ -232,7 +232,7 @@ description: Monitor and optimize system performance with batchtools
 
 # 📊 Performance Monitoring & Optimization
 
-Real-time performance monitoring and optimization tools for Claude-Flow operations.
+Real-time performance monitoring and optimization tools for Outlaw-Flow operations.
 
 ## Performance Metrics
 
@@ -253,25 +253,25 @@ Real-time performance monitoring and optimization tools for Claude-Flow operatio
 ### Real-time Monitoring
 \`\`\`bash
 # Monitor all system performance
-./claude-flow performance monitor --real-time --all
+./outlaw-flow performance monitor --real-time --all
 
 # Focus on parallel operations
-./claude-flow performance monitor --parallel --batchtools
+./outlaw-flow performance monitor --parallel --batchtools
 
 # Monitor specific components
-./claude-flow performance monitor --focus sparc --concurrent
+./outlaw-flow performance monitor --focus sparc --concurrent
 \`\`\`
 
 ### Performance Analysis
 \`\`\`bash
 # Generate performance report
-./claude-flow performance report --detailed --timeframe 24h
+./outlaw-flow performance report --detailed --timeframe 24h
 
 # Analyze batch operation efficiency
-./claude-flow performance analyze --batchtools --optimization
+./outlaw-flow performance analyze --batchtools --optimization
 
 # Compare performance across different modes
-./claude-flow performance compare --modes architect,code,tdd
+./outlaw-flow performance compare --modes architect,code,tdd
 \`\`\`
 
 ## Optimization Recommendations
@@ -316,7 +316,7 @@ Real-time performance monitoring and optimization tools for Claude-Flow operatio
 - Implement performance alerts for critical thresholds
 - Regular performance analysis and optimization
 
-For comprehensive performance guides, see: https://github.com/ruvnet/claude-code-flow/docs/performance.md
+For comprehensive performance guides, see: https://github.com/ruvnet/outlaw-flow/docs/performance.md
 `;
   
   await Deno.writeTextFile(`${workingDir}/.claude/commands/performance.md`, performanceCommand);

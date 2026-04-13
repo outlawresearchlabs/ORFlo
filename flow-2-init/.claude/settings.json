@@ -1,15 +1,15 @@
 {
   "env": {
-    "CLAUDE_FLOW_AUTO_COMMIT": "false",
-    "CLAUDE_FLOW_AUTO_PUSH": "false",
-    "CLAUDE_FLOW_HOOKS_ENABLED": "true",
-    "CLAUDE_FLOW_TELEMETRY_ENABLED": "true",
-    "CLAUDE_FLOW_REMOTE_EXECUTION": "true",
-    "CLAUDE_FLOW_GITHUB_INTEGRATION": "true"
+    "OUTLAW_FLOW_AUTO_COMMIT": "false",
+    "OUTLAW_FLOW_AUTO_PUSH": "false",
+    "OUTLAW_FLOW_HOOKS_ENABLED": "true",
+    "OUTLAW_FLOW_TELEMETRY_ENABLED": "true",
+    "OUTLAW_FLOW_REMOTE_EXECUTION": "true",
+    "OUTLAW_FLOW_GITHUB_INTEGRATION": "true"
   },
   "permissions": {
     "allow": [
-      "Bash(npx claude-flow *)",
+      "Bash(npx outlaw-flow *)",
       "Bash(npm run lint)",
       "Bash(npm run test:*)",
       "Bash(npm test *)",
@@ -77,18 +77,18 @@
     }
   },
   "mcpServers": {
-    "claude-flow": {
+    "outlaw-flow": {
       "command": "npx",
       "args": [
-        "claude-flow",
+        "outlaw-flow",
         "mcp",
         "start"
       ],
       "env": {
-        "CLAUDE_FLOW_HOOKS_ENABLED": "true",
-        "CLAUDE_FLOW_TELEMETRY_ENABLED": "true",
-        "CLAUDE_FLOW_REMOTE_READY": "true",
-        "CLAUDE_FLOW_GITHUB_INTEGRATION": "true"
+        "OUTLAW_FLOW_HOOKS_ENABLED": "true",
+        "OUTLAW_FLOW_TELEMETRY_ENABLED": "true",
+        "OUTLAW_FLOW_REMOTE_READY": "true",
+        "OUTLAW_FLOW_GITHUB_INTEGRATION": "true"
       }
     }
   },

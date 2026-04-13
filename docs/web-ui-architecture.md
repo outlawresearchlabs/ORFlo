@@ -39,7 +39,7 @@ This document outlines the technical architecture for implementing a console-sty
 └─────────────────────────────────────────────────────────────────┘
                                 │
 ┌─────────────────────────────────────────────────────────────────┐
-│               Existing Claude-Flow CLI                         │
+│               Existing Outlaw-Flow CLI                         │
 │  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
 │  │  Orchestrator   │  │ Terminal Mgr    │  │  Memory System  │ │
 │  │  Task System    │  │ Agent Manager   │  │  Config Manager │ │
@@ -119,16 +119,16 @@ interface CapturedProcess {
 
 #### CLI Integration Points
 
-1. **Wrapper Script**: Create `claude-flow-web` wrapper that:
+1. **Wrapper Script**: Create `outlaw-flow-web` wrapper that:
    - Launches regular CLI with output capture
    - Starts WebSocket server
    - Manages process lifecycle
 
 2. **Environment Variables**: Use environment flags to detect web mode:
    ```bash
-   CLAUDE_FLOW_WEB_MODE=true
-   CLAUDE_FLOW_WEB_PORT=3000
-   CLAUDE_FLOW_SESSION_ID=session-123
+   OUTLAW_FLOW_WEB_MODE=true
+   OUTLAW_FLOW_WEB_PORT=3000
+   OUTLAW_FLOW_SESSION_ID=session-123
    ```
 
 3. **Output Hooks**: Minimal hooks in existing CLI for:
@@ -501,4 +501,4 @@ This architecture provides:
 7. **Performance Optimized**: Efficient resource usage
 8. **Backward Compatible**: Existing CLI unchanged
 
-The design ensures that claude-flow settings integration, real-time CLI streaming, and console-style web interface work together seamlessly while maintaining the robustness and functionality of the existing CLI system.
+The design ensures that outlaw-flow settings integration, real-time CLI streaming, and console-style web interface work together seamlessly while maintaining the robustness and functionality of the existing CLI system.

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Automated build and test script for claude-code-flow Docker environment
+# Automated build and test script for outlaw-flow Docker environment
 # This script handles the complete build, test, and validation pipeline
 
 set -euo pipefail
@@ -81,15 +81,15 @@ build_images() {
     
     # Build development image
     log "${BLUE}📦 Building development image...${NC}"
-    docker-compose build claude-flow-dev
+    docker-compose build outlaw-flow-dev
     
     # Build testing image
     log "${BLUE}📦 Building testing image...${NC}"
-    docker-compose build claude-flow-test
+    docker-compose build outlaw-flow-test
     
     # Build production image
     log "${BLUE}📦 Building production image...${NC}"
-    docker-compose build claude-flow-prod
+    docker-compose build outlaw-flow-prod
     
     # Build swarm integration image
     log "${BLUE}📦 Building swarm integration image...${NC}"
@@ -105,7 +105,7 @@ run_unit_tests() {
     cd "${DOCKER_TEST_DIR}"
     
     # Run unit tests
-    docker-compose run --rm claude-flow-test npm run test:unit > "${DOCKER_TEST_DIR}/test-results/unit-tests.log" 2>&1
+    docker-compose run --rm outlaw-flow-test npm run test:unit > "${DOCKER_TEST_DIR}/test-results/unit-tests.log" 2>&1
     
     if [ $? -eq 0 ]; then
         log "${GREEN}✅ Unit tests passed${NC}"
@@ -123,13 +123,13 @@ run_integration_tests() {
     cd "${DOCKER_TEST_DIR}"
     
     # Start dependencies
-    docker-compose up -d claude-flow-db ruv-swarm-db
+    docker-compose up -d outlaw-flow-db ruv-swarm-db
     
     # Wait for databases to be ready
     sleep 10
     
     # Run integration tests
-    docker-compose run --rm claude-flow-test npm run test:integration > "${DOCKER_TEST_DIR}/test-results/integration-tests.log" 2>&1
+    docker-compose run --rm outlaw-flow-test npm run test:integration > "${DOCKER_TEST_DIR}/test-results/integration-tests.log" 2>&1
     
     if [ $? -eq 0 ]; then
         log "${GREEN}✅ Integration tests passed${NC}"
@@ -171,7 +171,7 @@ run_e2e_tests() {
     cd "${DOCKER_TEST_DIR}"
     
     # Start full environment
-    docker-compose up -d claude-flow-dev claude-flow-db
+    docker-compose up -d outlaw-flow-dev outlaw-flow-db
     
     # Wait for services to be ready
     sleep 30
@@ -198,13 +198,13 @@ run_performance_tests() {
     docker-compose --profile monitoring up -d performance-monitor
     
     # Start services
-    docker-compose up -d claude-flow-dev claude-flow-db
+    docker-compose up -d outlaw-flow-dev outlaw-flow-db
     
     # Wait for services
     sleep 20
     
     # Run performance tests
-    docker-compose run --rm claude-flow-test npm run test:performance > "${DOCKER_TEST_DIR}/test-results/performance-tests.log" 2>&1
+    docker-compose run --rm outlaw-flow-test npm run test:performance > "${DOCKER_TEST_DIR}/test-results/performance-tests.log" 2>&1
     
     if [ $? -eq 0 ]; then
         log "${GREEN}✅ Performance tests passed${NC}"
@@ -232,7 +232,7 @@ validate_production() {
         log "${GREEN}✅ Production deployment is healthy${NC}"
     else
         log "${RED}❌ Production deployment health check failed${NC}"
-        docker-compose --profile production logs claude-flow-prod
+        docker-compose --profile production logs outlaw-flow-prod
         return 1
     fi
 }
@@ -247,7 +247,7 @@ generate_reports() {
     mkdir -p "${DOCKER_TEST_DIR}/test-results/reports"
     
     # Generate coverage report
-    docker-compose run --rm claude-flow-test npm run coverage:report > "${DOCKER_TEST_DIR}/test-results/reports/coverage.html" 2>&1 || true
+    docker-compose run --rm outlaw-flow-test npm run coverage:report > "${DOCKER_TEST_DIR}/test-results/reports/coverage.html" 2>&1 || true
     
     # Generate summary report
     cat > "${DOCKER_TEST_DIR}/test-results/reports/summary.md" << EOF
@@ -267,7 +267,7 @@ generate_reports() {
 
 ## Build Information
 
-- **Docker Images Built:** $(docker images | grep claude-flow | wc -l)
+- **Docker Images Built:** $(docker images | grep outlaw-flow | wc -l)
 - **Total Test Duration:** $(grep -o "Build and test completed in [0-9]* seconds" "${LOG_FILE}" | cut -d' ' -f6 || echo "N/A")
 - **Log File:** ${LOG_FILE}
 

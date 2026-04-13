@@ -56,9 +56,9 @@ mcp__github__push_files {
   branch: "release/v1.0.72",
   files: [
     {
-      path: "claude-code-flow/claude-code-flow/package.json",
+      path: "outlaw-flow/outlaw-flow/package.json",
       content: JSON.stringify({
-        name: "claude-flow",
+        name: "outlaw-flow",
         version: "1.0.72",
         // ... rest of package.json
       }, null, 2)
@@ -100,10 +100,10 @@ mcp__github__push_files {
 ### 3. Automated Release Validation
 ```javascript
 // Comprehensive release testing
-Bash("cd /workspaces/ruv-FANN/claude-code-flow/claude-code-flow && npm install")
-Bash("cd /workspaces/ruv-FANN/claude-code-flow/claude-code-flow && npm run test")
-Bash("cd /workspaces/ruv-FANN/claude-code-flow/claude-code-flow && npm run lint")
-Bash("cd /workspaces/ruv-FANN/claude-code-flow/claude-code-flow && npm run build")
+Bash("cd /workspaces/ruv-FANN/outlaw-flow/outlaw-flow && npm install")
+Bash("cd /workspaces/ruv-FANN/outlaw-flow/outlaw-flow && npm run test")
+Bash("cd /workspaces/ruv-FANN/outlaw-flow/outlaw-flow && npm run lint")
+Bash("cd /workspaces/ruv-FANN/outlaw-flow/outlaw-flow && npm run build")
 
 Bash("cd /workspaces/ruv-FANN/ruv-swarm/npm && npm install")
 Bash("cd /workspaces/ruv-FANN/ruv-swarm/npm && npm run test:all")
@@ -125,7 +125,7 @@ mcp__github__create_pull_request {
 - **Improved Testing**: Comprehensive integration test suite with 89% success rate
 
 ### 📦 Package Updates
-- **claude-flow**: v1.0.71 → v1.0.72
+- **outlaw-flow**: v1.0.71 → v1.0.72
 - **ruv-swarm**: v1.0.11 → v1.0.12
 
 ### 🔧 Changes
@@ -192,7 +192,7 @@ This release is production-ready with comprehensive validation and testing.
   mcp__github__push_files {
     branch: "release/v1.0.72",
     files: [
-      { path: "claude-code-flow/claude-code-flow/package.json", content: "[updated package.json]" },
+      { path: "outlaw-flow/outlaw-flow/package.json", content: "[updated package.json]" },
       { path: "ruv-swarm/npm/package.json", content: "[updated package.json]" },
       { path: "CHANGELOG.md", content: "[release changelog]" },
       { path: "RELEASE_NOTES.md", content: "[detailed release notes]" }
@@ -201,7 +201,7 @@ This release is production-ready with comprehensive validation and testing.
   }
   
   // Run comprehensive validation
-  Bash("cd /workspaces/ruv-FANN/claude-code-flow/claude-code-flow && npm install && npm test && npm run lint && npm run build")
+  Bash("cd /workspaces/ruv-FANN/outlaw-flow/outlaw-flow && npm install && npm test && npm run lint && npm run build")
   Bash("cd /workspaces/ruv-FANN/ruv-swarm/npm && npm install && npm run test:all && npm run lint")
   
   // Create release PR
@@ -229,7 +229,7 @@ This release is production-ready with comprehensive validation and testing.
       timestamp: Date.now(),
       version: "1.0.72",
       stage: "validation_complete",
-      packages: ["claude-flow", "ruv-swarm"],
+      packages: ["outlaw-flow", "ruv-swarm"],
       validation_passed: true,
       ready_for_review: true
     }
@@ -317,10 +317,10 @@ jobs:
           node-version: '20'
       - name: Install and Test
         run: |
-          cd claude-code-flow/claude-code-flow && npm install && npm test
+          cd outlaw-flow/outlaw-flow && npm install && npm test
           cd ../../ruv-swarm/npm && npm install && npm test:all
       - name: Validate Release
-        run: npx claude-flow release validate
+        run: npx outlaw-flow release validate
 ```
 
 ## Monitoring and Metrics

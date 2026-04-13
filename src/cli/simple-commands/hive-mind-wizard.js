@@ -68,10 +68,10 @@ async function runInteractiveWizard() {
             console.log(chalk.gray('Your intelligent swarm has been created and is ready to work.\n'));
             
             console.log(chalk.cyan('📱 Next Steps:'));
-            console.log(chalk.gray('  • View status: claude-flow hive-mind status'));
-            console.log(chalk.gray('  • Monitor progress: claude-flow hive-mind metrics'));
-            console.log(chalk.gray('  • Create another swarm: claude-flow hive-mind wizard'));
-            console.log(chalk.gray('  • Learn more: claude-flow help hive-mind\n'));
+            console.log(chalk.gray('  • View status: outlaw-flow hive-mind status'));
+            console.log(chalk.gray('  • Monitor progress: outlaw-flow hive-mind metrics'));
+            console.log(chalk.gray('  • Create another swarm: outlaw-flow hive-mind wizard'));
+            console.log(chalk.gray('  • Learn more: outlaw-flow help hive-mind\n'));
             
             console.log(chalk.green.bold('🚀 Happy swarming!'));
         } else {
@@ -80,7 +80,7 @@ async function runInteractiveWizard() {
         
     } catch (error) {
         console.log(chalk.red(`❌ Wizard error: ${error.message}`));
-        console.log(chalk.gray('You can try manual setup with: claude-flow hive-mind init'));
+        console.log(chalk.gray('You can try manual setup with: outlaw-flow hive-mind init'));
     }
 }
 

@@ -18,7 +18,7 @@ export async function launchUI(args = []) {
         const webServer = new ClaudeCodeWebServer(port);
         await webServer.start();
         
-        printSuccess('🌐 Claude Flow Web UI is running!');
+        printSuccess('🌐 Outlaw Flow Web UI is running!');
         console.log(`📍 Open your browser to: http://localhost:${port}/console`);
         console.log();
         console.log('Features:');
@@ -100,7 +100,7 @@ async function launchTerminalUI(port) {
         ProcessUI = puiModule.ProcessUI;
       }
       
-      printSuccess('🚀 Claude-Flow Process Management UI');
+      printSuccess('🚀 Outlaw-Flow Process Management UI');
       console.log('─'.repeat(60));
       
       // Initialize process manager
@@ -124,10 +124,10 @@ async function launchTerminalUI(port) {
       printWarning('UI launch failed. Use these commands instead:');
       console.log();
       console.log('Process Management Commands:');
-      console.log('  • Start all: claude-flow start');
-      console.log('  • Check status: claude-flow status');
-      console.log('  • View logs: claude-flow logs');
-      console.log('  • Stop: claude-flow stop');
+      console.log('  • Start all: outlaw-flow start');
+      console.log('  • Check status: outlaw-flow status');
+      console.log('  • View logs: outlaw-flow logs');
+      console.log('  • Stop: outlaw-flow stop');
     }
   }
 }

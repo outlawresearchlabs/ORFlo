@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Test script for Claude-Flow MCP Wrapper
+ * Test script for Outlaw-Flow MCP Wrapper
  * 
  * This script demonstrates how the wrapper transforms SPARC tool calls
  * into enhanced Claude Code MCP requests.
@@ -17,7 +17,7 @@ class MCPWrapperTester {
   }
 
   async connect() {
-    console.log('🔌 Connecting to Claude-Flow MCP Wrapper...');
+    console.log('🔌 Connecting to Outlaw-Flow MCP Wrapper...');
     
     const transport = new StdioClientTransport({
       command: 'npx',

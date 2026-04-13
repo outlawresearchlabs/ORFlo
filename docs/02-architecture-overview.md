@@ -1,12 +1,12 @@
 # Architecture Overview
 
-Claude-Flow implements a sophisticated multi-layered architecture designed for scalability, reliability, and extensibility. This document provides a comprehensive overview of the system components and their interactions.
+Outlaw-Flow implements a sophisticated multi-layered architecture designed for scalability, reliability, and extensibility. This document provides a comprehensive overview of the system components and their interactions.
 
 ## High-Level Architecture
 
 ```mermaid
 graph TB
-    CLI[Claude-Flow CLI] --> Orchestrator[Orchestrator]
+    CLI[Outlaw-Flow CLI] --> Orchestrator[Orchestrator]
     Orchestrator --> TM[Terminal Manager]
     Orchestrator --> MM[Memory Manager]
     Orchestrator --> CM[Coordination Manager]
@@ -31,7 +31,7 @@ graph TB
 
 ### 1. Orchestrator (Central Coordinator)
 
-The orchestrator serves as the central command and control system for all Claude-Flow operations.
+The orchestrator serves as the central command and control system for all Outlaw-Flow operations.
 
 **Key Responsibilities:**
 - **Agent Lifecycle Management**: Spawning, monitoring, and terminating agents
@@ -198,7 +198,7 @@ sequenceDiagram
     participant Memory
     participant Terminal
     
-    User->>CLI: claude-flow task create
+    User->>CLI: outlaw-flow task create
     CLI->>Orchestrator: Create task request
     Orchestrator->>Memory: Store task definition
     Orchestrator->>Agent: Assign task
@@ -212,18 +212,18 @@ sequenceDiagram
 
 ## Communication Patterns
 
-Claude-Flow supports multiple communication patterns between agents:
+Outlaw-Flow supports multiple communication patterns between agents:
 
 ### 1. Direct Communication
 Agents can send messages directly to specific agents:
 ```bash
-claude-flow agent message <target-agent-id> "Please prioritize API implementation"
+outlaw-flow agent message <target-agent-id> "Please prioritize API implementation"
 ```
 
 ### 2. Broadcast Communication
 Agents can broadcast information to all active agents:
 ```bash
-claude-flow agent broadcast "System maintenance scheduled in 30 minutes"
+outlaw-flow agent broadcast "System maintenance scheduled in 30 minutes"
 ```
 
 ### 3. Pub/Sub Pattern
@@ -243,10 +243,10 @@ Agents can subscribe to specific event types or topics:
 Agents access shared state through the memory manager:
 ```bash
 # Agent writes discovery
-claude-flow memory store --type "discovery" --content "Found optimal algorithm"
+outlaw-flow memory store --type "discovery" --content "Found optimal algorithm"
 
 # Other agents can query
-claude-flow memory query --type "discovery" --recent
+outlaw-flow memory query --type "discovery" --recent
 ```
 
 ## Scalability Design

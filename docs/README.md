@@ -1,6 +1,6 @@
-# 📚 Claude Flow v2.0.0 Documentation
+# 📚 Outlaw Flow v2.0.0 Documentation
 
-Welcome to the comprehensive documentation for Claude Flow v2.0.0 - Intelligent AI Agent Coordination Platform!
+Welcome to the comprehensive documentation for Outlaw Flow v2.0.0 - Intelligent AI Agent Coordination Platform!
 
 ## 🚀 Getting Started
 
@@ -107,4 +107,4 @@ Want to improve the documentation? See our [Contributing Guidelines](../CONTRIBU
 
 ---
 
-**Built with ❤️ by the Claude-Flow team | Powered by Claude AI**
+**Built with ❤️ by the Outlaw-Flow team | Powered by Claude AI**

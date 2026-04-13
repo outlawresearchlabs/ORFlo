@@ -1,6 +1,6 @@
 /**
  * SPARC Memory Bank - Main Export
- * Complete memory management system for Claude-Flow
+ * Complete memory management system for Outlaw-Flow
  */
 
 export { MemoryManager, MemoryManagerConfig } from './core/memory-manager';

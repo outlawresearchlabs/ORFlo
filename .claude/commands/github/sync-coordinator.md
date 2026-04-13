@@ -1,7 +1,7 @@
 # GitHub Sync Coordinator
 
 ## Purpose
-Multi-package synchronization and version alignment with ruv-swarm coordination for seamless integration between claude-code-flow and ruv-swarm packages.
+Multi-package synchronization and version alignment with ruv-swarm coordination for seamless integration between outlaw-flow and ruv-swarm packages.
 
 ## Capabilities
 - **Package synchronization** with intelligent dependency resolution
@@ -31,14 +31,14 @@ mcp__ruv-swarm__agent_spawn { type: "coder", name: "Integration Developer" }
 mcp__ruv-swarm__agent_spawn { type: "tester", name: "Validation Engineer" }
 
 // Analyze current package states
-Read("/workspaces/ruv-FANN/claude-code-flow/claude-code-flow/package.json")
+Read("/workspaces/ruv-FANN/outlaw-flow/outlaw-flow/package.json")
 Read("/workspaces/ruv-FANN/ruv-swarm/npm/package.json")
 
 // Synchronize versions and dependencies
 mcp__github__create_or_update_file {
   owner: "ruvnet",
   repo: "ruv-FANN",
-  path: "claude-code-flow/claude-code-flow/package.json",
+  path: "outlaw-flow/outlaw-flow/package.json",
   content: "{ updated package.json with aligned versions }",
   message: "feat: Align Node.js version requirements across packages",
   branch: "sync/package-alignment"
@@ -61,11 +61,11 @@ mcp__github__get_file_contents {
   path: "ruv-swarm/docs/CLAUDE.md"
 }
 
-// Update claude-code-flow CLAUDE.md to match
+// Update outlaw-flow CLAUDE.md to match
 mcp__github__create_or_update_file {
   owner: "ruvnet",
   repo: "ruv-FANN",
-  path: "claude-code-flow/claude-code-flow/CLAUDE.md",
+  path: "outlaw-flow/outlaw-flow/CLAUDE.md",
   content: "# Claude Code Configuration for ruv-swarm\n\n[synchronized content]",
   message: "docs: Synchronize CLAUDE.md with ruv-swarm integration patterns",
   branch: "sync/documentation"
@@ -88,11 +88,11 @@ mcp__github__push_files {
   branch: "feature/github-commands",
   files: [
     {
-      path: "claude-code-flow/claude-code-flow/.claude/commands/github/github-modes.md",
+      path: "outlaw-flow/outlaw-flow/.claude/commands/github/github-modes.md",
       content: "[GitHub modes documentation]"
     },
     {
-      path: "claude-code-flow/claude-code-flow/.claude/commands/github/pr-manager.md", 
+      path: "outlaw-flow/outlaw-flow/.claude/commands/github/pr-manager.md", 
       content: "[PR manager documentation]"
     },
     {
@@ -155,25 +155,25 @@ This integration uses ruv-swarm agents for:
   mcp__ruv-swarm__agent_spawn { type: "reviewer", name: "Quality Reviewer" }
   
   // Read current state of both packages
-  Read("/workspaces/ruv-FANN/claude-code-flow/claude-code-flow/package.json")
+  Read("/workspaces/ruv-FANN/outlaw-flow/outlaw-flow/package.json")
   Read("/workspaces/ruv-FANN/ruv-swarm/npm/package.json")
-  Read("/workspaces/ruv-FANN/claude-code-flow/claude-code-flow/CLAUDE.md")
+  Read("/workspaces/ruv-FANN/outlaw-flow/outlaw-flow/CLAUDE.md")
   Read("/workspaces/ruv-FANN/ruv-swarm/docs/CLAUDE.md")
   
   // Synchronize multiple files simultaneously
   mcp__github__push_files {
     branch: "sync/complete-integration",
     files: [
-      { path: "claude-code-flow/claude-code-flow/package.json", content: "[aligned package.json]" },
-      { path: "claude-code-flow/claude-code-flow/CLAUDE.md", content: "[synchronized CLAUDE.md]" },
-      { path: "claude-code-flow/claude-code-flow/.claude/commands/github/github-modes.md", content: "[GitHub modes]" }
+      { path: "outlaw-flow/outlaw-flow/package.json", content: "[aligned package.json]" },
+      { path: "outlaw-flow/outlaw-flow/CLAUDE.md", content: "[synchronized CLAUDE.md]" },
+      { path: "outlaw-flow/outlaw-flow/.claude/commands/github/github-modes.md", content: "[GitHub modes]" }
     ],
     message: "feat: Complete package synchronization with GitHub integration"
   }
   
   // Run validation tests
-  Bash("cd /workspaces/ruv-FANN/claude-code-flow/claude-code-flow && npm install")
-  Bash("cd /workspaces/ruv-FANN/claude-code-flow/claude-code-flow && npm test")
+  Bash("cd /workspaces/ruv-FANN/outlaw-flow/outlaw-flow && npm install")
+  Bash("cd /workspaces/ruv-FANN/outlaw-flow/outlaw-flow && npm test")
   Bash("cd /workspaces/ruv-FANN/ruv-swarm/npm && npm test")
   
   // Track synchronization progress
@@ -191,7 +191,7 @@ This integration uses ruv-swarm agents for:
     key: "sync/complete/status",
     value: {
       timestamp: Date.now(),
-      packages_synced: ["claude-code-flow", "ruv-swarm"],
+      packages_synced: ["outlaw-flow", "ruv-swarm"],
       version_alignment: "completed",
       documentation_sync: "completed",
       github_integration: "completed",
@@ -224,11 +224,11 @@ const syncStrategy = {
 const docSyncPattern = {
   sourceOfTruth: "ruv-swarm/docs/CLAUDE.md",
   targets: [
-    "claude-code-flow/claude-code-flow/CLAUDE.md",
+    "outlaw-flow/outlaw-flow/CLAUDE.md",
     "CLAUDE.md"  // Root level
   ],
   customSections: {
-    "claude-code-flow": "GitHub Commands Integration",
+    "outlaw-flow": "GitHub Commands Integration",
     "ruv-swarm": "MCP Tools Reference"
   }
 }
@@ -238,7 +238,7 @@ const docSyncPattern = {
 ```javascript
 // Comprehensive testing across synchronized packages
 const testMatrix = {
-  packages: ["claude-code-flow", "ruv-swarm"],
+  packages: ["outlaw-flow", "ruv-swarm"],
   tests: [
     "unit_tests",
     "integration_tests", 

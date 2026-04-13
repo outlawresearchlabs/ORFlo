@@ -1,4 +1,4 @@
-# Claude Flow v2.0.0 System Architecture Diagrams
+# Outlaw Flow v2.0.0 System Architecture Diagrams
 
 ## 1. Overall System Architecture
 
@@ -10,7 +10,7 @@ graph TB
         TOOLS[87 MCP Tools]
     end
     
-    subgraph "Claude Flow v2.0.0 Core"
+    subgraph "Outlaw Flow v2.0.0 Core"
         WEB_UI[Web Interface]
         ORCHESTRATOR[Central Orchestrator]
         NEURAL_ENGINE[Neural Processing Engine]

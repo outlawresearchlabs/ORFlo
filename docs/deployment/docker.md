@@ -1,4 +1,4 @@
-# 🐳 Claude Flow v2.0.0 Docker Deployment Guide
+# 🐳 Outlaw Flow v2.0.0 Docker Deployment Guide
 
 ## 📋 Table of Contents
 1. [Overview](#overview)
@@ -14,7 +14,7 @@
 
 ## 🎯 Overview
 
-Claude Flow v2.0.0 provides enterprise-grade Docker support with:
+Outlaw Flow v2.0.0 provides enterprise-grade Docker support with:
 - **✅ Multi-stage builds** - 60% smaller images, faster deployments
 - **✅ Security hardening** - Non-root user, minimal attack surface
 - **✅ Health checks** - Automatic container recovery
@@ -26,26 +26,26 @@ Claude Flow v2.0.0 provides enterprise-grade Docker support with:
 ### Pull and Run
 ```bash
 # Pull the latest image
-docker pull ruvnet/claude-flow:2.0.0
+docker pull ruvnet/outlaw-flow:2.0.0
 
 # Run with interactive shell
-docker run -it -p 3000:3000 ruvnet/claude-flow:2.0.0
+docker run -it -p 3000:3000 ruvnet/outlaw-flow:2.0.0
 
 # Run with volume mounting
-docker run -it -v $(pwd):/app -p 3000:3000 ruvnet/claude-flow:2.0.0 init --sparc
+docker run -it -v $(pwd):/app -p 3000:3000 ruvnet/outlaw-flow:2.0.0 init --sparc
 ```
 
 ### Build from Source
 ```bash
 # Clone repository
-git clone https://github.com/ruvnet/claude-code-flow.git
-cd claude-code-flow
+git clone https://github.com/ruvnet/outlaw-flow.git
+cd outlaw-flow
 
 # Build Docker image
-docker build -t claude-flow:local .
+docker build -t outlaw-flow:local .
 
 # Run local build
-docker run -it -p 3000:3000 claude-flow:local
+docker run -it -p 3000:3000 outlaw-flow:local
 ```
 
 ## 🏗️ Docker Images
@@ -61,9 +61,9 @@ docker run -it -p 3000:3000 claude-flow:local
 ### Multi-Architecture Support
 ```bash
 # Available architectures
-docker pull ruvnet/claude-flow:2.0.0 --platform linux/amd64
-docker pull ruvnet/claude-flow:2.0.0 --platform linux/arm64
-docker pull ruvnet/claude-flow:2.0.0 --platform linux/arm/v7
+docker pull ruvnet/outlaw-flow:2.0.0 --platform linux/amd64
+docker pull ruvnet/outlaw-flow:2.0.0 --platform linux/arm64
+docker pull ruvnet/outlaw-flow:2.0.0 --platform linux/arm/v7
 ```
 
 ## ⚙️ Container Configuration
@@ -136,9 +136,9 @@ CMD ["node", "dist/cli/index.js", "start", "--ui"]
 ### Environment Variables
 ```bash
 # Core Configuration
-CLAUDE_FLOW_PORT=3000
-CLAUDE_FLOW_UI_ENABLED=true
-CLAUDE_FLOW_LOG_LEVEL=info
+OUTLAW_FLOW_PORT=3000
+OUTLAW_FLOW_UI_ENABLED=true
+OUTLAW_FLOW_LOG_LEVEL=info
 
 # MCP Configuration
 MCP_SERVER_ENABLED=true
@@ -169,9 +169,9 @@ SSL_ENABLED=false
 version: '3.8'
 
 services:
-  claude-flow:
-    image: ruvnet/claude-flow:2.0.0-dev
-    container_name: claude-flow-dev
+  outlaw-flow:
+    image: ruvnet/outlaw-flow:2.0.0-dev
+    container_name: outlaw-flow-dev
     ports:
       - "3000:3000"
       - "3001:3001"
@@ -181,7 +181,7 @@ services:
       - claude-logs:/app/logs
     environment:
       - NODE_ENV=development
-      - CLAUDE_FLOW_PORT=3000
+      - OUTLAW_FLOW_PORT=3000
       - MCP_SERVER_PORT=3001
       - MEMORY_PERSISTENCE_PATH=/app/memory
     command: ["npm", "run", "dev"]
@@ -203,9 +203,9 @@ networks:
 version: '3.8'
 
 services:
-  claude-flow:
-    image: ruvnet/claude-flow:2.0.0
-    container_name: claude-flow-prod
+  outlaw-flow:
+    image: ruvnet/outlaw-flow:2.0.0
+    container_name: outlaw-flow-prod
     restart: unless-stopped
     ports:
       - "80:3000"
@@ -216,7 +216,7 @@ services:
       - claude-logs:/app/logs
     environment:
       - NODE_ENV=production
-      - CLAUDE_FLOW_PORT=3000
+      - OUTLAW_FLOW_PORT=3000
       - MCP_SERVER_PORT=3001
       - MEMORY_PERSISTENCE_PATH=/app/memory
       - SSL_ENABLED=true
@@ -248,7 +248,7 @@ services:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
       - ./certs:/etc/nginx/certs:ro
     depends_on:
-      - claude-flow
+      - outlaw-flow
     networks:
       - claude-network
 
@@ -274,8 +274,8 @@ networks:
 version: '3.8'
 
 services:
-  claude-flow:
-    image: ruvnet/claude-flow:2.0.0
+  outlaw-flow:
+    image: ruvnet/outlaw-flow:2.0.0
     deploy:
       replicas: 3
       update_config:
@@ -304,7 +304,7 @@ services:
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro
     depends_on:
-      - claude-flow
+      - outlaw-flow
     networks:
       - claude-network
 ```
@@ -319,29 +319,29 @@ docker build \
   --build-arg VERSION=2.0.0 \
   --build-arg BUILD_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
   --build-arg VCS_REF=$(git rev-parse --short HEAD) \
-  -t claude-flow:production \
+  -t outlaw-flow:production \
   -f Dockerfile.prod .
 ```
 
 ### 2. Security Scanning
 ```bash
 # Scan for vulnerabilities
-docker scan claude-flow:production
+docker scan outlaw-flow:production
 
 # Use Trivy for detailed scanning
-trivy image claude-flow:production
+trivy image outlaw-flow:production
 
 # Check with Snyk
-snyk test --docker claude-flow:production
+snyk test --docker outlaw-flow:production
 ```
 
 ### 3. Push to Registry
 ```bash
 # Tag for registry
-docker tag claude-flow:production myregistry.com/claude-flow:2.0.0
+docker tag outlaw-flow:production myregistry.com/outlaw-flow:2.0.0
 
 # Push to registry
-docker push myregistry.com/claude-flow:2.0.0
+docker push myregistry.com/outlaw-flow:2.0.0
 ```
 
 ### 4. Deploy Script
@@ -350,50 +350,50 @@ docker push myregistry.com/claude-flow:2.0.0
 # deploy.sh
 
 # Pull latest image
-docker pull myregistry.com/claude-flow:2.0.0
+docker pull myregistry.com/outlaw-flow:2.0.0
 
 # Stop existing container
-docker stop claude-flow || true
-docker rm claude-flow || true
+docker stop outlaw-flow || true
+docker rm outlaw-flow || true
 
 # Run new container
 docker run -d \
-  --name claude-flow \
+  --name outlaw-flow \
   --restart unless-stopped \
   -p 80:3000 \
-  -v /opt/claude-flow/config:/app/.claude \
-  -v /opt/claude-flow/memory:/app/memory \
-  -v /opt/claude-flow/logs:/app/logs \
+  -v /opt/outlaw-flow/config:/app/.claude \
+  -v /opt/outlaw-flow/memory:/app/memory \
+  -v /opt/outlaw-flow/logs:/app/logs \
   -e NODE_ENV=production \
-  -e CLAUDE_FLOW_PORT=3000 \
+  -e OUTLAW_FLOW_PORT=3000 \
   --memory="4g" \
   --cpus="2" \
-  myregistry.com/claude-flow:2.0.0
+  myregistry.com/outlaw-flow:2.0.0
 ```
 
 ## ☸️ Kubernetes Deployment
 
 ### Deployment Manifest
 ```yaml
-# claude-flow-deployment.yaml
+# outlaw-flow-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: claude-flow
+  name: outlaw-flow
   namespace: claude-system
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: claude-flow
+      app: outlaw-flow
   template:
     metadata:
       labels:
-        app: claude-flow
+        app: outlaw-flow
     spec:
       containers:
-      - name: claude-flow
-        image: ruvnet/claude-flow:2.0.0
+      - name: outlaw-flow
+        image: ruvnet/outlaw-flow:2.0.0
         ports:
         - containerPort: 3000
           name: http
@@ -402,7 +402,7 @@ spec:
         env:
         - name: NODE_ENV
           value: "production"
-        - name: CLAUDE_FLOW_PORT
+        - name: OUTLAW_FLOW_PORT
           value: "3000"
         - name: MCP_SERVER_PORT
           value: "3001"
@@ -437,19 +437,19 @@ spec:
       volumes:
       - name: config
         configMap:
-          name: claude-flow-config
+          name: outlaw-flow-config
       - name: memory
         persistentVolumeClaim:
-          claimName: claude-flow-memory
+          claimName: outlaw-flow-memory
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: claude-flow-service
+  name: outlaw-flow-service
   namespace: claude-system
 spec:
   selector:
-    app: claude-flow
+    app: outlaw-flow
   ports:
   - port: 80
     targetPort: 3000
@@ -463,8 +463,8 @@ spec:
 ### Helm Chart
 ```bash
 # Install with Helm
-helm repo add claude-flow https://charts.claude-flow.io
-helm install claude-flow claude-flow/claude-flow \
+helm repo add outlaw-flow https://charts.outlaw-flow.io
+helm install outlaw-flow outlaw-flow/outlaw-flow \
   --namespace claude-system \
   --create-namespace \
   --set image.tag=2.0.0 \
@@ -498,7 +498,7 @@ COPY --chown=node:node . .
 ```yaml
 # docker-compose.security.yml
 services:
-  claude-flow:
+  outlaw-flow:
     security_opt:
       - no-new-privileges:true
     cap_drop:
@@ -545,16 +545,16 @@ fluentd:
     - ./fluent.conf:/fluentd/etc/fluent.conf
     - claude-logs:/logs
   links:
-    - claude-flow
+    - outlaw-flow
 ```
 
 ### 3. Health Monitoring
 ```bash
 # Monitor container health
-docker inspect claude-flow --format='{{.State.Health.Status}}'
+docker inspect outlaw-flow --format='{{.State.Health.Status}}'
 
 # View health check logs
-docker inspect claude-flow --format='{{range .State.Health.Log}}{{.End}} | {{.ExitCode}} | {{.Output}}{{end}}'
+docker inspect outlaw-flow --format='{{range .State.Health.Log}}{{.End}} | {{.ExitCode}} | {{.Output}}{{end}}'
 ```
 
 ## 🔧 Troubleshooting
@@ -564,10 +564,10 @@ docker inspect claude-flow --format='{{range .State.Health.Log}}{{.End}} | {{.Ex
 #### 1. Container Exits Immediately
 ```bash
 # Check logs
-docker logs claude-flow
+docker logs outlaw-flow
 
 # Run with debug
-docker run -it --entrypoint /bin/sh ruvnet/claude-flow:2.0.0
+docker run -it --entrypoint /bin/sh ruvnet/outlaw-flow:2.0.0
 ```
 
 #### 2. Permission Errors
@@ -585,14 +585,14 @@ docker run --user $(id -u):$(id -g) ...
 docker run --memory="8g" --memory-swap="8g" ...
 
 # Check memory usage
-docker stats claude-flow
+docker stats outlaw-flow
 ```
 
 #### 4. Network Connectivity
 ```bash
 # Test from container
-docker exec claude-flow ping google.com
-docker exec claude-flow curl http://localhost:3000/health
+docker exec outlaw-flow ping google.com
+docker exec outlaw-flow curl http://localhost:3000/health
 
 # Check network
 docker network inspect bridge
@@ -601,13 +601,13 @@ docker network inspect bridge
 ### Debugging Commands
 ```bash
 # Interactive shell
-docker exec -it claude-flow /bin/sh
+docker exec -it outlaw-flow /bin/sh
 
 # View processes
-docker top claude-flow
+docker top outlaw-flow
 
 # Export container
-docker export claude-flow > claude-flow.tar
+docker export outlaw-flow > outlaw-flow.tar
 
 # System information
 docker system df
@@ -623,4 +623,4 @@ docker system prune -a
 
 ---
 
-**🎉 Claude Flow v2.0.0 - Production-Ready Docker Deployment!**
+**🎉 Outlaw Flow v2.0.0 - Production-Ready Docker Deployment!**

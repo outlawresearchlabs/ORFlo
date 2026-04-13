@@ -40,7 +40,7 @@ export function isInteractive() {
   }
   
   // Check if running in non-interactive mode explicitly
-  if (process.env.CLAUDE_FLOW_NON_INTERACTIVE === 'true') {
+  if (process.env.OUTLAW_FLOW_NON_INTERACTIVE === 'true') {
     return false;
   }
   
@@ -89,7 +89,7 @@ export function handleNonInteractive(commandName, interactiveFn, nonInteractiveF
         console.error('3. Use --non-interactive flag with required parameters');
         console.error('4. If using Docker, run with: docker run -it');
         console.error('5. If using SSH, ensure pseudo-TTY allocation with: ssh -t');
-        console.error('\nFor more info: https://github.com/ruvnet/claude-code-flow/docs/non-interactive.md\n');
+        console.error('\nFor more info: https://github.com/ruvnet/outlaw-flow/docs/non-interactive.md\n');
         process.exit(1);
       }
     }

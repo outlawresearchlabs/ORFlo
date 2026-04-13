@@ -1,6 +1,6 @@
-# Contributing to Claude-Flow
+# Contributing to Outlaw-Flow
 
-Thank you for your interest in contributing to Claude-Flow! This document provides everything you need to know to get started, regardless of your experience level.
+Thank you for your interest in contributing to Outlaw-Flow! This document provides everything you need to know to get started, regardless of your experience level.
 
 ## 🚀 Quick Start
 
@@ -49,7 +49,7 @@ Before you begin, you'll need to have the following installed on your computer:
 
 ### 1. Fork the Repository
 
-1. Go to [https://github.com/ruvnet/claude-flow](https://github.com/ruvnet/claude-flow)
+1. Go to [https://github.com/ruvnet/outlaw-flow](https://github.com/ruvnet/outlaw-flow)
 2. Click the "Fork" button in the top-right corner
 3. This creates your own copy of the project
 
@@ -57,14 +57,14 @@ Before you begin, you'll need to have the following installed on your computer:
 
 ```bash
 # Replace 'your-username' with your GitHub username
-git clone https://github.com/your-username/claude-flow.git
-cd claude-flow
+git clone https://github.com/your-username/outlaw-flow.git
+cd outlaw-flow
 ```
 
 ### 3. Add the Original Repository as Upstream
 
 ```bash
-git remote add upstream https://github.com/ruvnet/claude-flow.git
+git remote add upstream https://github.com/ruvnet/outlaw-flow.git
 ```
 
 ## Setting Up Your Development Environment
@@ -77,10 +77,10 @@ npm install
 
 ### 2. Checkout the Development Branch
 
-Claude-Flow development happens on the alpha branch:
+Outlaw-Flow development happens on the alpha branch:
 
 ```bash
-git checkout claude-flow-v2.0.0
+git checkout outlaw-flow-v2.0.0
 ```
 
 ### 3. Build the Project
@@ -98,7 +98,7 @@ Test that everything is working:
 claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch
 
 # Initialize the project
-npx --y claude-flow@alpha init --force
+npx --y outlaw-flow@alpha init --force
 ```
 
 If these commands run without errors, you're ready to contribute!
@@ -118,8 +118,8 @@ Always create a new branch for your changes:
 
 ```bash
 # Make sure you're on the latest version
-git checkout claude-flow-v2.0.0
-git pull upstream claude-flow-v2.0.0
+git checkout outlaw-flow-v2.0.0
+git pull upstream outlaw-flow-v2.0.0
 
 # Create your feature branch
 git checkout -b feature/your-feature-name
@@ -139,7 +139,7 @@ git checkout -b fix/bug-description
 ### Understanding the Project Structure
 
 ```
-claude-flow/
+outlaw-flow/
 ├── .claude/           # Claude Code configuration
 ├── .hive-mind/        # Hive-mind architecture files
 ├── src/               # Source code
@@ -246,7 +246,7 @@ describe('Feature Name', () => {
 2. **Open a Pull Request**:
    - Go to your fork on GitHub
    - Click "New Pull Request"
-   - Choose the `claude-flow-v2.0.0` branch as the base
+   - Choose the `outlaw-flow-v2.0.0` branch as the base
    - Fill out the PR template
 
 ### Pull Request Template
@@ -317,11 +317,11 @@ npm run build:alpha
 
 ## Recognition
 
-All contributors will be recognized in our README. Thank you for helping make Claude-Flow better!
+All contributors will be recognized in our README. Thank you for helping make Outlaw-Flow better!
 
 ## License
 
-By contributing to Claude-Flow, you agree that your contributions will be licensed under the MIT License.
+By contributing to Outlaw-Flow, you agree that your contributions will be licensed under the MIT License.
 
 ---
 

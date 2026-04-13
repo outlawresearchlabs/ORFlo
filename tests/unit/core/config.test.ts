@@ -28,12 +28,12 @@ describe('ConfigManager', () => {
     // Save original env vars
     originalEnv = {};
     const envKeys = [
-      'CLAUDE_FLOW_MAX_AGENTS',
-      'CLAUDE_FLOW_TERMINAL_TYPE',
-      'CLAUDE_FLOW_MEMORY_BACKEND',
-      'CLAUDE_FLOW_MCP_TRANSPORT',
-      'CLAUDE_FLOW_MCP_PORT',
-      'CLAUDE_FLOW_LOG_LEVEL',
+      'OUTLAW_FLOW_MAX_AGENTS',
+      'OUTLAW_FLOW_TERMINAL_TYPE',
+      'OUTLAW_FLOW_MEMORY_BACKEND',
+      'OUTLAW_FLOW_MCP_TRANSPORT',
+      'OUTLAW_FLOW_MCP_PORT',
+      'OUTLAW_FLOW_LOG_LEVEL',
     ];
     
     envKeys.forEach(key => {
@@ -120,12 +120,12 @@ describe('ConfigManager', () => {
     });
 
     it('should load configuration from environment variables', async () => {
-      Deno.env.set('CLAUDE_FLOW_MAX_AGENTS', '5');
-      Deno.env.set('CLAUDE_FLOW_TERMINAL_TYPE', 'vscode');
-      Deno.env.set('CLAUDE_FLOW_MEMORY_BACKEND', 'sqlite');
-      Deno.env.set('CLAUDE_FLOW_MCP_TRANSPORT', 'http');
-      Deno.env.set('CLAUDE_FLOW_MCP_PORT', '9000');
-      Deno.env.set('CLAUDE_FLOW_LOG_LEVEL', 'debug');
+      Deno.env.set('OUTLAW_FLOW_MAX_AGENTS', '5');
+      Deno.env.set('OUTLAW_FLOW_TERMINAL_TYPE', 'vscode');
+      Deno.env.set('OUTLAW_FLOW_MEMORY_BACKEND', 'sqlite');
+      Deno.env.set('OUTLAW_FLOW_MCP_TRANSPORT', 'http');
+      Deno.env.set('OUTLAW_FLOW_MCP_PORT', '9000');
+      Deno.env.set('OUTLAW_FLOW_LOG_LEVEL', 'debug');
       
       const config = await configManager.load();
       
@@ -148,7 +148,7 @@ describe('ConfigManager', () => {
       };
       
       const configFile = await createTestFile('config.json', JSON.stringify(configData));
-      Deno.env.set('CLAUDE_FLOW_MAX_AGENTS', '15');
+      Deno.env.set('OUTLAW_FLOW_MAX_AGENTS', '15');
       
       const config = await configManager.load(configFile);
       
@@ -157,7 +157,7 @@ describe('ConfigManager', () => {
     });
 
     it('should ignore invalid env values', async () => {
-      Deno.env.set('CLAUDE_FLOW_TERMINAL_TYPE', 'invalid-type');
+      Deno.env.set('OUTLAW_FLOW_TERMINAL_TYPE', 'invalid-type');
       
       const config = await configManager.load();
       

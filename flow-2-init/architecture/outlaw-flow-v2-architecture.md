@@ -1,8 +1,8 @@
-# Claude Flow v2.0.0 Architecture Design
+# Outlaw Flow v2.0.0 Architecture Design
 
 ## Executive Summary
 
-Claude Flow v2.0.0 represents a complete integration of Claude Code CLI with ruv-swarm orchestration capabilities, creating a powerful autonomous development system. This architecture enables parallel execution, intelligent task coordination, and seamless GitHub workflow integration.
+Outlaw Flow v2.0.0 represents a complete integration of Claude Code CLI with ruv-swarm orchestration capabilities, creating a powerful autonomous development system. This architecture enables parallel execution, intelligent task coordination, and seamless GitHub workflow integration.
 
 ## Architecture Overview
 
@@ -14,7 +14,7 @@ graph TB
         CCMemory[File Operations]
     end
     
-    subgraph "Claude Flow Integration Layer"
+    subgraph "Outlaw Flow Integration Layer"
         SC[SwarmCoordinator]
         TE[TaskExecutor]
         SM[SharedMemory]
@@ -304,7 +304,7 @@ interface NeuralFeatures {
 ### Directory Structure
 
 ```
-/workspaces/claude-code-flow/
+/workspaces/outlaw-flow/
 ├── src/
 │   ├── coordination/
 │   │   ├── swarm-coordinator.ts      # Main coordinator
@@ -351,7 +351,7 @@ sequenceDiagram
     participant Memory
     participant GitHub
     
-    User->>CLI: claude-flow swarm init
+    User->>CLI: outlaw-flow swarm init
     CLI->>SC: Initialize swarm
     SC->>Memory: Load configuration
     SC->>SC: Create swarm topology
@@ -414,7 +414,7 @@ graph LR
 ### 1. Separation of Concerns
 - **Claude Code CLI**: Handles all file operations and code generation
 - **ruv-swarm MCP**: Provides coordination and memory capabilities
-- **Claude Flow**: Integrates both systems seamlessly
+- **Outlaw Flow**: Integrates both systems seamlessly
 
 ### 2. Parallel Execution Strategy
 - Use process pooling for Claude CLI instances
@@ -537,7 +537,7 @@ interface GitHubApiIntegration {
 # docker-compose.yml
 version: '3.8'
 services:
-  claude-flow:
+  outlaw-flow:
     build: .
     volumes:
       - ./workspace:/workspace
@@ -556,8 +556,8 @@ services:
 
 ### 2. CI/CD Integration
 ```yaml
-# .github/workflows/claude-flow.yml
-name: Claude Flow CI/CD
+# .github/workflows/outlaw-flow.yml
+name: Outlaw Flow CI/CD
 on:
   push:
     branches: [main]
@@ -565,15 +565,15 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  claude-flow:
+  outlaw-flow:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Run Claude Flow
+      - name: Run Outlaw Flow
         run: |
-          npx claude-flow swarm init --topology hierarchical
-          npx claude-flow swarm spawn developer analyzer tester
-          npx claude-flow task orchestrate "Review and test PR"
+          npx outlaw-flow swarm init --topology hierarchical
+          npx outlaw-flow swarm spawn developer analyzer tester
+          npx outlaw-flow task orchestrate "Review and test PR"
 ```
 
 ### 3. Production Deployment
@@ -657,7 +657,7 @@ interface ProductionConfig {
 
 ## Conclusion
 
-Claude Flow v2.0.0 architecture provides a robust, scalable, and intelligent system for autonomous development. By combining Claude Code CLI's powerful capabilities with ruv-swarm's orchestration features, we create a system that can handle complex development tasks with minimal human intervention.
+Outlaw Flow v2.0.0 architecture provides a robust, scalable, and intelligent system for autonomous development. By combining Claude Code CLI's powerful capabilities with ruv-swarm's orchestration features, we create a system that can handle complex development tasks with minimal human intervention.
 
 The architecture prioritizes:
 - **Scalability**: Handle projects of any size
@@ -666,4 +666,4 @@ The architecture prioritizes:
 - **Usability**: Simple commands, powerful results
 - **Extensibility**: Easy to add new capabilities
 
-This design positions Claude Flow as the premier autonomous development platform, enabling developers to focus on high-level objectives while the system handles implementation details.
+This design positions Outlaw Flow as the premier autonomous development platform, enabling developers to focus on high-level objectives while the system handles implementation details.

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Local Execution Tests for Claude Flow Migration
+ * Local Execution Tests for Outlaw Flow Migration
  * Tests all functionality works with pure Node.js/npm (no Deno)
  */
 
@@ -11,8 +11,8 @@ const path = require('path');
 const os = require('os');
 
 // Test configuration
-const TEST_DIR = path.join(os.tmpdir(), 'claude-flow-local-test-' + Date.now());
-const CLAUDE_FLOW_BIN = path.resolve(__dirname, '../../../bin/claude-flow');
+const TEST_DIR = path.join(os.tmpdir(), 'outlaw-flow-local-test-' + Date.now());
+const OUTLAW_FLOW_BIN = path.resolve(__dirname, '../../../bin/outlaw-flow');
 
 // Color codes for output
 const colors = {
@@ -90,15 +90,15 @@ process.chdir(TEST_DIR);
 
 // Test 1: CLI is executable without Deno
 runTest('CLI is executable without Deno', () => {
-  const output = exec(`node ${CLAUDE_FLOW_BIN} --version`);
-  if (!output.includes('claude-flow')) {
+  const output = exec(`node ${OUTLAW_FLOW_BIN} --version`);
+  if (!output.includes('outlaw-flow')) {
     throw new Error('Version output not found');
   }
 });
 
 // Test 2: Help command works
 runTest('Help command works', () => {
-  const output = exec(`node ${CLAUDE_FLOW_BIN} --help`);
+  const output = exec(`node ${OUTLAW_FLOW_BIN} --help`);
   if (!output.includes('init') || !output.includes('start')) {
     throw new Error('Help output missing expected commands');
   }
@@ -106,21 +106,21 @@ runTest('Help command works', () => {
 
 // Test 3: Init creates expected files
 runTest('Init creates expected files', () => {
-  exec(`node ${CLAUDE_FLOW_BIN} init -y`);
+  exec(`node ${OUTLAW_FLOW_BIN} init -y`);
   
   // Check all expected files
   assertFileExists(path.join(TEST_DIR, 'CLAUDE.md'));
-  assertFileExists(path.join(TEST_DIR, 'claude-flow'));
-  assertFileExists(path.join(TEST_DIR, 'claude-flow.config.json'));
+  assertFileExists(path.join(TEST_DIR, 'outlaw-flow'));
+  assertFileExists(path.join(TEST_DIR, 'outlaw-flow.config.json'));
   
   // Check file contents
   assertFileContains(path.join(TEST_DIR, 'CLAUDE.md'), 'Claude Code Configuration');
-  assertFileContains(path.join(TEST_DIR, 'claude-flow'), '#!/usr/bin/env node');
+  assertFileContains(path.join(TEST_DIR, 'outlaw-flow'), '#!/usr/bin/env node');
 });
 
 // Test 4: Config command works
 runTest('Config command works', () => {
-  const output = exec(`node ${CLAUDE_FLOW_BIN} config list`);
+  const output = exec(`node ${OUTLAW_FLOW_BIN} config list`);
   if (!output.includes('github') || !output.includes('swarm')) {
     throw new Error('Config list missing expected settings');
   }
@@ -129,7 +129,7 @@ runTest('Config command works', () => {
 // Test 5: GitHub integration functions
 runTest('GitHub integration functions', () => {
   // Test without token (should show help)
-  const output = exec(`node ${CLAUDE_FLOW_BIN} github --help`);
+  const output = exec(`node ${OUTLAW_FLOW_BIN} github --help`);
   if (!output.includes('setup') || !output.includes('issue')) {
     throw new Error('GitHub help missing expected commands');
   }
@@ -137,7 +137,7 @@ runTest('GitHub integration functions', () => {
 
 // Test 6: Swarm commands available
 runTest('Swarm commands available', () => {
-  const output = exec(`node ${CLAUDE_FLOW_BIN} swarm --help`);
+  const output = exec(`node ${OUTLAW_FLOW_BIN} swarm --help`);
   if (!output.includes('init') || !output.includes('spawn')) {
     throw new Error('Swarm help missing expected commands');
   }
@@ -145,7 +145,7 @@ runTest('Swarm commands available', () => {
 
 // Test 7: Task commands work
 runTest('Task commands work', () => {
-  const output = exec(`node ${CLAUDE_FLOW_BIN} task --help`);
+  const output = exec(`node ${OUTLAW_FLOW_BIN} task --help`);
   if (!output.includes('create') || !output.includes('list')) {
     throw new Error('Task help missing expected commands');
   }
@@ -153,7 +153,7 @@ runTest('Task commands work', () => {
 
 // Test 8: Memory commands work
 runTest('Memory commands work', () => {
-  const output = exec(`node ${CLAUDE_FLOW_BIN} memory --help`);
+  const output = exec(`node ${OUTLAW_FLOW_BIN} memory --help`);
   if (!output.includes('store') || !output.includes('list')) {
     throw new Error('Memory help missing expected commands');
   }
@@ -161,7 +161,7 @@ runTest('Memory commands work', () => {
 
 // Test 9: No Deno imports in generated files
 runTest('No Deno imports in generated files', () => {
-  const claudeFlowScript = fs.readFileSync(path.join(TEST_DIR, 'claude-flow'), 'utf8');
+  const claudeFlowScript = fs.readFileSync(path.join(TEST_DIR, 'outlaw-flow'), 'utf8');
   if (claudeFlowScript.includes('deno') || claudeFlowScript.includes('Deno')) {
     throw new Error('Generated script contains Deno references');
   }
@@ -170,19 +170,19 @@ runTest('No Deno imports in generated files', () => {
 // Test 10: Cross-platform script execution
 runTest('Cross-platform script execution', () => {
   const isWindows = process.platform === 'win32';
-  const scriptPath = path.join(TEST_DIR, 'claude-flow');
+  const scriptPath = path.join(TEST_DIR, 'outlaw-flow');
   
   if (isWindows) {
     // Test Windows execution
     const output = exec(`node ${scriptPath} --version`);
-    if (!output.includes('claude-flow')) {
+    if (!output.includes('outlaw-flow')) {
       throw new Error('Windows script execution failed');
     }
   } else {
     // Test Unix execution
     fs.chmodSync(scriptPath, '755');
     const output = exec(`${scriptPath} --version`);
-    if (!output.includes('claude-flow')) {
+    if (!output.includes('outlaw-flow')) {
       throw new Error('Unix script execution failed');
     }
   }
@@ -190,7 +190,7 @@ runTest('Cross-platform script execution', () => {
 
 // Test 11: Environment variable handling
 runTest('Environment variable handling', () => {
-  const output = exec(`node ${CLAUDE_FLOW_BIN} config get github.token`, {
+  const output = exec(`node ${OUTLAW_FLOW_BIN} config get github.token`, {
     env: { ...process.env, GITHUB_TOKEN: 'test-token-123' }
   });
   if (!output.includes('test-token-123')) {
@@ -209,12 +209,12 @@ runTest('Package.json scripts generation', () => {
   fs.writeFileSync(path.join(TEST_DIR, 'package.json'), JSON.stringify(packageJson, null, 2));
   
   // Run init again to update package.json
-  exec(`node ${CLAUDE_FLOW_BIN} init -y`);
+  exec(`node ${OUTLAW_FLOW_BIN} init -y`);
   
   // Check scripts were added
   const updatedPackage = JSON.parse(fs.readFileSync(path.join(TEST_DIR, 'package.json'), 'utf8'));
-  if (!updatedPackage.scripts['claude-flow']) {
-    throw new Error('Claude Flow scripts not added to package.json');
+  if (!updatedPackage.scripts['outlaw-flow']) {
+    throw new Error('Outlaw Flow scripts not added to package.json');
   }
 });
 

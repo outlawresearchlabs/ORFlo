@@ -1,7 +1,7 @@
 # SPARC Development Modes
 
 ## Overview
-This document describes all 17 specialized SPARC development modes available in Claude-Flow. Each mode is optimized for specific tasks and includes batch tool integration for maximum efficiency.
+This document describes all 17 specialized SPARC development modes available in Outlaw-Flow. Each mode is optimized for specific tasks and includes batch tool integration for maximum efficiency.
 
 ## Core Orchestration Modes
 
@@ -221,11 +221,11 @@ Integrate modes into complex workflows:
 
 ```bash
 # Research-driven development workflow
-./claude-flow sparc researcher "Best practices for microservices"
-./claude-flow sparc architect "Design microservices architecture"  
-./claude-flow sparc coder "Implement service layer"
-./claude-flow sparc tester "Create integration tests"
-./claude-flow sparc reviewer "Review implementation"
+./outlaw-flow sparc researcher "Best practices for microservices"
+./outlaw-flow sparc architect "Design microservices architecture"  
+./outlaw-flow sparc coder "Implement service layer"
+./outlaw-flow sparc tester "Create integration tests"
+./outlaw-flow sparc reviewer "Review implementation"
 ```
 
 ## Best Practices

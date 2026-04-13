@@ -1,8 +1,8 @@
 # Phase 1: Specification
-## Claude-Flow Multi-Terminal Orchestration System
+## Outlaw-Flow Multi-Terminal Orchestration System
 
 ### Executive Summary
-Claude-Flow is a next-generation CLI tool that orchestrates multiple Claude Code sessions across parallel terminal instances, enabling sophisticated multi-agent development workflows with shared memory and coordination capabilities.
+Outlaw-Flow is a next-generation CLI tool that orchestrates multiple Claude Code sessions across parallel terminal instances, enabling sophisticated multi-agent development workflows with shared memory and coordination capabilities.
 
 ### Functional Requirements
 
@@ -109,7 +109,7 @@ So that we can divide and conquer large codebases
 #### Epic 3: Automation and CI/CD
 ```
 As a DevOps engineer
-I want to integrate Claude-Flow into our pipeline
+I want to integrate Outlaw-Flow into our pipeline
 So that AI can assist with automated tasks
 ```
 
@@ -167,23 +167,23 @@ interface MCPServer {
 #### CLI Command Structure
 ```bash
 # Basic Commands
-claude-flow init                    # Initialize new project
-claude-flow spawn <count>           # Spawn agent terminals
-claude-flow exec <command>          # Execute in all terminals
-claude-flow target <agent> <cmd>    # Target specific agent
-claude-flow status                  # Show system status
-claude-flow shutdown               # Graceful shutdown
+outlaw-flow init                    # Initialize new project
+outlaw-flow spawn <count>           # Spawn agent terminals
+outlaw-flow exec <command>          # Execute in all terminals
+outlaw-flow target <agent> <cmd>    # Target specific agent
+outlaw-flow status                  # Show system status
+outlaw-flow shutdown               # Graceful shutdown
 
 # Advanced Commands
-claude-flow workflow <file>         # Run workflow file
-claude-flow memory export <file>    # Export memory bank
-claude-flow replay <session>        # Replay session
-claude-flow monitor                 # Live monitoring UI
+outlaw-flow workflow <file>         # Run workflow file
+outlaw-flow memory export <file>    # Export memory bank
+outlaw-flow replay <session>        # Replay session
+outlaw-flow monitor                 # Live monitoring UI
 
 # Configuration Commands
-claude-flow config set <key> <val>  # Set configuration
-claude-flow config get <key>        # Get configuration
-claude-flow profile create <name>   # Create agent profile
+outlaw-flow config set <key> <val>  # Set configuration
+outlaw-flow config get <key>        # Get configuration
+outlaw-flow profile create <name>   # Create agent profile
 ```
 
 ### Data Models

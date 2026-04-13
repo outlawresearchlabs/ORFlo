@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Comprehensive Test Runner for Claude Flow v2.0.0
+ * Comprehensive Test Runner for Outlaw Flow v2.0.0
  */
 
 import { spawn } from 'child_process';
@@ -75,14 +75,14 @@ const dockerTests = [
   {
     name: 'Docker Build Test',
     command: 'docker',
-    args: ['build', '-t', 'claude-flow:test', '.'],
+    args: ['build', '-t', 'outlaw-flow:test', '.'],
     description: 'Test Docker image build',
     timeout: 600000 // 10 minutes
   },
   {
     name: 'Docker Container Test',
     command: 'docker',
-    args: ['run', '--rm', 'claude-flow:test', 'claude-flow', '--version'],
+    args: ['run', '--rm', 'outlaw-flow:test', 'outlaw-flow', '--version'],
     description: 'Test Docker container execution',
     timeout: 120000 // 2 minutes
   }
@@ -291,7 +291,7 @@ class TestRunner {
   }
 
   async run() {
-    this.log('🚀 Starting Claude Flow v2.0.0 Comprehensive Test Suite');
+    this.log('🚀 Starting Outlaw Flow v2.0.0 Comprehensive Test Suite');
     
     try {
       // Core test suites
@@ -338,7 +338,7 @@ function parseArgs() {
 
 function showHelp() {
   console.log(`
-${chalk.bold.blue('Claude Flow v2.0.0 Comprehensive Test Runner')}
+${chalk.bold.blue('Outlaw Flow v2.0.0 Comprehensive Test Runner')}
 
 ${chalk.bold('Usage:')}
   node scripts/test-comprehensive.js [options]

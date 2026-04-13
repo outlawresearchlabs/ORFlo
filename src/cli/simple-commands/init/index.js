@@ -70,9 +70,9 @@ async function setupMcpServers(dryRun = false) {
   
   const servers = [
     {
-      name: 'claude-flow',
-      command: 'npx claude-flow@alpha mcp start',
-      description: 'Claude Flow MCP server with swarm orchestration (alpha)'
+      name: 'outlaw-flow',
+      command: 'npx outlaw-flow@alpha mcp start',
+      description: 'Outlaw Flow MCP server with swarm orchestration (alpha)'
     },
     {
       name: 'ruv-swarm',
@@ -113,7 +113,7 @@ export async function initCommand(subArgs, flags) {
     return;
   }
   
-  // Default to enhanced Claude Flow v2 init
+  // Default to enhanced Outlaw Flow v2 init
   // Use --basic flag for old behavior
   if (!flags.basic && !flags.minimal && !flags.sparc) {
     return await enhancedClaudeFlowInit(flags, subArgs);
@@ -349,17 +349,17 @@ export async function initCommand(subArgs, flags) {
       lastUpdated: Date.now()
     };
     if (!initDryRun) {
-      await Deno.writeTextFile('memory/claude-flow-data.json', JSON.stringify(initialData, null, 2));
-      console.log('  ✓ Created memory/claude-flow-data.json (persistence database)');
+      await Deno.writeTextFile('memory/outlaw-flow-data.json', JSON.stringify(initialData, null, 2));
+      console.log('  ✓ Created memory/outlaw-flow-data.json (persistence database)');
     } else {
-      console.log('  [DRY RUN] Would create memory/claude-flow-data.json (persistence database)');
+      console.log('  [DRY RUN] Would create memory/outlaw-flow-data.json (persistence database)');
     }
     
-    // Create local claude-flow executable wrapper
+    // Create local outlaw-flow executable wrapper
     if (!initDryRun) {
       await createLocalExecutable(workingDir);
     } else {
-      console.log('  [DRY RUN] Would create local claude-flow executable wrapper');
+      console.log('  [DRY RUN] Would create local outlaw-flow executable wrapper');
     }
     
     // SPARC initialization
@@ -431,7 +431,7 @@ export async function initCommand(subArgs, flags) {
       console.log(`  • Template type: ${initOptimized ? 'Optimized for parallel processing' : 'Standard'}`);
       console.log('  • Core files: CLAUDE.md, memory-bank.md, coordination.md');
       console.log('  • Directory structure: memory/, coordination/, .claude/');
-      console.log('  • Local executable: ./claude-flow');
+      console.log('  • Local executable: ./outlaw-flow');
       if (initSparc) {
         console.log(`  • Claude Code slash commands: ${selectedModes ? selectedModes.length : 'All'} SPARC mode commands`);
         console.log('  • SPARC environment with all development modes');
@@ -456,8 +456,8 @@ export async function initCommand(subArgs, flags) {
       console.log(`  ✅ memory-bank.md (${initOptimized ? 'With parallel processing' : 'Standard memory system'})`);
       console.log(`  ✅ coordination.md (${initOptimized ? 'Enhanced with batchtools' : 'Standard coordination'})`);
       console.log('  ✅ Directory structure with memory/ and coordination/');
-      console.log('  ✅ Local executable at ./claude-flow');
-      console.log('  ✅ Persistence database at memory/claude-flow-data.json');
+      console.log('  ✅ Local executable at ./outlaw-flow');
+      console.log('  ✅ Persistence database at memory/outlaw-flow-data.json');
       
       if (initSparc) {
         const modeCount = selectedModes ? selectedModes.length : '20+';
@@ -467,26 +467,26 @@ export async function initCommand(subArgs, flags) {
       
       console.log('\n🚀 Next steps:');
       console.log('1. Review and customize the generated files for your project');
-      console.log('2. Run \'./claude-flow start\' to begin the orchestration system');
-      console.log('3. Use \'./claude-flow\' instead of \'npx claude-flow\' for all commands');
+      console.log('2. Run \'./outlaw-flow start\' to begin the orchestration system');
+      console.log('3. Use \'./outlaw-flow\' instead of \'npx outlaw-flow\' for all commands');
       console.log('4. Use \'claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch\' for unattended operation');
       
       if (initSparc) {
         console.log('5. Use Claude Code slash commands: /sparc, /sparc-architect, /sparc-tdd, etc.');
-        console.log('6. Explore SPARC modes with \'./claude-flow sparc modes\'');
-        console.log('7. Try TDD workflow with \'./claude-flow sparc tdd "your task"\'');
+        console.log('6. Explore SPARC modes with \'./outlaw-flow sparc modes\'');
+        console.log('7. Try TDD workflow with \'./outlaw-flow sparc tdd "your task"\'');
         
         if (initOptimized) {
           console.log('8. Use batchtools commands: /batchtools, /performance for optimization');
           console.log('9. Enable parallel processing with --parallel flags');
-          console.log('10. Monitor performance with \'./claude-flow performance monitor\'');
+          console.log('10. Monitor performance with \'./outlaw-flow performance monitor\'');
         }
       }
       
       console.log('\n💡 Tips:');
       console.log('  • Type \'/\' in Claude Code to see all available slash commands');
-      console.log('  • Use \'./claude-flow status\' to check system health');
-      console.log('  • Store important context with \'./claude-flow memory store\'');
+      console.log('  • Use \'./outlaw-flow status\' to check system health');
+      console.log('  • Store important context with \'./outlaw-flow memory store\'');
       
       if (initOptimized) {
         console.log('  • Use --parallel flags for concurrent operations');
@@ -508,7 +508,7 @@ export async function initCommand(subArgs, flags) {
         console.log('\n⚠️  Claude Code CLI not detected!');
         console.log('  📥 Install with: npm install -g @anthropics/claude-code');
         console.log('  📋 Then add MCP servers manually with:');
-        console.log('     claude mcp add claude-flow claude-flow mcp start');
+        console.log('     claude mcp add outlaw-flow outlaw-flow mcp start');
         console.log('     claude mcp add ruv-swarm npx ruv-swarm mcp start');
       }
     }
@@ -935,7 +935,7 @@ async function createDirectoryStructure(workingDir) {
 
 async function setupMemorySystem(workingDir) {
   const initialData = { agents: [], tasks: [], lastUpdated: Date.now() };
-  await Deno.writeTextFile(`${workingDir}/memory/claude-flow-data.json`, JSON.stringify(initialData, null, 2));
+  await Deno.writeTextFile(`${workingDir}/memory/outlaw-flow-data.json`, JSON.stringify(initialData, null, 2));
   
   await Deno.writeTextFile(`${workingDir}/memory/agents/README.md`, createAgentsReadme());
   await Deno.writeTextFile(`${workingDir}/memory/sessions/README.md`, createSessionsReadme());
@@ -947,10 +947,10 @@ async function setupCoordinationSystem(workingDir) {
 }
 
 /**
- * Enhanced Claude Flow v2.0.0 initialization
+ * Enhanced Outlaw Flow v2.0.0 initialization
  */
 async function enhancedClaudeFlowInit(flags, subArgs = []) {
-  console.log('🚀 Initializing Claude Flow v2.0.0 with enhanced features...');
+  console.log('🚀 Initializing Outlaw Flow v2.0.0 with enhanced features...');
   
   const workingDir = process.cwd();
   const force = flags.force || flags.f;
@@ -984,9 +984,9 @@ async function enhancedClaudeFlowInit(flags, subArgs = []) {
     // Create CLAUDE.md
     if (!dryRun) {
       await Deno.writeTextFile(`${workingDir}/CLAUDE.md`, createEnhancedClaudeMd());
-      printSuccess('✓ Created CLAUDE.md (Claude Flow v2.0.0)');
+      printSuccess('✓ Created CLAUDE.md (Outlaw Flow v2.0.0)');
     } else {
-      console.log('[DRY RUN] Would create CLAUDE.md (Claude Flow v2.0.0)');
+      console.log('[DRY RUN] Would create CLAUDE.md (Outlaw Flow v2.0.0)');
     }
     
     // Create .claude directory structure
@@ -1018,7 +1018,7 @@ async function enhancedClaudeFlowInit(flags, subArgs = []) {
         // Create category README
         const categoryReadme = `# ${category.charAt(0).toUpperCase() + category.slice(1)} Commands
 
-Commands for ${category} operations in Claude Flow.
+Commands for ${category} operations in Outlaw Flow.
 
 ## Available Commands
 
@@ -1044,14 +1044,14 @@ ${commands.map(cmd => `- [${cmd}](./${cmd}.md)`).join('\n')}
     if (!dryRun) {
       // Unix wrapper
       const unixWrapper = createWrapperScript('unix');
-      await Deno.writeTextFile(`${workingDir}/claude-flow`, unixWrapper);
-      await fs.chmod(`${workingDir}/claude-flow`, 0o755);
+      await Deno.writeTextFile(`${workingDir}/outlaw-flow`, unixWrapper);
+      await fs.chmod(`${workingDir}/outlaw-flow`, 0o755);
       
       // Windows wrapper
-      await Deno.writeTextFile(`${workingDir}/claude-flow.bat`, createWrapperScript('windows'));
+      await Deno.writeTextFile(`${workingDir}/outlaw-flow.bat`, createWrapperScript('windows'));
       
       // PowerShell wrapper
-      await Deno.writeTextFile(`${workingDir}/claude-flow.ps1`, createWrapperScript('powershell'));
+      await Deno.writeTextFile(`${workingDir}/outlaw-flow.ps1`, createWrapperScript('powershell'));
       
       printSuccess('✓ Created platform-specific wrapper scripts');
     } else {
@@ -1098,7 +1098,7 @@ ${commands.map(cmd => `- [${cmd}](./${cmd}.md)`).join('\n')}
       
       // Initialize memory system
       const initialData = { agents: [], tasks: [], lastUpdated: Date.now() };
-      await fs.writeFile(`${workingDir}/memory/claude-flow-data.json`, JSON.stringify(initialData, null, 2));
+      await fs.writeFile(`${workingDir}/memory/outlaw-flow-data.json`, JSON.stringify(initialData, null, 2));
       
       // Create README files
       await fs.writeFile(`${workingDir}/memory/agents/README.md`, createAgentsReadme());
@@ -1117,7 +1117,7 @@ ${commands.map(cmd => `- [${cmd}](./${cmd}.md)`).join('\n')}
       } else {
         console.log('  ℹ️  Skipping MCP setup (--skip-mcp flag used)');
         console.log('\n  📋 To add MCP servers manually:');
-        console.log('     claude mcp add claude-flow claude-flow mcp start');
+        console.log('     claude mcp add outlaw-flow outlaw-flow mcp start');
         console.log('     claude mcp add ruv-swarm npx ruv-swarm mcp start');
       }
     } else if (!dryRun && !isClaudeCodeInstalled()) {
@@ -1125,22 +1125,22 @@ ${commands.map(cmd => `- [${cmd}](./${cmd}.md)`).join('\n')}
       console.log('\n  📥 To install Claude Code:');
       console.log('     npm install -g @anthropics/claude-code');
       console.log('\n  📋 After installing, add MCP servers:');
-      console.log('     claude mcp add claude-flow claude-flow mcp start');
+      console.log('     claude mcp add outlaw-flow outlaw-flow mcp start');
       console.log('     claude mcp add ruv-swarm npx ruv-swarm mcp start');
     }
     
     // Final instructions
-    console.log('\n🎉 Claude Flow v2.0.0 initialization complete!');
+    console.log('\n🎉 Outlaw Flow v2.0.0 initialization complete!');
     console.log('\n📚 Quick Start:');
     if (isClaudeCodeInstalled()) {
       console.log('1. View available commands: ls .claude/commands/');
-      console.log('2. Start a swarm: npx claude-flow swarm init');
+      console.log('2. Start a swarm: npx outlaw-flow swarm init');
       console.log('3. Use MCP tools in Claude Code for enhanced coordination');
     } else {
       console.log('1. Install Claude Code: npm install -g @anthropics/claude-code');
       console.log('2. Add MCP servers (see instructions above)');
       console.log('3. View available commands: ls .claude/commands/');
-      console.log('4. Start a swarm: npx claude-flow swarm init');
+      console.log('4. Start a swarm: npx outlaw-flow swarm init');
     }
     console.log('\n💡 Tips:');
     console.log('• Check .claude/commands/ for detailed documentation');
@@ -1148,6 +1148,6 @@ ${commands.map(cmd => `- [${cmd}](./${cmd}.md)`).join('\n')}
     console.log('• Enable GitHub integration with .claude/helpers/github-setup.sh');
     
   } catch (err) {
-    printError(`Failed to initialize Claude Flow v2.0.0: ${err.message}`);
+    printError(`Failed to initialize Outlaw Flow v2.0.0: ${err.message}`);
   }
 }

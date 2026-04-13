@@ -267,9 +267,9 @@ export class MigrationRunner {
       }
 
       const scripts = {
-        'migrate': 'claude-flow migrate',
-        'migrate:analyze': 'claude-flow migrate analyze',
-        'migrate:rollback': 'claude-flow migrate rollback'
+        'migrate': 'outlaw-flow migrate',
+        'migrate:analyze': 'outlaw-flow migrate analyze',
+        'migrate:rollback': 'outlaw-flow migrate rollback'
       };
 
       let modified = false;
@@ -481,9 +481,9 @@ export class MigrationRunner {
           { source: 'sparc/architect.md', target: 'sparc-architect.md' },
           { source: 'sparc/code.md', target: 'sparc-code.md' },
           { source: 'sparc/tdd.md', target: 'sparc-tdd.md' },
-          { source: 'claude-flow-help.md', target: 'claude-flow-help.md' },
-          { source: 'claude-flow-memory.md', target: 'claude-flow-memory.md' },
-          { source: 'claude-flow-swarm.md', target: 'claude-flow-swarm.md' }
+          { source: 'outlaw-flow-help.md', target: 'outlaw-flow-help.md' },
+          { source: 'outlaw-flow-memory.md', target: 'outlaw-flow-memory.md' },
+          { source: 'outlaw-flow-swarm.md', target: 'outlaw-flow-swarm.md' }
         ],
         configurations: {},
         templates: {}
@@ -554,7 +554,7 @@ export class MigrationRunner {
 
     if (result.rollbackPath) {
       console.log(`\n${chalk.bold('Rollback Available:')} ${result.rollbackPath}`);
-      console.log(chalk.gray(`  Run "claude-flow migrate rollback -t ${result.rollbackPath}" to revert`));
+      console.log(chalk.gray(`  Run "outlaw-flow migrate rollback -t ${result.rollbackPath}" to revert`));
     }
 
     console.log(chalk.gray('\n' + '─'.repeat(50)));

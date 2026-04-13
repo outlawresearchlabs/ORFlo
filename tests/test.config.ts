@@ -1,5 +1,5 @@
 /**
- * Test configuration for Claude-Flow
+ * Test configuration for Outlaw-Flow
  */
 
 export const TEST_CONFIG = {
@@ -33,12 +33,12 @@ export const TEST_CONFIG = {
 
   // Test environment
   env: {
-    CLAUDE_FLOW_ENV: 'test',
-    CLAUDE_FLOW_LOG_LEVEL: 'silent',
-    CLAUDE_FLOW_DATA_DIR: './tests/data',
-    CLAUDE_FLOW_CONFIG_FILE: './tests/fixtures/test-config.json',
-    CLAUDE_FLOW_DISABLE_METRICS: 'true',
-    CLAUDE_FLOW_DISABLE_TELEMETRY: 'true',
+    OUTLAW_FLOW_ENV: 'test',
+    OUTLAW_FLOW_LOG_LEVEL: 'silent',
+    OUTLAW_FLOW_DATA_DIR: './tests/data',
+    OUTLAW_FLOW_CONFIG_FILE: './tests/fixtures/test-config.json',
+    OUTLAW_FLOW_DISABLE_METRICS: 'true',
+    OUTLAW_FLOW_DISABLE_TELEMETRY: 'true',
   },
 
   // Performance test settings
@@ -84,7 +84,7 @@ export function setupTestEnv(): void {
 export async function cleanupTestEnv(): Promise<void> {
   // Remove test data directory
   const cleanupPaths = [
-    TEST_CONFIG.env.CLAUDE_FLOW_DATA_DIR,
+    TEST_CONFIG.env.OUTLAW_FLOW_DATA_DIR,
     './tests/temp',
     './tests/fixtures/temp',
     './tests/results/temp',

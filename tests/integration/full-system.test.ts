@@ -1,6 +1,6 @@
 /**
  * Full system integration tests
- * Tests the complete Claude-Flow system with all components working together
+ * Tests the complete Outlaw-Flow system with all components working together
  */
 
 import {

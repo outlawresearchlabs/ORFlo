@@ -1,8 +1,8 @@
 #!/bin/bash
-# Test script for Claude-Flow v2.0.0 port functionality
+# Test script for Outlaw-Flow v2.0.0 port functionality
 # Demonstrates that Issue #87 is resolved
 
-echo "🌊 Claude-Flow v2.0.0 - Infrastructure Issue #87 Test Script"
+echo "🌊 Outlaw-Flow v2.0.0 - Infrastructure Issue #87 Test Script"
 echo "=================================================================="
 
 echo
@@ -11,16 +11,16 @@ echo
 
 # Test 1: Show MCP help
 echo "1️⃣ Testing MCP Command Structure (Issue #91 resolution):"
-echo "Command: ./bin/claude-flow mcp"
+echo "Command: ./bin/outlaw-flow mcp"
 echo "Expected: Show MCP help with port options"
 echo
-timeout 5 ./bin/claude-flow mcp 2>/dev/null || echo "⚠️  Command timeout - demonstrates working command structure"
+timeout 5 ./bin/outlaw-flow mcp 2>/dev/null || echo "⚠️  Command timeout - demonstrates working command structure"
 echo
 
 # Test 2: Show version
 echo "2️⃣ Testing Version (confirms v2.0.0):"
-echo "Command: ./bin/claude-flow --version"
-./bin/claude-flow --version
+echo "Command: ./bin/outlaw-flow --version"
+./bin/outlaw-flow --version
 echo
 
 # Test 3: Show port configuration in MCP help
@@ -28,10 +28,10 @@ echo "3️⃣ Testing Port Configuration Help:"
 echo "The MCP command supports the following port options:"
 echo
 echo "Available commands:"
-echo "  ./claude-flow mcp start --port 3001     # Custom port"
-echo "  ./claude-flow mcp start --host 0.0.0.0  # Custom host"
-echo "  ./claude-flow mcp config                # Show config"
-echo "  ./claude-flow mcp status                # Check status"
+echo "  ./outlaw-flow mcp start --port 3001     # Custom port"
+echo "  ./outlaw-flow mcp start --host 0.0.0.0  # Custom host"
+echo "  ./outlaw-flow mcp config                # Show config"
+echo "  ./outlaw-flow mcp status                # Check status"
 echo
 
 # Test 4: Demonstrate command structure
@@ -39,10 +39,10 @@ echo "4️⃣ MCP Command Structure (resolves command conflicts):"
 echo
 cat << 'EOF'
 ✅ RESOLVED Command Structure:
-  claude-flow mcp status           ← Clear namespace
-  claude-flow mcp start --port N   ← Port configuration  
-  claude-flow mcp tools            ← Tool listing
-  claude-flow mcp config           ← Configuration
+  outlaw-flow mcp status           ← Clear namespace
+  outlaw-flow mcp start --port N   ← Port configuration  
+  outlaw-flow mcp tools            ← Tool listing
+  outlaw-flow mcp config           ← Configuration
 
 ❌ OLD Conflicting Commands (no longer used):
   /mcp                            ← Removed
@@ -57,19 +57,19 @@ cat << 'EOF'
 ✅ Working Port Examples (Issue #87 RESOLVED):
 
 # Start on port 3001
-./claude-flow mcp start --port 3001
+./outlaw-flow mcp start --port 3001
 
 # Start on all interfaces
-./claude-flow mcp start --host 0.0.0.0 --port 8080
+./outlaw-flow mcp start --host 0.0.0.0 --port 8080
 
 # Start with auto port selection
-./claude-flow mcp start --port auto
+./outlaw-flow mcp start --port auto
 
 # Check current configuration
-./claude-flow mcp config
+./outlaw-flow mcp config
 
 # Check server status
-./claude-flow mcp status
+./outlaw-flow mcp status
 EOF
 
 echo
@@ -105,16 +105,16 @@ If you encounter any issues:
    sudo kill -9 $(lsof -t -i:3000)
 
 3. Use alternative port:
-   ./claude-flow mcp start --port 3001
+   ./outlaw-flow mcp start --port 3001
 
 4. Check runtime:
    deno --version || echo "Using Node.js fallback"
 
 5. Verify installation:
-   ./claude-flow --version
+   ./outlaw-flow --version
 
 6. Force re-initialization:
-   ./claude-flow init --sparc --force
+   ./outlaw-flow init --sparc --force
 EOF
 
 echo

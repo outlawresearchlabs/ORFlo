@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
- * Claude-Flow MCP Server
- * Implements the Model Context Protocol for Claude-Flow v2.0.0
+ * Outlaw-Flow MCP Server
+ * Implements the Model Context Protocol for Outlaw-Flow v2.0.0
  * Compatible with ruv-swarm MCP interface
  */
 
@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-class ClaudeFlowMCPServer {
+class OutlawFlowMCPServer {
   constructor() {
     this.version = '2.0.0';
     this.capabilities = {
@@ -635,26 +635,26 @@ class ClaudeFlowMCPServer {
 
   initializeResources() {
     return {
-      'claude-flow://swarms': {
-        uri: 'claude-flow://swarms',
+      'outlaw-flow://swarms': {
+        uri: 'outlaw-flow://swarms',
         name: 'Active Swarms',
         description: 'List of active swarm configurations and status',
         mimeType: 'application/json'
       },
-      'claude-flow://agents': {
-        uri: 'claude-flow://agents',
+      'outlaw-flow://agents': {
+        uri: 'outlaw-flow://agents',
         name: 'Agent Registry',
         description: 'Registry of available agents and their capabilities',
         mimeType: 'application/json'
       },
-      'claude-flow://models': {
-        uri: 'claude-flow://models',
+      'outlaw-flow://models': {
+        uri: 'outlaw-flow://models',
         name: 'Neural Models',
         description: 'Available neural network models and training status',
         mimeType: 'application/json'
       },
-      'claude-flow://performance': {
-        uri: 'claude-flow://performance',
+      'outlaw-flow://performance': {
+        uri: 'outlaw-flow://performance',
         name: 'Performance Metrics',
         description: 'Real-time performance metrics and benchmarks',
         mimeType: 'application/json'
@@ -686,7 +686,7 @@ class ClaudeFlowMCPServer {
   }
 
   handleInitialize(id, params) {
-    console.error(`[${new Date().toISOString()}] INFO [claude-flow-mcp] (${this.sessionId}) 🔌 Connection established: ${this.sessionId}`);
+    console.error(`[${new Date().toISOString()}] INFO [outlaw-flow-mcp] (${this.sessionId}) 🔌 Connection established: ${this.sessionId}`);
     
     return {
       jsonrpc: '2.0',
@@ -695,7 +695,7 @@ class ClaudeFlowMCPServer {
         protocolVersion: '2024-11-05',
         capabilities: this.capabilities,
         serverInfo: {
-          name: 'claude-flow',
+          name: 'outlaw-flow',
           version: this.version
         }
       }
@@ -716,7 +716,7 @@ class ClaudeFlowMCPServer {
   async handleToolCall(id, params) {
     const { name, arguments: args } = params;
     
-    console.error(`[${new Date().toISOString()}] INFO [claude-flow-mcp] (${this.sessionId}) 🔧 Tool called: ${name}`);
+    console.error(`[${new Date().toISOString()}] INFO [outlaw-flow-mcp] (${this.sessionId}) 🔧 Tool called: ${name}`);
     
     try {
       const result = await this.executeTool(name, args);
@@ -1075,7 +1075,7 @@ class ClaudeFlowMCPServer {
 
   async readResource(uri) {
     switch (uri) {
-      case 'claude-flow://swarms':
+      case 'outlaw-flow://swarms':
         return {
           active_swarms: 3,
           total_agents: 15,
@@ -1083,7 +1083,7 @@ class ClaudeFlowMCPServer {
           performance: '2.8-4.4x speedup'
         };
 
-      case 'claude-flow://agents':
+      case 'outlaw-flow://agents':
         return {
           total_agents: 8,
           types: ['researcher', 'coder', 'analyst', 'architect', 'tester', 'coordinator', 'reviewer', 'optimizer'],
@@ -1091,7 +1091,7 @@ class ClaudeFlowMCPServer {
           capabilities: 127
         };
 
-      case 'claude-flow://models':
+      case 'outlaw-flow://models':
         return {
           total_models: 27,
           wasm_enabled: true,
@@ -1100,7 +1100,7 @@ class ClaudeFlowMCPServer {
           accuracy_avg: 0.89
         };
 
-      case 'claude-flow://performance':
+      case 'outlaw-flow://performance':
         return {
           uptime: '99.9%',
           token_reduction: '32.3%',
@@ -1127,9 +1127,9 @@ class ClaudeFlowMCPServer {
 
 // Main server execution
 async function startMCPServer() {
-  const server = new ClaudeFlowMCPServer();
+  const server = new OutlawFlowMCPServer();
   
-  console.error(`[${new Date().toISOString()}] INFO [claude-flow-mcp] (${server.sessionId}) Claude-Flow MCP server starting in stdio mode`);
+  console.error(`[${new Date().toISOString()}] INFO [outlaw-flow-mcp] (${server.sessionId}) Outlaw-Flow MCP server starting in stdio mode`);
   console.error({
     arch: process.arch,
     mode: 'mcp-stdio',
@@ -1147,7 +1147,7 @@ async function startMCPServer() {
     method: 'server.initialized',
     params: {
       serverInfo: {
-        name: 'claude-flow',
+        name: 'outlaw-flow',
         version: server.version,
         capabilities: server.capabilities
       }
@@ -1173,26 +1173,26 @@ async function startMCPServer() {
             console.log(JSON.stringify(response));
           }
         } catch (error) {
-          console.error(`[${new Date().toISOString()}] ERROR [claude-flow-mcp] Failed to parse message:`, error.message);
+          console.error(`[${new Date().toISOString()}] ERROR [outlaw-flow-mcp] Failed to parse message:`, error.message);
         }
       }
     }
   });
 
   process.stdin.on('end', () => {
-    console.error(`[${new Date().toISOString()}] INFO [claude-flow-mcp] (${server.sessionId}) 🔌 Connection closed: ${server.sessionId}`);
-    console.error(`[${new Date().toISOString()}] INFO [claude-flow-mcp] (${server.sessionId}) MCP: stdin closed, shutting down...`);
+    console.error(`[${new Date().toISOString()}] INFO [outlaw-flow-mcp] (${server.sessionId}) 🔌 Connection closed: ${server.sessionId}`);
+    console.error(`[${new Date().toISOString()}] INFO [outlaw-flow-mcp] (${server.sessionId}) MCP: stdin closed, shutting down...`);
     process.exit(0);
   });
 
   // Handle process termination
   process.on('SIGINT', () => {
-    console.error(`[${new Date().toISOString()}] INFO [claude-flow-mcp] (${server.sessionId}) Received SIGINT, shutting down gracefully...`);
+    console.error(`[${new Date().toISOString()}] INFO [outlaw-flow-mcp] (${server.sessionId}) Received SIGINT, shutting down gracefully...`);
     process.exit(0);
   });
 
   process.on('SIGTERM', () => {
-    console.error(`[${new Date().toISOString()}] INFO [claude-flow-mcp] (${server.sessionId}) Received SIGTERM, shutting down gracefully...`);
+    console.error(`[${new Date().toISOString()}] INFO [outlaw-flow-mcp] (${server.sessionId}) Received SIGTERM, shutting down gracefully...`);
     process.exit(0);
   });
 }
@@ -1202,4 +1202,4 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   startMCPServer().catch(console.error);
 }
 
-export { ClaudeFlowMCPServer };
+export { OutlawFlowMCPServer };

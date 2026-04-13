@@ -1,7 +1,7 @@
 #!/bin/bash
-# Test script for claude-flow MCP wrapper integration
+# Test script for outlaw-flow MCP wrapper integration
 
-echo "🧪 Testing Claude-Flow MCP Wrapper Integration"
+echo "🧪 Testing Outlaw-Flow MCP Wrapper Integration"
 echo "=============================================="
 echo ""
 
@@ -76,5 +76,5 @@ echo ""
 echo "📌 Next steps:"
 echo "1. The MCP server now uses the wrapper by default"
 echo "2. All SPARC tools forward to Claude Code with prompt injection"
-echo "3. To use legacy mode: CLAUDE_FLOW_LEGACY_MCP=true npm run mcp"
-echo "4. Configure in Claude Desktop with: claude-flow.mcp.json"
+echo "3. To use legacy mode: OUTLAW_FLOW_LEGACY_MCP=true npm run mcp"
+echo "4. Configure in Claude Desktop with: outlaw-flow.mcp.json"

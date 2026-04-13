@@ -1,10 +1,10 @@
 # VSCode Terminal Extension Integration
 
-This document describes how to integrate Claude-Flow's terminal system with a VSCode extension.
+This document describes how to integrate Outlaw-Flow's terminal system with a VSCode extension.
 
 ## Overview
 
-Claude-Flow provides a powerful terminal management system that can integrate seamlessly with VSCode's terminal API when running as an extension. The integration provides:
+Outlaw-Flow provides a powerful terminal management system that can integrate seamlessly with VSCode's terminal API when running as an extension. The integration provides:
 
 - Automatic terminal creation and management
 - Command execution with output capture
@@ -20,7 +20,7 @@ In your VSCode extension's activation function:
 
 ```typescript
 import * as vscode from 'vscode';
-import { initializeTerminalBridge } from './claude-flow/terminal/vscode-bridge';
+import { initializeTerminalBridge } from './outlaw-flow/terminal/vscode-bridge';
 
 export function activate(context: vscode.ExtensionContext) {
   // Initialize the terminal bridge
@@ -30,12 +30,12 @@ export function activate(context: vscode.ExtensionContext) {
 }
 ```
 
-### 2. Configure Claude-Flow for VSCode
+### 2. Configure Outlaw-Flow for VSCode
 
-When initializing Claude-Flow, configure it to use VSCode terminals:
+When initializing Outlaw-Flow, configure it to use VSCode terminals:
 
 ```typescript
-import { ClaudeFlow } from './claude-flow';
+import { ClaudeFlow } from './outlaw-flow';
 
 const config = {
   terminal: {
@@ -56,7 +56,7 @@ await claudeFlow.initialize();
 
 ### Automatic Terminal Management
 
-Claude-Flow automatically manages VSCode terminals:
+Outlaw-Flow automatically manages VSCode terminals:
 
 ```typescript
 // Spawn a terminal for an agent
@@ -114,7 +114,7 @@ await claudeFlow.performTerminalMaintenance();
 
 ## Shell Support
 
-Claude-Flow automatically detects and uses the appropriate shell:
+Outlaw-Flow automatically detects and uses the appropriate shell:
 
 - **Windows**: PowerShell or CMD
 - **macOS/Linux**: Bash, Zsh, or sh
@@ -208,12 +208,12 @@ try {
 
 ## Example Extension
 
-Here's a complete example of a VSCode extension using Claude-Flow terminals:
+Here's a complete example of a VSCode extension using Outlaw-Flow terminals:
 
 ```typescript
 import * as vscode from 'vscode';
-import { ClaudeFlow } from './claude-flow';
-import { initializeTerminalBridge } from './claude-flow/terminal/vscode-bridge';
+import { ClaudeFlow } from './outlaw-flow';
+import { initializeTerminalBridge } from './outlaw-flow/terminal/vscode-bridge';
 
 let claudeFlow: ClaudeFlow;
 let outputChannel: vscode.OutputChannel;
@@ -223,9 +223,9 @@ export async function activate(context: vscode.ExtensionContext) {
   initializeTerminalBridge(context);
   
   // Create output channel
-  outputChannel = vscode.window.createOutputChannel('Claude-Flow');
+  outputChannel = vscode.window.createOutputChannel('Outlaw-Flow');
   
-  // Initialize Claude-Flow
+  // Initialize Outlaw-Flow
   claudeFlow = new ClaudeFlow({
     terminal: {
       type: 'vscode',
@@ -240,7 +240,7 @@ export async function activate(context: vscode.ExtensionContext) {
   
   // Register commands
   context.subscriptions.push(
-    vscode.commands.registerCommand('claude-flow.runTask', async () => {
+    vscode.commands.registerCommand('outlaw-flow.runTask', async () => {
       const task = await vscode.window.showInputBox({
         prompt: 'Enter task description',
       });

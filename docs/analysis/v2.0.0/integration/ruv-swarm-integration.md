@@ -2,7 +2,7 @@
 
 ## Executive Summary
 
-This document provides a comprehensive analysis of the current ruv-swarm integration in Claude-Flow v2.0.0 and proposes improved NPM SDK integration patterns. The analysis reveals opportunities to simplify the integration, reduce complexity, and provide a more intuitive developer experience through a dedicated SDK wrapper.
+This document provides a comprehensive analysis of the current ruv-swarm integration in Outlaw-Flow v2.0.0 and proposes improved NPM SDK integration patterns. The analysis reveals opportunities to simplify the integration, reduce complexity, and provide a more intuitive developer experience through a dedicated SDK wrapper.
 
 ## Current Integration Analysis
 
@@ -19,7 +19,7 @@ The current integration consists of multiple layers:
 │              ruv-swarm MCP Tools                        │
 │  ┌─────────────────────┬────────────────────────────┐  │
 │  │ ruv-swarm-tools.ts  │  swarm-tools.ts           │  │
-│  │ (External Package)  │  (Built-in Claude-Flow)   │  │
+│  │ (External Package)  │  (Built-in Outlaw-Flow)   │  │
 │  └─────────────────────┴────────────────────────────┘  │
 ├─────────────────────────────────────────────────────────┤
 │          Configuration & Integration Layer              │
@@ -69,8 +69,8 @@ mcp__ruv-swarm__task_orchestrate({ task: "Research AI patterns" })
 #### 3.2 CLI Command Usage
 ```bash
 # Current pattern - requires shell execution
-claude-flow ruv-swarm init --topology mesh --max-agents 8
-claude-flow ruv-swarm spawn researcher --name "AI Researcher"
+outlaw-flow ruv-swarm init --topology mesh --max-agents 8
+outlaw-flow ruv-swarm spawn researcher --name "AI Researcher"
 ```
 
 #### 3.3 Configuration Management
@@ -87,7 +87,7 @@ const integration = getRuvSwarmIntegration();
 
 ```typescript
 // New simplified architecture
-import { RuvSwarm } from '@claude-flow/ruv-swarm-sdk';
+import { RuvSwarm } from '@outlaw-flow/ruv-swarm-sdk';
 
 const swarm = new RuvSwarm({
   topology: 'mesh',
@@ -104,7 +104,7 @@ const result = await swarm.orchestrate('Research neural architectures');
 ### 2. SDK Module Structure
 
 ```
-@claude-flow/ruv-swarm-sdk/
+@outlaw-flow/ruv-swarm-sdk/
 ├── src/
 │   ├── index.ts              # Main SDK entry
 │   ├── client/
@@ -294,7 +294,7 @@ class RuvSwarmProcess {
 ### 5. Migration Strategy
 
 #### 5.1 Phase 1: SDK Development
-1. Create `@claude-flow/ruv-swarm-sdk` package
+1. Create `@outlaw-flow/ruv-swarm-sdk` package
 2. Implement core SDK functionality
 3. Add preset configurations
 4. Create comprehensive examples
@@ -316,7 +316,7 @@ class RuvSwarmProcess {
 #### 6.1 Simple Development Task
 
 ```typescript
-import { RuvSwarm } from '@claude-flow/ruv-swarm-sdk';
+import { RuvSwarm } from '@outlaw-flow/ruv-swarm-sdk';
 
 // Before: Complex multi-step process
 // After: Simple and intuitive
@@ -461,7 +461,7 @@ const metrics = await swarm.metrics.export('prometheus');
 ### 10. Testing Support
 
 ```typescript
-import { MockSwarm } from '@claude-flow/ruv-swarm-sdk/testing';
+import { MockSwarm } from '@outlaw-flow/ruv-swarm-sdk/testing';
 
 // Easy testing with mock swarm
 const mockSwarm = new MockSwarm();
@@ -491,7 +491,7 @@ expect(agent.id).toBe('mock-agent-1');
 - [ ] Add monitoring capabilities
 
 ### Phase 3: Integration (Week 5-6)
-- [ ] Update Claude-Flow to use SDK
+- [ ] Update Outlaw-Flow to use SDK
 - [ ] Create migration tools
 - [ ] Update documentation
 - [ ] Add comprehensive examples

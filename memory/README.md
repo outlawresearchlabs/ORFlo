@@ -1,6 +1,6 @@
 # SPARC Memory Bank
 
-A sophisticated persistent memory system for Claude-Flow, providing CRDT-based conflict resolution, hybrid storage backends, advanced indexing, and distributed replication capabilities.
+A sophisticated persistent memory system for Outlaw-Flow, providing CRDT-based conflict resolution, hybrid storage backends, advanced indexing, and distributed replication capabilities.
 
 ## Features
 
@@ -16,13 +16,13 @@ A sophisticated persistent memory system for Claude-Flow, providing CRDT-based c
 ## Installation
 
 ```bash
-npm install @claude-flow/memory
+npm install @outlaw-flow/memory
 ```
 
 ## Quick Start
 
 ```typescript
-import { MemoryManager } from '@claude-flow/memory';
+import { MemoryManager } from '@outlaw-flow/memory';
 
 // Initialize with SQLite backend
 const memory = new MemoryManager({
@@ -43,9 +43,9 @@ await memory.initialize();
 await memory.store({
   category: 'knowledge',
   key: 'important-fact',
-  value: { data: 'Claude-Flow is awesome!' },
+  value: { data: 'Outlaw-Flow is awesome!' },
   metadata: {
-    tags: ['important', 'claude-flow'],
+    tags: ['important', 'outlaw-flow'],
     confidence: 0.95
   }
 });

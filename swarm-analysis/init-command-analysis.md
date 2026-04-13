@@ -1,7 +1,7 @@
 # Init Command Analysis Report
 
 ## Overview
-This report provides a comprehensive analysis of the claude-flow init command structure, dependencies, and integration with SPARC modes.
+This report provides a comprehensive analysis of the outlaw-flow init command structure, dependencies, and integration with SPARC modes.
 
 ## Init Command Structure
 
@@ -23,7 +23,7 @@ This report provides a comprehensive analysis of the claude-flow init command st
 src/cli/simple-commands/init/
 ├── index.js                    # Main init command logic
 ├── help.js                     # Help text display
-├── executable-wrapper.js       # Creates local claude-flow executable
+├── executable-wrapper.js       # Creates local outlaw-flow executable
 ├── sparc-structure.js         # SPARC environment setup
 ├── templates/
 │   ├── claude-md.js           # CLAUDE.md templates
@@ -37,7 +37,7 @@ src/cli/simple-commands/init/
 └── claude-commands/
     ├── slash-commands.js      # Main command creator
     ├── sparc-commands.js      # SPARC-specific commands
-    └── claude-flow-commands.js # Claude-flow commands
+    └── outlaw-flow-commands.js # Claude-flow commands
 ```
 
 ## Key Functions and Dependencies
@@ -61,7 +61,7 @@ project/
 ├── memory/
 │   ├── agents/
 │   ├── sessions/
-│   └── claude-flow-data.json
+│   └── outlaw-flow-data.json
 ├── coordination/
 │   ├── memory_bank/
 │   ├── subtasks/

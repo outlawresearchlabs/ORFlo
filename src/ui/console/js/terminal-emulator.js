@@ -11,13 +11,13 @@ export class TerminalEmulator {
     this.historyIndex = -1;
     this.maxHistorySize = 1000;
     this.maxOutputLines = 1000;
-    this.currentPrompt = 'claude-flow>';
+    this.currentPrompt = 'outlaw-flow>';
     this.isLocked = false;
     
     // Command suggestions
     this.commands = [
       'help', 'clear', 'status', 'connect', 'disconnect',
-      'claude-flow', 'swarm', 'init', 'config', 'memory',
+      'outlaw-flow', 'swarm', 'init', 'config', 'memory',
       'tools', 'agents', 'benchmark', 'sparc'
     ];
     
@@ -140,7 +140,7 @@ export class TerminalEmulator {
     welcome.innerHTML = `
       <div class="ascii-art">╔═══════════════════════════════════════════════════════════╗
 ║                                                           ║
-║     🌊 Claude Flow v2.0.0                                ║
+║     🌊 Outlaw Flow v2.0.0                                ║
 ║                                                           ║
 ║     Welcome to the web-based swarm orchestration         ║
 ║     Type 'help' for available commands                   ║

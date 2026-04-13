@@ -84,7 +84,7 @@ describe('Raw Mode Fix (Issue #213)', () => {
   test('SPARC command should not fail with raw mode error in piped input', async () => {
     const result = await new Promise<{code: number | null, stderr: string, error?: string}>((resolve) => {
       const echo = spawn('echo', ['test']);
-      const claudeFlow = spawn('./claude-flow', ['sparc', '--help'], {
+      const claudeFlow = spawn('./outlaw-flow', ['sparc', '--help'], {
         stdio: [echo.stdout, 'pipe', 'pipe']
       });
 
@@ -120,7 +120,7 @@ describe('Raw Mode Fix (Issue #213)', () => {
 
   test('SPARC command should not fail with raw mode error in CI environment', async () => {
     const result = await new Promise<{code: number | null, stderr: string}>((resolve) => {
-      const claudeFlow = spawn('./claude-flow', ['sparc', '--help'], {
+      const claudeFlow = spawn('./outlaw-flow', ['sparc', '--help'], {
         stdio: ['pipe', 'pipe', 'pipe'],
         env: { ...process.env, CI: 'true' }
       });
@@ -154,7 +154,7 @@ describe('Raw Mode Fix (Issue #213)', () => {
     // This is the exact command from the GitHub issue that was failing
     const result = await new Promise<{hasRawModeError: boolean, stderr: string}>((resolve) => {
       const echo = spawn('echo', ['test']);
-      const claudeFlow = spawn('./claude-flow', ['sparc', 'build a REST API', '--dry-run'], {
+      const claudeFlow = spawn('./outlaw-flow', ['sparc', 'build a REST API', '--dry-run'], {
         stdio: [echo.stdout, 'pipe', 'pipe']
       });
 

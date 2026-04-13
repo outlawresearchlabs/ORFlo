@@ -1,5 +1,5 @@
 /**
- * End-to-End Integration Tests for Claude-Flow
+ * End-to-End Integration Tests for Outlaw-Flow
  * Tests complete workflows and system integration
  */
 

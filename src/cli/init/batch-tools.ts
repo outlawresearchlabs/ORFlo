@@ -382,7 +382,7 @@ Memory.store("error_state", {
 - Plan rollback procedures in TodoWrite tasks
 - Monitor agent health and implement recovery procedures
 
-This guide provides the foundation for effective batch tool coordination in Claude-Flow swarm operations.
+This guide provides the foundation for effective batch tool coordination in Outlaw-Flow swarm operations.
 `;
   
   await fs.writeFile(path.join(batchToolsDir, 'batch-tools-guide.md'), batchToolsGuide);

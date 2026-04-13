@@ -2,7 +2,7 @@
 
 ## Overview
 
-This document provides detailed technical specifications for capturing and streaming CLI output in real-time while maintaining full backward compatibility with existing claude-flow operations.
+This document provides detailed technical specifications for capturing and streaming CLI output in real-time while maintaining full backward compatibility with existing outlaw-flow operations.
 
 ## Architecture Design
 
@@ -112,9 +112,9 @@ class CLIProcessLauncher implements ProcessLauncher {
       ...process.env,
       ...options.environment,
       // Flag to indicate web mode
-      CLAUDE_FLOW_WEB_MODE: 'true',
-      CLAUDE_FLOW_SESSION_ID: options.sessionId || 'default',
-      CLAUDE_FLOW_PROCESS_ID: processId,
+      OUTLAW_FLOW_WEB_MODE: 'true',
+      OUTLAW_FLOW_SESSION_ID: options.sessionId || 'default',
+      OUTLAW_FLOW_PROCESS_ID: processId,
     };
     
     // Spawn process with captured streams
@@ -579,9 +579,9 @@ To maintain backward compatibility, integration with the existing CLI is minimal
 
 ```typescript
 // In existing CLI code (minimal addition)
-const isWebMode = process.env.CLAUDE_FLOW_WEB_MODE === 'true';
-const sessionId = process.env.CLAUDE_FLOW_SESSION_ID;
-const processId = process.env.CLAUDE_FLOW_PROCESS_ID;
+const isWebMode = process.env.OUTLAW_FLOW_WEB_MODE === 'true';
+const sessionId = process.env.OUTLAW_FLOW_SESSION_ID;
+const processId = process.env.OUTLAW_FLOW_PROCESS_ID;
 
 if (isWebMode) {
   // Initialize web mode hooks
@@ -597,10 +597,10 @@ export class Orchestrator implements IOrchestrator {
   // ... existing code ...
   
   private async notifyWebClients(event: string, data: any): Promise<void> {
-    if (process.env.CLAUDE_FLOW_WEB_MODE === 'true') {
+    if (process.env.OUTLAW_FLOW_WEB_MODE === 'true') {
       const stateFile = path.join(
-        process.env.CLAUDE_FLOW_STATE_DIR || './tmp',
-        `${process.env.CLAUDE_FLOW_PROCESS_ID}.state.json`
+        process.env.OUTLAW_FLOW_STATE_DIR || './tmp',
+        `${process.env.OUTLAW_FLOW_PROCESS_ID}.state.json`
       );
       
       const state = {
@@ -843,4 +843,4 @@ This CLI output capture and streaming system provides:
 6. **Performance**: Optimized streaming with compression and batching
 7. **Backward Compatibility**: Existing CLI functionality unchanged
 
-The architecture ensures that the web UI can provide a real-time console experience while maintaining the full functionality and reliability of the existing claude-flow CLI system.
+The architecture ensures that the web UI can provide a real-time console experience while maintaining the full functionality and reliability of the existing outlaw-flow CLI system.

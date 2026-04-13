@@ -7,7 +7,7 @@ declare global {
     interface ProcessEnv {
       NODE_ENV?: 'development' | 'production' | 'test';
       DEBUG?: string;
-      CLAUDE_FLOW_HOME?: string;
+      OUTLAW_FLOW_HOME?: string;
       [key: string]: string | undefined;
     }
   }

@@ -131,8 +131,8 @@ class PerformanceMonitor {
     
     checkApplicationEndpoints() {
         const endpoints = [
-            'http://claude-flow-dev:3000/health',
-            'http://claude-flow-prod:3000/health'
+            'http://outlaw-flow-dev:3000/health',
+            'http://outlaw-flow-prod:3000/health'
         ];
         
         return endpoints.map(endpoint => {
@@ -158,9 +158,9 @@ class PerformanceMonitor {
     
     measureResponseTimes() {
         const urls = [
-            'http://claude-flow-dev:3000/api/status',
-            'http://claude-flow-dev:3000/api/agents',
-            'http://claude-flow-dev:3000/api/memory'
+            'http://outlaw-flow-dev:3000/api/status',
+            'http://outlaw-flow-dev:3000/api/agents',
+            'http://outlaw-flow-dev:3000/api/memory'
         ];
         
         return urls.map(url => {

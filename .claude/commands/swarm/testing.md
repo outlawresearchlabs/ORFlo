@@ -2,7 +2,7 @@
 
 ## Usage
 ```bash
-claude-flow swarm "Test application" --strategy testing --mode mesh
+outlaw-flow swarm "Test application" --strategy testing --mode mesh
 ```
 
 ## Description

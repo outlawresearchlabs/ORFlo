@@ -14,7 +14,7 @@ import { glob } from 'glob';
 export class MigrationAnalyzer {
   private optimizedCommands = [
     'sparc', 'sparc-architect', 'sparc-code', 'sparc-tdd',
-    'claude-flow-help', 'claude-flow-memory', 'claude-flow-swarm'
+    'outlaw-flow-help', 'outlaw-flow-memory', 'outlaw-flow-swarm'
   ];
 
   async analyze(projectPath: string): Promise<MigrationAnalysis> {

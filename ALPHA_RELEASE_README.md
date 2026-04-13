@@ -1,19 +1,19 @@
-# 🚀 Claude-Flow v2.0.0-alpha.1 Release Notes
+# 🚀 Outlaw-Flow v2.0.0-alpha.1 Release Notes
 
 ## NPX Installation Ready
 
-Claude-Flow alpha is now ready for NPX installation and testing!
+Outlaw-Flow alpha is now ready for NPX installation and testing!
 
 ```bash
-npx claude-flow@2.0.0-alpha.1
+npx outlaw-flow@2.0.0-alpha.1
 ```
 
 ## 🎯 Alpha Release Status
 
 ### ✅ Working Features
-- **CLI Entry Point**: Functional `claude-flow` command
-- **Help System**: `claude-flow --help` displays usage
-- **Version Info**: `claude-flow --version` shows v2.0.0-alpha.1
+- **CLI Entry Point**: Functional `outlaw-flow` command
+- **Help System**: `outlaw-flow --help` displays usage
+- **Version Info**: `outlaw-flow --version` shows v2.0.0-alpha.1
 - **Basic Commands**: Status, init info, start info available
 - **Development Mode**: Full CLI when cloned and running from source
 
@@ -23,7 +23,7 @@ npx claude-flow@2.0.0-alpha.1
 - **Swarm Features**: Available when running from source
 
 ### 📦 Package Details
-- **Name**: claude-flow
+- **Name**: outlaw-flow
 - **Version**: 2.0.0-alpha.1
 - **Entry**: cli.mjs (ES module)
 - **Node**: v20+ required
@@ -33,8 +33,8 @@ npx claude-flow@2.0.0-alpha.1
 ### Running in Development Mode
 ```bash
 # Clone the repository
-git clone https://github.com/ruvnet/claude-code-flow.git
-cd claude-code-flow
+git clone https://github.com/ruvnet/outlaw-flow.git
+cd outlaw-flow
 
 # Install dependencies
 npm install
@@ -43,7 +43,7 @@ npm install
 npm run dev
 
 # Or use the linked CLI
-claude-flow hive-mind wizard
+outlaw-flow hive-mind wizard
 ```
 
 ### Alpha Testing Focus
@@ -85,11 +85,11 @@ This alpha release was achieved through coordinated swarm execution:
 
 ## 📞 Support
 
-- **Issues**: https://github.com/ruvnet/claude-code-flow/issues
-- **Documentation**: https://github.com/ruvnet/claude-code-flow/wiki
+- **Issues**: https://github.com/ruvnet/outlaw-flow/issues
+- **Documentation**: https://github.com/ruvnet/outlaw-flow/wiki
 - **Discord**: [Coming Soon]
 
 ---
 
-**Claude-Flow v2.0.0-alpha.1** - Enterprise AI Agent Orchestration Platform
+**Outlaw-Flow v2.0.0-alpha.1** - Enterprise AI Agent Orchestration Platform
 *Powered by ruv-swarm and Hive Mind Intelligence*

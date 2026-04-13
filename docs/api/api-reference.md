@@ -1,4 +1,4 @@
-# 📖 Claude Flow v2.0.0 API Reference
+# 📖 Outlaw Flow v2.0.0 API Reference
 
 ## 🚨 Current Implementation Status
 
@@ -6,7 +6,7 @@
 **🔧 Local Build**: ⚠️ **BUILD ISSUES** (269+ TypeScript errors)
 **🐳 Docker**: ✅ **WORKING** with warnings
 
-> **RECOMMENDED**: Use `npx claude-flow@2.0.0` for all operations until local build issues are resolved.
+> **RECOMMENDED**: Use `npx outlaw-flow@2.0.0` for all operations until local build issues are resolved.
 
 ## 📋 Table of Contents
 1. [Quick Start (NPX)](#quick-start-npx)
@@ -27,16 +27,16 @@
 ### Immediate Usage (Production Ready)
 ```bash
 # ✅ These commands work immediately:
-npx claude-flow@2.0.0 --help
-npx claude-flow@2.0.0 status
-npx claude-flow@2.0.0 swarm "your objective" --max-agents 3
-npx claude-flow@2.0.0 sparc "research modern frameworks"
+npx outlaw-flow@2.0.0 --help
+npx outlaw-flow@2.0.0 status
+npx outlaw-flow@2.0.0 swarm "your objective" --max-agents 3
+npx outlaw-flow@2.0.0 sparc "research modern frameworks"
 
 # Initialize project (creates .claude directory structure)
-npx claude-flow@2.0.0 init --sparc
+npx outlaw-flow@2.0.0 init --sparc
 
 # Enterprise swarm coordination
-npx claude-flow@2.0.0 swarm "build REST API" --strategy development --parallel
+npx outlaw-flow@2.0.0 swarm "build REST API" --strategy development --parallel
 ```
 
 ### Performance Benchmarks (NPX)
@@ -49,10 +49,10 @@ npx claude-flow@2.0.0 swarm "build REST API" --strategy development --parallel
 ## 🎯 Core Commands
 
 ### `init`
-Initialize Claude Flow in your project.
+Initialize Outlaw Flow in your project.
 
 ```bash
-claude-flow init [options]
+outlaw-flow init [options]
 ```
 
 **Options:**
@@ -66,20 +66,20 @@ claude-flow init [options]
 **Examples:**
 ```bash
 # Full enterprise setup
-./claude-flow init --sparc
+./outlaw-flow init --sparc
 
 # Minimal setup
-./claude-flow init --minimal
+./outlaw-flow init --minimal
 
 # CI/CD setup
-./claude-flow init --ci --sparc
+./outlaw-flow init --ci --sparc
 ```
 
 ### `start`
-Start the Claude Flow orchestration system.
+Start the Outlaw Flow orchestration system.
 
 ```bash
-claude-flow start [options]
+outlaw-flow start [options]
 ```
 
 **Options:**
@@ -94,20 +94,20 @@ claude-flow start [options]
 **Examples:**
 ```bash
 # Start with UI
-./claude-flow start --ui
+./outlaw-flow start --ui
 
 # Custom ports
-./claude-flow start --port 8080 --mcp-port 8081
+./outlaw-flow start --port 8080 --mcp-port 8081
 
 # Background mode
-./claude-flow start --detached
+./outlaw-flow start --detached
 ```
 
 ### `status`
 Show system status and health metrics.
 
 ```bash
-claude-flow status [options]
+outlaw-flow status [options]
 ```
 
 **Options:**
@@ -117,7 +117,7 @@ claude-flow status [options]
 
 **Output:**
 ```
-🌊 Claude Flow Status
+🌊 Outlaw Flow Status
 ├── Version: 2.0.0
 ├── Uptime: 2h 15m
 ├── Components:
@@ -129,10 +129,10 @@ claude-flow status [options]
 ```
 
 ### `stop`
-Stop the Claude Flow system.
+Stop the Outlaw Flow system.
 
 ```bash
-claude-flow stop [options]
+outlaw-flow stop [options]
 ```
 
 **Options:**
@@ -146,7 +146,7 @@ claude-flow stop [options]
 Create and spawn new agents.
 
 ```bash
-claude-flow agent spawn <type> [name] [options]
+outlaw-flow agent spawn <type> [name] [options]
 ```
 
 **Agent Types:**
@@ -166,17 +166,17 @@ claude-flow agent spawn <type> [name] [options]
 **Examples:**
 ```bash
 # Spawn a researcher agent
-npx claude-flow@2.0.0 agent spawn researcher "Lead Researcher"
+npx outlaw-flow@2.0.0 agent spawn researcher "Lead Researcher"
 
 # Spawn coder with specific capabilities
-npx claude-flow@2.0.0 agent spawn coder "API Developer" --capabilities "rest-api,database,testing"
+npx outlaw-flow@2.0.0 agent spawn coder "API Developer" --capabilities "rest-api,database,testing"
 ```
 
 ### `agent list`
 List all active agents.
 
 ```bash
-claude-flow agent list [options]
+outlaw-flow agent list [options]
 ```
 
 **Options:**
@@ -190,7 +190,7 @@ claude-flow agent list [options]
 Deploy multi-agent swarms for complex objectives.
 
 ```bash
-claude-flow swarm "<objective>" [options]
+outlaw-flow swarm "<objective>" [options]
 ```
 
 **Options:**
@@ -216,16 +216,16 @@ claude-flow swarm "<objective>" [options]
 **Examples:**
 ```bash
 # Basic swarm deployment
-npx claude-flow@2.0.0 swarm "Build a REST API with authentication"
+npx outlaw-flow@2.0.0 swarm "Build a REST API with authentication"
 
 # Research-focused swarm
-npx claude-flow@2.0.0 swarm "Research cloud architecture patterns" --strategy research --mode hierarchical
+npx outlaw-flow@2.0.0 swarm "Research cloud architecture patterns" --strategy research --mode hierarchical
 
 # Development swarm with monitoring
-npx claude-flow@2.0.0 swarm "Implement user management system" --strategy development --parallel --monitor
+npx outlaw-flow@2.0.0 swarm "Implement user management system" --strategy development --parallel --monitor
 
 # Large-scale enterprise swarm
-npx claude-flow@2.0.0 swarm "Optimize database performance" --max-agents 8 --mode mesh --ui
+npx outlaw-flow@2.0.0 swarm "Optimize database performance" --max-agents 8 --mode mesh --ui
 ```
 
 **Performance Metrics (NPX):**
@@ -241,7 +241,7 @@ npx claude-flow@2.0.0 swarm "Optimize database performance" --max-agents 8 --mod
 SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) development methodology.
 
 ```bash
-claude-flow sparc [mode] [objective]
+outlaw-flow sparc [mode] [objective]
 ```
 
 **Available Modes (17 total):**
@@ -271,18 +271,18 @@ claude-flow sparc [mode] [objective]
 **Examples:**
 ```bash
 # Auto-mode selection
-npx claude-flow@2.0.0 sparc "design authentication system"
+npx outlaw-flow@2.0.0 sparc "design authentication system"
 
 # Specific mode usage
-npx claude-flow@2.0.0 sparc architect "design microservices architecture"
-npx claude-flow@2.0.0 sparc tdd "user registration feature"
-npx claude-flow@2.0.0 sparc security "audit API endpoints"
+npx outlaw-flow@2.0.0 sparc architect "design microservices architecture"
+npx outlaw-flow@2.0.0 sparc tdd "user registration feature"
+npx outlaw-flow@2.0.0 sparc security "audit API endpoints"
 
 # List all modes
-npx claude-flow@2.0.0 sparc modes
+npx outlaw-flow@2.0.0 sparc modes
 
 # Get mode details
-npx claude-flow@2.0.0 sparc info security
+npx outlaw-flow@2.0.0 sparc info security
 ```
 
 ## 💾 Memory Operations
@@ -291,7 +291,7 @@ npx claude-flow@2.0.0 sparc info security
 Store data in the shared memory system.
 
 ```bash
-claude-flow memory store <key> <value> [options]
+outlaw-flow memory store <key> <value> [options]
 ```
 
 **Options:**
@@ -303,7 +303,7 @@ claude-flow memory store <key> <value> [options]
 Retrieve data from shared memory.
 
 ```bash
-claude-flow memory get <key> [options]
+outlaw-flow memory get <key> [options]
 ```
 
 **Options:**
@@ -314,7 +314,7 @@ claude-flow memory get <key> [options]
 Search memory entries.
 
 ```bash
-claude-flow memory search <query> [options]
+outlaw-flow memory search <query> [options]
 ```
 
 **Options:**
@@ -328,7 +328,7 @@ claude-flow memory search <query> [options]
 Create new tasks.
 
 ```bash
-claude-flow task create "<description>" [options]
+outlaw-flow task create "<description>" [options]
 ```
 
 **Options:**
@@ -341,7 +341,7 @@ claude-flow task create "<description>" [options]
 List all tasks.
 
 ```bash
-claude-flow task list [options]
+outlaw-flow task list [options]
 ```
 
 **Options:**
@@ -355,7 +355,7 @@ claude-flow task list [options]
 Start MCP (Model Context Protocol) server.
 
 ```bash
-claude-flow mcp start [options]
+outlaw-flow mcp start [options]
 ```
 
 **Options:**
@@ -367,7 +367,7 @@ claude-flow mcp start [options]
 List available MCP tools.
 
 ```bash
-claude-flow mcp tools [options]
+outlaw-flow mcp tools [options]
 ```
 
 **Available Tools (27 total):**
@@ -384,7 +384,7 @@ claude-flow mcp tools [options]
 GitHub workflow automation.
 
 ```bash
-claude-flow github <mode> [options]
+outlaw-flow github <mode> [options]
 ```
 
 **Available Modes (6 total):**
@@ -398,13 +398,13 @@ claude-flow github <mode> [options]
 **Examples:**
 ```bash
 # PR management with multi-reviewer coordination
-npx claude-flow@2.0.0 github pr-manager "coordinate feature review"
+npx outlaw-flow@2.0.0 github pr-manager "coordinate feature review"
 
 # Automated issue tracking
-npx claude-flow@2.0.0 github issue-tracker "track bug resolution"
+npx outlaw-flow@2.0.0 github issue-tracker "track bug resolution"
 
 # Release coordination
-npx claude-flow@2.0.0 github release-manager "prepare v2.1.0 release"
+npx outlaw-flow@2.0.0 github release-manager "prepare v2.1.0 release"
 ```
 
 ## 📊 Monitoring & Analytics
@@ -413,7 +413,7 @@ npx claude-flow@2.0.0 github release-manager "prepare v2.1.0 release"
 Real-time system monitoring.
 
 ```bash
-claude-flow monitor [options]
+outlaw-flow monitor [options]
 ```
 
 **Options:**
@@ -426,7 +426,7 @@ claude-flow monitor [options]
 System status overview.
 
 ```bash
-claude-flow status [options]
+outlaw-flow status [options]
 ```
 
 **Status Components:**
@@ -451,7 +451,7 @@ npm run build
 **Workaround**: Use NPX version for all operations
 ```bash
 # Instead of local build, use:
-npx claude-flow@2.0.0 <command>
+npx outlaw-flow@2.0.0 <command>
 ```
 
 ### 🧪 Test Suite Issues
@@ -470,7 +470,7 @@ npm test
 
 **Problem**: LoadBalancer not defined error in some swarm operations
 ```bash
-npx claude-flow swarm "test" --max-agents 2
+npx outlaw-flow swarm "test" --max-agents 2
 # Error: LoadBalancer is not defined
 ```
 
@@ -478,35 +478,35 @@ npx claude-flow swarm "test" --max-agents 2
 
 **Solution**: Use latest NPX version:
 ```bash
-npx claude-flow@2.0.0 swarm "your objective"
+npx outlaw-flow@2.0.0 swarm "your objective"
 ```
 
 ### 🔍 Debug Commands
 
 ```bash
 # Check system health
-npx claude-flow@2.0.0 status
+npx outlaw-flow@2.0.0 status
 
 # Validate installation
-npx claude-flow@2.0.0 --version
+npx outlaw-flow@2.0.0 --version
 
 # Test basic functionality
-npx claude-flow@2.0.0 --help
+npx outlaw-flow@2.0.0 --help
 
 # Initialize clean environment
-npx claude-flow@2.0.0 init --sparc
+npx outlaw-flow@2.0.0 init --sparc
 ```
 
 ### 📞 Support Resources
 
-- **GitHub Issues**: https://github.com/ruvnet/claude-code-flow/issues
-- **Documentation**: https://github.com/ruvnet/claude-code-flow#readme
+- **GitHub Issues**: https://github.com/ruvnet/outlaw-flow/issues
+- **Documentation**: https://github.com/ruvnet/outlaw-flow#readme
 - **ruv-swarm Integration**: https://github.com/ruvnet/ruv-FANN/tree/main/ruv-swarm
 
 ### 🔄 Update Recommendations
 
 **For Immediate Use**:
-- ✅ Use `npx claude-flow@2.0.0` for all operations
+- ✅ Use `npx outlaw-flow@2.0.0` for all operations
 - ✅ All swarm intelligence features fully functional
 - ✅ Neural networks and memory persistence working
 - ✅ GitHub integration operational
@@ -521,7 +521,7 @@ npx claude-flow@2.0.0 init --sparc
 *Last Updated: 2025-01-05*  
 *Version: 2.0.0*  
 *Status: NPX Production Ready | Local Build In Progress*
-claude-flow stop [options]
+outlaw-flow stop [options]
 ```
 
 **Options:**
@@ -532,7 +532,7 @@ claude-flow stop [options]
 Manage configuration settings.
 
 ```bash
-claude-flow config <action> [key] [value]
+outlaw-flow config <action> [key] [value]
 ```
 
 **Actions:**
@@ -545,13 +545,13 @@ claude-flow config <action> [key] [value]
 **Examples:**
 ```bash
 # Set UI port
-./claude-flow config set ui.port 8080
+./outlaw-flow config set ui.port 8080
 
 # Get swarm settings
-./claude-flow config get swarm
+./outlaw-flow config get swarm
 
 # List all settings
-./claude-flow config list
+./outlaw-flow config list
 ```
 
 ## 🤖 Agent Management
@@ -560,7 +560,7 @@ claude-flow config <action> [key] [value]
 Create a new AI agent.
 
 ```bash
-claude-flow agent spawn <type> [options]
+outlaw-flow agent spawn <type> [options]
 ```
 
 **Agent Types:**
@@ -585,24 +585,24 @@ claude-flow agent spawn <type> [options]
 **Examples:**
 ```bash
 # Spawn researcher
-./claude-flow agent spawn researcher --name "DataBot"
+./outlaw-flow agent spawn researcher --name "DataBot"
 
 # Spawn with configuration
-./claude-flow agent spawn coder \
+./outlaw-flow agent spawn coder \
   --name "APIBuilder" \
   --temperature 0.7 \
   --tools "file-system,web-search"
 
 # Create hierarchy
-./claude-flow agent spawn coordinator --name "Lead"
-./claude-flow agent spawn coder --parent lead-123
+./outlaw-flow agent spawn coordinator --name "Lead"
+./outlaw-flow agent spawn coder --parent lead-123
 ```
 
 ### `agent list`
 List all active agents.
 
 ```bash
-claude-flow agent list [options]
+outlaw-flow agent list [options]
 ```
 
 **Options:**
@@ -624,14 +624,14 @@ claude-flow agent list [options]
 Get detailed agent information.
 
 ```bash
-claude-flow agent info <agent-id>
+outlaw-flow agent info <agent-id>
 ```
 
 ### `agent terminate`
 Terminate an agent.
 
 ```bash
-claude-flow agent terminate <agent-id> [options]
+outlaw-flow agent terminate <agent-id> [options]
 ```
 
 **Options:**
@@ -642,7 +642,7 @@ claude-flow agent terminate <agent-id> [options]
 Assign task to agent.
 
 ```bash
-claude-flow agent assign <agent-id> <task> [options]
+outlaw-flow agent assign <agent-id> <task> [options]
 ```
 
 **Options:**
@@ -656,7 +656,7 @@ claude-flow agent assign <agent-id> <task> [options]
 Initialize a swarm with topology.
 
 ```bash
-claude-flow swarm init [options]
+outlaw-flow swarm init [options]
 ```
 
 **Options:**
@@ -674,17 +674,17 @@ claude-flow swarm init [options]
 **Examples:**
 ```bash
 # Hierarchical swarm
-./claude-flow swarm init --topology hierarchical --max-agents 10
+./outlaw-flow swarm init --topology hierarchical --max-agents 10
 
 # Mesh network
-./claude-flow swarm init --topology mesh --strategy adaptive
+./outlaw-flow swarm init --topology mesh --strategy adaptive
 ```
 
 ### `swarm`
 Execute task with swarm coordination.
 
 ```bash
-claude-flow swarm <task> [options]
+outlaw-flow swarm <task> [options]
 ```
 
 **Options:**
@@ -702,13 +702,13 @@ claude-flow swarm <task> [options]
 **Examples:**
 ```bash
 # Development task
-./claude-flow swarm "Build REST API with authentication" \
+./outlaw-flow swarm "Build REST API with authentication" \
   --strategy development \
   --parallel \
   --monitor
 
 # Research task
-./claude-flow swarm "Research best practices for microservices" \
+./outlaw-flow swarm "Research best practices for microservices" \
   --strategy research \
   --max-agents 5
 ```
@@ -717,7 +717,7 @@ claude-flow swarm <task> [options]
 Get swarm status and metrics.
 
 ```bash
-claude-flow swarm status [options]
+outlaw-flow swarm status [options]
 ```
 
 **Options:**
@@ -728,7 +728,7 @@ claude-flow swarm status [options]
 Real-time swarm monitoring.
 
 ```bash
-claude-flow swarm monitor [options]
+outlaw-flow swarm monitor [options]
 ```
 
 **Options:**
@@ -741,7 +741,7 @@ claude-flow swarm monitor [options]
 Execute SPARC development mode.
 
 ```bash
-claude-flow sparc run <mode> <prompt> [options]
+outlaw-flow sparc run <mode> <prompt> [options]
 ```
 
 **Modes:**
@@ -776,20 +776,20 @@ claude-flow sparc run <mode> <prompt> [options]
 **Examples:**
 ```bash
 # Architecture design
-./claude-flow sparc run architect "design microservices for e-commerce"
+./outlaw-flow sparc run architect "design microservices for e-commerce"
 
 # TDD workflow
-./claude-flow sparc run tdd "user authentication system"
+./outlaw-flow sparc run tdd "user authentication system"
 
 # Chained execution
-./claude-flow sparc run --chain spec,architect,code "payment processing"
+./outlaw-flow sparc run --chain spec,architect,code "payment processing"
 ```
 
 ### `sparc template`
 Manage SPARC templates.
 
 ```bash
-claude-flow sparc template <action> [name]
+outlaw-flow sparc template <action> [name]
 ```
 
 **Actions:**
@@ -805,7 +805,7 @@ claude-flow sparc template <action> [name]
 Store information in memory bank.
 
 ```bash
-claude-flow memory store <key> <value> [options]
+outlaw-flow memory store <key> <value> [options]
 ```
 
 **Options:**
@@ -818,13 +818,13 @@ claude-flow memory store <key> <value> [options]
 **Examples:**
 ```bash
 # Store text
-./claude-flow memory store api-design "RESTful endpoints for user management"
+./outlaw-flow memory store api-design "RESTful endpoints for user management"
 
 # Store JSON
-./claude-flow memory store config '{"api": {"version": "2.0"}}' --type json
+./outlaw-flow memory store config '{"api": {"version": "2.0"}}' --type json
 
 # Store with tags
-./claude-flow memory store requirements "User auth with JWT" \
+./outlaw-flow memory store requirements "User auth with JWT" \
   --tags "auth,security,backend"
 ```
 
@@ -832,7 +832,7 @@ claude-flow memory store <key> <value> [options]
 Search memory bank.
 
 ```bash
-claude-flow memory query <pattern> [options]
+outlaw-flow memory query <pattern> [options]
 ```
 
 **Options:**
@@ -844,17 +844,17 @@ claude-flow memory query <pattern> [options]
 **Examples:**
 ```bash
 # Query by pattern
-./claude-flow memory query "auth"
+./outlaw-flow memory query "auth"
 
 # Query with filters
-./claude-flow memory query "*" --tags "security" --limit 10
+./outlaw-flow memory query "*" --tags "security" --limit 10
 ```
 
 ### `memory delete`
 Delete memory entries.
 
 ```bash
-claude-flow memory delete <key> [options]
+outlaw-flow memory delete <key> [options]
 ```
 
 **Options:**
@@ -865,7 +865,7 @@ claude-flow memory delete <key> [options]
 Export memory bank.
 
 ```bash
-claude-flow memory export <file> [options]
+outlaw-flow memory export <file> [options]
 ```
 
 **Options:**
@@ -876,7 +876,7 @@ claude-flow memory export <file> [options]
 Import memory data.
 
 ```bash
-claude-flow memory import <file> [options]
+outlaw-flow memory import <file> [options]
 ```
 
 **Options:**
@@ -889,7 +889,7 @@ claude-flow memory import <file> [options]
 Create a new task.
 
 ```bash
-claude-flow task create <type> <description> [options]
+outlaw-flow task create <type> <description> [options]
 ```
 
 **Task Types:**
@@ -910,12 +910,12 @@ claude-flow task create <type> <description> [options]
 **Examples:**
 ```bash
 # Create development task
-./claude-flow task create development "Implement user authentication" \
+./outlaw-flow task create development "Implement user authentication" \
   --priority high \
   --assign coder-123
 
 # Create with dependencies
-./claude-flow task create testing "Integration tests" \
+./outlaw-flow task create testing "Integration tests" \
   --dependencies task-001,task-002
 ```
 
@@ -923,7 +923,7 @@ claude-flow task create <type> <description> [options]
 List tasks.
 
 ```bash
-claude-flow task list [options]
+outlaw-flow task list [options]
 ```
 
 **Options:**
@@ -935,7 +935,7 @@ claude-flow task list [options]
 Update task status.
 
 ```bash
-claude-flow task update <task-id> [options]
+outlaw-flow task update <task-id> [options]
 ```
 
 **Options:**
@@ -947,7 +947,7 @@ claude-flow task update <task-id> [options]
 Execute task workflow.
 
 ```bash
-claude-flow task workflow <workflow-file> [options]
+outlaw-flow task workflow <workflow-file> [options]
 ```
 
 **Options:**
@@ -960,7 +960,7 @@ claude-flow task workflow <workflow-file> [options]
 Check MCP server status.
 
 ```bash
-claude-flow mcp status [options]
+outlaw-flow mcp status [options]
 ```
 
 **Options:**
@@ -971,7 +971,7 @@ claude-flow mcp status [options]
 List available MCP tools.
 
 ```bash
-claude-flow mcp tools [options]
+outlaw-flow mcp tools [options]
 ```
 
 **Options:**
@@ -1000,17 +1000,17 @@ claude-flow mcp tools [options]
 Call MCP tool directly.
 
 ```bash
-claude-flow mcp call <tool> [params] [options]
+outlaw-flow mcp call <tool> [params] [options]
 ```
 
 **Examples:**
 ```bash
 # Initialize swarm
-./claude-flow mcp call swarm_init \
+./outlaw-flow mcp call swarm_init \
   --params '{"topology": "mesh", "maxAgents": 5}'
 
 # Store memory
-./claude-flow mcp call memory_usage \
+./outlaw-flow mcp call memory_usage \
   --params '{"action": "store", "key": "test", "value": "data"}'
 ```
 
@@ -1020,7 +1020,7 @@ claude-flow mcp call <tool> [params] [options]
 Manage pull requests with swarm intelligence.
 
 ```bash
-claude-flow github pr-manager <description> [options]
+outlaw-flow github pr-manager <description> [options]
 ```
 
 **Options:**
@@ -1035,7 +1035,7 @@ claude-flow github pr-manager <description> [options]
 Analyze and solve GitHub issues.
 
 ```bash
-claude-flow github issue-solver <issue> [options]
+outlaw-flow github issue-solver <issue> [options]
 ```
 
 **Options:**
@@ -1047,7 +1047,7 @@ claude-flow github issue-solver <issue> [options]
 Coordinate releases.
 
 ```bash
-claude-flow github release-coordinator <version> [options]
+outlaw-flow github release-coordinator <version> [options]
 ```
 
 **Options:**
@@ -1060,7 +1060,7 @@ claude-flow github release-coordinator <version> [options]
 Synchronize packages across repositories.
 
 ```bash
-claude-flow github sync-packages [options]
+outlaw-flow github sync-packages [options]
 ```
 
 **Options:**
@@ -1072,7 +1072,7 @@ claude-flow github sync-packages [options]
 Optimize repository structure.
 
 ```bash
-claude-flow github repo-architect [action] [options]
+outlaw-flow github repo-architect [action] [options]
 ```
 
 **Options:**
@@ -1086,7 +1086,7 @@ claude-flow github repo-architect [action] [options]
 Project lifecycle management.
 
 ```bash
-claude-flow project <action> [name] [options]
+outlaw-flow project <action> [name] [options]
 ```
 
 **Actions:**
@@ -1105,7 +1105,7 @@ claude-flow project <action> [name] [options]
 Deployment automation.
 
 ```bash
-claude-flow deploy <action> [target] [options]
+outlaw-flow deploy <action> [target] [options]
 ```
 
 **Actions:**
@@ -1125,7 +1125,7 @@ claude-flow deploy <action> [target] [options]
 Multi-cloud resource management.
 
 ```bash
-claude-flow cloud <action> [resource] [options]
+outlaw-flow cloud <action> [resource] [options]
 ```
 
 **Actions:**
@@ -1142,7 +1142,7 @@ claude-flow cloud <action> [resource] [options]
 Security management.
 
 ```bash
-claude-flow security <action> [target] [options]
+outlaw-flow security <action> [target] [options]
 ```
 
 **Actions:**
@@ -1159,7 +1159,7 @@ claude-flow security <action> [target] [options]
 Performance analytics.
 
 ```bash
-claude-flow analytics <action> [options]
+outlaw-flow analytics <action> [options]
 ```
 
 **Actions:**
@@ -1178,7 +1178,7 @@ claude-flow analytics <action> [options]
 Real-time system monitoring.
 
 ```bash
-claude-flow monitor [options]
+outlaw-flow monitor [options]
 ```
 
 **Options:**
@@ -1191,7 +1191,7 @@ claude-flow monitor [options]
 View system logs.
 
 ```bash
-claude-flow logs [component] [options]
+outlaw-flow logs [component] [options]
 ```
 
 **Options:**
@@ -1204,7 +1204,7 @@ claude-flow logs [component] [options]
 Run performance benchmarks.
 
 ```bash
-claude-flow benchmark [test] [options]
+outlaw-flow benchmark [test] [options]
 ```
 
 **Options:**
@@ -1216,7 +1216,7 @@ claude-flow benchmark [test] [options]
 System diagnostics.
 
 ```bash
-claude-flow diagnose [options]
+outlaw-flow diagnose [options]
 ```
 
 **Options:**
@@ -1251,30 +1251,30 @@ Available for all commands:
 ### Complete Development Workflow
 ```bash
 # 1. Initialize project
-./claude-flow init --sparc
+./outlaw-flow init --sparc
 
 # 2. Start system
-./claude-flow start --ui --monitor
+./outlaw-flow start --ui --monitor
 
 # 3. Create swarm for development
-./claude-flow swarm init --topology hierarchical --max-agents 8
+./outlaw-flow swarm init --topology hierarchical --max-agents 8
 
 # 4. Execute development task
-./claude-flow swarm "Build complete REST API with authentication" \
+./outlaw-flow swarm "Build complete REST API with authentication" \
   --strategy development \
   --parallel \
   --monitor
 
 # 5. Monitor progress
-./claude-flow monitor --dashboard
+./outlaw-flow monitor --dashboard
 
 # 6. Create PR when ready
-./claude-flow github pr-manager "Feature: Complete REST API implementation"
+./outlaw-flow github pr-manager "Feature: Complete REST API implementation"
 
 # 7. Deploy
-./claude-flow deploy create v1.0.0 --strategy blue-green
+./outlaw-flow deploy create v1.0.0 --strategy blue-green
 ```
 
 ---
 
-**📖 For more examples and detailed guides, visit our [documentation](https://github.com/ruvnet/claude-code-flow/docs).**
+**📖 For more examples and detailed guides, visit our [documentation](https://github.com/ruvnet/outlaw-flow/docs).**

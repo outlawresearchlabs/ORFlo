@@ -1,6 +1,6 @@
 # Demo Scripts
 
-Interactive demonstrations showing Claude Flow creating various applications through the swarm system.
+Interactive demonstrations showing Outlaw Flow creating various applications through the swarm system.
 
 ## Directory Structure
 

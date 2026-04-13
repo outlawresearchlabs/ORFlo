@@ -1,6 +1,6 @@
 import { getErrorMessage } from '../../utils/error-handler.js';
 /**
- * Comprehensive help system for Claude-Flow CLI
+ * Comprehensive help system for Outlaw-Flow CLI
  */
 
 import { Command } from 'commander';
@@ -45,60 +45,60 @@ interface HelpExample {
 const HELP_TOPICS: HelpTopic[] = [
   {
     name: 'getting-started',
-    description: 'Basic introduction to Claude-Flow',
+    description: 'Basic introduction to Outlaw-Flow',
     category: 'basic',
     tutorial: [
-      'Welcome to Claude-Flow! This tutorial will get you started.',
+      'Welcome to Outlaw-Flow! This tutorial will get you started.',
       '1. First, initialize a configuration file:',
-      '   claude-flow config init',
+      '   outlaw-flow config init',
       '',
       '2. Start the orchestration system:',
-      '   claude-flow start',
+      '   outlaw-flow start',
       '',
       '3. In another terminal, spawn your first agent:',
-      '   claude-flow agent spawn researcher --name "My Research Agent"',
+      '   outlaw-flow agent spawn researcher --name "My Research Agent"',
       '',
       '4. Create a task for the agent:',
-      '   claude-flow task create research "Find information about AI trends"',
+      '   outlaw-flow task create research "Find information about AI trends"',
       '',
       '5. Monitor progress:',
-      '   claude-flow status',
+      '   outlaw-flow status',
       '',
       'You can also use the interactive REPL mode:',
-      '   claude-flow repl',
+      '   outlaw-flow repl',
       '',
-      'For more help, try: claude-flow help <topic>'
+      'For more help, try: outlaw-flow help <topic>'
     ],
     related: ['agents', 'tasks', 'configuration']
   },
   {
     name: 'agents',
-    description: 'Working with Claude-Flow agents',
+    description: 'Working with Outlaw-Flow agents',
     category: 'basic',
     examples: [
       {
         description: 'Spawn a research agent',
-        command: 'claude-flow agent spawn researcher --name "Research Assistant"',
+        command: 'outlaw-flow agent spawn researcher --name "Research Assistant"',
         explanation: 'Creates a new research agent with specialized capabilities for information gathering'
       },
       {
         description: 'List all active agents',
-        command: 'claude-flow agent list',
+        command: 'outlaw-flow agent list',
         explanation: 'Shows all currently running agents with their status and task counts'
       },
       {
         description: 'Get detailed agent information',
-        command: 'claude-flow agent info agent-001',
+        command: 'outlaw-flow agent info agent-001',
         explanation: 'Displays comprehensive information about a specific agent'
       },
       {
         description: 'Terminate an agent',
-        command: 'claude-flow agent terminate agent-001',
+        command: 'outlaw-flow agent terminate agent-001',
         explanation: 'Safely shuts down an agent and reassigns its tasks'
       }
     ],
     tutorial: [
-      'Agents are the core workers in Claude-Flow. Each agent has:',
+      'Agents are the core workers in Outlaw-Flow. Each agent has:',
       '• A unique ID (automatically generated)',
       '• A name (for easy identification)',
       '• A type (coordinator, researcher, implementer, analyst, custom)',
@@ -115,7 +115,7 @@ const HELP_TOPICS: HelpTopic[] = [
       'Best Practices:',
       '• Use descriptive names for your agents',
       '• Match agent types to your workflow needs',
-      '• Monitor agent performance with "claude-flow status"',
+      '• Monitor agent performance with "outlaw-flow status"',
       '• Terminate idle agents to free resources'
     ],
     related: ['tasks', 'workflows', 'coordination']
@@ -127,27 +127,27 @@ const HELP_TOPICS: HelpTopic[] = [
     examples: [
       {
         description: 'Create a research task',
-        command: 'claude-flow task create research "Find papers on quantum computing" --priority 5',
+        command: 'outlaw-flow task create research "Find papers on quantum computing" --priority 5',
         explanation: 'Creates a high-priority research task with specific instructions'
       },
       {
         description: 'Create a task with dependencies',
-        command: 'claude-flow task create analysis "Analyze research results" --dependencies task-001',
+        command: 'outlaw-flow task create analysis "Analyze research results" --dependencies task-001',
         explanation: 'Creates a task that waits for task-001 to complete before starting'
       },
       {
         description: 'Assign task to specific agent',
-        command: 'claude-flow task create implementation "Write API client" --assign agent-003',
+        command: 'outlaw-flow task create implementation "Write API client" --assign agent-003',
         explanation: 'Directly assigns a task to a specific agent'
       },
       {
         description: 'Monitor task progress',
-        command: 'claude-flow task status task-001',
+        command: 'outlaw-flow task status task-001',
         explanation: 'Shows detailed status and progress information for a task'
       },
       {
         description: 'Cancel a running task',
-        command: 'claude-flow task cancel task-001 --reason "Requirements changed"',
+        command: 'outlaw-flow task cancel task-001 --reason "Requirements changed"',
         explanation: 'Stops a task and provides a reason for cancellation'
       }
     ],
@@ -185,27 +185,27 @@ const HELP_TOPICS: HelpTopic[] = [
     examples: [
       {
         description: 'Spawn Claude with web research capabilities',
-        command: 'claude-flow claude spawn "implement user authentication" --research --parallel',
+        command: 'outlaw-flow claude spawn "implement user authentication" --research --parallel',
         explanation: 'Creates a Claude instance with WebFetchTool and BatchTool for parallel web research'
       },
       {
         description: 'Spawn Claude without permission prompts',
-        command: 'claude-flow claude spawn "fix payment bug" --no-permissions',
+        command: 'outlaw-flow claude spawn "fix payment bug" --no-permissions',
         explanation: 'Runs Claude with safe tool allowlist to avoid interruptions'
       },
       {
         description: 'Spawn Claude with custom tools',
-        command: 'claude-flow claude spawn "analyze codebase" --tools "View,Edit,GrepTool,LS"',
+        command: 'outlaw-flow claude spawn "analyze codebase" --tools "View,Edit,GrepTool,LS"',
         explanation: 'Specifies exactly which tools Claude can use for the task'
       },
       {
         description: 'Spawn Claude with test coverage target',
-        command: 'claude-flow claude spawn "write unit tests" --coverage 95 --commit feature',
+        command: 'outlaw-flow claude spawn "write unit tests" --coverage 95 --commit feature',
         explanation: 'Sets test coverage goal to 95% and commits after each feature'
       },
       {
         description: 'Dry run to preview command',
-        command: 'claude-flow claude spawn "build API" --mode backend-only --dry-run',
+        command: 'outlaw-flow claude spawn "build API" --mode backend-only --dry-run',
         explanation: 'Shows what would be executed without actually running Claude'
       }
     ],
@@ -226,9 +226,9 @@ const HELP_TOPICS: HelpTopic[] = [
       '',
       'Environment Variables Set:',
       '• CLAUDE_INSTANCE_ID: Unique identifier for the Claude instance',
-      '• CLAUDE_FLOW_MODE: Development mode setting',
-      '• CLAUDE_FLOW_COVERAGE: Target test coverage percentage',
-      '• CLAUDE_FLOW_COMMIT: Commit frequency setting',
+      '• OUTLAW_FLOW_MODE: Development mode setting',
+      '• OUTLAW_FLOW_COVERAGE: Target test coverage percentage',
+      '• OUTLAW_FLOW_COMMIT: Commit frequency setting',
       '',
       'Common Use Cases:',
       '• Full-stack development: --mode full --parallel',
@@ -246,27 +246,27 @@ const HELP_TOPICS: HelpTopic[] = [
     examples: [
       {
         description: 'Run a workflow from file',
-        command: 'claude-flow workflow run research-pipeline.json --watch',
+        command: 'outlaw-flow workflow run research-pipeline.json --watch',
         explanation: 'Executes a workflow definition and monitors progress in real-time'
       },
       {
         description: 'Validate workflow before running',
-        command: 'claude-flow workflow validate my-workflow.json --strict',
+        command: 'outlaw-flow workflow validate my-workflow.json --strict',
         explanation: 'Checks workflow syntax and dependencies without executing'
       },
       {
         description: 'Generate workflow template',
-        command: 'claude-flow workflow template research --output research-workflow.json',
+        command: 'outlaw-flow workflow template research --output research-workflow.json',
         explanation: 'Creates a pre-configured workflow template for research tasks'
       },
       {
         description: 'Monitor running workflows',
-        command: 'claude-flow workflow list --all',
+        command: 'outlaw-flow workflow list --all',
         explanation: 'Shows all workflows including completed ones'
       },
       {
         description: 'Stop a running workflow',
-        command: 'claude-flow workflow stop workflow-001 --force',
+        command: 'outlaw-flow workflow stop workflow-001 --force',
         explanation: 'Immediately stops all tasks in a workflow'
       }
     ],
@@ -315,37 +315,37 @@ const HELP_TOPICS: HelpTopic[] = [
   },
   {
     name: 'configuration',
-    description: 'Configuring Claude-Flow settings',
+    description: 'Configuring Outlaw-Flow settings',
     category: 'configuration',
     examples: [
       {
         description: 'Initialize default configuration',
-        command: 'claude-flow config init --template development',
+        command: 'outlaw-flow config init --template development',
         explanation: 'Creates a configuration file optimized for development'
       },
       {
         description: 'View current configuration',
-        command: 'claude-flow config show --diff',
+        command: 'outlaw-flow config show --diff',
         explanation: 'Shows only settings that differ from defaults'
       },
       {
         description: 'Update a setting',
-        command: 'claude-flow config set orchestrator.maxConcurrentAgents 20',
+        command: 'outlaw-flow config set orchestrator.maxConcurrentAgents 20',
         explanation: 'Changes the maximum number of concurrent agents'
       },
       {
         description: 'Save configuration profile',
-        command: 'claude-flow config profile save production',
+        command: 'outlaw-flow config profile save production',
         explanation: 'Saves current settings as a named profile'
       },
       {
         description: 'Load configuration profile',
-        command: 'claude-flow config profile load development',
+        command: 'outlaw-flow config profile load development',
         explanation: 'Switches to a previously saved configuration profile'
       }
     ],
     tutorial: [
-      'Configuration controls all aspects of Claude-Flow behavior.',
+      'Configuration controls all aspects of Outlaw-Flow behavior.',
       '',
       'Main Configuration Sections:',
       '',
@@ -368,14 +368,14 @@ const HELP_TOPICS: HelpTopic[] = [
       '  - port: Network port for HTTP transport',
       '',
       'Configuration Files:',
-      '• Global: ~/.claude-flow/config.json',
-      '• Project: ./claude-flow.config.json',
-      '• Profiles: ~/.claude-flow/profiles/',
+      '• Global: ~/.outlaw-flow/config.json',
+      '• Project: ./outlaw-flow.config.json',
+      '• Profiles: ~/.outlaw-flow/profiles/',
       '',
       'Environment Variables:',
-      '• CLAUDE_FLOW_LOG_LEVEL: Override log level',
-      '• CLAUDE_FLOW_MAX_AGENTS: Override agent limit',
-      '• CLAUDE_FLOW_MCP_PORT: Override MCP port'
+      '• OUTLAW_FLOW_LOG_LEVEL: Override log level',
+      '• OUTLAW_FLOW_MAX_AGENTS: Override agent limit',
+      '• OUTLAW_FLOW_MCP_PORT: Override MCP port'
     ],
     related: ['profiles', 'environment', 'troubleshooting']
   },
@@ -386,27 +386,27 @@ const HELP_TOPICS: HelpTopic[] = [
     examples: [
       {
         description: 'Check system status',
-        command: 'claude-flow status --watch',
+        command: 'outlaw-flow status --watch',
         explanation: 'Continuously monitors system health and updates every few seconds'
       },
       {
         description: 'Start monitoring dashboard',
-        command: 'claude-flow monitor --interval 5',
+        command: 'outlaw-flow monitor --interval 5',
         explanation: 'Opens a live dashboard with real-time metrics and graphs'
       },
       {
         description: 'View component-specific status',
-        command: 'claude-flow status --component orchestrator',
+        command: 'outlaw-flow status --component orchestrator',
         explanation: 'Shows detailed status for a specific system component'
       },
       {
         description: 'Monitor in compact mode',
-        command: 'claude-flow monitor --compact --no-graphs',
+        command: 'outlaw-flow monitor --compact --no-graphs',
         explanation: 'Simplified monitoring view without visual graphs'
       }
     ],
     tutorial: [
-      'Claude-Flow provides comprehensive monitoring capabilities.',
+      'Outlaw-Flow provides comprehensive monitoring capabilities.',
       '',
       'Monitoring Commands:',
       '• status: Point-in-time system status',
@@ -442,32 +442,32 @@ const HELP_TOPICS: HelpTopic[] = [
     examples: [
       {
         description: 'Save current session',
-        command: 'claude-flow session save "Development Session" --description "Working on API integration"',
+        command: 'outlaw-flow session save "Development Session" --description "Working on API integration"',
         explanation: 'Saves all current agents, tasks, and memory state'
       },
       {
         description: 'List saved sessions',
-        command: 'claude-flow session list',
+        command: 'outlaw-flow session list',
         explanation: 'Shows all saved sessions with creation dates and metadata'
       },
       {
         description: 'Restore a session',
-        command: 'claude-flow session restore session-001 --merge',
+        command: 'outlaw-flow session restore session-001 --merge',
         explanation: 'Restores session state, merging with current state'
       },
       {
         description: 'Export session to file',
-        command: 'claude-flow session export session-001 backup.json --include-memory',
+        command: 'outlaw-flow session export session-001 backup.json --include-memory',
         explanation: 'Creates a portable backup including agent memory'
       },
       {
         description: 'Clean up old sessions',
-        command: 'claude-flow session clean --older-than 30 --dry-run',
+        command: 'outlaw-flow session clean --older-than 30 --dry-run',
         explanation: 'Shows what sessions would be deleted (older than 30 days)'
       }
     ],
     tutorial: [
-      'Sessions capture the complete state of your Claude-Flow environment.',
+      'Sessions capture the complete state of your Outlaw-Flow environment.',
       '',
       'What Sessions Include:',
       '• All active agents and their configurations',
@@ -504,17 +504,17 @@ const HELP_TOPICS: HelpTopic[] = [
     examples: [
       {
         description: 'Start REPL mode',
-        command: 'claude-flow repl',
+        command: 'outlaw-flow repl',
         explanation: 'Opens interactive command line with tab completion'
       },
       {
         description: 'REPL with custom history file',
-        command: 'claude-flow repl --history-file .my-history',
+        command: 'outlaw-flow repl --history-file .my-history',
         explanation: 'Uses a specific file for command history'
       },
       {
         description: 'Skip welcome banner',
-        command: 'claude-flow repl --no-banner',
+        command: 'outlaw-flow repl --no-banner',
         explanation: 'Starts REPL in minimal mode'
       }
     ],
@@ -552,22 +552,22 @@ const HELP_TOPICS: HelpTopic[] = [
     examples: [
       {
         description: 'Check system health',
-        command: 'claude-flow status --component all',
+        command: 'outlaw-flow status --component all',
         explanation: 'Comprehensive health check of all components'
       },
       {
         description: 'Enable debug logging',
-        command: 'claude-flow start --log-level debug',
+        command: 'outlaw-flow start --log-level debug',
         explanation: 'Start with verbose logging for debugging'
       },
       {
         description: 'Validate configuration',
-        command: 'claude-flow config validate claude-flow.config.json --strict',
+        command: 'outlaw-flow config validate outlaw-flow.config.json --strict',
         explanation: 'Check configuration file for errors'
       },
       {
         description: 'Reset to defaults',
-        command: 'claude-flow config reset --confirm',
+        command: 'outlaw-flow config reset --confirm',
         explanation: 'Restore default configuration settings'
       }
     ],
@@ -576,7 +576,7 @@ const HELP_TOPICS: HelpTopic[] = [
       '',
       'Connection Issues:',
       '• Problem: "Connection refused" errors',
-      '• Solution: Ensure Claude-Flow is started with "claude-flow start"',
+      '• Solution: Ensure Outlaw-Flow is started with "outlaw-flow start"',
       '• Check: MCP transport settings match between client and server',
       '',
       'Agent Issues:',
@@ -600,28 +600,28 @@ const HELP_TOPICS: HelpTopic[] = [
       '• Check: Environment variable overrides',
       '',
       'Debug Commands:',
-      '• claude-flow status: System health check',
-      '• claude-flow config validate: Configuration check',
-      '• claude-flow --verbose: Enable detailed logging',
-      '• claude-flow monitor: Real-time diagnostics'
+      '• outlaw-flow status: System health check',
+      '• outlaw-flow config validate: Configuration check',
+      '• outlaw-flow --verbose: Enable detailed logging',
+      '• outlaw-flow monitor: Real-time diagnostics'
     ],
     related: ['monitoring', 'configuration', 'debugging']
   }
 ];
 
 function showMainHelp(): void {
-  console.log(chalk.cyan.bold('Claude-Flow Help System'));
+  console.log(chalk.cyan.bold('Outlaw-Flow Help System'));
   console.log('─'.repeat(50));
   console.log();
   
-  console.log(chalk.white('Claude-Flow is an advanced AI agent orchestration system.'));
+  console.log(chalk.white('Outlaw-Flow is an advanced AI agent orchestration system.'));
   console.log(chalk.white('Use this help system to learn about features and best practices.'));
   console.log();
   
   console.log(chalk.yellow.bold('Quick Start:'));
-  console.log(chalk.gray('  claude-flow help getting-started    # Beginner tutorial'));
-  console.log(chalk.gray('  claude-flow help --interactive      # Interactive help mode'));
-  console.log(chalk.gray('  claude-flow help <topic>            # Specific topic help'));
+  console.log(chalk.gray('  outlaw-flow help getting-started    # Beginner tutorial'));
+  console.log(chalk.gray('  outlaw-flow help --interactive      # Interactive help mode'));
+  console.log(chalk.gray('  outlaw-flow help <topic>            # Specific topic help'));
   console.log();
   
   console.log(chalk.yellow.bold('Help Categories:'));
@@ -646,8 +646,8 @@ function showMainHelp(): void {
   }
   
   console.log();
-  console.log(chalk.gray('Use "claude-flow help <topic>" for detailed information.'));
-  console.log(chalk.gray('Use "claude-flow help --all" to see all topics.'));
+  console.log(chalk.gray('Use "outlaw-flow help <topic>" for detailed information.'));
+  console.log(chalk.gray('Use "outlaw-flow help --all" to see all topics.'));
 }
 
 function showAllTopics(): void {
@@ -670,7 +670,7 @@ function showAllTopics(): void {
   console.log(table.toString());
   
   console.log();
-  console.log(chalk.gray('Use "claude-flow help <topic>" for detailed information.'));
+  console.log(chalk.gray('Use "outlaw-flow help <topic>" for detailed information.'));
 }
 
 async function showTopicHelp(topicName: string, options: any): Promise<void> {
@@ -692,7 +692,7 @@ async function showTopicHelp(topicName: string, options: any): Promise<void> {
         console.log(chalk.cyan(`  ${suggestion.name}`));
       }
     } else {
-      console.log(chalk.gray('Use "claude-flow help --all" to see all topics.'));
+      console.log(chalk.gray('Use "outlaw-flow help --all" to see all topics.'));
     }
     return;
   }
@@ -706,7 +706,7 @@ async function showTopicHelp(topicName: string, options: any): Promise<void> {
     console.log(chalk.yellow.bold('Tutorial:'));
     console.log('─'.repeat(20));
     for (const line of topic.tutorial) {
-      if (line.trim().startsWith('claude-flow')) {
+      if (line.trim().startsWith('outlaw-flow')) {
         console.log(chalk.cyan(`  ${line}`));
       } else if (line.trim() === '') {
         console.log();
@@ -769,7 +769,7 @@ async function showTopicHelp(topicName: string, options: any): Promise<void> {
     console.log(chalk.yellow.bold('Related Topics:'));
     console.log('─'.repeat(20));
     for (const related of topic.related) {
-      console.log(chalk.cyan(`  claude-flow help ${related}`));
+      console.log(chalk.cyan(`  outlaw-flow help ${related}`));
     }
     console.log();
   }

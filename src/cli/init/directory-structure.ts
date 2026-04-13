@@ -57,14 +57,14 @@ export async function createDirectoryStructure(): Promise<void> {
     version: "1.0.71"
   };
   
-  await fs.writeFile('memory/claude-flow-data.json', JSON.stringify(initialData, null, 2));
-  console.log('  ✅ Created memory/claude-flow-data.json (persistence database)');
+  await fs.writeFile('memory/outlaw-flow-data.json', JSON.stringify(initialData, null, 2));
+  console.log('  ✅ Created memory/outlaw-flow-data.json (persistence database)');
 }
 
 function createAgentsReadme(): string {
   return `# Agents Directory
 
-This directory stores persistent information about AI agents created and managed by Claude-Flow.
+This directory stores persistent information about AI agents created and managed by Outlaw-Flow.
 
 ## Structure
 - Each agent gets its own JSON file named by agent ID
@@ -72,10 +72,10 @@ This directory stores persistent information about AI agents created and managed
 - Shared agent data is stored in agent-registry.json
 
 ## Usage
-Agents are automatically managed by the Claude-Flow orchestration system. You can:
-- View agent status with \`claude-flow agent list\`
-- Create new agents with \`claude-flow agent spawn <type>\`
-- Configure agents with \`claude-flow agent configure <id>\`
+Agents are automatically managed by the Outlaw-Flow orchestration system. You can:
+- View agent status with \`outlaw-flow agent list\`
+- Create new agents with \`outlaw-flow agent spawn <type>\`
+- Configure agents with \`outlaw-flow agent configure <id>\`
 
 ## Files
 - \`agent-registry.json\`: Central agent registry
@@ -87,7 +87,7 @@ Agents are automatically managed by the Claude-Flow orchestration system. You ca
 function createSessionsReadme(): string {
   return `# Sessions Directory
 
-This directory stores information about Claude-Flow orchestration sessions.
+This directory stores information about Outlaw-Flow orchestration sessions.
 
 ## Structure
 - Each session gets its own subdirectory
@@ -96,9 +96,9 @@ This directory stores information about Claude-Flow orchestration sessions.
 
 ## Usage
 Sessions are managed automatically during orchestration:
-- Start sessions with \`claude-flow start\`
-- Monitor sessions with \`claude-flow status\`
-- Review session history with \`claude-flow session list\`
+- Start sessions with \`outlaw-flow start\`
+- Monitor sessions with \`outlaw-flow status\`
+- Review session history with \`outlaw-flow session list\`
 
 ## Files
 - \`session-<id>/\`: Individual session directories
@@ -124,7 +124,7 @@ Coordination data is used for:
 - Resource allocation and balancing
 - Error recovery and failover
 
-Access coordination data through the Claude-Flow API or CLI commands.
+Access coordination data through the Outlaw-Flow API or CLI commands.
 `;
 }
 
@@ -140,8 +140,8 @@ This directory stores output reports from swarm operations and orchestration tas
 
 ## Usage
 Reports are generated automatically by swarm operations:
-- View recent reports with \`claude-flow swarm list\`
-- Check specific reports with \`claude-flow swarm status <id>\`
+- View recent reports with \`outlaw-flow swarm list\`
+- Check specific reports with \`outlaw-flow swarm status <id>\`
 - Export reports in different formats using \`--output\` flags
 
 ## File Types

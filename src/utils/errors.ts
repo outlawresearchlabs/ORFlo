@@ -1,10 +1,10 @@
 import { getErrorMessage } from '../utils/error-handler.js';
 /**
- * Custom error types for Claude-Flow
+ * Custom error types for Outlaw-Flow
  */
 
 /**
- * Base error class for all Claude-Flow errors
+ * Base error class for all Outlaw-Flow errors
  */
 export class ClaudeFlowError extends Error {
   constructor(

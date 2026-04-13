@@ -2,7 +2,7 @@ name: Test Suite
 
 on:
   push:
-    branches: [ main, develop, claude-flow-v2.0.0 ]
+    branches: [ main, develop, outlaw-flow-v2.0.0 ]
   pull_request:
     branches: [ main, develop ]
 
@@ -131,23 +131,23 @@ jobs:
 
     - name: Test CLI binary
       run: |
-        chmod +x ./bin/claude-flow
-        ./bin/claude-flow --version
-        ./bin/claude-flow --help
+        chmod +x ./bin/outlaw-flow
+        ./bin/outlaw-flow --version
+        ./bin/outlaw-flow --help
 
     - name: Test init command
       run: |
         mkdir test-project
         cd test-project
-        ../bin/claude-flow init --minimal
+        ../bin/outlaw-flow init --minimal
         ls -la .claude/
 
     - name: Test memory commands
       run: |
         cd test-project
-        ../bin/claude-flow memory store test-key "test value"
-        ../bin/claude-flow memory retrieve test-key
-        ../bin/claude-flow memory list
+        ../bin/outlaw-flow memory store test-key "test value"
+        ../bin/outlaw-flow memory retrieve test-key
+        ../bin/outlaw-flow memory list
 
   docker-test:
     runs-on: ubuntu-latest
@@ -162,12 +162,12 @@ jobs:
 
     - name: Build Docker image
       run: |
-        docker build -t claude-flow:test .
+        docker build -t outlaw-flow:test .
 
     - name: Test Docker container
       run: |
-        docker run --rm claude-flow:test --version
-        docker run --rm claude-flow:test --help
+        docker run --rm outlaw-flow:test --version
+        docker run --rm outlaw-flow:test --help
 
   benchmark:
     runs-on: ubuntu-latest

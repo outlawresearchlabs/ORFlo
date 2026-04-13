@@ -1026,16 +1026,16 @@ function showDryRunConfiguration(swarmId: string, objective: string, options: an
 
 function showSwarmHelp(): void {
   console.log(`
-🐝 Claude Flow Advanced Swarm System
+🐝 Outlaw Flow Advanced Swarm System
 
 USAGE:
-  claude-flow swarm <objective> [options]
+  outlaw-flow swarm <objective> [options]
 
 EXAMPLES:
-  claude-flow swarm "Build a REST API" --strategy development
-  claude-flow swarm "Research cloud architecture" --strategy research --ui
-  claude-flow swarm "Analyze data trends" --strategy analysis --parallel
-  claude-flow swarm "Optimize performance" --distributed --monitor
+  outlaw-flow swarm "Build a REST API" --strategy development
+  outlaw-flow swarm "Research cloud architecture" --strategy research --ui
+  outlaw-flow swarm "Analyze data trends" --strategy analysis --parallel
+  outlaw-flow swarm "Optimize performance" --distributed --monitor
 
 STRATEGIES:
   auto           Automatically determine best approach (default)
@@ -1106,6 +1106,6 @@ ADVANCED FEATURES:
   🔒 Security and encryption options
   🖥️  Interactive terminal UI
 
-For more information, visit: https://github.com/ruvnet/claude-code-flow
+For more information, visit: https://github.com/ruvnet/outlaw-flow
 `);
 }

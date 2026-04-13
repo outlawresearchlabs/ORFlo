@@ -80,7 +80,7 @@ generate_junit_xml() {
     
     cat > "$JUNIT_OUTPUT_FILE" <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="Claude-Flow CLI Tests" tests="$total_tests" failures="$failed_tests" time="$test_duration">
+<testsuites name="Outlaw-Flow CLI Tests" tests="$total_tests" failures="$failed_tests" time="$test_duration">
   <testsuite name="CLI Integration Tests" tests="$total_tests" failures="$failed_tests" time="$test_duration">
 $test_results
   </testsuite>
@@ -261,14 +261,14 @@ cleanup_ci_environment() {
     fi
     
     # Clean up temporary files
-    rm -rf /tmp/claude-flow-test-*
+    rm -rf /tmp/outlaw-flow-test-*
     
     # Generate final report
     cat > test-results/report.html <<EOF
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Claude-Flow CI Test Report</title>
+    <title>Outlaw-Flow CI Test Report</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .pass { color: green; }
@@ -277,7 +277,7 @@ cleanup_ci_environment() {
     </style>
 </head>
 <body>
-    <h1>Claude-Flow CI Test Report</h1>
+    <h1>Outlaw-Flow CI Test Report</h1>
     <div class="summary">
         <h2>Summary</h2>
         <p>Date: $(date)</p>

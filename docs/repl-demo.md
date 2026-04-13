@@ -1,11 +1,11 @@
-# Claude-Flow REPL Demo
+# Outlaw-Flow REPL Demo
 
-The Claude-Flow REPL (Read-Eval-Print Loop) provides an interactive shell for managing your AI orchestration system.
+The Outlaw-Flow REPL (Read-Eval-Print Loop) provides an interactive shell for managing your AI orchestration system.
 
 ## Starting the REPL
 
 ```bash
-claude-flow repl
+outlaw-flow repl
 ```
 
 ## Available Commands
@@ -100,36 +100,36 @@ terminal detach
 ## Interactive Example Session
 
 ```
-$ claude-flow repl
-🧠 Claude-Flow Interactive Shell v1.0.26
+$ outlaw-flow repl
+🧠 Outlaw-Flow Interactive Shell v1.0.26
 Type "help" for available commands, "exit" to quit
 
-claude-flow> status
-🟢 Claude-Flow Status:
+outlaw-flow> status
+🟢 Outlaw-Flow Status:
   Agents: 0 active
   Tasks: 0 in queue
   Terminals: 0 active
   Memory Keys: 0
 
-claude-flow> agent spawn researcher ai-bot
+outlaw-flow> agent spawn researcher ai-bot
 ✅ Spawned researcher agent: ai-bot (agent-1234567890)
 
-claude-flow> task create research "Analyze code patterns"
+outlaw-flow> task create research "Analyze code patterns"
 ✅ Created task: task-1234567891
   Type: research
   Description: Analyze code patterns
 
-claude-flow> task assign task-1234567891 ai-bot
+outlaw-flow> task assign task-1234567891 ai-bot
 ✅ Assigned task task-1234567891 to agent ai-bot
 
-claude-flow> memory store current_project "claude-flow"
-✅ Stored: current_project = claude-flow
+outlaw-flow> memory store current_project "outlaw-flow"
+✅ Stored: current_project = outlaw-flow
 
-claude-flow> !echo "Running shell command"
+outlaw-flow> !echo "Running shell command"
 Running shell command
 
-claude-flow> exit
-👋 Exiting Claude-Flow REPL...
+outlaw-flow> exit
+👋 Exiting Outlaw-Flow REPL...
 ```
 
 ## Tips

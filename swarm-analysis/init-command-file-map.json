@@ -34,7 +34,7 @@
     "claude_commands": {
       "slash_commands": "/src/cli/simple-commands/init/claude-commands/slash-commands.js",
       "sparc_commands": "/src/cli/simple-commands/init/claude-commands/sparc-commands.js",
-      "claude_flow_commands": "/src/cli/simple-commands/init/claude-commands/claude-flow-commands.js"
+      "claude_flow_commands": "/src/cli/simple-commands/init/claude-commands/outlaw-flow-commands.js"
     }
   },
   
@@ -51,7 +51,7 @@
         "memory/",
         "memory/agents/",
         "memory/sessions/",
-        "memory/claude-flow-data.json",
+        "memory/outlaw-flow-data.json",
         "memory/agents/README.md",
         "memory/sessions/README.md"
       ],

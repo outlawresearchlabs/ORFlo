@@ -1,12 +1,12 @@
 # outlaw-flow
 
-Security-hardened fork of [claude-flow](https://github.com/ruvnet/claude-code-flow) v2.0.0-alpha.
+Security-hardened AI agent orchestration. Based on [claude-flow](https://github.com/ruvnet/claude-code-flow) v2.0.0-alpha by [rUv](https://github.com/ruvnet), now an independent project.
 
-## Why this fork exists
+## Why this exists
 
 `claude-flow` defaulted to `--dangerously-skip-permissions` on every Claude Code spawn path — swarm, SPARC, hive-mind, GitHub integration, batch tasks. This flag bypasses **all** permission prompts, allowing arbitrary shell execution, unrestricted file access, and uncontrolled network requests with no audit trail.
 
-We replaced it with granular `--allowedTools` allowlists and `permissions.allow`/`permissions.deny` lists. Every spawn path now restricts tools by default. See [SECURITY.md](./SECURITY.md) for full details.
+We replaced it with granular `--allowedTools` allowlists, `permissions.allow`/`permissions.deny` lists, and (coming) a SafeBash MCP server with OS sandbox support. Every spawn path now restricts tools by default. See [SECURITY.md](./SECURITY.md) for full details.
 
 ## Quick start
 
@@ -30,14 +30,16 @@ outlaw-flow swarm "Deploy staging"
 
 ## Key changes from upstream
 
-| Change | Upstream | Outlaw-flow |
+| Change | Upstream (claude-flow) | Outlaw-flow |
 |--------|----------|-------------|
 | Permission model | `--dangerously-skip-permissions` (bypasses all) | `--allowedTools` with mode-specific allowlists |
-| Bash restrictions | 4 deny patterns | 16 deny patterns (sudo, pipe-to-shell, eval, chmod 777, etc.) |
+| Bash restrictions | 4 deny patterns | 25+ deny patterns |
 | Tool allowlists | None (all tools available) | Swarm, SPARC, GitHub each get scoped tools |
 | CI/Docker/SSH | `--dangerously-skip-permissions` | `--non-interactive` + allowlists |
 | Bare spawns | Several paths spawned Claude with no restrictions | All paths apply allowlists unconditionally |
-| `allowed-tools.js` | Did not exist | Central allowlist module (CORE_TOOLS, SWARM_ALLOWED_TOOLS, SPARC_ALLOWED_TOOLS, GITHUB_ALLOWED_TOOLS) |
+| `allowed-tools.js` | Did not exist | Central allowlist module |
+| Download-execute chain | No prevention | `curl -o`/`wget -q` removed, `chmod +x` restricted, temp-dir execution denied |
+| SafeBash MCP server | Not present | (coming) Semantic command analysis + OS sandbox |
 
 ## Architecture
 
@@ -46,6 +48,7 @@ outlaw-flow swarm "Deploy staging"
 - **Memory** — Persistent key-value store with namespace support
 - **MCP server** — Model Context Protocol integration for Claude Code
 - **Swarm executor** — Spawns and manages Claude Code instances with scoped permissions
+- **SafeBash** (coming) — Semantic command analysis MCP server with OS sandbox support
 
 ## Commands
 
@@ -87,6 +90,6 @@ See [SECURITY.md](./SECURITY.md) for:
 
 ## Credits
 
-Forked from [claude-flow](https://github.com/ruvnet/claude-code-flow) by [rUv](https://github.com/ruvnet).
+Originally based on [claude-flow](https://github.com/ruvnet/claude-code-flow) v2.0.0-alpha by [rUv](https://github.com/ruvnet). Now maintained independently as outlaw-flow by [Outlaw Research Labs](https://github.com/outlawresearchlabs).
 
 MIT License — see [LICENSE](./LICENSE).

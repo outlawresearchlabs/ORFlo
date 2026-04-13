@@ -14,7 +14,7 @@ export function createMinimalClaudeMd() {
 - Run typecheck before committing
 
 ## Project Info
-This is a Claude-Flow AI agent orchestration system.
+This is a Outlaw-Flow AI agent orchestration system.
 `;
 }
 
@@ -26,8 +26,8 @@ export function createFullClaudeMd() {
 - \`npm run test\`: Run the full test suite
 - \`npm run lint\`: Run ESLint and format checks
 - \`npm run typecheck\`: Run TypeScript type checking
-- \`./claude-flow start\`: Start the orchestration system
-- \`./claude-flow --help\`: Show all available commands
+- \`./outlaw-flow start\`: Start the orchestration system
+- \`./outlaw-flow --help\`: Show all available commands
 
 ## Code Style Preferences
 - Use ES modules (import/export) syntax, not CommonJS (require)
@@ -46,7 +46,7 @@ export function createFullClaudeMd() {
 - Ensure all tests pass before merging
 
 ## Project Architecture
-This is a Claude-Flow AI agent orchestration system with the following components:
+This is a Outlaw-Flow AI agent orchestration system with the following components:
 - **CLI Interface**: Command-line tools for managing the system
 - **Orchestrator**: Core engine for coordinating agents and tasks
 - **Memory System**: Persistent storage and retrieval of information
@@ -61,9 +61,9 @@ This is a Claude-Flow AI agent orchestration system with the following component
 - All components are event-driven for scalability
 
 ## Debugging
-- Check logs in \`./claude-flow.log\`
-- Use \`./claude-flow status\` to check system health
-- Monitor with \`./claude-flow monitor\` for real-time updates
+- Check logs in \`./outlaw-flow.log\`
+- Use \`./outlaw-flow status\` to check system health
+- Monitor with \`./outlaw-flow monitor\` for real-time updates
 - Verbose output available with \`--verbose\` flag on most commands
 `;
 }
@@ -72,15 +72,15 @@ export function createSparcClaudeMd() {
   return `# Claude Code Configuration - SPARC Development Environment
 
 ## Project Overview
-This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology for systematic Test-Driven Development with AI assistance through Claude-Flow orchestration.
+This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology for systematic Test-Driven Development with AI assistance through Outlaw-Flow orchestration.
 
 ## SPARC Development Commands
 
 ### Core SPARC Commands
-- \`./claude-flow sparc modes\`: List all available SPARC development modes
-- \`./claude-flow sparc run <mode> "<task>"\`: Execute specific SPARC mode for a task
-- \`./claude-flow sparc tdd "<feature>"\`: Run complete TDD workflow using SPARC methodology
-- \`./claude-flow sparc info <mode>\`: Get detailed information about a specific mode
+- \`./outlaw-flow sparc modes\`: List all available SPARC development modes
+- \`./outlaw-flow sparc run <mode> "<task>"\`: Execute specific SPARC mode for a task
+- \`./outlaw-flow sparc tdd "<feature>"\`: Run complete TDD workflow using SPARC methodology
+- \`./outlaw-flow sparc info <mode>\`: Get detailed information about a specific mode
 
 ### Standard Build Commands
 - \`npm run build\`: Build the project
@@ -93,7 +93,7 @@ This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement
 ### 1. Specification Phase
 \`\`\`bash
 # Create detailed specifications and requirements
-./claude-flow sparc run spec-pseudocode "Define user authentication requirements"
+./outlaw-flow sparc run spec-pseudocode "Define user authentication requirements"
 \`\`\`
 - Define clear functional requirements
 - Document edge cases and constraints
@@ -103,7 +103,7 @@ This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement
 ### 2. Pseudocode Phase
 \`\`\`bash
 # Develop algorithmic logic and data flows
-./claude-flow sparc run spec-pseudocode "Create authentication flow pseudocode"
+./outlaw-flow sparc run spec-pseudocode "Create authentication flow pseudocode"
 \`\`\`
 - Break down complex logic into steps
 - Define data structures and interfaces
@@ -113,7 +113,7 @@ This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement
 ### 3. Architecture Phase
 \`\`\`bash
 # Design system architecture and component structure
-./claude-flow sparc run architect "Design authentication service architecture"
+./outlaw-flow sparc run architect "Design authentication service architecture"
 \`\`\`
 - Create system diagrams and component relationships
 - Define API contracts and interfaces
@@ -123,7 +123,7 @@ This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement
 ### 4. Refinement Phase (TDD Implementation)
 \`\`\`bash
 # Execute Test-Driven Development cycle
-./claude-flow sparc tdd "implement user authentication system"
+./outlaw-flow sparc tdd "implement user authentication system"
 \`\`\`
 
 **TDD Cycle:**
@@ -135,7 +135,7 @@ This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement
 ### 5. Completion Phase
 \`\`\`bash
 # Integration, documentation, and validation
-./claude-flow sparc run integration "integrate authentication with user management"
+./outlaw-flow sparc run integration "integrate authentication with user management"
 \`\`\`
 - Integrate all components
 - Perform end-to-end testing
@@ -169,9 +169,9 @@ Claude Code slash commands are available in \`.claude/commands/\`:
 ### Project Commands
 - \`/sparc\`: Execute SPARC methodology workflows
 - \`/sparc-<mode>\`: Run specific SPARC mode (e.g., /sparc-architect)
-- \`/claude-flow-help\`: Show all Claude-Flow commands
-- \`/claude-flow-memory\`: Interact with memory system
-- \`/claude-flow-swarm\`: Coordinate multi-agent swarms
+- \`/outlaw-flow-help\`: Show all Outlaw-Flow commands
+- \`/outlaw-flow-memory\`: Interact with memory system
+- \`/outlaw-flow-swarm\`: Coordinate multi-agent swarms
 
 ### Using Slash Commands
 1. Type \`/\` in Claude Code to see available commands
@@ -196,7 +196,7 @@ Claude Code slash commands are available in \`.claude/commands/\`:
 - Prefer composition over inheritance
 
 ### Memory and State Management
-- Use claude-flow memory system for persistent state across sessions
+- Use outlaw-flow memory system for persistent state across sessions
 - Store progress and findings using namespaced keys
 - Query previous work before starting new tasks
 - Export/import memory for backup and sharing
@@ -206,19 +206,19 @@ Claude Code slash commands are available in \`.claude/commands/\`:
 ### Memory Commands for SPARC Development
 \`\`\`bash
 # Store project specifications
-./claude-flow memory store spec_auth "User authentication requirements and constraints"
+./outlaw-flow memory store spec_auth "User authentication requirements and constraints"
 
 # Store architectural decisions
-./claude-flow memory store arch_decisions "Database schema and API design choices"
+./outlaw-flow memory store arch_decisions "Database schema and API design choices"
 
 # Store test results and coverage
-./claude-flow memory store test_coverage "Authentication module: 95% coverage, all tests passing"
+./outlaw-flow memory store test_coverage "Authentication module: 95% coverage, all tests passing"
 
 # Query previous work
-./claude-flow memory query auth_implementation
+./outlaw-flow memory query auth_implementation
 
 # Export project memory
-./claude-flow memory export project_backup.json
+./outlaw-flow memory export project_backup.json
 \`\`\`
 
 ### Memory Namespaces
@@ -233,37 +233,37 @@ Claude Code slash commands are available in \`.claude/commands/\`:
 ### Feature Development Workflow
 \`\`\`bash
 # 1. Start with specification
-./claude-flow sparc run spec-pseudocode "User profile management feature"
+./outlaw-flow sparc run spec-pseudocode "User profile management feature"
 
 # 2. Design architecture
-./claude-flow sparc run architect "Profile service architecture with data validation"
+./outlaw-flow sparc run architect "Profile service architecture with data validation"
 
 # 3. Implement with TDD
-./claude-flow sparc tdd "user profile CRUD operations"
+./outlaw-flow sparc tdd "user profile CRUD operations"
 
 # 4. Security review
-./claude-flow sparc run security-review "profile data access and validation"
+./outlaw-flow sparc run security-review "profile data access and validation"
 
 # 5. Integration testing
-./claude-flow sparc run integration "profile service with authentication system"
+./outlaw-flow sparc run integration "profile service with authentication system"
 
 # 6. Documentation
-./claude-flow sparc run docs-writer "profile service API documentation"
+./outlaw-flow sparc run docs-writer "profile service API documentation"
 \`\`\`
 
 ### Bug Fix Workflow
 \`\`\`bash
 # 1. Debug and analyze
-./claude-flow sparc run debug "authentication token expiration issue"
+./outlaw-flow sparc run debug "authentication token expiration issue"
 
 # 2. Write regression tests
-./claude-flow sparc run tdd "token refresh mechanism tests"
+./outlaw-flow sparc run tdd "token refresh mechanism tests"
 
 # 3. Implement fix
-./claude-flow sparc run code "fix token refresh in authentication service"
+./outlaw-flow sparc run code "fix token refresh in authentication service"
 
 # 4. Security review
-./claude-flow sparc run security-review "token handling security implications"
+./outlaw-flow sparc run security-review "token handling security implications"
 \`\`\`
 
 ## Configuration Files
@@ -276,7 +276,7 @@ Claude Code slash commands are available in \`.claude/commands/\`:
 - **\`.roomodes\`**: SPARC mode definitions and configurations (auto-generated)
 - **\`.roo/\`**: SPARC templates and workflows (auto-generated)
 
-### Claude-Flow Configuration
+### Outlaw-Flow Configuration
 - **\`memory/\`**: Persistent memory and session data
 - **\`coordination/\`**: Multi-agent coordination settings
 - **\`CLAUDE.md\`**: Project instructions for Claude Code
@@ -306,16 +306,16 @@ Claude Code slash commands are available in \`.claude/commands/\`:
 ### Debug Commands
 \`\`\`bash
 # Check SPARC configuration
-./claude-flow sparc modes
+./outlaw-flow sparc modes
 
 # Verify memory system
-./claude-flow memory stats
+./outlaw-flow memory stats
 
 # Check system status
-./claude-flow status
+./outlaw-flow status
 
 # View detailed mode information
-./claude-flow sparc info <mode-name>
+./outlaw-flow sparc info <mode-name>
 \`\`\`
 
 ## Project Architecture
@@ -336,7 +336,7 @@ This SPARC-enabled project follows a systematic development approach:
 - Regular security reviews for any authentication or data handling code
 - Claude Code slash commands provide quick access to SPARC modes
 
-For more information about SPARC methodology, see: https://github.com/ruvnet/claude-code-flow/docs/sparc.md
+For more information about SPARC methodology, see: https://github.com/ruvnet/outlaw-flow/docs/sparc.md
 `;
 }
 
@@ -345,22 +345,22 @@ export async function createOptimizedSparcClaudeMd() {
   return `# Claude Code Configuration - SPARC Development Environment (Batchtools Optimized)
 
 ## Project Overview
-This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology for systematic Test-Driven Development with AI assistance through Claude-Flow orchestration.
+This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology for systematic Test-Driven Development with AI assistance through Outlaw-Flow orchestration.
 
 **🚀 Batchtools Optimization Enabled**: This configuration includes optimized prompts and parallel processing capabilities for improved performance and efficiency.
 
 ## SPARC Development Commands
 
 ### Core SPARC Commands
-- \`npx claude-flow sparc modes\`: List all available SPARC development modes
-- \`npx claude-flow sparc run <mode> "<task>"\`: Execute specific SPARC mode for a task
-- \`npx claude-flow sparc tdd "<feature>"\`: Run complete TDD workflow using SPARC methodology
-- \`npx claude-flow sparc info <mode>\`: Get detailed information about a specific mode
+- \`npx outlaw-flow sparc modes\`: List all available SPARC development modes
+- \`npx outlaw-flow sparc run <mode> "<task>"\`: Execute specific SPARC mode for a task
+- \`npx outlaw-flow sparc tdd "<feature>"\`: Run complete TDD workflow using SPARC methodology
+- \`npx outlaw-flow sparc info <mode>\`: Get detailed information about a specific mode
 
 ### Batchtools Commands (Optimized)
-- \`npx claude-flow sparc batch <modes> "<task>"\`: Execute multiple SPARC modes in parallel
-- \`npx claude-flow sparc pipeline "<task>"\`: Execute full SPARC pipeline with parallel processing
-- \`npx claude-flow sparc concurrent <mode> "<tasks-file>"\`: Process multiple tasks concurrently
+- \`npx outlaw-flow sparc batch <modes> "<task>"\`: Execute multiple SPARC modes in parallel
+- \`npx outlaw-flow sparc pipeline "<task>"\`: Execute full SPARC pipeline with parallel processing
+- \`npx outlaw-flow sparc concurrent <mode> "<tasks-file>"\`: Process multiple tasks concurrently
 
 ### Standard Build Commands
 - \`npm run build\`: Build the project
@@ -373,35 +373,35 @@ This project uses the SPARC (Specification, Pseudocode, Architecture, Refinement
 ### 1. Specification Phase (Parallel Analysis)
 \`\`\`bash
 # Create detailed specifications with concurrent requirements analysis
-npx claude-flow sparc run spec-pseudocode "Define user authentication requirements" --parallel
+npx outlaw-flow sparc run spec-pseudocode "Define user authentication requirements" --parallel
 \`\`\`
 **Batchtools Optimization**: Simultaneously analyze multiple requirement sources, validate constraints in parallel, and generate comprehensive specifications.
 
 ### 2. Pseudocode Phase (Concurrent Logic Design)
 \`\`\`bash
 # Develop algorithmic logic with parallel pattern analysis
-npx claude-flow sparc run spec-pseudocode "Create authentication flow pseudocode" --batch-optimize
+npx outlaw-flow sparc run spec-pseudocode "Create authentication flow pseudocode" --batch-optimize
 \`\`\`
 **Batchtools Optimization**: Process multiple algorithm patterns concurrently, validate logic flows in parallel, and optimize data structures simultaneously.
 
 ### 3. Architecture Phase (Parallel Component Design)
 \`\`\`bash
 # Design system architecture with concurrent component analysis
-npx claude-flow sparc run architect "Design authentication service architecture" --parallel
+npx outlaw-flow sparc run architect "Design authentication service architecture" --parallel
 \`\`\`
 **Batchtools Optimization**: Generate multiple architectural alternatives simultaneously, validate integration points in parallel, and create comprehensive documentation concurrently.
 
 ### 4. Refinement Phase (Parallel TDD Implementation)
 \`\`\`bash
 # Execute Test-Driven Development with parallel test generation
-npx claude-flow sparc tdd "implement user authentication system" --batch-tdd
+npx outlaw-flow sparc tdd "implement user authentication system" --batch-tdd
 \`\`\`
 **Batchtools Optimization**: Generate multiple test scenarios simultaneously, implement and validate code in parallel, and optimize performance concurrently.
 
 ### 5. Completion Phase (Concurrent Integration)
 \`\`\`bash
 # Integration with parallel validation and documentation
-npx claude-flow sparc run integration "integrate authentication with user management" --parallel
+npx outlaw-flow sparc run integration "integrate authentication with user management" --parallel
 \`\`\`
 **Batchtools Optimization**: Run integration tests in parallel, generate documentation concurrently, and validate requirements simultaneously.
 
@@ -455,8 +455,8 @@ npx claude-flow sparc run integration "integrate authentication with user manage
 - Monitor system resources during parallel operations for optimal performance
 
 For more information about SPARC methodology and batchtools optimization, see: 
-- SPARC Guide: https://github.com/ruvnet/claude-code-flow/docs/sparc.md
-- Batchtools Documentation: https://github.com/ruvnet/claude-code-flow/docs/batchtools.md
+- SPARC Guide: https://github.com/ruvnet/outlaw-flow/docs/sparc.md
+- Batchtools Documentation: https://github.com/ruvnet/outlaw-flow/docs/batchtools.md
 
 # important-instruction-reminders
 Do what has been asked; nothing more, nothing less.

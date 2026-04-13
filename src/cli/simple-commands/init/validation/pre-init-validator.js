@@ -19,12 +19,12 @@ export class PreInitValidator {
 
     try {
       // Test write permission in working directory
-      const testFile = `${this.workingDir}/.claude-flow-permission-test`;
+      const testFile = `${this.workingDir}/.outlaw-flow-permission-test`;
       await Deno.writeTextFile(testFile, 'test');
       await Deno.remove(testFile);
 
       // Test directory creation permission
-      const testDir = `${this.workingDir}/.claude-flow-dir-test`;
+      const testDir = `${this.workingDir}/.outlaw-flow-dir-test`;
       await Deno.mkdir(testDir);
       await Deno.remove(testDir);
 
@@ -102,7 +102,7 @@ export class PreInitValidator {
       'memory-bank.md',
       'coordination.md',
       '.roomodes',
-      'memory/claude-flow-data.json'
+      'memory/outlaw-flow-data.json'
     ];
 
     const criticalDirs = [
@@ -227,7 +227,7 @@ export class PreInitValidator {
       { name: 'HOME', required: false },
       { name: 'PATH', required: true },
       { name: 'PWD', required: false },
-      { name: 'CLAUDE_FLOW_DEBUG', required: false }
+      { name: 'OUTLAW_FLOW_DEBUG', required: false }
     ];
 
     for (const envVar of envVars) {

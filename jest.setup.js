@@ -4,7 +4,7 @@
  */
 
 // Set test environment flags
-process.env.CLAUDE_FLOW_ENV = 'test';
+process.env.OUTLAW_FLOW_ENV = 'test';
 process.env.NODE_ENV = 'test';
 
 // Initialize logger for test environment

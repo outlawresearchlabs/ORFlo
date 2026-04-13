@@ -1,7 +1,7 @@
 {
-  "name": "@claude-flow/memory",
+  "name": "@outlaw-flow/memory",
   "version": "1.0.0",
-  "description": "SPARC Memory Bank - Persistent memory system for Claude-Flow",
+  "description": "SPARC Memory Bank - Persistent memory system for Outlaw-Flow",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {

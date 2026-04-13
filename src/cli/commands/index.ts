@@ -156,15 +156,15 @@ export function setupCommands(cli: CLI): void {
           tasks: [],
           lastUpdated: Date.now()
         };
-        await writeFile("memory/claude-flow-data.json", JSON.stringify(initialData, null, 2));
-        console.log("  ✓ Created memory/claude-flow-data.json (persistence database)");
+        await writeFile("memory/outlaw-flow-data.json", JSON.stringify(initialData, null, 2));
+        console.log("  ✓ Created memory/outlaw-flow-data.json (persistence database)");
         
         success("Claude Code integration files initialized successfully!");
         console.log("\nNext steps:");
         console.log("1. Review and customize the generated files for your project");
-        console.log("2. Run 'npx claude-flow start' to begin the orchestration system");
+        console.log("2. Run 'npx outlaw-flow start' to begin the orchestration system");
         console.log("3. Use 'claude --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch' for safe unattended operation");
-        console.log("\nNote: Persistence database initialized at memory/claude-flow-data.json");
+        console.log("\nNote: Persistence database initialized at memory/outlaw-flow-data.json");
         
       } catch (err) {
         error(`Failed to initialize files: ${(err as Error).message}`);
@@ -192,7 +192,7 @@ export function setupCommands(cli: CLI): void {
       },
     ],
     action: async (ctx: CommandContext) => {
-      success("Starting Claude-Flow orchestration system...");
+      success("Starting Outlaw-Flow orchestration system...");
       
       try {
         const orch = await getOrchestrator();
@@ -361,7 +361,7 @@ export function setupCommands(cli: CLI): void {
               warning("Workflow execution would start here (not yet implemented)");
               // TODO: Implement workflow execution
             } else {
-              info("To execute this workflow, ensure Claude-Flow is running");
+              info("To execute this workflow, ensure Outlaw-Flow is running");
             }
           } catch (err) {
             error(`Failed to load workflow: ${(err as Error).message}`);
@@ -418,7 +418,7 @@ export function setupCommands(cli: CLI): void {
             
             warning("Enhanced agent management is available!");
             console.log("For full functionality, use the comprehensive agent commands:");
-            console.log(`  - claude-flow agent ${subcommand} ${ctx.args.slice(1).join(' ')}`);
+            console.log(`  - outlaw-flow agent ${subcommand} ${ctx.args.slice(1).join(' ')}`);
             console.log("  - Enhanced features: pools, health monitoring, resource management");
             console.log("  - Interactive configuration and detailed metrics");
             break;
@@ -442,7 +442,7 @@ export function setupCommands(cli: CLI): void {
             console.log("  ✨ Interactive configuration");
             console.log("  ✨ Memory integration for coordination");
             console.log("");
-            console.log("For detailed help, use: claude-flow agent <command> --help");
+            console.log("For detailed help, use: outlaw-flow agent <command> --help");
             break;
           }
         }
@@ -528,7 +528,7 @@ export function setupCommands(cli: CLI): void {
       
       // Mock the enhanced status command action
       console.log(chalk.cyan('🔍 Enhanced Status Command'));
-      console.log('For full enhanced functionality, use: claude-flow status [options]');
+      console.log('For full enhanced functionality, use: outlaw-flow status [options]');
       console.log('Available options: --watch, --interval, --component, --json, --detailed, --health-check, --history');
       
       // Fallback to basic status
@@ -540,7 +540,7 @@ export function setupCommands(cli: CLI): void {
         const { access } = await import("fs/promises");
         const isRunning = await access("orchestrator.log").then(() => true).catch(() => false);
         
-        success("Claude-Flow System Status:");
+        success("Outlaw-Flow System Status:");
         console.log(`🟢 Status: ${isRunning ? 'Running' : 'Stopped'}`);
         console.log(`🤖 Agents: ${stats.activeAgents} active (${stats.totalAgents} total)`);
         console.log(`📋 Tasks: ${stats.pendingTasks} in queue (${stats.totalTasks} total)`);
@@ -559,7 +559,7 @@ export function setupCommands(cli: CLI): void {
         
         if (options.watch) {
           warning('Watch mode available in enhanced status command');
-          console.log('Use: claude-flow status --watch');
+          console.log('Use: outlaw-flow status --watch');
         }
         
       } catch (err) {
@@ -597,7 +597,7 @@ export function setupCommands(cli: CLI): void {
           const { access } = await import("fs/promises");
           const isRunning = await access("orchestrator.log").then(() => true).catch(() => false);
           
-          success("Claude-Flow System Status:");
+          success("Outlaw-Flow System Status:");
           console.log(`🟢 Status: ${isRunning ? 'Running' : 'Stopped'}`);
           console.log(`🤖 Agents: ${stats.activeAgents} active (${stats.totalAgents} total)`);
           console.log(`📋 Tasks: ${stats.pendingTasks} in queue (${stats.totalTasks} total)`);
@@ -638,14 +638,14 @@ export function setupCommands(cli: CLI): void {
             const health = await orch.healthCheck();
             
             if (!health.healthy) {
-              warning("Orchestrator is not running. Start it first with 'claude-flow start'");
+              warning("Orchestrator is not running. Start it first with 'outlaw-flow start'");
               return;
             }
             
             success(`MCP server is running as part of the orchestration system`);
             console.log(`📡 Default address: http://${host}:${port}`);
             console.log(`🔧 Available tools: Research, Code, Terminal, Memory`);
-            console.log(`📚 Use 'claude-flow mcp tools' to see all available tools`);
+            console.log(`📚 Use 'outlaw-flow mcp tools' to see all available tools`);
           } catch (err) {
             error(`Failed to check MCP server: ${(err as Error).message}`);
           }
@@ -660,7 +660,7 @@ export function setupCommands(cli: CLI): void {
             if (!health.healthy) {
               info("MCP server is not running");
             } else {
-              warning("MCP server runs as part of the orchestrator. Use 'claude-flow stop' to stop the entire system");
+              warning("MCP server runs as part of the orchestrator. Use 'outlaw-flow stop' to stop the entire system");
             }
           } catch (err) {
             error(`Failed to check MCP server: ${(err as Error).message}`);
@@ -733,7 +733,7 @@ export function setupCommands(cli: CLI): void {
         
         case "restart": {
           try {
-            warning("MCP server runs as part of the orchestrator. Use 'claude-flow stop' then 'claude-flow start' to restart the entire system");
+            warning("MCP server runs as part of the orchestrator. Use 'outlaw-flow stop' then 'outlaw-flow start' to restart the entire system");
           } catch (err) {
             error(`Failed to restart MCP server: ${(err as Error).message}`);
           }
@@ -1024,23 +1024,23 @@ export function setupCommands(cli: CLI): void {
             
             const instanceId = `claude-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
             
-            // Build enhanced task with Claude-Flow guidance
-            let enhancedTask = `# Claude-Flow Enhanced Task
+            // Build enhanced task with Outlaw-Flow guidance
+            let enhancedTask = `# Outlaw-Flow Enhanced Task
 
 ## Your Task
 ${task}
 
-## Claude-Flow System Context
+## Outlaw-Flow System Context
 
-You are running within the Claude-Flow orchestration system, which provides powerful features for complex task management:
+You are running within the Outlaw-Flow orchestration system, which provides powerful features for complex task management:
 
 ### Available Features
 
 1. **Memory Bank** (Always Available)
-   - Store data: \`npx claude-flow memory store <key> <value>\` - Save important data, findings, or progress
-   - Retrieve data: \`npx claude-flow memory query <key>\` - Access previously stored information
-   - Check status: \`npx claude-flow status\` - View current system/task status
-   - List agents: \`npx claude-flow agent list\` - See active agents
+   - Store data: \`npx outlaw-flow memory store <key> <value>\` - Save important data, findings, or progress
+   - Retrieve data: \`npx outlaw-flow memory query <key>\` - Access previously stored information
+   - Check status: \`npx outlaw-flow status\` - View current system/task status
+   - List agents: \`npx outlaw-flow agent list\` - See active agents
    - Memory persists across Claude instances in the same namespace
 
 2. **Tool Access**
@@ -1048,9 +1048,9 @@ You are running within the Claude-Flow orchestration system, which provides powe
 
             if (ctx.flags.parallel) {
               enhancedTask += `
-   - **Parallel Execution Enabled**: Use \`npx claude-flow agent spawn <type> --name <name>\` to spawn sub-agents
-   - Create tasks: \`npx claude-flow task create <type> "<description>"\`
-   - Assign tasks: \`npx claude-flow task assign <task-id> <agent-id>\`
+   - **Parallel Execution Enabled**: Use \`npx outlaw-flow agent spawn <type> --name <name>\` to spawn sub-agents
+   - Create tasks: \`npx outlaw-flow task create <type> "<description>"\`
+   - Assign tasks: \`npx outlaw-flow task assign <task-id> <agent-id>\`
    - Break down complex tasks and delegate to specialized agents`;
             }
 
@@ -1064,24 +1064,24 @@ You are running within the Claude-Flow orchestration system, which provides powe
 ### Workflow Guidelines
 
 1. **Before Starting**:
-   - Check memory: \`npx claude-flow memory query previous_work\`
-   - Check system status: \`npx claude-flow status\`
-   - List active agents: \`npx claude-flow agent list\`
-   - List active tasks: \`npx claude-flow task list\`
+   - Check memory: \`npx outlaw-flow memory query previous_work\`
+   - Check system status: \`npx outlaw-flow status\`
+   - List active agents: \`npx outlaw-flow agent list\`
+   - List active tasks: \`npx outlaw-flow task list\`
 
 2. **During Execution**:
-   - Store findings: \`npx claude-flow memory store findings "your data here"\`
-   - Save checkpoints: \`npx claude-flow memory store progress_${task.replace(/\s+/g, '_')} "current status"\`
-   ${ctx.flags.parallel ? '- Spawn agents: `npx claude-flow agent spawn researcher --name "research-agent"`' : ''}
-   ${ctx.flags.parallel ? '- Create tasks: `npx claude-flow task create implementation "implement feature X"`' : ''}
+   - Store findings: \`npx outlaw-flow memory store findings "your data here"\`
+   - Save checkpoints: \`npx outlaw-flow memory store progress_${task.replace(/\s+/g, '_')} "current status"\`
+   ${ctx.flags.parallel ? '- Spawn agents: `npx outlaw-flow agent spawn researcher --name "research-agent"`' : ''}
+   ${ctx.flags.parallel ? '- Create tasks: `npx outlaw-flow task create implementation "implement feature X"`' : ''}
 
 3. **Best Practices**:
-   - Use the Bash tool to run \`npx claude-flow\` commands
+   - Use the Bash tool to run \`npx outlaw-flow\` commands
    - Store data as JSON strings for complex structures
    - Query memory before starting to check for existing work
    - Use descriptive keys for memory storage
    ${ctx.flags.parallel ? '- Coordinate with other agents through shared memory' : ''}
-   ${ctx.flags.research ? '- Store research findings: `npx claude-flow memory store research_findings "data"`' : ''}
+   ${ctx.flags.research ? '- Store research findings: `npx outlaw-flow memory store research_findings "data"`' : ''}
 
 ## Configuration
 - Instance ID: ${instanceId}
@@ -1091,21 +1091,21 @@ You are running within the Claude-Flow orchestration system, which provides powe
 
 ## Example Commands
 
-To interact with Claude-Flow, use the Bash tool:
+To interact with Outlaw-Flow, use the Bash tool:
 
 \`\`\`bash
 # Check for previous work
-Bash("npx claude-flow memory query previous_work")
+Bash("npx outlaw-flow memory query previous_work")
 
 # Store your findings
-Bash("npx claude-flow memory store analysis_results 'Found 3 critical issues...'")
+Bash("npx outlaw-flow memory store analysis_results 'Found 3 critical issues...'")
 
 # Check system status
-Bash("npx claude-flow status")
+Bash("npx outlaw-flow status")
 
 # Create and assign tasks (when --parallel is enabled)
-Bash("npx claude-flow task create research 'Research authentication methods'")
-Bash("npx claude-flow agent spawn researcher --name auth-researcher")
+Bash("npx outlaw-flow task create research 'Research authentication methods'")
+Bash("npx outlaw-flow agent spawn researcher --name auth-researcher")
 \`\`\`
 
 Now, please proceed with the task: ${task}`;
@@ -1132,9 +1132,9 @@ Now, please proceed with the task: ${task}`;
               console.log(`Coverage: ${ctx.flags.coverage || 80}%`);
               console.log(`Commit: ${ctx.flags.commit || "phase"}`);
               console.log(`\nEnhanced Features:`);
-              console.log(`  - Memory Bank enabled via: npx claude-flow memory commands`);
+              console.log(`  - Memory Bank enabled via: npx outlaw-flow memory commands`);
               console.log(`  - Coordination ${ctx.flags.parallel ? 'enabled' : 'disabled'}`);
-              console.log(`  - Access Claude-Flow features through Bash tool`);
+              console.log(`  - Access Outlaw-Flow features through Bash tool`);
               return;
             }
             
@@ -1144,7 +1144,7 @@ Now, please proceed with the task: ${task}`;
             console.log(`⚙️  Mode: ${ctx.flags.mode || "full"}`);
             console.log(`📊 Coverage: ${ctx.flags.coverage || 80}%`);
             console.log(`💾 Commit: ${ctx.flags.commit || "phase"}`);
-            console.log(`✨ Enhanced with Claude-Flow guidance for memory and coordination`);
+            console.log(`✨ Enhanced with Outlaw-Flow guidance for memory and coordination`);
             console.log('');
             console.log('📋 Task will be enhanced with:');
             console.log('  - Memory Bank instructions (store/retrieve)');
@@ -1158,14 +1158,14 @@ Now, please proceed with the task: ${task}`;
               env: {
                 ...process.env,
                 CLAUDE_INSTANCE_ID: instanceId,
-                CLAUDE_FLOW_MODE: ctx.flags.mode as string || "full",
-                CLAUDE_FLOW_COVERAGE: (ctx.flags.coverage || 80).toString(),
-                CLAUDE_FLOW_COMMIT: ctx.flags.commit as string || "phase",
-                // Add Claude-Flow specific features
-                CLAUDE_FLOW_MEMORY_ENABLED: 'true',
-                CLAUDE_FLOW_MEMORY_NAMESPACE: 'default',
-                CLAUDE_FLOW_COORDINATION_ENABLED: ctx.flags.parallel ? 'true' : 'false',
-                CLAUDE_FLOW_FEATURES: 'memory,coordination,swarm',
+                OUTLAW_FLOW_MODE: ctx.flags.mode as string || "full",
+                OUTLAW_FLOW_COVERAGE: (ctx.flags.coverage || 80).toString(),
+                OUTLAW_FLOW_COMMIT: ctx.flags.commit as string || "phase",
+                // Add Outlaw-Flow specific features
+                OUTLAW_FLOW_MEMORY_ENABLED: 'true',
+                OUTLAW_FLOW_MEMORY_NAMESPACE: 'default',
+                OUTLAW_FLOW_COORDINATION_ENABLED: ctx.flags.parallel ? 'true' : 'false',
+                OUTLAW_FLOW_FEATURES: 'memory,coordination,swarm',
               },
               stdio: "inherit",
             });
@@ -1284,9 +1284,9 @@ Now, please proceed with the task: ${task}`;
         default: {
           console.log("Available subcommands: spawn, batch");
           console.log("\nExamples:");
-          console.log("  claude-flow claude spawn \"implement user authentication\" --research --parallel");
-          console.log("  claude-flow claude spawn \"fix bug in payment system\" --no-permissions");
-          console.log("  claude-flow claude batch workflow.json --dry-run");
+          console.log("  outlaw-flow claude spawn \"implement user authentication\" --research --parallel");
+          console.log("  outlaw-flow claude spawn \"fix bug in payment system\" --no-permissions");
+          console.log("  outlaw-flow claude batch workflow.json --dry-run");
           break;
         }
       }
@@ -1309,7 +1309,7 @@ Now, please proceed with the task: ${task}`;
       };
       
       console.log(chalk.cyan('📊 Enhanced Monitor Command'));
-      console.log('For full enhanced functionality, use: claude-flow monitor [options]');
+      console.log('For full enhanced functionality, use: outlaw-flow monitor [options]');
       console.log('Available options: --interval, --compact, --focus, --alerts, --export, --threshold, --log-level, --no-graphs');
       
       // Fallback to basic monitoring
@@ -1321,7 +1321,7 @@ Now, please proceed with the task: ${task}`;
         const isRunning = await access("orchestrator.log").then(() => true).catch(() => false);
         
         if (!isRunning) {
-          warning("Orchestrator is not running. Start it first with 'claude-flow start'");
+          warning("Orchestrator is not running. Start it first with 'outlaw-flow start'");
           return;
         }
         
@@ -1352,7 +1352,7 @@ Now, please proceed with the task: ${task}`;
             const tasks = await persist.getActiveTasks();
             
             // Enhanced header
-            success("Claude-Flow Enhanced Live Monitor");
+            success("Outlaw-Flow Enhanced Live Monitor");
             console.log("═".repeat(60));
             console.log(`Update #${++cycles} • ${new Date().toLocaleTimeString()} • Interval: ${options.interval}s`);
             
@@ -1470,7 +1470,7 @@ Now, please proceed with the task: ${task}`;
           const isRunning = await access("orchestrator.log").then(() => true).catch(() => false);
           
           if (!isRunning) {
-            warning("Orchestrator is not running. Start it first with 'claude-flow start'");
+            warning("Orchestrator is not running. Start it first with 'outlaw-flow start'");
             return;
           }
           
@@ -1491,7 +1491,7 @@ Now, please proceed with the task: ${task}`;
           while (running) {
             console.clear();
             const stats = await persist.getStats();
-            success("Claude-Flow Live Monitor");
+            success("Outlaw-Flow Live Monitor");
             console.log(`🟢 Status: Running`);
             console.log(`🤖 Agents: ${stats.activeAgents} active`);
             console.log(`📋 Tasks: ${stats.pendingTasks} pending`);
@@ -1788,7 +1788,7 @@ Now, please proceed with the task: ${task}`;
   try {
     const enhancedSessionAction = async (ctx: CommandContext) => {
       console.log(chalk.cyan('💾 Enhanced Session Management'));
-      console.log('For full enhanced functionality, use: claude-flow session <command> [options]');
+      console.log('For full enhanced functionality, use: outlaw-flow session <command> [options]');
       console.log();
       console.log('Available commands:');
       console.log('  list          - List all saved sessions with status');
@@ -1815,7 +1815,7 @@ Now, please proceed with the task: ${task}`;
       const subcommand = ctx.args[0];
       if (subcommand) {
         console.log();
-        console.log(`For detailed help on '${subcommand}', use: claude-flow session ${subcommand} --help`);
+        console.log(`For detailed help on '${subcommand}', use: outlaw-flow session ${subcommand} --help`);
       }
     };
     
@@ -1831,7 +1831,7 @@ Now, please proceed with the task: ${task}`;
   // Enhanced orchestration start command integration
   try {
     const enhancedStartAction = async (ctx: CommandContext) => {
-      console.log(chalk.cyan('🧠 Enhanced Claude-Flow Orchestration System'));
+      console.log(chalk.cyan('🧠 Enhanced Outlaw-Flow Orchestration System'));
       console.log('Features: Service Management + Health Checks + Auto-Recovery + Process UI');
       console.log();
       
@@ -1861,7 +1861,7 @@ Now, please proceed with the task: ${task}`;
       }
       
       console.log();
-      console.log('For full enhanced functionality, use: claude-flow start [options]');
+      console.log('For full enhanced functionality, use: outlaw-flow start [options]');
       console.log('Available options: --daemon, --port, --mcp-transport, --ui, --verbose, --auto-start, --force, --health-check, --timeout');
       
       // Fallback to basic start functionality
@@ -1949,19 +1949,19 @@ Now, please proceed with the task: ${task}`;
         console.log("  -d, --dry-run              Show what would be executed without running");
         console.log();
         console.log(bold("Examples:"));
-        console.log(`  ${blue("claude-flow claude spawn")} "implement user authentication" --research --parallel`);
-        console.log(`  ${blue("claude-flow claude spawn")} "fix payment bug" --tools "View,Edit,Bash" --no-permissions`);
-        console.log(`  ${blue("claude-flow claude batch")} workflow.json --dry-run`);
+        console.log(`  ${blue("outlaw-flow claude spawn")} "implement user authentication" --research --parallel`);
+        console.log(`  ${blue("outlaw-flow claude spawn")} "fix payment bug" --tools "View,Edit,Bash" --no-permissions`);
+        console.log(`  ${blue("outlaw-flow claude batch")} workflow.json --dry-run`);
         console.log();
-        console.log("For more information, see: https://github.com/ruvnet/claude-code-flow/docs/11-claude-spawning.md");
+        console.log("For more information, see: https://github.com/ruvnet/outlaw-flow/docs/11-claude-spawning.md");
       } else if (command === "swarm" || command === "swarm-ui") {
         console.log(bold(blue("Claude Swarm Mode")));
         console.log();
         console.log("Create self-orchestrating Claude agent swarms to tackle complex objectives.");
         console.log();
         console.log(bold("Usage:"));
-        console.log("  claude-flow swarm <objective> [options]");
-        console.log("  claude-flow swarm-ui <objective> [options]  # Uses blessed UI (avoids TTY issues)");
+        console.log("  outlaw-flow swarm <objective> [options]");
+        console.log("  outlaw-flow swarm-ui <objective> [options]  # Uses blessed UI (avoids TTY issues)");
         console.log();
         console.log(bold("Options:"));
         console.log("  -s, --strategy <s>         Orchestration strategy (auto, research, development, analysis)");
@@ -1981,19 +1981,19 @@ Now, please proceed with the task: ${task}`;
         console.log("  --ui                       Use blessed terminal UI (avoids TTY issues)");
         console.log();
         console.log(bold("Examples:"));
-        console.log(`  ${blue("claude-flow swarm")} "Build a REST API"`);
-        console.log(`  ${blue("claude-flow swarm-ui")} "Build a REST API"  # Avoids TTY issues`);
-        console.log(`  ${blue("claude-flow swarm")} "Research cloud architecture" --strategy research --research`);
-        console.log(`  ${blue("claude-flow swarm")} "Migrate app to microservices" --coordinator --review --ui`);
+        console.log(`  ${blue("outlaw-flow swarm")} "Build a REST API"`);
+        console.log(`  ${blue("outlaw-flow swarm-ui")} "Build a REST API"  # Avoids TTY issues`);
+        console.log(`  ${blue("outlaw-flow swarm")} "Research cloud architecture" --strategy research --research`);
+        console.log(`  ${blue("outlaw-flow swarm")} "Migrate app to microservices" --coordinator --review --ui`);
         console.log();
         console.log(bold("TTY Issues?"));
         console.log("If you encounter 'Raw mode is not supported' errors, use:");
-        console.log(`  - ${blue("claude-flow swarm-ui")} <objective>  # Recommended`);
-        console.log(`  - ${blue("claude-flow swarm")} <objective> --ui`);
+        console.log(`  - ${blue("outlaw-flow swarm-ui")} <objective>  # Recommended`);
+        console.log(`  - ${blue("outlaw-flow swarm")} <objective> --ui`);
         console.log();
         console.log("For more information, see:");
-        console.log("  - https://github.com/ruvnet/claude-code-flow/docs/12-swarm.md");
-        console.log("  - https://github.com/ruvnet/claude-code-flow/SWARM_TTY_SOLUTION.md");
+        console.log("  - https://github.com/ruvnet/outlaw-flow/docs/12-swarm.md");
+        console.log("  - https://github.com/ruvnet/outlaw-flow/SWARM_TTY_SOLUTION.md");
       } else if (command === "sparc") {
         console.log(bold(blue("SPARC Development Mode")));
         console.log();
@@ -2026,19 +2026,19 @@ Now, please proceed with the task: ${task}`;
         console.log("  --sequential             Wait between workflow steps (default: true)");
         console.log();
         console.log(bold("Examples:"));
-        console.log(`  ${blue("claude-flow sparc modes")}                              # List all modes`);
-        console.log(`  ${blue("claude-flow sparc run code")} "implement user auth"      # Run specific mode`);
-        console.log(`  ${blue("claude-flow sparc tdd")} "payment processing system"    # Full TDD workflow`);
-        console.log(`  ${blue("claude-flow sparc workflow")} project-workflow.json     # Custom workflow`);
+        console.log(`  ${blue("outlaw-flow sparc modes")}                              # List all modes`);
+        console.log(`  ${blue("outlaw-flow sparc run code")} "implement user auth"      # Run specific mode`);
+        console.log(`  ${blue("outlaw-flow sparc tdd")} "payment processing system"    # Full TDD workflow`);
+        console.log(`  ${blue("outlaw-flow sparc workflow")} project-workflow.json     # Custom workflow`);
         console.log();
-        console.log("For more information, see: https://github.com/ruvnet/claude-code-flow/docs/sparc.md");
+        console.log("For more information, see: https://github.com/ruvnet/outlaw-flow/docs/sparc.md");
       } else if (command === "start") {
         console.log(bold(blue("Enhanced Start Command")));
         console.log();
-        console.log("Start the Claude-Flow orchestration system with comprehensive service management.");
+        console.log("Start the Outlaw-Flow orchestration system with comprehensive service management.");
         console.log();
         console.log(bold("Usage:"));
-        console.log("  claude-flow start [options]");
+        console.log("  outlaw-flow start [options]");
         console.log();
         console.log(bold("Options:"));
         console.log("  -d, --daemon              Run as daemon in background");
@@ -2053,17 +2053,17 @@ Now, please proceed with the task: ${task}`;
         console.log("  --timeout <seconds>       Startup timeout in seconds (default: 60)");
         console.log();
         console.log(bold("Examples:"));
-        console.log(`  ${blue("claude-flow start")}                    # Interactive mode`);
-        console.log(`  ${blue("claude-flow start --daemon")}           # Background daemon`);
-        console.log(`  ${blue("claude-flow start --ui")}               # Process management UI`);
-        console.log(`  ${blue("claude-flow start --health-check")}     # With pre-flight checks`);
+        console.log(`  ${blue("outlaw-flow start")}                    # Interactive mode`);
+        console.log(`  ${blue("outlaw-flow start --daemon")}           # Background daemon`);
+        console.log(`  ${blue("outlaw-flow start --ui")}               # Process management UI`);
+        console.log(`  ${blue("outlaw-flow start --health-check")}     # With pre-flight checks`);
       } else if (command === "status") {
         console.log(bold(blue("Enhanced Status Command")));
         console.log();
-        console.log("Show comprehensive Claude-Flow system status with detailed reporting.");
+        console.log("Show comprehensive Outlaw-Flow system status with detailed reporting.");
         console.log();
         console.log(bold("Usage:"));
-        console.log("  claude-flow status [options]");
+        console.log("  outlaw-flow status [options]");
         console.log();
         console.log(bold("Options:"));
         console.log("  -w, --watch              Watch mode - continuously update status");
@@ -2075,17 +2075,17 @@ Now, please proceed with the task: ${task}`;
         console.log("  --history                Show status history from logs");
         console.log();
         console.log(bold("Examples:"));
-        console.log(`  ${blue("claude-flow status")}                   # Basic status`);
-        console.log(`  ${blue("claude-flow status --watch")}           # Live updates`);
-        console.log(`  ${blue("claude-flow status --detailed")}        # Comprehensive info`);
-        console.log(`  ${blue("claude-flow status --component mcp")}   # Specific component`);
+        console.log(`  ${blue("outlaw-flow status")}                   # Basic status`);
+        console.log(`  ${blue("outlaw-flow status --watch")}           # Live updates`);
+        console.log(`  ${blue("outlaw-flow status --detailed")}        # Comprehensive info`);
+        console.log(`  ${blue("outlaw-flow status --component mcp")}   # Specific component`);
       } else if (command === "monitor") {
         console.log(bold(blue("Enhanced Monitor Command")));
         console.log();
         console.log("Real-time monitoring dashboard with comprehensive metrics and alerting.");
         console.log();
         console.log(bold("Usage:"));
-        console.log("  claude-flow monitor [options]");
+        console.log("  outlaw-flow monitor [options]");
         console.log();
         console.log(bold("Options:"));
         console.log("  -i, --interval <seconds> Update interval in seconds (default: 2)");
@@ -2098,10 +2098,10 @@ Now, please proceed with the task: ${task}`;
         console.log("  --no-graphs              Disable ASCII graphs");
         console.log();
         console.log(bold("Examples:"));
-        console.log(`  ${blue("claude-flow monitor")}                  # Basic monitoring`);
-        console.log(`  ${blue("claude-flow monitor --alerts")}         # With alerting`);
-        console.log(`  ${blue("claude-flow monitor --focus mcp")}      # Component focus`);
-        console.log(`  ${blue("claude-flow monitor --export data.json")} # Data export`);
+        console.log(`  ${blue("outlaw-flow monitor")}                  # Basic monitoring`);
+        console.log(`  ${blue("outlaw-flow monitor --alerts")}         # With alerting`);
+        console.log(`  ${blue("outlaw-flow monitor --focus mcp")}      # Component focus`);
+        console.log(`  ${blue("outlaw-flow monitor --export data.json")} # Data export`);
       } else if (command === "session") {
         console.log(bold(blue("Enhanced Session Management")));
         console.log();
@@ -2122,13 +2122,13 @@ Now, please proceed with the task: ${task}`;
         console.log("  monitor                  Monitor active sessions");
         console.log();
         console.log(bold("Examples:"));
-        console.log(`  ${blue("claude-flow session list")}             # List sessions`);
-        console.log(`  ${blue("claude-flow session save mywork")}      # Save session`);
-        console.log(`  ${blue("claude-flow session restore abc123")}   # Restore session`);
-        console.log(`  ${blue("claude-flow session validate --fix")}   # Validate and fix`);
+        console.log(`  ${blue("outlaw-flow session list")}             # List sessions`);
+        console.log(`  ${blue("outlaw-flow session save mywork")}      # Save session`);
+        console.log(`  ${blue("outlaw-flow session restore abc123")}   # Restore session`);
+        console.log(`  ${blue("outlaw-flow session validate --fix")}   # Validate and fix`);
       } else {
         // Show general help with enhanced commands
-        console.log(bold(blue("Claude-Flow Enhanced Orchestration System")));
+        console.log(bold(blue("Outlaw-Flow Enhanced Orchestration System")));
         console.log();
         console.log("Available commands:");
         console.log("  start        Enhanced orchestration system startup");
@@ -2144,7 +2144,7 @@ Now, please proceed with the task: ${task}`;
         console.log("  claude       Claude instance spawning");
         console.log();
         console.log("For detailed help on any command, use:");
-        console.log(`  ${blue("claude-flow help <command>")}`);
+        console.log(`  ${blue("outlaw-flow help <command>")}`);
         console.log();
         console.log("Enhanced features:");
         console.log("  ✨ Comprehensive service management");
@@ -2165,7 +2165,7 @@ Now, please proceed with the task: ${task}`;
   console.log('  ✓ session  - Advanced session lifecycle management');
   console.log('  ✓ sparc    - Enhanced TDD with orchestration features');
   console.log();
-  console.log('For detailed help on enhanced commands: claude-flow help <command>');
+  console.log('For detailed help on enhanced commands: outlaw-flow help <command>');
 
   // Hive Mind command
   cli.command({
@@ -2287,7 +2287,7 @@ function createMinimalClaudeMd(): string {
 - Run typecheck before committing
 
 ## Project Info
-This is a Claude-Flow AI agent orchestration system.
+This is a Outlaw-Flow AI agent orchestration system.
 `;
 }
 
@@ -2299,8 +2299,8 @@ function createFullClaudeMd(): string {
 - \`npm run test\`: Run the full test suite
 - \`npm run lint\`: Run ESLint and format checks
 - \`npm run typecheck\`: Run TypeScript type checking
-- \`npx claude-flow start\`: Start the orchestration system
-- \`npx claude-flow --help\`: Show all available commands
+- \`npx outlaw-flow start\`: Start the orchestration system
+- \`npx outlaw-flow --help\`: Show all available commands
 
 ## Code Style Preferences
 - Use ES modules (import/export) syntax, not CommonJS (require)
@@ -2319,7 +2319,7 @@ function createFullClaudeMd(): string {
 - Ensure all tests pass before merging
 
 ## Project Architecture
-This is a Claude-Flow AI agent orchestration system with the following components:
+This is a Outlaw-Flow AI agent orchestration system with the following components:
 - **CLI Interface**: Command-line tools for managing the system
 - **Orchestrator**: Core engine for coordinating agents and tasks
 - **Memory System**: Persistent storage and retrieval of information
@@ -2334,9 +2334,9 @@ This is a Claude-Flow AI agent orchestration system with the following component
 - All components are event-driven for scalability
 
 ## Debugging
-- Check logs in \`./claude-flow.log\`
-- Use \`npx claude-flow status\` to check system health
-- Monitor with \`npx claude-flow monitor\` for real-time updates
+- Check logs in \`./outlaw-flow.log\`
+- Use \`npx outlaw-flow status\` to check system health
+- Monitor with \`npx outlaw-flow monitor\` for real-time updates
 - Verbose output available with \`--verbose\` flag on most commands
 `;
 }
@@ -2347,10 +2347,10 @@ function createMinimalMemoryBankMd(): string {
 ## Quick Reference
 - Project uses SQLite for memory persistence
 - Memory is organized by namespaces
-- Query with \`npx claude-flow memory query <search>\`
+- Query with \`npx outlaw-flow memory query <search>\`
 
 ## Storage Location
-- Database: \`./memory/claude-flow-data.json\`
+- Database: \`./memory/outlaw-flow-data.json\`
 - Sessions: \`./memory/sessions/\`
 `;
 }
@@ -2359,10 +2359,10 @@ function createFullMemoryBankMd(): string {
   return `# Memory Bank Configuration
 
 ## Overview
-The Claude-Flow memory system provides persistent storage and intelligent retrieval of information across agent sessions. It uses a hybrid approach combining SQL databases with semantic search capabilities.
+The Outlaw-Flow memory system provides persistent storage and intelligent retrieval of information across agent sessions. It uses a hybrid approach combining SQL databases with semantic search capabilities.
 
 ## Storage Backends
-- **Primary**: JSON database (\`./memory/claude-flow-data.json\`)
+- **Primary**: JSON database (\`./memory/outlaw-flow-data.json\`)
 - **Sessions**: File-based storage in \`./memory/sessions/\`
 - **Cache**: In-memory cache for frequently accessed data
 
@@ -2373,18 +2373,18 @@ The Claude-Flow memory system provides persistent storage and intelligent retrie
 - **Replication**: Optional distributed storage support
 
 ## Commands
-- \`npx claude-flow memory query <search>\`: Search stored information
-- \`npx claude-flow memory stats\`: Show memory usage statistics
-- \`npx claude-flow memory export <file>\`: Export memory to file
-- \`npx claude-flow memory import <file>\`: Import memory from file
+- \`npx outlaw-flow memory query <search>\`: Search stored information
+- \`npx outlaw-flow memory stats\`: Show memory usage statistics
+- \`npx outlaw-flow memory export <file>\`: Export memory to file
+- \`npx outlaw-flow memory import <file>\`: Import memory from file
 
 ## Configuration
-Memory settings are configured in \`claude-flow.config.json\`:
+Memory settings are configured in \`outlaw-flow.config.json\`:
 \`\`\`json
 {
   "memory": {
     "backend": "json",
-    "path": "./memory/claude-flow-data.json",
+    "path": "./memory/outlaw-flow-data.json",
     "cacheSize": 1000,
     "indexing": true,
     "namespaces": ["default", "agents", "tasks", "sessions"],
@@ -2421,9 +2421,9 @@ function createMinimalCoordinationMd(): string {
   return `# Agent Coordination
 
 ## Quick Commands
-- \`npx claude-flow agent spawn <type>\`: Create new agent
-- \`npx claude-flow agent list\`: Show active agents
-- \`npx claude-flow task create <type> <description>\`: Create task
+- \`npx outlaw-flow agent spawn <type>\`: Create new agent
+- \`npx outlaw-flow agent list\`: Show active agents
+- \`npx outlaw-flow task create <type> <description>\`: Create task
 
 ## Agent Types
 - researcher, coder, analyst, coordinator, general
@@ -2434,7 +2434,7 @@ function createFullCoordinationMd(): string {
   return `# Agent Coordination System
 
 ## Overview
-The Claude-Flow coordination system manages multiple AI agents working together on complex tasks. It provides intelligent task distribution, resource management, and inter-agent communication.
+The Outlaw-Flow coordination system manages multiple AI agents working together on complex tasks. It provides intelligent task distribution, resource management, and inter-agent communication.
 
 ## Agent Types and Capabilities
 - **Researcher**: Web search, information gathering, knowledge synthesis
@@ -2452,27 +2452,27 @@ The Claude-Flow coordination system manages multiple AI agents working together 
 ## Coordination Commands
 \`\`\`bash
 # Agent Management
-npx claude-flow agent spawn <type> --name <name> --priority <1-10>
-npx claude-flow agent list
-npx claude-flow agent info <agent-id>
-npx claude-flow agent terminate <agent-id>
+npx outlaw-flow agent spawn <type> --name <name> --priority <1-10>
+npx outlaw-flow agent list
+npx outlaw-flow agent info <agent-id>
+npx outlaw-flow agent terminate <agent-id>
 
 # Task Management  
-npx claude-flow task create <type> <description> --priority <1-10> --deps <task-ids>
-npx claude-flow task list --verbose
-npx claude-flow task status <task-id>
-npx claude-flow task cancel <task-id>
+npx outlaw-flow task create <type> <description> --priority <1-10> --deps <task-ids>
+npx outlaw-flow task list --verbose
+npx outlaw-flow task status <task-id>
+npx outlaw-flow task cancel <task-id>
 
 # System Monitoring
-npx claude-flow status --verbose
-npx claude-flow monitor --interval 5000
+npx outlaw-flow status --verbose
+npx outlaw-flow monitor --interval 5000
 \`\`\`
 
 ## Workflow Execution
 Workflows are defined in JSON format and can orchestrate complex multi-agent operations:
 \`\`\`bash
-npx claude-flow workflow examples/research-workflow.json
-npx claude-flow workflow examples/development-config.json --async
+npx outlaw-flow workflow examples/research-workflow.json
+npx outlaw-flow workflow examples/development-config.json --async
 \`\`\`
 
 ## Advanced Features
@@ -2482,7 +2482,7 @@ npx claude-flow workflow examples/development-config.json --async
 - **Metrics Collection**: Performance monitoring and optimization
 
 ## Configuration
-Coordination settings in \`claude-flow.config.json\`:
+Coordination settings in \`outlaw-flow.config.json\`:
 \`\`\`json
 {
   "orchestrator": {
@@ -2515,8 +2515,8 @@ Coordination settings in \`claude-flow.config.json\`:
 - Regular cleanup of completed tasks and inactive agents
 
 ## Troubleshooting
-- Check agent health with \`npx claude-flow status\`
-- View detailed logs with \`npx claude-flow monitor\`
+- Check agent health with \`npx outlaw-flow status\`
+- View detailed logs with \`npx outlaw-flow monitor\`
 - Restart stuck agents with terminate/spawn cycle
 - Use \`--verbose\` flags for detailed diagnostic information
 `;
@@ -2561,7 +2561,7 @@ function createSessionsReadme(): string {
   return `# Session Memory Storage
 
 ## Purpose
-This directory stores session-based memory data, conversation history, and contextual information for development sessions using the Claude-Flow orchestration system.
+This directory stores session-based memory data, conversation history, and contextual information for development sessions using the Outlaw-Flow orchestration system.
 
 ## Structure
 Sessions are organized by date and session ID for easy retrieval:

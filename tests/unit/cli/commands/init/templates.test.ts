@@ -58,10 +58,10 @@ describe("Template Generation Tests", () => {
       const content = createSparcClaudeMd();
       
       // Check for SPARC commands
-      expect(content).toContain("npx claude-flow sparc modes");
-      expect(content).toContain("npx claude-flow sparc run");
-      expect(content).toContain("npx claude-flow sparc tdd");
-      expect(content).toContain("npx claude-flow sparc info");
+      expect(content).toContain("npx outlaw-flow sparc modes");
+      expect(content).toContain("npx outlaw-flow sparc run");
+      expect(content).toContain("npx outlaw-flow sparc tdd");
+      expect(content).toContain("npx outlaw-flow sparc info");
     });
   });
 

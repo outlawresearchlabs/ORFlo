@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Integration Tests for Claude Flow Migration
+ * Integration Tests for Outlaw Flow Migration
  * Tests integration with ruv-swarm MCP, GitHub API, and cross-platform functionality
  */
 
@@ -12,8 +12,8 @@ const os = require('os');
 const net = require('net');
 
 // Test configuration
-const TEST_DIR = path.join(os.tmpdir(), 'claude-flow-integration-' + Date.now());
-const CLAUDE_FLOW_BIN = path.resolve(__dirname, '../../../bin/claude-flow');
+const TEST_DIR = path.join(os.tmpdir(), 'outlaw-flow-integration-' + Date.now());
+const OUTLAW_FLOW_BIN = path.resolve(__dirname, '../../../bin/outlaw-flow');
 
 // Color codes for output
 const colors = {
@@ -137,8 +137,8 @@ console.log(`${colors.yellow}Setting up test environment...${colors.reset}`);
 fs.mkdirSync(TEST_DIR, { recursive: true });
 process.chdir(TEST_DIR);
 
-// Initialize Claude Flow
-exec(`node ${CLAUDE_FLOW_BIN} init -y`);
+// Initialize Outlaw Flow
+exec(`node ${OUTLAW_FLOW_BIN} init -y`);
 
 // Test 1: ruv-swarm MCP integration
 runAsyncTest('ruv-swarm MCP integration', async () => {
@@ -153,11 +153,11 @@ runAsyncTest('ruv-swarm MCP integration', async () => {
   // Test MCP server start
   const port = 3456;
   if (await isPortAvailable(port)) {
-    const mcpCmd = `node ${CLAUDE_FLOW_BIN} mcp start --port ${port}`;
+    const mcpCmd = `node ${OUTLAW_FLOW_BIN} mcp start --port ${port}`;
     console.log(`  Starting MCP server on port ${port}...`);
     
     // Start in background and check if it's running
-    const proc = spawn('node', [CLAUDE_FLOW_BIN, 'mcp', 'start', '--port', port.toString()], {
+    const proc = spawn('node', [OUTLAW_FLOW_BIN, 'mcp', 'start', '--port', port.toString()], {
       cwd: TEST_DIR,
       detached: true,
       stdio: 'ignore'
@@ -185,14 +185,14 @@ runAsyncTest('ruv-swarm MCP integration', async () => {
 // Test 2: GitHub API integration
 runTest('GitHub API integration', () => {
   // Test without token (should work but with limitations)
-  const output = exec(`node ${CLAUDE_FLOW_BIN} github setup --check`);
+  const output = exec(`node ${OUTLAW_FLOW_BIN} github setup --check`);
   
   if (output.includes('error') && !output.includes('token')) {
     throw new Error('GitHub integration check failed');
   }
   
   // Test with mock token
-  const tokenOutput = exec(`node ${CLAUDE_FLOW_BIN} github setup --check`, {
+  const tokenOutput = exec(`node ${OUTLAW_FLOW_BIN} github setup --check`, {
     env: { ...process.env, GITHUB_TOKEN: 'ghp_mocktoken123' }
   });
   
@@ -204,19 +204,19 @@ runTest('GitHub API integration', () => {
 // Test 3: Cross-platform script execution
 runTest('Cross-platform script execution', () => {
   const isWindows = process.platform === 'win32';
-  const scriptName = isWindows ? 'claude-flow.bat' : 'claude-flow';
+  const scriptName = isWindows ? 'outlaw-flow.bat' : 'outlaw-flow';
   
   // Create platform-specific wrapper
   if (isWindows) {
     fs.writeFileSync(
-      path.join(TEST_DIR, 'claude-flow.bat'),
-      '@echo off\nnode "%~dp0claude-flow" %*'
+      path.join(TEST_DIR, 'outlaw-flow.bat'),
+      '@echo off\nnode "%~dp0outlaw-flow" %*'
     );
   }
   
   // Test execution
   const output = exec(`./${scriptName} --version`);
-  if (!output.includes('claude-flow')) {
+  if (!output.includes('outlaw-flow')) {
     throw new Error('Cross-platform script execution failed');
   }
 });
@@ -224,19 +224,19 @@ runTest('Cross-platform script execution', () => {
 // Test 4: Swarm coordination with agents
 runAsyncTest('Swarm coordination with agents', async () => {
   // Initialize swarm
-  const initOutput = exec(`node ${CLAUDE_FLOW_BIN} swarm init --topology mesh --max-agents 3`);
+  const initOutput = exec(`node ${OUTLAW_FLOW_BIN} swarm init --topology mesh --max-agents 3`);
   if (!initOutput.includes('initialized') && !initOutput.includes('success')) {
     throw new Error('Swarm initialization failed');
   }
   
   // Spawn test agent
-  const spawnOutput = exec(`node ${CLAUDE_FLOW_BIN} swarm spawn --type researcher --name "Test Agent"`);
+  const spawnOutput = exec(`node ${OUTLAW_FLOW_BIN} swarm spawn --type researcher --name "Test Agent"`);
   if (!spawnOutput.includes('spawned') && !spawnOutput.includes('created')) {
     throw new Error('Agent spawn failed');
   }
   
   // Check swarm status
-  const statusOutput = exec(`node ${CLAUDE_FLOW_BIN} swarm status`);
+  const statusOutput = exec(`node ${OUTLAW_FLOW_BIN} swarm status`);
   if (!statusOutput.includes('mesh') && !statusOutput.includes('topology')) {
     throw new Error('Swarm status check failed');
   }
@@ -245,19 +245,19 @@ runAsyncTest('Swarm coordination with agents', async () => {
 // Test 5: Memory bank persistence
 runTest('Memory bank persistence', () => {
   // Store test data
-  const storeOutput = exec(`node ${CLAUDE_FLOW_BIN} memory store --key test-key --value "test-value"`);
+  const storeOutput = exec(`node ${OUTLAW_FLOW_BIN} memory store --key test-key --value "test-value"`);
   if (storeOutput.includes('error')) {
     throw new Error('Memory store failed');
   }
   
   // Retrieve test data
-  const getOutput = exec(`node ${CLAUDE_FLOW_BIN} memory get --key test-key`);
+  const getOutput = exec(`node ${OUTLAW_FLOW_BIN} memory get --key test-key`);
   if (!getOutput.includes('test-value')) {
     throw new Error('Memory retrieve failed');
   }
   
   // List memory entries
-  const listOutput = exec(`node ${CLAUDE_FLOW_BIN} memory list`);
+  const listOutput = exec(`node ${OUTLAW_FLOW_BIN} memory list`);
   if (!listOutput.includes('test-key')) {
     throw new Error('Memory list failed');
   }
@@ -266,13 +266,13 @@ runTest('Memory bank persistence', () => {
 // Test 6: Task coordination system
 runTest('Task coordination system', () => {
   // Create a task
-  const createOutput = exec(`node ${CLAUDE_FLOW_BIN} task create --name "Test Task" --priority high`);
+  const createOutput = exec(`node ${OUTLAW_FLOW_BIN} task create --name "Test Task" --priority high`);
   if (createOutput.includes('error')) {
     throw new Error('Task creation failed');
   }
   
   // List tasks
-  const listOutput = exec(`node ${CLAUDE_FLOW_BIN} task list`);
+  const listOutput = exec(`node ${OUTLAW_FLOW_BIN} task list`);
   if (!listOutput.includes('Test Task')) {
     throw new Error('Task list failed');
   }
@@ -281,16 +281,16 @@ runTest('Task coordination system', () => {
 // Test 7: Configuration management
 runTest('Configuration management', () => {
   // Set config value
-  exec(`node ${CLAUDE_FLOW_BIN} config set test.value "integration-test"`);
+  exec(`node ${OUTLAW_FLOW_BIN} config set test.value "integration-test"`);
   
   // Get config value
-  const getOutput = exec(`node ${CLAUDE_FLOW_BIN} config get test.value`);
+  const getOutput = exec(`node ${OUTLAW_FLOW_BIN} config get test.value`);
   if (!getOutput.includes('integration-test')) {
     throw new Error('Config get failed');
   }
   
   // List all config
-  const listOutput = exec(`node ${CLAUDE_FLOW_BIN} config list`);
+  const listOutput = exec(`node ${OUTLAW_FLOW_BIN} config list`);
   if (!listOutput.includes('test.value')) {
     throw new Error('Config list failed');
   }
@@ -310,7 +310,7 @@ runTest('Multi-command workflow', () => {
   let lastOutput = '';
   for (const cmd of commands) {
     try {
-      lastOutput = exec(`node ${CLAUDE_FLOW_BIN} ${cmd}`);
+      lastOutput = exec(`node ${OUTLAW_FLOW_BIN} ${cmd}`);
     } catch (error) {
       throw new Error(`Workflow failed at: ${cmd}\n${error.message}`);
     }
@@ -325,7 +325,7 @@ runTest('Multi-command workflow', () => {
 runTest('Error handling and recovery', () => {
   // Test invalid command
   try {
-    exec(`node ${CLAUDE_FLOW_BIN} invalid-command`);
+    exec(`node ${OUTLAW_FLOW_BIN} invalid-command`);
     throw new Error('Should have failed on invalid command');
   } catch (error) {
     if (!error.message.includes('invalid') && !error.message.includes('unknown')) {
@@ -335,7 +335,7 @@ runTest('Error handling and recovery', () => {
   
   // Test with invalid arguments
   try {
-    exec(`node ${CLAUDE_FLOW_BIN} swarm init --invalid-option`);
+    exec(`node ${OUTLAW_FLOW_BIN} swarm init --invalid-option`);
     throw new Error('Should have failed on invalid option');
   } catch (error) {
     // Expected to fail
@@ -354,7 +354,7 @@ runAsyncTest('Performance benchmarks', async () => {
   console.log('  Performance metrics:');
   for (const op of operations) {
     const start = Date.now();
-    exec(`node ${CLAUDE_FLOW_BIN} ${op.cmd}`);
+    exec(`node ${OUTLAW_FLOW_BIN} ${op.cmd}`);
     const duration = Date.now() - start;
     console.log(`    ${op.name}: ${duration}ms`);
     

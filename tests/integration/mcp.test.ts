@@ -417,7 +417,7 @@ describe('MCP Integration Tests', () => {
     });
   });
 
-  describe('Claude-Flow Tools', () => {
+  describe('Outlaw-Flow Tools', () => {
     beforeEach(async () => {
       await server.start();
     });

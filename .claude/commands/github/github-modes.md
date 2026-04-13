@@ -1,7 +1,7 @@
 # GitHub Integration Modes
 
 ## Overview
-This document describes all GitHub integration modes available in Claude-Flow with ruv-swarm coordination. Each mode is optimized for specific GitHub workflows and includes batch tool integration for maximum efficiency.
+This document describes all GitHub integration modes available in Outlaw-Flow with ruv-swarm coordination. Each mode is optimized for specific GitHub workflows and includes batch tool integration for maximum efficiency.
 
 ## GitHub Workflow Modes
 
@@ -108,7 +108,7 @@ This document describes all GitHub integration modes available in Claude-Flow wi
 
 ### Managing repository synchronization:
 ```bash
-/github sync-coordinator "Synchronize claude-code-flow and ruv-swarm packages, align versions, and update cross-dependencies"
+/github sync-coordinator "Synchronize outlaw-flow and ruv-swarm packages, align versions, and update cross-dependencies"
 ```
 
 ### Setting up automated issue tracking:

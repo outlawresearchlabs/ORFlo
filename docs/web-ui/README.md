@@ -1,8 +1,8 @@
-# Claude Flow v2.0.0 Web UI Documentation
+# Outlaw Flow v2.0.0 Web UI Documentation
 
-## 🌊 Welcome to Claude Flow Web UI
+## 🌊 Welcome to Outlaw Flow Web UI
 
-The Claude Flow Web UI provides a comprehensive browser-based interface for orchestrating AI swarms, managing neural networks, and executing all 71+ Claude Flow tools through an intuitive console interface.
+The Outlaw Flow Web UI provides a comprehensive browser-based interface for orchestrating AI swarms, managing neural networks, and executing all 71+ Outlaw Flow tools through an intuitive console interface.
 
 ## 📚 Documentation Index
 
@@ -101,7 +101,7 @@ The Claude Flow Web UI provides a comprehensive browser-based interface for orch
 ### 1. Start the Web Server
 ```bash
 # Using the start command with UI flag
-claude-flow start --ui --port 3000
+outlaw-flow start --ui --port 3000
 
 # Or using the standalone script
 node start-web-ui.js 3000
@@ -112,19 +112,19 @@ Open your browser and navigate to:
 - Console UI: `http://localhost:3000/console`
 - Analytics Dashboard: `http://localhost:3000/console/analytics.html`
 
-### 3. Connect to Claude Flow
+### 3. Connect to Outlaw Flow
 The WebSocket connection will establish automatically. Look for the green connection indicator.
 
 ### 4. Execute Your First Command
 ```bash
 # In the web console
-claude-flow> help
+outlaw-flow> help
 
 # Check system status
-claude-flow> status
+outlaw-flow> status
 
 # View available agents
-claude-flow> agents list
+outlaw-flow> agents list
 ```
 
 ## 📊 Current Implementation Status
@@ -157,14 +157,14 @@ We welcome contributions! Please see:
 
 ## 📝 License
 
-Claude Flow is licensed under the MIT License. See [LICENSE](../../LICENSE) for details.
+Outlaw Flow is licensed under the MIT License. See [LICENSE](../../LICENSE) for details.
 
 ## 🆘 Support
 
 - **Documentation**: This directory
-- **Issues**: [GitHub Issues](https://github.com/ruvnet/claude-flow/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/ruvnet/claude-flow/discussions)
-- **Email**: support@claude-flow.ai
+- **Issues**: [GitHub Issues](https://github.com/ruvnet/outlaw-flow/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/ruvnet/outlaw-flow/discussions)
+- **Email**: support@outlaw-flow.ai
 
 ---
 

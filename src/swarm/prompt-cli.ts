@@ -18,7 +18,7 @@ const program = new Command();
 
 program
   .name('prompt-copier')
-  .description('Robust prompt copying mechanism for Claude-Flow')
+  .description('Robust prompt copying mechanism for Outlaw-Flow')
   .version('1.0.0');
 
 program

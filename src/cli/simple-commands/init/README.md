@@ -1,6 +1,6 @@
 # Init Command - Modular Structure
 
-This directory contains the modular implementation of the `claude-flow init` command, which initializes Claude Code integration files for projects.
+This directory contains the modular implementation of the `outlaw-flow init` command, which initializes Claude Code integration files for projects.
 
 ## Directory Structure
 
@@ -23,7 +23,7 @@ init/
 └── claude-commands/             # Claude Code slash commands
     ├── slash-commands.js        # Main slash command creator
     ├── sparc-commands.js        # SPARC-specific commands
-    └── claude-flow-commands.js  # Claude-Flow specific commands
+    └── outlaw-flow-commands.js  # Outlaw-Flow specific commands
 ```
 
 ## What Gets Created
@@ -41,7 +41,7 @@ init/
    - `memory/` directory structure
    - `memory/agents/` - Agent-specific memory
    - `memory/sessions/` - Session storage
-   - `memory/claude-flow-data.json` - Persistence database
+   - `memory/outlaw-flow-data.json` - Persistence database
 
 3. **Coordination System**:
    - `coordination.md` - Agent coordination documentation
@@ -54,13 +54,13 @@ init/
 5. **Slash Commands Created**:
    - `/sparc` - Main SPARC command
    - `/sparc-<mode>` - Individual mode commands (architect, code, tdd, etc.)
-   - `/claude-flow-help` - Help command
-   - `/claude-flow-memory` - Memory system command
-   - `/claude-flow-swarm` - Swarm coordination command
+   - `/outlaw-flow-help` - Help command
+   - `/outlaw-flow-memory` - Memory system command
+   - `/outlaw-flow-swarm` - Swarm coordination command
 
 6. **Local Executable**:
-   - `./claude-flow` (Unix/Mac/Linux)
-   - `claude-flow.cmd` (Windows)
+   - `./outlaw-flow` (Unix/Mac/Linux)
+   - `outlaw-flow.cmd` (Windows)
 
 ### With `--minimal` flag:
 Creates minimal versions of all configuration files without SPARC features.
@@ -72,13 +72,13 @@ Overwrites existing files if they already exist.
 
 ```bash
 # Recommended first-time setup with SPARC
-npx claude-flow@latest init --sparc
+npx outlaw-flow@latest init --sparc
 
 # Minimal setup
-npx claude-flow init --minimal
+npx outlaw-flow init --minimal
 
 # Force overwrite existing files
-npx claude-flow init --force
+npx outlaw-flow init --force
 ```
 
 ## Module Responsibilities
@@ -95,5 +95,5 @@ npx claude-flow init --force
 
 - The init command detects Claude Code's `.claude/` directory structure
 - Slash commands follow Claude Code's markdown format with YAML frontmatter
-- SPARC modes are fully integrated with Claude-Flow's orchestration system
+- SPARC modes are fully integrated with Outlaw-Flow's orchestration system
 - All generated files include comprehensive documentation

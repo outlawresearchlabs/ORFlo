@@ -1,18 +1,18 @@
 {
   "mcpServers": {
-    "claude-flow": {
-      "command": "claude-flow",
+    "outlaw-flow": {
+      "command": "outlaw-flow",
       "args": [
         "mcp",
         "start",
         "--stdio"
       ],
       "env": {
-        "CLAUDE_FLOW_AUTO_ORCHESTRATOR": "true",
-        "CLAUDE_FLOW_NEURAL_ENABLED": "true",
-        "CLAUDE_FLOW_WASM_ENABLED": "true",
-        "CLAUDE_FLOW_TELEMETRY_ENABLED": "true",
-        "CLAUDE_FLOW_HOOKS_ENABLED": "true"
+        "OUTLAW_FLOW_AUTO_ORCHESTRATOR": "true",
+        "OUTLAW_FLOW_NEURAL_ENABLED": "true",
+        "OUTLAW_FLOW_WASM_ENABLED": "true",
+        "OUTLAW_FLOW_TELEMETRY_ENABLED": "true",
+        "OUTLAW_FLOW_HOOKS_ENABLED": "true"
       },
       "alwaysAllow": [
         "swarm_init",

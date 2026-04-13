@@ -1,6 +1,6 @@
 # Application
 
-Created by Claude Flow Swarm
+Created by Outlaw Flow Swarm
 
 ## Overview
 Write tests for the implementation

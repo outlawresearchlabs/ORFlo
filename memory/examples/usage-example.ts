@@ -19,7 +19,7 @@ async function main() {
   const memoryManager = new MemoryManager({
     backend: 'sqlite',
     backendConfig: {
-      path: './claude-flow-memory.db',
+      path: './outlaw-flow-memory.db',
       wal: true
     },
     cacheConfig: {

@@ -18,7 +18,7 @@ if (-not (Get-Command node -ErrorAction SilentlyContinue)) {
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 
 # Run Claude Flow CLI
-& node "$scriptDir\claude-flow" @Arguments
+& node "$scriptDir\outlaw-flow" @Arguments
 
 # Forward the exit code
 exit $LASTEXITCODE

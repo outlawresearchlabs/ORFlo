@@ -1,4 +1,4 @@
-# Claude-Flow Root Directory Cleanup Summary
+# Outlaw-Flow Root Directory Cleanup Summary
 
 Date: 2025-07-04
 
@@ -34,7 +34,7 @@ Date: 2025-07-04
 - debug-hooks-system-SOLUTION.md
 
 #### Old Releases (moved to `archive/releases/`)
-- claude-flow-1.0.70.tgz (58MB)
+- outlaw-flow-1.0.70.tgz (58MB)
 
 ### 🗑️ Files Removed
 - bin/*.tmp* (temporary files)
@@ -57,8 +57,8 @@ Date: 2025-07-04
 
 ### Entry Points
 - cli.js - Node.js entry point
-- claude-flow - Local wrapper script
-- bin/claude-flow - Main executable
+- outlaw-flow - Local wrapper script
+- bin/outlaw-flow - Main executable
 
 ## 📊 Space Saved
 

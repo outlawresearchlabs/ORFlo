@@ -13,6 +13,6 @@ if %errorlevel% neq 0 (
 )
 
 :: Run Claude Flow CLI
-node "%~dp0claude-flow" %*
+node "%~dp0outlaw-flow" %*
 
 endlocal

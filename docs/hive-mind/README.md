@@ -6,16 +6,16 @@ The Hive Mind system represents a breakthrough in AI coordination, featuring que
 
 ```bash
 # Interactive setup wizard (recommended)
-claude-flow hive-mind wizard
+outlaw-flow hive-mind wizard
 
 # Create a swarm with specific objective
-claude-flow hive-mind spawn "Build a REST API with authentication"
+outlaw-flow hive-mind spawn "Build a REST API with authentication"
 
 # View active swarms
-claude-flow hive-mind status
+outlaw-flow hive-mind status
 
 # Performance analytics
-claude-flow hive-mind metrics
+outlaw-flow hive-mind metrics
 ```
 
 ## 🏗️ Architecture
@@ -69,7 +69,7 @@ claude-flow hive-mind metrics
 The fastest way to experience Hive Mind is through the interactive wizard:
 
 ```bash
-claude-flow hive-mind wizard
+outlaw-flow hive-mind wizard
 ```
 
 This will guide you through creating your first intelligent swarm step-by-step.

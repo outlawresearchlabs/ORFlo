@@ -1,8 +1,8 @@
-# Claude-Flow MCP Wrapper Integration Complete
+# Outlaw-Flow MCP Wrapper Integration Complete
 
 ## Summary
 
-The claude-flow MCP server now uses the Claude Code wrapper by default when you run `claude-flow mcp start` or `npm run mcp`.
+The outlaw-flow MCP server now uses the Claude Code wrapper by default when you run `outlaw-flow mcp start` or `npm run mcp`.
 
 ## What Changed
 
@@ -12,11 +12,11 @@ The claude-flow MCP server now uses the Claude Code wrapper by default when you 
 
 ### 2. **Updated Files**
 - `package.json`: Updated `mcp` script to use wrapper entry point
-- `claude-flow.mcp.json`: Updated to use wrapper server
+- `outlaw-flow.mcp.json`: Updated to use wrapper server
 - `src/mcp/server-with-wrapper.ts`: New entry point with mode selection
 
 ### 3. **Backward Compatibility**
-- Legacy mode still available with: `CLAUDE_FLOW_LEGACY_MCP=true npm run mcp`
+- Legacy mode still available with: `OUTLAW_FLOW_LEGACY_MCP=true npm run mcp`
 - Or use `--legacy` flag
 
 ## How to Use
@@ -25,14 +25,14 @@ The claude-flow MCP server now uses the Claude Code wrapper by default when you 
 ```bash
 # These all use the wrapper now:
 npm run mcp
-claude-flow mcp start
-claude mcp serve claude-flow.mcp.json
+outlaw-flow mcp start
+claude mcp serve outlaw-flow.mcp.json
 ```
 
 ### Use Legacy Mode (If Needed)
 ```bash
 # Use the old template-based approach:
-CLAUDE_FLOW_LEGACY_MCP=true npm run mcp
+OUTLAW_FLOW_LEGACY_MCP=true npm run mcp
 ```
 
 ### Test the Integration
@@ -52,10 +52,10 @@ CLAUDE_FLOW_LEGACY_MCP=true npm run mcp
 
 When starting the MCP server, users will now see:
 ```
-🚀 Claude-Flow MCP Server (Wrapper Mode)
+🚀 Outlaw-Flow MCP Server (Wrapper Mode)
 📦 Using Claude Code MCP pass-through with SPARC prompt injection
 🔧 All SPARC tools available with enhanced AI capabilities
-ℹ️  To use legacy mode, set CLAUDE_FLOW_LEGACY_MCP=true
+ℹ️  To use legacy mode, set OUTLAW_FLOW_LEGACY_MCP=true
 ```
 
 ## Tool Behavior
@@ -76,13 +76,13 @@ sparc_coder("Create REST API")
 
 ## Configuration
 
-The `claude-flow.mcp.json` now includes:
+The `outlaw-flow.mcp.json` now includes:
 ```json
 {
   "command": "node",
   "args": ["node_modules/.bin/tsx", "src/mcp/server-with-wrapper.ts"],
   "env": {
-    "CLAUDE_FLOW_WRAPPER_MODE": "true"
+    "OUTLAW_FLOW_WRAPPER_MODE": "true"
   }
 }
 ```
@@ -110,6 +110,6 @@ This will test:
 
 ## Support
 
-- Report issues: https://github.com/ruvnet/claude-code-flow/issues
+- Report issues: https://github.com/ruvnet/outlaw-flow/issues
 - Legacy mode available as fallback
 - All existing workflows continue to work

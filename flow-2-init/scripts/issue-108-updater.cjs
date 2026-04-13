@@ -119,7 +119,7 @@ class Issue108Coordinator {
 
   hasSignificantChanges(changes) {
     const significantPatterns = [
-      'claude-flow',
+      'outlaw-flow',
       'issue 108',
       'typescript',
       'swarm',

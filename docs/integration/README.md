@@ -1,14 +1,14 @@
-# Claude Flow v2.0.0 - Integration Documentation
+# Outlaw Flow v2.0.0 - Integration Documentation
 
 ## 🎯 Overview
 
-This directory contains comprehensive integration guides and technical documentation for Claude Flow v2.0.0, covering all aspects of ruv-swarm integration, neural networks, MCP tools, and enterprise deployment.
+This directory contains comprehensive integration guides and technical documentation for Outlaw Flow v2.0.0, covering all aspects of ruv-swarm integration, neural networks, MCP tools, and enterprise deployment.
 
 ## 📋 Documentation Index
 
 ### 🚀 Core Integration Guides
 
-#### [Complete Integration Guide](./claude-flow-v2-integration-guide.md)
+#### [Complete Integration Guide](./outlaw-flow-v2-integration-guide.md)
 Comprehensive setup and configuration guide covering:
 - ruv-swarm MCP integration (87 tools)
 - QUDAG/DAA WASM neural networks
@@ -51,30 +51,30 @@ Comprehensive problem-solving resource:
 
 ### Basic Integration
 ```bash
-# Install and initialize Claude Flow v2.0.0
-npm install -g claude-flow@2.0.0
-npx claude-flow@2.0.0 init --claude --webui
+# Install and initialize Outlaw Flow v2.0.0
+npm install -g outlaw-flow@2.0.0
+npx outlaw-flow@2.0.0 init --claude --webui
 
 # Add ruv-swarm MCP server
 claude mcp add ruv-swarm npx ruv-swarm mcp start
 
 # Initialize swarm coordination
-npx claude-flow@2.0.0 coordination swarm-init --topology mesh --max-agents 8
+npx outlaw-flow@2.0.0 coordination swarm-init --topology mesh --max-agents 8
 ```
 
 ### Verification Commands
 ```bash
 # Check system health
-npx claude-flow@2.0.0 health-check --comprehensive
+npx outlaw-flow@2.0.0 health-check --comprehensive
 
 # Verify MCP integration
 claude mcp list-tools ruv-swarm | wc -l  # Should show 87 tools
 
 # Test neural networks
-npx claude-flow@2.0.0 neural status --detailed
+npx outlaw-flow@2.0.0 neural status --detailed
 
 # Start WebUI
-npx claude-flow@2.0.0 start --ui --port 3000
+npx outlaw-flow@2.0.0 start --ui --port 3000
 ```
 
 ---
@@ -173,11 +173,11 @@ npx claude-flow@2.0.0 start --ui --port 3000
 - Docker (optional, for containerized deployment)
 
 ### Installation Process
-1. **Install Claude Flow**: `npm install -g claude-flow@2.0.0`
-2. **Initialize Integration**: `npx claude-flow@2.0.0 init --claude --webui`
+1. **Install Outlaw Flow**: `npm install -g outlaw-flow@2.0.0`
+2. **Initialize Integration**: `npx outlaw-flow@2.0.0 init --claude --webui`
 3. **Configure MCP**: `claude mcp add ruv-swarm npx ruv-swarm mcp start`
-4. **Verify Setup**: `npx claude-flow@2.0.0 health-check --comprehensive`
-5. **Start Coordination**: `npx claude-flow@2.0.0 start --ui`
+4. **Verify Setup**: `npx outlaw-flow@2.0.0 health-check --comprehensive`
+5. **Start Coordination**: `npx outlaw-flow@2.0.0 start --ui`
 
 ### First Steps
 1. **Initialize Swarm**: Create your first coordination topology
@@ -191,7 +191,7 @@ npx claude-flow@2.0.0 start --ui --port 3000
 ## 📖 Learning Path
 
 ### Beginner (First Week)
-1. Read [Complete Integration Guide](./claude-flow-v2-integration-guide.md)
+1. Read [Complete Integration Guide](./outlaw-flow-v2-integration-guide.md)
 2. Follow quick setup commands
 3. Explore basic swarm coordination
 4. Try simple neural training
@@ -256,8 +256,8 @@ npx claude-flow@2.0.0 start --ui --port 3000
 - [MCP Protocol](https://spec.modelcontextprotocol.io/) - Model Context Protocol
 
 ### Community
-- [GitHub Issues](https://github.com/ruvnet/claude-code-flow/issues) - Bug reports and feature requests
-- [GitHub Discussions](https://github.com/ruvnet/claude-code-flow/discussions) - Community support
+- [GitHub Issues](https://github.com/ruvnet/outlaw-flow/issues) - Bug reports and feature requests
+- [GitHub Discussions](https://github.com/ruvnet/outlaw-flow/discussions) - Community support
 - [Performance Metrics](../reports/COMPREHENSIVE_BENCHMARK_ANALYSIS_REPORT.md) - Latest benchmarks
 
 ---
@@ -281,4 +281,4 @@ After completing integration, you should achieve:
 - Memory compression: >60%
 - System uptime: >99.5%
 
-This integration documentation provides everything needed to successfully deploy and operate Claude Flow v2.0.0 in any environment, from development to enterprise production.
+This integration documentation provides everything needed to successfully deploy and operate Outlaw Flow v2.0.0 in any environment, from development to enterprise production.

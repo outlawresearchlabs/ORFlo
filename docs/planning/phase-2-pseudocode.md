@@ -1,5 +1,5 @@
 # Phase 2: Pseudocode and Algorithms
-## Claude-Flow Core Algorithms
+## Outlaw-Flow Core Algorithms
 
 ### Core Orchestrator Algorithm
 

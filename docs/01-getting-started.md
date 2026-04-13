@@ -1,33 +1,33 @@
-# Getting Started with Claude-Flow
+# Getting Started with Outlaw-Flow
 
-Welcome to Claude-Flow, an advanced AI agent orchestration system designed for sophisticated multi-agent collaboration, task coordination, and memory management. This guide will help you get up and running quickly.
+Welcome to Outlaw-Flow, an advanced AI agent orchestration system designed for sophisticated multi-agent collaboration, task coordination, and memory management. This guide will help you get up and running quickly.
 
 ## Quick Installation
 
 ### Option 1: NPX (Recommended for First-Time Users)
 ```bash
 # Run directly without installation
-npx claude-flow
+npx outlaw-flow
 
 # Or install globally for persistent use
-npm install -g claude-flow
-claude-flow --version
+npm install -g outlaw-flow
+outlaw-flow --version
 ```
 
 ### Option 2: Deno Installation
 ```bash
 # Install with Deno
-deno install --allow-all --name claude-flow https://raw.githubusercontent.com/ruvnet/claude-code-flow/main/src/cli/index.ts
+deno install --allow-all --name outlaw-flow https://raw.githubusercontent.com/ruvnet/outlaw-flow/main/src/cli/index.ts
 
 # Verify installation
-claude-flow --help
+outlaw-flow --help
 ```
 
 ### Option 3: From Source
 ```bash
 # Clone the repository
-git clone https://github.com/ruvnet/claude-code-flow.git
-cd claude-code-flow
+git clone https://github.com/ruvnet/outlaw-flow.git
+cd outlaw-flow
 
 # Install dependencies and build
 deno task install
@@ -41,72 +41,72 @@ deno task dev
 ### 1. Initialize Configuration
 ```bash
 # Create default configuration file
-claude-flow config init
+outlaw-flow config init
 
 # Verify configuration
-claude-flow config show
+outlaw-flow config show
 ```
 
 ### 2. Start the Orchestrator
 ```bash
 # Basic start
-claude-flow start
+outlaw-flow start
 
 # Start with daemon mode for background operation
-claude-flow start --daemon
+outlaw-flow start --daemon
 
 # Start with custom port
-claude-flow start --port 3000
+outlaw-flow start --port 3000
 ```
 
 ### 3. Verify System Health
 ```bash
 # Check system status
-claude-flow agent list
-claude-flow memory stats
-claude-flow mcp status
+outlaw-flow agent list
+outlaw-flow memory stats
+outlaw-flow mcp status
 ```
 
 ## Your First Workflow
 
-Let's create a simple research workflow to demonstrate Claude-Flow's capabilities:
+Let's create a simple research workflow to demonstrate Outlaw-Flow's capabilities:
 
 ### Step 1: Spawn a Research Agent
 ```bash
 # Create a research agent
-claude-flow agent spawn researcher --name "Research Assistant"
+outlaw-flow agent spawn researcher --name "Research Assistant"
 
 # Verify agent is active
-claude-flow agent list
+outlaw-flow agent list
 ```
 
 ### Step 2: Create a Research Task
 ```bash
 # Create a research task
-claude-flow task create research "Analyze current trends in AI development tools" \
+outlaw-flow task create research "Analyze current trends in AI development tools" \
   --priority high \
   --estimated-duration 2h
 
 # Check task status
-claude-flow task list
+outlaw-flow task list
 ```
 
 ### Step 3: Monitor Progress
 ```bash
 # Monitor task execution
-claude-flow task monitor --follow
+outlaw-flow task monitor --follow
 
 # Check agent activity
-claude-flow agent info <agent-id>
+outlaw-flow agent info <agent-id>
 ```
 
 ### Step 4: Review Results
 ```bash
 # Query memory for research findings
-claude-flow memory query --filter "AI development tools" --recent
+outlaw-flow memory query --filter "AI development tools" --recent
 
 # Export findings
-claude-flow memory export --filter "research-results" --output research-findings.json
+outlaw-flow memory export --filter "research-results" --output research-findings.json
 ```
 
 ## Interactive Exploration
@@ -115,7 +115,7 @@ For learning and experimentation, use the interactive REPL mode:
 
 ```bash
 # Start interactive session
-claude-flow repl
+outlaw-flow repl
 ```
 
 In REPL mode, you can:
@@ -171,64 +171,64 @@ Model Context Protocol enables:
 ### Agent Management
 ```bash
 # List all agents
-claude-flow agent list
+outlaw-flow agent list
 
 # Get detailed agent info
-claude-flow agent info <agent-id>
+outlaw-flow agent info <agent-id>
 
 # Terminate an agent
-claude-flow agent terminate <agent-id>
+outlaw-flow agent terminate <agent-id>
 ```
 
 ### Task Management
 ```bash
 # List all tasks
-claude-flow task list
+outlaw-flow task list
 
 # Check task status
-claude-flow task status <task-id>
+outlaw-flow task status <task-id>
 
 # Cancel a task
-claude-flow task cancel <task-id>
+outlaw-flow task cancel <task-id>
 ```
 
 ### Memory Operations
 ```bash
 # Search memory
-claude-flow memory query --search "keyword"
+outlaw-flow memory query --search "keyword"
 
 # View memory stats
-claude-flow memory stats
+outlaw-flow memory stats
 
 # Clean up old entries
-claude-flow memory cleanup --older-than 30d
+outlaw-flow memory cleanup --older-than 30d
 ```
 
 ### Configuration
 ```bash
 # View current config
-claude-flow config show
+outlaw-flow config show
 
 # Update settings
-claude-flow config set orchestrator.maxConcurrentAgents 15
+outlaw-flow config set orchestrator.maxConcurrentAgents 15
 
 # Reset to defaults
-claude-flow config init --force
+outlaw-flow config init --force
 ```
 
 ## Next Steps
 
-1. **Explore the Architecture**: Read [02-architecture-overview.md](./02-architecture-overview.md) to understand how Claude-Flow works
+1. **Explore the Architecture**: Read [02-architecture-overview.md](./02-architecture-overview.md) to understand how Outlaw-Flow works
 2. **Configure Your System**: See [03-configuration-guide.md](./03-configuration-guide.md) for detailed configuration options
 3. **Learn Agent Management**: Check [04-agent-management.md](./04-agent-management.md) for advanced agent patterns
 4. **Create Complex Workflows**: Study [05-task-coordination.md](./05-task-coordination.md) for workflow orchestration
 
 ## Getting Help
 
-- Use `claude-flow help` for command-line help
-- Join our [Discord community](https://discord.gg/claude-flow)
-- Check [GitHub Issues](https://github.com/ruvnet/claude-code-flow/issues)
-- Review the [full documentation](https://claude-flow.dev/docs)
+- Use `outlaw-flow help` for command-line help
+- Join our [Discord community](https://discord.gg/outlaw-flow)
+- Check [GitHub Issues](https://github.com/ruvnet/outlaw-flow/issues)
+- Review the [full documentation](https://outlaw-flow.dev/docs)
 
 ## Troubleshooting Common Issues
 
@@ -250,21 +250,21 @@ If configuration fails to initialize:
 ls -la $(pwd)
 
 # Manually create config
-touch claude-flow.config.json
-claude-flow config init --force
+touch outlaw-flow.config.json
+outlaw-flow config init --force
 ```
 
 ### Agent Startup Issues
 If agents fail to start:
 ```bash
 # Check system resources
-claude-flow system resources
+outlaw-flow system resources
 
 # Increase limits
-claude-flow config set orchestrator.maxConcurrentAgents 5
+outlaw-flow config set orchestrator.maxConcurrentAgents 5
 
 # Check logs
-claude-flow logs --level debug
+outlaw-flow logs --level debug
 ```
 
-You're now ready to start using Claude-Flow! Continue to the next sections for more advanced features and configuration options.
+You're now ready to start using Outlaw-Flow! Continue to the next sections for more advanced features and configuration options.

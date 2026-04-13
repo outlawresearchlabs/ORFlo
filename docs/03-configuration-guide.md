@@ -1,10 +1,10 @@
 # Configuration Guide
 
-Claude-Flow uses a comprehensive configuration system that allows fine-tuning of all system components. This guide covers all configuration options, examples, and best practices.
+Outlaw-Flow uses a comprehensive configuration system that allows fine-tuning of all system components. This guide covers all configuration options, examples, and best practices.
 
 ## Configuration File Structure
 
-The main configuration file is `claude-flow.config.json`, located in your project root or specified via the `--config` flag.
+The main configuration file is `outlaw-flow.config.json`, located in your project root or specified via the `--config` flag.
 
 ### Default Configuration
 
@@ -57,7 +57,7 @@ The main configuration file is `claude-flow.config.json`, located in your projec
     "level": "info",
     "format": "json",
     "destination": "console",
-    "fileOutput": "logs/claude-flow.log",
+    "fileOutput": "logs/outlaw-flow.log",
     "maxFileSize": "10MB",
     "maxFiles": 5
   }
@@ -324,7 +324,7 @@ Controls system logging and audit trails.
     "level": "info",
     "format": "json",
     "destination": "console",
-    "fileOutput": "logs/claude-flow.log",
+    "fileOutput": "logs/outlaw-flow.log",
     "maxFileSize": "10MB",
     "maxFiles": 5,
     "components": {
@@ -401,7 +401,7 @@ Optimized for production environments:
   "logging": {
     "level": "info",
     "destination": "file",
-    "fileOutput": "/var/log/claude-flow/app.log"
+    "fileOutput": "/var/log/outlaw-flow/app.log"
   }
 }
 ```
@@ -444,22 +444,22 @@ For enterprise deployments with redundancy:
 
 ```bash
 # Show current configuration
-claude-flow config show
+outlaw-flow config show
 
 # Get specific value
-claude-flow config get orchestrator.maxConcurrentAgents
+outlaw-flow config get orchestrator.maxConcurrentAgents
 
 # Set configuration value
-claude-flow config set memory.cacheSizeMB 200
+outlaw-flow config set memory.cacheSizeMB 200
 
 # Validate configuration file
-claude-flow config validate
+outlaw-flow config validate
 
 # Initialize with defaults
-claude-flow config init
+outlaw-flow config init
 
 # Use custom config file
-claude-flow --config /path/to/custom-config.json start
+outlaw-flow --config /path/to/custom-config.json start
 ```
 
 ### Environment Variables
@@ -468,17 +468,17 @@ Configuration values can be overridden using environment variables:
 
 ```bash
 # Override orchestrator settings
-export CLAUDE_FLOW_ORCHESTRATOR_MAX_CONCURRENT_AGENTS=20
+export OUTLAW_FLOW_ORCHESTRATOR_MAX_CONCURRENT_AGENTS=20
 
 # Override memory settings
-export CLAUDE_FLOW_MEMORY_CACHE_SIZE_MB=500
+export OUTLAW_FLOW_MEMORY_CACHE_SIZE_MB=500
 
 # Override logging level
-export CLAUDE_FLOW_LOGGING_LEVEL=debug
+export OUTLAW_FLOW_LOGGING_LEVEL=debug
 ```
 
 **Environment Variable Format:**
-`CLAUDE_FLOW_<SECTION>_<SETTING>=<VALUE>`
+`OUTLAW_FLOW_<SECTION>_<SETTING>=<VALUE>`
 
 ### Configuration Inheritance
 
@@ -486,13 +486,13 @@ Create configuration hierarchies for different environments:
 
 ```bash
 # Base configuration
-claude-flow config create base --template base-config.json
+outlaw-flow config create base --template base-config.json
 
 # Development inherits from base
-claude-flow config create development --inherit base --override dev-overrides.json
+outlaw-flow config create development --inherit base --override dev-overrides.json
 
 # Production inherits from base
-claude-flow config create production --inherit base --override prod-overrides.json
+outlaw-flow config create production --inherit base --override prod-overrides.json
 ```
 
 ## Advanced Configuration Patterns
@@ -558,13 +558,13 @@ Validate configuration against schema:
 
 ```bash
 # Validate current configuration
-claude-flow config validate
+outlaw-flow config validate
 
 # Validate specific file
-claude-flow config validate --file custom-config.json
+outlaw-flow config validate --file custom-config.json
 
 # Validate with strict mode
-claude-flow config validate --strict
+outlaw-flow config validate --strict
 ```
 
 ### Common Validation Errors
@@ -624,4 +624,4 @@ claude-flow config validate --strict
 - Test backup restoration procedures
 - Implement proper retention policies
 
-This configuration guide provides comprehensive coverage of all Claude-Flow configuration options. Use these settings to optimize Claude-Flow for your specific use case and environment.
+This configuration guide provides comprehensive coverage of all Outlaw-Flow configuration options. Use these settings to optimize Outlaw-Flow for your specific use case and environment.

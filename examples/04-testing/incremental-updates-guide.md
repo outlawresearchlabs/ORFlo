@@ -1,10 +1,10 @@
-# Incremental Updates Guide for Claude Flow
+# Incremental Updates Guide for Outlaw Flow
 
-This guide demonstrates and tests various incremental update mechanisms implemented throughout the Claude Flow system.
+This guide demonstrates and tests various incremental update mechanisms implemented throughout the Outlaw Flow system.
 
 ## Overview
 
-Incremental updates are a core pattern in Claude Flow, enabling:
+Incremental updates are a core pattern in Outlaw Flow, enabling:
 - Version tracking for memory entries
 - Atomic counter operations for metrics
 - Progressive task execution monitoring
@@ -215,17 +215,17 @@ npm test -- incremental
 
 ## Monitoring Incremental Updates
 
-Use Claude Flow's built-in monitoring:
+Use Outlaw Flow's built-in monitoring:
 
 ```bash
 # Monitor memory updates
-npx claude-flow memory monitor
+npx outlaw-flow memory monitor
 
 # Track swarm progress
-npx claude-flow swarm status --watch
+npx outlaw-flow swarm status --watch
 
 # View cache statistics
-npx claude-flow cache stats
+npx outlaw-flow cache stats
 ```
 
 ## Troubleshooting
@@ -240,4 +240,4 @@ Common issues and solutions:
 
 ## Conclusion
 
-Incremental updates are fundamental to Claude Flow's distributed architecture. By following these patterns and best practices, you can build reliable, scalable systems that track changes efficiently and maintain consistency across distributed components.
+Incremental updates are fundamental to Outlaw Flow's distributed architecture. By following these patterns and best practices, you can build reliable, scalable systems that track changes efficiently and maintain consistency across distributed components.

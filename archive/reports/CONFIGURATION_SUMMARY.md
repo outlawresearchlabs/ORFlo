@@ -10,7 +10,7 @@ As the Configuration Manager agent in the coordinated swarm, I have successfully
 - **Added**: ruv-swarm configuration section to main Config interface
 - **Features**:
   - `ruvSwarm` configuration section with topology, strategy, and agent settings
-  - Environment variable support (`CLAUDE_FLOW_RUV_SWARM_*`)
+  - Environment variable support (`OUTLAW_FLOW_RUV_SWARM_*`)
   - Validation for ruv-swarm specific settings
   - Helper methods: `getRuvSwarmConfig()`, `setRuvSwarmConfig()`, `getRuvSwarmArgs()`
 
@@ -73,41 +73,41 @@ interface Config {
 ```
 
 ### Environment Variables
-- `CLAUDE_FLOW_RUV_SWARM_ENABLED=true|false`
-- `CLAUDE_FLOW_RUV_SWARM_TOPOLOGY=mesh|hierarchical|ring|star`
-- `CLAUDE_FLOW_RUV_SWARM_MAX_AGENTS=<number>`
+- `OUTLAW_FLOW_RUV_SWARM_ENABLED=true|false`
+- `OUTLAW_FLOW_RUV_SWARM_TOPOLOGY=mesh|hierarchical|ring|star`
+- `OUTLAW_FLOW_RUV_SWARM_MAX_AGENTS=<number>`
 
 ## 🚀 Available CLI Commands
 
 ### Core Commands
 ```bash
 # Main ruv-swarm interface
-claude-flow ruv-swarm init --topology mesh --max-agents 8
-claude-flow ruv-swarm status --verbose
-claude-flow ruv-swarm spawn researcher --name "AI Researcher"
+outlaw-flow ruv-swarm init --topology mesh --max-agents 8
+outlaw-flow ruv-swarm status --verbose
+outlaw-flow ruv-swarm spawn researcher --name "AI Researcher"
 
 # Quick commands
-claude-flow swarm-init --topology hierarchical --strategy specialized
-claude-flow neural-spawn coder --capabilities "typescript,react"
-claude-flow memory-coordinate --detail detailed --sync
+outlaw-flow swarm-init --topology hierarchical --strategy specialized
+outlaw-flow neural-spawn coder --capabilities "typescript,react"
+outlaw-flow memory-coordinate --detail detailed --sync
 
 # Enhanced configuration
-claude-flow config-integration setup --enable-ruv-swarm
-claude-flow config-integration preset development
-claude-flow config-integration status --verbose
-claude-flow config-integration sync --force
+outlaw-flow config-integration setup --enable-ruv-swarm
+outlaw-flow config-integration preset development
+outlaw-flow config-integration status --verbose
+outlaw-flow config-integration sync --force
 ```
 
 ### Environment Presets
 ```bash
 # Development environment (hierarchical, 8 agents, specialized)
-claude-flow config-integration preset development
+outlaw-flow config-integration preset development
 
 # Research environment (mesh, 12 agents, adaptive)
-claude-flow config-integration preset research
+outlaw-flow config-integration preset research
 
 # Production environment (star, 6 agents, balanced)
-claude-flow config-integration preset production
+outlaw-flow config-integration preset production
 ```
 
 ## 📋 Key Features Implemented
@@ -157,22 +157,22 @@ claude-flow config-integration preset production
 
 1. **Initialize Integration**:
    ```bash
-   claude-flow config-integration setup --enable-ruv-swarm
+   outlaw-flow config-integration setup --enable-ruv-swarm
    ```
 
 2. **Apply Environment Preset**:
    ```bash
-   claude-flow config-integration preset development
+   outlaw-flow config-integration preset development
    ```
 
 3. **Initialize Swarm**:
    ```bash
-   claude-flow swarm-init --topology mesh --max-agents 8
+   outlaw-flow swarm-init --topology mesh --max-agents 8
    ```
 
 4. **Check Status**:
    ```bash
-   claude-flow config-integration status --verbose
+   outlaw-flow config-integration status --verbose
    ```
 
 ## ⚠️ Known Issues

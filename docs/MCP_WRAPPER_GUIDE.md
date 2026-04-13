@@ -1,21 +1,21 @@
-# Claude-Flow MCP Wrapper Guide
+# Outlaw-Flow MCP Wrapper Guide
 
 ## Overview
 
-The Claude-Flow MCP Wrapper is a new architecture that replaces the templated approach with a dynamic wrapper around Claude Code's MCP tools. This provides automatic SPARC/swarm prompt injection while leveraging Claude Code's native capabilities.
+The Outlaw-Flow MCP Wrapper is a new architecture that replaces the templated approach with a dynamic wrapper around Claude Code's MCP tools. This provides automatic SPARC/swarm prompt injection while leveraging Claude Code's native capabilities.
 
 ## Architecture
 
 ### Previous Architecture (Templated)
 ```
-User → claude-flow MCP → Template Engine → File Generation
+User → outlaw-flow MCP → Template Engine → File Generation
                       ↓
                     Claude CLI (optional)
 ```
 
 ### New Architecture (Wrapper)
 ```
-User → claude-flow MCP Wrapper → Claude Code MCP Tools
+User → outlaw-flow MCP Wrapper → Claude Code MCP Tools
            ↓                           ↑
     Prompt Injection              Native Tools
 ```
@@ -97,7 +97,7 @@ Autonomous code generation and implementation
 npm run mcp:wrapper
 
 # Or use the executable
-./claude-flow-mcp-wrapper
+./outlaw-flow-mcp-wrapper
 
 # Build and run compiled version
 npm run mcp:wrapper:build
@@ -106,11 +106,11 @@ npm run mcp:wrapper:serve
 
 ### Configuration
 
-The wrapper is configured via `claude-flow-wrapper.mcp.json`:
+The wrapper is configured via `outlaw-flow-wrapper.mcp.json`:
 
 ```json
 {
-  "name": "claude-flow-wrapper",
+  "name": "outlaw-flow-wrapper",
   "tools": {
     "sparc_coder": {
       "passThrough": "Task",
@@ -127,8 +127,8 @@ Add to your Claude desktop configuration:
 ```json
 {
   "servers": {
-    "claude-flow": {
-      "command": "/path/to/claude-flow-mcp-wrapper"
+    "outlaw-flow": {
+      "command": "/path/to/outlaw-flow-mcp-wrapper"
     }
   }
 }

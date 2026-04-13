@@ -29,7 +29,7 @@ class SwarmUI {
     // Create blessed screen
     this.screen = blessed.screen({
       smartCSR: true,
-      title: 'Claude Flow - Swarm Control Center'
+      title: 'Outlaw Flow - Swarm Control Center'
     });
 
     this.createLayout();
@@ -64,7 +64,7 @@ class SwarmUI {
       left: 0,
       width: '100%',
       height: 3,
-      content: '{center}🐝 Claude Flow Swarm Control Center{/center}',
+      content: '{center}🐝 Outlaw Flow Swarm Control Center{/center}',
       tags: true,
       style: {
         fg: 'white',
@@ -543,7 +543,7 @@ class SwarmUI {
       
       // Execute swarm command
       const args = ['swarm', description, '--ui', '--monitor'];
-      const process = spawn('claude-flow', args, {
+      const process = spawn('outlaw-flow', args, {
         detached: true,
         stdio: 'ignore'
       });
@@ -568,7 +568,7 @@ class SwarmUI {
     try {
       // Kill all swarm processes (simplified)
       const { exec } = require('child_process');
-      exec('pkill -f "claude-flow swarm"', (error) => {
+      exec('pkill -f "outlaw-flow swarm"', (error) => {
         if (error) {
           this.log(`Error stopping swarm: ${error.message}`, 'error');
         } else {

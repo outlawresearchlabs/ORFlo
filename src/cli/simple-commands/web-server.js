@@ -379,7 +379,7 @@ export class ClaudeCodeWebServer {
       jsonrpc: '2.0',
       method: 'connection/established',
       params: {
-        server: 'claude-flow-web-server',
+        server: 'outlaw-flow-web-server',
         version: '2.0.0',
         timestamp: new Date().toISOString()
       }
@@ -456,7 +456,7 @@ export class ClaudeCodeWebServer {
       result: {
         protocolVersion: { major: 2024, minor: 11, patch: 5 },
         serverInfo: {
-          name: 'claude-flow-web-server',
+          name: 'outlaw-flow-web-server',
           version: '2.0.0'
         },
         capabilities: {
@@ -516,8 +516,8 @@ export class ClaudeCodeWebServer {
   handleToolsList(ws, message) {
     const tools = [
       {
-        name: 'claude-flow/execute',
-        description: 'Execute Claude Flow commands (start, stop, status, modes)',
+        name: 'outlaw-flow/execute',
+        description: 'Execute Outlaw Flow commands (start, stop, status, modes)',
         inputSchema: {
           type: 'object',
           properties: {
@@ -622,7 +622,7 @@ export class ClaudeCodeWebServer {
    */
   executeMockTool(name, args) {
     switch (name) {
-      case 'claude-flow/execute':
+      case 'outlaw-flow/execute':
         return this.executeClaudeFlowCommand(args.command, args.args);
         
       case 'system/health':
@@ -671,12 +671,12 @@ export class ClaudeCodeWebServer {
   }
 
   /**
-   * Execute Claude Flow command simulation
+   * Execute Outlaw Flow command simulation
    */
   executeClaudeFlowCommand(command, args = {}) {
     switch (command) {
       case 'status':
-        return `Claude Flow Status:
+        return `Outlaw Flow Status:
   Version: 2.0.0
   Mode: Web Console
   Active Processes: 3
@@ -684,7 +684,7 @@ export class ClaudeCodeWebServer {
   Uptime: ${Math.floor(process.uptime())}s`;
 
       case 'init':
-        return `Claude Flow initialization complete:
+        return `Outlaw Flow initialization complete:
   ✅ Project structure created
   ✅ Configuration files generated
   ✅ Memory bank initialized
@@ -699,7 +699,7 @@ export class ClaudeCodeWebServer {
   Total: 3 agents`;
 
       default:
-        return `Claude Flow command '${command}' executed successfully`;
+        return `Outlaw Flow command '${command}' executed successfully`;
     }
   }
 

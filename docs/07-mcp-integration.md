@@ -1,6 +1,6 @@
 # MCP Integration Guide for External Tools
 
-Model Context Protocol (MCP) integration enables Claude-Flow to seamlessly connect with external tools, services, and systems, dramatically expanding its capabilities. This comprehensive guide covers MCP server setup, tool integration, security, and advanced usage patterns.
+Model Context Protocol (MCP) integration enables Outlaw-Flow to seamlessly connect with external tools, services, and systems, dramatically expanding its capabilities. This comprehensive guide covers MCP server setup, tool integration, security, and advanced usage patterns.
 
 ## MCP Server Configuration
 
@@ -9,16 +9,16 @@ Model Context Protocol (MCP) integration enables Claude-Flow to seamlessly conne
 **Initialize MCP Configuration:**
 ```bash
 # Initialize MCP with default settings
-claude-flow mcp init
+outlaw-flow mcp init
 
 # Initialize with custom configuration
-claude-flow mcp init --config custom-mcp-config.json
+outlaw-flow mcp init --config custom-mcp-config.json
 
 # Start MCP server
-claude-flow mcp start --transport stdio --port 3000
+outlaw-flow mcp start --transport stdio --port 3000
 
 # Start with advanced options
-claude-flow mcp start \
+outlaw-flow mcp start \
   --transport http \
   --port 3000 \
   --tls-enabled \
@@ -29,13 +29,13 @@ claude-flow mcp start \
 **Check MCP Server Status:**
 ```bash
 # Basic status check
-claude-flow mcp status
+outlaw-flow mcp status
 
 # Detailed status with metrics
-claude-flow mcp status --detailed --metrics
+outlaw-flow mcp status --detailed --metrics
 
 # Health check with diagnostics
-claude-flow mcp health-check --comprehensive
+outlaw-flow mcp health-check --comprehensive
 ```
 
 ### MCP Configuration File
@@ -107,7 +107,7 @@ claude-flow mcp health-check --comprehensive
       "remoteRegistries": [
         {
           "name": "official-tools",
-          "url": "https://registry.claude-flow.dev/tools",
+          "url": "https://registry.outlaw-flow.dev/tools",
           "authToken": "${MCP_REGISTRY_TOKEN}"
         }
       ],
@@ -211,24 +211,24 @@ claude-flow mcp health-check --comprehensive
 **File Operations:**
 ```bash
 # Read file content
-claude-flow mcp invoke filesystem read_file \
+outlaw-flow mcp invoke filesystem read_file \
   --path "/project/src/main.py" \
   --encoding "utf-8"
 
 # Write file content
-claude-flow mcp invoke filesystem write_file \
+outlaw-flow mcp invoke filesystem write_file \
   --path "/project/output/results.txt" \
   --content "Analysis results: Performance improved by 25%" \
   --create-dirs true
 
 # List directory contents
-claude-flow mcp invoke filesystem list_directory \
+outlaw-flow mcp invoke filesystem list_directory \
   --path "/project/src" \
   --recursive true \
   --filter "*.py,*.js"
 
 # Copy files
-claude-flow mcp invoke filesystem copy_file \
+outlaw-flow mcp invoke filesystem copy_file \
   --source "/project/templates/config.yaml" \
   --destination "/project/config/app-config.yaml"
 ```
@@ -236,20 +236,20 @@ claude-flow mcp invoke filesystem copy_file \
 **File Search and Analysis:**
 ```bash
 # Search for files by pattern
-claude-flow mcp invoke filesystem search_files \
+outlaw-flow mcp invoke filesystem search_files \
   --pattern "*.py" \
   --directory "/project" \
   --exclude "node_modules,__pycache__"
 
 # Grep text in files
-claude-flow mcp invoke filesystem grep \
+outlaw-flow mcp invoke filesystem grep \
   --pattern "function.*main" \
   --files "*.py" \
   --directory "/project/src" \
   --context-lines 3
 
 # File statistics
-claude-flow mcp invoke filesystem file_stats \
+outlaw-flow mcp invoke filesystem file_stats \
   --path "/project" \
   --recursive true \
   --include-hidden false
@@ -260,19 +260,19 @@ claude-flow mcp invoke filesystem file_stats \
 **Web Scraping and Data Extraction:**
 ```bash
 # Simple web scraping
-claude-flow mcp invoke web scrape_url \
+outlaw-flow mcp invoke web scrape_url \
   --url "https://example.com/api/docs" \
   --format "markdown" \
   --extract-links true
 
 # Advanced scraping with selectors
-claude-flow mcp invoke web scrape_advanced \
+outlaw-flow mcp invoke web scrape_advanced \
   --url "https://news.ycombinator.com" \
   --selectors '{"titles": ".titleline > a", "scores": ".score"}' \
   --output-format "json"
 
 # Download web content
-claude-flow mcp invoke web download_file \
+outlaw-flow mcp invoke web download_file \
   --url "https://example.com/data.csv" \
   --output "/project/data/external-data.csv" \
   --verify-ssl true
@@ -281,7 +281,7 @@ claude-flow mcp invoke web download_file \
 **API Interactions:**
 ```bash
 # REST API calls
-claude-flow mcp invoke web api_request \
+outlaw-flow mcp invoke web api_request \
   --method "POST" \
   --url "https://api.example.com/v1/data" \
   --headers '{"Authorization": "Bearer ${API_TOKEN}", "Content-Type": "application/json"}' \
@@ -289,13 +289,13 @@ claude-flow mcp invoke web api_request \
   --timeout 30
 
 # GraphQL queries
-claude-flow mcp invoke web graphql_query \
+outlaw-flow mcp invoke web graphql_query \
   --endpoint "https://api.github.com/graphql" \
   --query "query { viewer { login repositories(first: 10) { nodes { name } } } }" \
   --headers '{"Authorization": "Bearer ${GITHUB_TOKEN}"}'
 
 # Webhook setup
-claude-flow mcp invoke web setup_webhook \
+outlaw-flow mcp invoke web setup_webhook \
   --url "https://api.service.com/webhooks" \
   --events "push,pull_request" \
   --callback-url "https://ourapp.com/webhook-handler"
@@ -306,26 +306,26 @@ claude-flow mcp invoke web setup_webhook \
 **Git Operations:**
 ```bash
 # Repository status
-claude-flow mcp invoke git status \
+outlaw-flow mcp invoke git status \
   --repository "/project" \
   --porcelain false
 
 # Commit changes
-claude-flow mcp invoke git commit \
+outlaw-flow mcp invoke git commit \
   --repository "/project" \
   --message "feat: implement user authentication with JWT tokens" \
   --add-all true \
   --sign true
 
 # Branch operations
-claude-flow mcp invoke git branch \
+outlaw-flow mcp invoke git branch \
   --repository "/project" \
   --action "create" \
   --branch-name "feature/user-dashboard" \
   --from "main"
 
 # Push to remote
-claude-flow mcp invoke git push \
+outlaw-flow mcp invoke git push \
   --repository "/project" \
   --remote "origin" \
   --branch "feature/user-dashboard" \
@@ -335,21 +335,21 @@ claude-flow mcp invoke git push \
 **Code Analysis:**
 ```bash
 # Static code analysis
-claude-flow mcp invoke code analyze \
+outlaw-flow mcp invoke code analyze \
   --path "/project/src" \
   --language "python" \
   --rules "pep8,security,complexity" \
   --output-format "json"
 
 # Code formatting
-claude-flow mcp invoke code format \
+outlaw-flow mcp invoke code format \
   --path "/project/src" \
   --formatter "black" \
   --config ".black.toml" \
   --check-only false
 
 # Dependency analysis
-claude-flow mcp invoke code dependencies \
+outlaw-flow mcp invoke code dependencies \
   --path "/project" \
   --package-manager "npm" \
   --check-vulnerabilities true \
@@ -359,7 +359,7 @@ claude-flow mcp invoke code dependencies \
 **Testing Tools:**
 ```bash
 # Run test suites
-claude-flow mcp invoke test run \
+outlaw-flow mcp invoke test run \
   --framework "pytest" \
   --path "/project/tests" \
   --coverage true \
@@ -367,14 +367,14 @@ claude-flow mcp invoke test run \
   --output "test-results.xml"
 
 # Test coverage analysis
-claude-flow mcp invoke test coverage \
+outlaw-flow mcp invoke test coverage \
   --source-dir "/project/src" \
   --test-dir "/project/tests" \
   --format "html" \
   --output "/project/coverage-report"
 
 # Load testing
-claude-flow mcp invoke test load \
+outlaw-flow mcp invoke test load \
   --target "http://localhost:8000/api" \
   --users 100 \
   --duration "5m" \
@@ -469,7 +469,7 @@ claude-flow mcp invoke test load \
 ```python
 #!/usr/bin/env python3
 """
-Database Query Tool for Claude-Flow MCP
+Database Query Tool for Outlaw-Flow MCP
 Executes database queries with security and performance monitoring
 """
 
@@ -664,7 +664,7 @@ if __name__ == "__main__":
 ```javascript
 #!/usr/bin/env node
 /**
- * API Testing Tool for Claude-Flow MCP
+ * API Testing Tool for Outlaw-Flow MCP
  * Performs comprehensive API testing with performance metrics
  */
 
@@ -735,7 +735,7 @@ class APITestingTool {
                 metadata: {
                     url,
                     method,
-                    userAgent: headers['User-Agent'] || 'Claude-Flow-MCP/1.0'
+                    userAgent: headers['User-Agent'] || 'Outlaw-Flow-MCP/1.0'
                 }
             };
 
@@ -881,7 +881,7 @@ if (require.main === module) {
 **Register Custom Tools:**
 ```bash
 # Register Python tool
-claude-flow mcp tools register \
+outlaw-flow mcp tools register \
   --name "database-query" \
   --executable "/tools/database-query.py" \
   --schema "database-query-schema.json" \
@@ -889,7 +889,7 @@ claude-flow mcp tools register \
   --version "1.2.0"
 
 # Register Node.js tool
-claude-flow mcp tools register \
+outlaw-flow mcp tools register \
   --name "api-testing" \
   --executable "/tools/api-testing.js" \
   --schema "api-testing-schema.json" \
@@ -897,7 +897,7 @@ claude-flow mcp tools register \
   --permissions "network-access"
 
 # Register tool with dependencies
-claude-flow mcp tools register \
+outlaw-flow mcp tools register \
   --name "ml-analysis" \
   --executable "/tools/ml-analysis.py" \
   --schema "ml-analysis-schema.json" \
@@ -908,18 +908,18 @@ claude-flow mcp tools register \
 **Tool Testing:**
 ```bash
 # Test tool functionality
-claude-flow mcp tools test database-query \
+outlaw-flow mcp tools test database-query \
   --input "test-inputs/db-query-test.json" \
   --validate-output true
 
 # Performance testing
-claude-flow mcp tools benchmark api-testing \
+outlaw-flow mcp tools benchmark api-testing \
   --iterations 100 \
   --concurrent 10 \
   --report "performance-report.json"
 
 # Integration testing
-claude-flow mcp tools integration-test \
+outlaw-flow mcp tools integration-test \
   --suite "database-tools" \
   --environment "staging"
 ```
@@ -931,20 +931,20 @@ claude-flow mcp tools integration-test \
 **Registry Configuration:**
 ```bash
 # Add remote tool registry
-claude-flow mcp registry add \
+outlaw-flow mcp registry add \
   --name "company-tools" \
   --url "https://tools.company.com/registry" \
   --auth-token "${COMPANY_TOOLS_TOKEN}" \
   --verify-ssl true
 
 # Browse available tools
-claude-flow mcp registry browse \
+outlaw-flow mcp registry browse \
   --registry "company-tools" \
   --category "development" \
   --search "kubernetes"
 
 # Install tools from registry
-claude-flow mcp registry install \
+outlaw-flow mcp registry install \
   --registry "company-tools" \
   --tool "k8s-manager" \
   --version "2.1.0" \
@@ -989,7 +989,7 @@ claude-flow mcp registry install \
 **API Gateway Integration:**
 ```bash
 # Set up tool proxy for internal APIs
-claude-flow mcp proxy create \
+outlaw-flow mcp proxy create \
   --name "internal-api-gateway" \
   --target "https://api.internal.company.com" \
   --auth "oauth2" \
@@ -997,11 +997,11 @@ claude-flow mcp proxy create \
   --rate-limit "1000/hour"
 
 # Use proxied tools
-claude-flow mcp invoke internal-api-gateway:user-management get_user \
+outlaw-flow mcp invoke internal-api-gateway:user-management get_user \
   --user_id 12345 \
   --include_profile true
 
-claude-flow mcp invoke internal-api-gateway:billing get_usage \
+outlaw-flow mcp invoke internal-api-gateway:billing get_usage \
   --account_id 67890 \
   --period "2024-12"
 ```
@@ -1043,19 +1043,19 @@ claude-flow mcp invoke internal-api-gateway:billing get_usage \
 **Token-Based Authentication:**
 ```bash
 # Generate MCP access token for agent
-claude-flow mcp auth generate-token \
+outlaw-flow mcp auth generate-token \
   --agent-id <agent-id> \
   --permissions "tools:read,tools:execute,files:read" \
   --expiry "24h" \
   --scope "project:web-app"
 
 # Revoke access token
-claude-flow mcp auth revoke-token \
+outlaw-flow mcp auth revoke-token \
   --token-id <token-id> \
   --reason "security-rotation"
 
 # List active tokens with details
-claude-flow mcp auth list-tokens \
+outlaw-flow mcp auth list-tokens \
   --agent-id <agent-id> \
   --include-permissions true \
   --format "table"
@@ -1107,7 +1107,7 @@ claude-flow mcp auth list-tokens \
 **Tool Permission Configuration:**
 ```bash
 # Grant specific tool permissions
-claude-flow mcp permissions grant \
+outlaw-flow mcp permissions grant \
   --agent-id <agent-id> \
   --tool "filesystem" \
   --actions "read,write" \
@@ -1115,14 +1115,14 @@ claude-flow mcp permissions grant \
   --exclude "/project/secrets/*"
 
 # Check agent permissions
-claude-flow mcp permissions check \
+outlaw-flow mcp permissions check \
   --agent-id <agent-id> \
   --tool "web" \
   --action "api_request" \
   --resource "https://api.external.com"
 
 # Audit tool usage
-claude-flow mcp audit \
+outlaw-flow mcp audit \
   --agent-id <agent-id> \
   --time-range "24h" \
   --tools "filesystem,web" \
@@ -1162,12 +1162,12 @@ claude-flow mcp audit \
 **Tool Chain Definition:**
 ```bash
 # Create tool chain
-claude-flow mcp chain create "data-processing-pipeline" \
+outlaw-flow mcp chain create "data-processing-pipeline" \
   --steps "web:fetch_data,filesystem:save_file,database-query:insert_data,api-testing:validate_api" \
   --config "data-pipeline-config.json"
 
 # Execute tool chain
-claude-flow mcp chain execute "data-processing-pipeline" \
+outlaw-flow mcp chain execute "data-processing-pipeline" \
   --input "chain-input.json" \
   --output "chain-output.json" \
   --monitor true
@@ -1242,7 +1242,7 @@ claude-flow mcp chain execute "data-processing-pipeline" \
 **Batch Tool Execution:**
 ```bash
 # Execute multiple tools in parallel
-claude-flow mcp batch execute \
+outlaw-flow mcp batch execute \
   --tools "filesystem:read_file,web:api_request,database-query:select" \
   --inputs "batch-inputs.json" \
   --parallel 5 \
@@ -1250,7 +1250,7 @@ claude-flow mcp batch execute \
   --output "batch-results.json"
 
 # Batch file processing
-claude-flow mcp batch filesystem process_files \
+outlaw-flow mcp batch filesystem process_files \
   --pattern "/project/data/*.csv" \
   --action "validate_csv" \
   --parallel 10 \
@@ -1296,21 +1296,21 @@ claude-flow mcp batch filesystem process_files \
 **Performance Monitoring:**
 ```bash
 # Monitor tool performance
-claude-flow mcp monitor \
+outlaw-flow mcp monitor \
   --tools "database-query,api-testing" \
   --metrics "latency,success_rate,error_count,resource_usage" \
   --real-time true \
   --dashboard true
 
 # Set up performance alerts
-claude-flow mcp alerts create \
+outlaw-flow mcp alerts create \
   --tool "database-query" \
   --condition "avg_latency > 5s OR error_rate > 5%" \
   --action "notify-ops-team" \
   --severity "warning"
 
 # Generate performance reports
-claude-flow mcp report performance \
+outlaw-flow mcp report performance \
   --time-range "7d" \
   --tools "all" \
   --format "pdf" \
@@ -1320,22 +1320,22 @@ claude-flow mcp report performance \
 **Usage Analytics:**
 ```bash
 # Tool usage statistics
-claude-flow mcp analytics usage \
+outlaw-flow mcp analytics usage \
   --time-range "30d" \
   --group-by "tool,agent,hour-of-day" \
   --export "usage-analytics.json"
 
 # Cost analysis
-claude-flow mcp analytics cost \
+outlaw-flow mcp analytics cost \
   --tools "external-api-*" \
   --billing-period "monthly" \
   --cost-model "api-calls.json"
 
 # Optimization recommendations
-claude-flow mcp analytics optimize \
+outlaw-flow mcp analytics optimize \
   --focus "performance,cost,reliability" \
   --recommendations true \
   --auto-tune false
 ```
 
-This comprehensive MCP integration guide provides all the tools and patterns needed to extend Claude-Flow with powerful external capabilities while maintaining security and performance standards.
+This comprehensive MCP integration guide provides all the tools and patterns needed to extend Outlaw-Flow with powerful external capabilities while maintaining security and performance standards.

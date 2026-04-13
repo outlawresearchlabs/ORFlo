@@ -553,7 +553,7 @@ export async function getRuvSwarmCapabilities(logger?: ILogger): Promise<any> {
 }
 
 /**
- * Initialize ruv-swarm with claude-code-flow integration
+ * Initialize ruv-swarm with outlaw-flow integration
  */
 export async function initializeRuvSwarmIntegration(
   workingDirectory: string,
@@ -561,7 +561,7 @@ export async function initializeRuvSwarmIntegration(
 ): Promise<RuvSwarmResponse> {
   const context: RuvSwarmToolContext = {
     workingDirectory,
-    sessionId: `claude-flow-${Date.now()}`
+    sessionId: `outlaw-flow-${Date.now()}`
   };
   
   logger?.info('Initializing ruv-swarm integration', { workingDirectory });
@@ -585,7 +585,7 @@ export async function initializeRuvSwarmIntegration(
     data: {
       available: true,
       capabilities,
-      integration: 'claude-code-flow',
+      integration: 'outlaw-flow',
       sessionId: context.sessionId
     },
     metadata: {

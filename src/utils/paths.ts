@@ -14,16 +14,16 @@ export function getClaudeFlowRoot(): string {
     // Strategy 2: From process.cwd()
     process.cwd(),
     // Strategy 3: From npm global location
-    resolve(process.execPath, '../../lib/node_modules/claude-flow'),
+    resolve(process.execPath, '../../lib/node_modules/outlaw-flow'),
     // Strategy 4: From environment variable
-    process.env.CLAUDE_FLOW_ROOT || ''
+    process.env.OUTLAW_FLOW_ROOT || ''
   ];
 
   for (const path of strategies) {
     if (path && existsSync(join(path, 'package.json'))) {
       try {
         const pkg = require(join(path, 'package.json'));
-        if (pkg.name === 'claude-flow') {
+        if (pkg.name === 'outlaw-flow') {
           return path;
         }
       } catch {}
@@ -35,7 +35,7 @@ export function getClaudeFlowRoot(): string {
 }
 
 export function getClaudeFlowBin(): string {
-  return join(getClaudeFlowRoot(), 'bin', 'claude-flow');
+  return join(getClaudeFlowRoot(), 'bin', 'outlaw-flow');
 }
 
 export function resolveProjectPath(relativePath: string): string {

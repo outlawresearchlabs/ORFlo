@@ -1,6 +1,6 @@
 import { getErrorMessage } from '../../utils/error-handler.js';
 /**
- * Session management commands for Claude-Flow
+ * Session management commands for Outlaw-Flow
  */
 
 import { Command } from 'commander';
@@ -14,7 +14,7 @@ import chalk from 'chalk';
 
 export const sessionCommand = new Command()
   .name('session')
-  .description('Manage Claude-Flow sessions')
+  .description('Manage Outlaw-Flow sessions')
   .action(() => {
     sessionCommand.help();
   });
@@ -124,7 +124,7 @@ interface SessionData {
   };
 }
 
-const SESSION_DIR = '.claude-flow/sessions';
+const SESSION_DIR = '.outlaw-flow/sessions';
 
 async function ensureSessionDir(): Promise<void> {
   try {

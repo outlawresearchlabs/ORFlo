@@ -50,10 +50,10 @@ describe("End-to-End Init Workflow Tests", () => {
         "CLAUDE.md",
         "memory-bank.md",
         "coordination.md",
-        "memory/claude-flow-data.json",
+        "memory/outlaw-flow-data.json",
         "memory/agents/README.md",
         "memory/sessions/README.md",
-        "claude-flow"
+        "outlaw-flow"
       ];
 
       for (const file of expectedFiles) {
@@ -78,7 +78,7 @@ describe("End-to-End Init Workflow Tests", () => {
       }
 
       // Step 2: Test that local executable works
-      const helpCommand = new Deno.Command(join(testDir, "claude-flow"), {
+      const helpCommand = new Deno.Command(join(testDir, "outlaw-flow"), {
         args: ["--help"],
         cwd: testDir,
         stdout: "piped",
@@ -89,10 +89,10 @@ describe("End-to-End Init Workflow Tests", () => {
       assertEquals(helpResult.success, true);
 
       const helpOutput = new TextDecoder().decode(helpResult.stdout);
-      assertStringIncludes(helpOutput, "claude-flow");
+      assertStringIncludes(helpOutput, "outlaw-flow");
 
       // Step 3: Verify memory system is functional
-      const memoryTestCommand = new Deno.Command(join(testDir, "claude-flow"), {
+      const memoryTestCommand = new Deno.Command(join(testDir, "outlaw-flow"), {
         args: ["memory", "store", "test_key", "test_value"],
         cwd: testDir,
         stdout: "piped",
@@ -131,7 +131,7 @@ describe("End-to-End Init Workflow Tests", () => {
       assertExists(await exists(join(testDir, ".claude/commands/sparc")));
 
       // Step 2: Test SPARC commands
-      const sparcModesCommand = new Deno.Command(join(testDir, "claude-flow"), {
+      const sparcModesCommand = new Deno.Command(join(testDir, "outlaw-flow"), {
         args: ["sparc", "modes"],
         cwd: testDir,
         stdout: "piped",
@@ -234,7 +234,7 @@ describe("End-to-End Init Workflow Tests", () => {
       await Deno.mkdir(join(testDir, "tests"));
       await Deno.writeTextFile(join(testDir, "tests/app.test.js"), "// Tests");
 
-      // Initialize Claude Flow
+      // Initialize Outlaw Flow
       const initCommand = new Deno.Command("deno", {
         args: [
           "run",
@@ -256,11 +256,11 @@ describe("End-to-End Init Workflow Tests", () => {
       assertExists(await exists(join(testDir, "src/app.js")));
       assertExists(await exists(join(testDir, "tests/app.test.js")));
 
-      // Should add Claude Flow files
+      // Should add Outlaw Flow files
       assertExists(await exists(join(testDir, "CLAUDE.md")));
       assertExists(await exists(join(testDir, "memory-bank.md")));
       assertExists(await exists(join(testDir, "coordination.md")));
-      assertExists(await exists(join(testDir, "claude-flow")));
+      assertExists(await exists(join(testDir, "outlaw-flow")));
 
       // Verify package.json is unchanged
       const packageJson = JSON.parse(await Deno.readTextFile(join(testDir, "package.json")));
@@ -301,7 +301,7 @@ describe("End-to-End Init Workflow Tests", () => {
 
       await gitCommitCommand.output();
 
-      // Initialize Claude Flow
+      // Initialize Outlaw Flow
       const initCommand = new Deno.Command("deno", {
         args: [
           "run",
@@ -322,7 +322,7 @@ describe("End-to-End Init Workflow Tests", () => {
       assertExists(await exists(join(testDir, "README.md")));
       assertExists(await exists(join(testDir, ".gitignore")));
 
-      // Should add Claude Flow files
+      // Should add Outlaw Flow files
       assertExists(await exists(join(testDir, "CLAUDE.md")));
       assertExists(await exists(join(testDir, "memory-bank.md")));
 
@@ -371,7 +371,7 @@ describe("End-to-End Init Workflow Tests", () => {
 
       const startTime = performance.now();
 
-      // Initialize Claude Flow
+      // Initialize Outlaw Flow
       const initCommand = new Deno.Command("deno", {
         args: [
           "run",
@@ -398,7 +398,7 @@ describe("End-to-End Init Workflow Tests", () => {
         assertExists(await exists(join(testDir, dir, "index.js")));
       }
 
-      // Should add Claude Flow files
+      // Should add Outlaw Flow files
       assertExists(await exists(join(testDir, "CLAUDE.md")));
       assertExists(await exists(join(testDir, "memory-bank.md")));
       assertExists(await exists(join(testDir, "coordination.md")));
@@ -431,12 +431,12 @@ describe("End-to-End Init Workflow Tests", () => {
 
       // Should provide next steps
       assertStringIncludes(output, "Next steps:");
-      assertStringIncludes(output, "./claude-flow start");
+      assertStringIncludes(output, "./outlaw-flow start");
       assertStringIncludes(output, "Review and customize");
 
       // Should mention local executable
       assertStringIncludes(output, "Local executable created");
-      assertStringIncludes(output, "Use './claude-flow' instead of 'npx claude-flow'");
+      assertStringIncludes(output, "Use './outlaw-flow' instead of 'npx outlaw-flow'");
     });
 
     it("should provide SPARC-specific guidance", async () => {

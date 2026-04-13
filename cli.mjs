@@ -24,7 +24,7 @@ function runCLI() {
     console.log(`
 🌊 Claude-Flow v2.0.0-alpha.1 - AI Agent Orchestration Platform
 
-Usage: claude-flow <command> [options]
+Usage: outlaw-flow <command> [options]
 
 Commands:
   init [options]           Initialize Claude-Flow project
@@ -41,19 +41,19 @@ Options:
   -v, --version           Show version
 
 Examples:
-  claude-flow init --sparc          # Initialize with SPARC methodology
-  claude-flow hive-mind wizard      # Interactive setup
-  claude-flow start --ui --swarm    # Start with UI and swarm
-  claude-flow status                # Show system status
+  outlaw-flow init --sparc          # Initialize with SPARC methodology
+  outlaw-flow hive-mind wizard      # Interactive setup
+  outlaw-flow start --ui --swarm    # Start with UI and swarm
+  outlaw-flow status                # Show system status
 
-For more information, visit: https://github.com/ruvnet/claude-code-flow
+For more information, visit: https://github.com/ruvnet/outlaw-flow
 `);
     return;
   }
 
   // Show version
   if (args[0] === '--version' || args[0] === '-v') {
-    console.log('claude-flow v2.0.0-alpha.1');
+    console.log('outlaw-flow v2.0.0-alpha.1');
     return;
   }
 
@@ -106,7 +106,7 @@ For more information, visit: https://github.com/ruvnet/claude-code-flow
       
     default:
       console.log(`❓ Unknown command: ${command}`);
-      console.log('Run "claude-flow --help" for available commands');
+      console.log('Run "outlaw-flow --help" for available commands');
       break;
   }
 }

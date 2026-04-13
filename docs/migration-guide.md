@@ -1,4 +1,4 @@
-# 🚀 Claude Flow v2.0.0 Migration Guide: Deno to Pure NPM TypeScript
+# 🚀 Outlaw Flow v2.0.0 Migration Guide: Deno to Pure NPM TypeScript
 
 ## 📋 Table of Contents
 1. [Overview](#overview)
@@ -14,7 +14,7 @@
 
 ## 🎯 Overview
 
-Claude Flow v2.0.0 represents a complete migration from Deno to pure NPM TypeScript, providing:
+Outlaw Flow v2.0.0 represents a complete migration from Deno to pure NPM TypeScript, providing:
 - **✅ Better ecosystem compatibility** - Full NPM package support
 - **✅ Improved performance** - 60% faster builds, 2.8-4.4x execution speed
 - **✅ Enhanced tooling** - Standard TypeScript toolchain
@@ -26,13 +26,13 @@ Claude Flow v2.0.0 represents a complete migration from Deno to pure NPM TypeScr
 ### Before (Deno)
 ```bash
 # Old Deno-based installation
-deno install -A -f --name claude-flow https://deno.land/x/claude_flow/src/cli.ts
+deno install -A -f --name outlaw-flow https://deno.land/x/claude_flow/src/cli.ts
 ```
 
 ### After (Pure NPM)
 ```bash
 # New NPM-based installation
-npx claude-flow@2.0.0 init --sparc
+npx outlaw-flow@2.0.0 init --sparc
 ```
 
 ## ⚠️ Breaking Changes
@@ -71,35 +71,35 @@ const data = readFileSync('./config.json', 'utf-8');
 ```bash
 # Create backup of your current setup
 cp -r .claude .claude-backup-$(date +%Y%m%d)
-cp claude-flow.config.json claude-flow.config.backup.json
+cp outlaw-flow.config.json outlaw-flow.config.backup.json
 ```
 
 ### Step 2: Uninstall Deno Version
 ```bash
 # Remove old Deno installation
-rm -f $(which claude-flow)  # Remove Deno binary
-rm -rf ~/.deno/bin/claude-flow  # Clean Deno cache
+rm -f $(which outlaw-flow)  # Remove Deno binary
+rm -rf ~/.deno/bin/outlaw-flow  # Clean Deno cache
 ```
 
 ### Step 3: Install NPM Version
 ```bash
 # Method 1: Quick start (Recommended)
-npx claude-flow@2.0.0 init --sparc
+npx outlaw-flow@2.0.0 init --sparc
 
 # Method 2: Global installation
-npm install -g claude-flow@2.0.0
+npm install -g outlaw-flow@2.0.0
 
 # Method 3: Project installation
-npm install claude-flow@2.0.0 --save-dev
+npm install outlaw-flow@2.0.0 --save-dev
 ```
 
 ### Step 4: Migrate Configuration
 ```bash
 # The init command will detect existing config and offer migration
-./claude-flow init --migrate
+./outlaw-flow init --migrate
 
 # Or manually update configuration
-./claude-flow config migrate
+./outlaw-flow config migrate
 ```
 
 ### Step 5: Update Scripts
@@ -107,10 +107,10 @@ npm install claude-flow@2.0.0 --save-dev
 // package.json
 {
   "scripts": {
-    "flow": "claude-flow",
-    "flow:start": "claude-flow start --ui",
-    "flow:swarm": "claude-flow swarm",
-    "flow:sparc": "claude-flow sparc"
+    "flow": "outlaw-flow",
+    "flow:start": "outlaw-flow start --ui",
+    "flow:swarm": "outlaw-flow swarm",
+    "flow:sparc": "outlaw-flow sparc"
   }
 }
 ```
@@ -120,33 +120,33 @@ npm install claude-flow@2.0.0 --save-dev
 ### Core Commands (Unchanged)
 ```bash
 # These commands work the same way
-./claude-flow start
-./claude-flow status
-./claude-flow agent spawn researcher
-./claude-flow swarm "Build API"
+./outlaw-flow start
+./outlaw-flow status
+./outlaw-flow agent spawn researcher
+./outlaw-flow swarm "Build API"
 ```
 
 ### New Features
 ```bash
 # Enhanced init command with templates
-./claude-flow init --sparc  # Full SPARC + ruv-swarm
-./claude-flow init --minimal  # Basic setup
-./claude-flow init --docker  # With Docker support
+./outlaw-flow init --sparc  # Full SPARC + ruv-swarm
+./outlaw-flow init --minimal  # Basic setup
+./outlaw-flow init --docker  # With Docker support
 
 # New GitHub integration
-./claude-flow github pr-manager "coordinate release"
-./claude-flow github sync-packages
+./outlaw-flow github pr-manager "coordinate release"
+./outlaw-flow github sync-packages
 
 # Enhanced monitoring
-./claude-flow monitor --dashboard
-./claude-flow analytics insights --timerange 7d
+./outlaw-flow monitor --dashboard
+./outlaw-flow analytics insights --timerange 7d
 ```
 
 ### Deprecated Commands
 ```bash
 # Old Deno-specific commands (removed)
-claude-flow --allow-read  # No longer needed
-claude-flow --unstable  # Not applicable
+outlaw-flow --allow-read  # No longer needed
+outlaw-flow --unstable  # Not applicable
 ```
 
 ## ⚙️ Configuration Updates
@@ -169,10 +169,10 @@ claude-flow --unstable  # Not applicable
   "name": "my-project",
   "version": "1.0.0",
   "dependencies": {
-    "claude-flow": "^2.0.0"
+    "outlaw-flow": "^2.0.0"
   },
   "scripts": {
-    "start": "claude-flow start --ui"
+    "start": "outlaw-flow start --ui"
   }
 }
 ```
@@ -205,7 +205,7 @@ claude-flow --unstable  # Not applicable
 ### Installing Dependencies
 ```bash
 # Automatic dependency resolution
-./claude-flow init --migrate
+./outlaw-flow init --migrate
 
 # Manual installation
 npm install @cliffy/command chalk inquirer
@@ -217,41 +217,41 @@ npm install --save-dev @types/node typescript
 ### 1. Verify Installation
 ```bash
 # Check version
-./claude-flow --version
-# Should show: claude-flow/2.0.0
+./outlaw-flow --version
+# Should show: outlaw-flow/2.0.0
 
 # Check system status
-./claude-flow status
+./outlaw-flow status
 ```
 
 ### 2. Test Basic Commands
 ```bash
 # Start orchestration
-./claude-flow start --ui --port 3000
+./outlaw-flow start --ui --port 3000
 
 # Spawn an agent
-./claude-flow agent spawn researcher --name "TestBot"
+./outlaw-flow agent spawn researcher --name "TestBot"
 
 # Run SPARC mode
-./claude-flow sparc run code "hello world function"
+./outlaw-flow sparc run code "hello world function"
 ```
 
 ### 3. Test Swarm Features
 ```bash
 # Initialize swarm
-./claude-flow swarm init --topology mesh
+./outlaw-flow swarm init --topology mesh
 
 # Run parallel task
-./claude-flow swarm "Create REST API" --parallel --monitor
+./outlaw-flow swarm "Create REST API" --parallel --monitor
 ```
 
 ### 4. Validate MCP Integration
 ```bash
 # Check MCP status
-./claude-flow mcp status
+./outlaw-flow mcp status
 
 # List available tools
-./claude-flow mcp tools
+./outlaw-flow mcp tools
 ```
 
 ## 🔧 Troubleshooting
@@ -261,7 +261,7 @@ npm install --save-dev @types/node typescript
 #### 1. Command Not Found
 ```bash
 # Solution: Use the local wrapper
-./claude-flow start  # Use ./ prefix
+./outlaw-flow start  # Use ./ prefix
 
 # Or add to PATH
 export PATH="$PWD:$PATH"
@@ -270,10 +270,10 @@ export PATH="$PWD:$PATH"
 #### 2. Permission Errors
 ```bash
 # Solution: Make wrapper executable
-chmod +x claude-flow
+chmod +x outlaw-flow
 
 # For global install
-sudo npm install -g claude-flow@2.0.0
+sudo npm install -g outlaw-flow@2.0.0
 ```
 
 #### 3. TypeScript Errors
@@ -290,21 +290,21 @@ npm run build
 cp -r memory memory-backup
 
 # Initialize new memory system
-./claude-flow memory init
+./outlaw-flow memory init
 
 # Import old data
-./claude-flow memory import ./memory-backup/data.json
+./outlaw-flow memory import ./memory-backup/data.json
 ```
 
 ### Migration Validation
 ```bash
 # Run comprehensive validation
-./claude-flow validate --check-all
+./outlaw-flow validate --check-all
 
 # Check specific components
-./claude-flow validate --mcp
-./claude-flow validate --swarm
-./claude-flow validate --memory
+./outlaw-flow validate --mcp
+./outlaw-flow validate --swarm
+./outlaw-flow validate --memory
 ```
 
 ## 📊 Performance Comparison
@@ -371,10 +371,10 @@ cp -r memory memory-backup
 
 ## 💬 Support
 
-- **GitHub Issues**: [Report problems](https://github.com/ruvnet/claude-code-flow/issues)
-- **Discord Community**: [Get help](https://discord.gg/claude-flow)
-- **Documentation**: [Full docs](https://github.com/ruvnet/claude-code-flow/docs)
+- **GitHub Issues**: [Report problems](https://github.com/ruvnet/outlaw-flow/issues)
+- **Discord Community**: [Get help](https://discord.gg/outlaw-flow)
+- **Documentation**: [Full docs](https://github.com/ruvnet/outlaw-flow/docs)
 
 ---
 
-**🎉 Welcome to Claude Flow v2.0.0 - Pure NPM TypeScript Edition!**
+**🎉 Welcome to Outlaw Flow v2.0.0 - Pure NPM TypeScript Edition!**

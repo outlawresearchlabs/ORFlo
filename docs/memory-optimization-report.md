@@ -14,8 +14,8 @@ I have successfully implemented comprehensive memory optimizations for the Hive 
 - **Pool Analytics**: Real-time monitoring of pool efficiency and reuse rates
 
 **Files Modified:**
-- `/workspaces/claude-code-flow/src/cli/simple-commands/hive-mind/memory.js`
-- `/workspaces/claude-code-flow/src/hive-mind/core/Memory.ts`
+- `/workspaces/outlaw-flow/src/cli/simple-commands/hive-mind/memory.js`
+- `/workspaces/outlaw-flow/src/hive-mind/core/Memory.ts`
 
 ### 2. **High-Performance LRU Cache System**
 - **Optimized LRU Cache**: Custom implementation with memory pressure handling

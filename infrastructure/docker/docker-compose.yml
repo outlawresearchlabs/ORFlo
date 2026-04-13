@@ -2,23 +2,23 @@ version: '3.8'
 
 services:
   # Claude Flow main service
-  claude-flow:
+  outlaw-flow:
     build:
       context: ../..
       dockerfile: infrastructure/docker/Dockerfile
-    image: claude-flow:latest
-    container_name: claude-flow
+    image: outlaw-flow:latest
+    container_name: outlaw-flow
     restart: unless-stopped
     environment:
       - NODE_ENV=production
       - GITHUB_TOKEN=${GITHUB_TOKEN}
-      - CLAUDE_FLOW_HOME=/home/claude/.claude-flow
+      - OUTLAW_FLOW_HOME=/home/claude/.outlaw-flow
       - MCP_SERVER_URL=http://mcp-server:3001
     volumes:
-      - claude-flow-data:/home/claude/.claude-flow
+      - outlaw-flow-data:/home/claude/.outlaw-flow
       - ../../workspace:/workspace
     networks:
-      - claude-flow-network
+      - outlaw-flow-network
     command: ["start", "--mode", "server"]
     ports:
       - "3000:3000"
@@ -28,8 +28,8 @@ services:
     build:
       context: ../..
       dockerfile: infrastructure/docker/Dockerfile
-    image: claude-flow:latest
-    container_name: claude-flow-mcp
+    image: outlaw-flow:latest
+    container_name: outlaw-flow-mcp
     restart: unless-stopped
     environment:
       - NODE_ENV=production
@@ -38,7 +38,7 @@ services:
     volumes:
       - mcp-data:/home/claude/.mcp
     networks:
-      - claude-flow-network
+      - outlaw-flow-network
     command: ["mcp", "start", "--port", "3001"]
     ports:
       - "3001:3001"
@@ -51,15 +51,15 @@ services:
     environment:
       - NODE_ENV=production
       - SWARM_MODE=distributed
-      - CLAUDE_FLOW_URL=http://claude-flow:3000
+      - OUTLAW_FLOW_URL=http://outlaw-flow:3000
     volumes:
       - ../../ruv-swarm:/app
       - swarm-data:/data
     networks:
-      - claude-flow-network
+      - outlaw-flow-network
     command: ["npx", "ruv-swarm", "mcp", "start"]
     depends_on:
-      - claude-flow
+      - outlaw-flow
       - mcp-server
 
   # Development environment
@@ -68,15 +68,15 @@ services:
       context: ../..
       dockerfile: infrastructure/docker/Dockerfile
       target: builder
-    image: claude-flow:dev
-    container_name: claude-flow-dev
+    image: outlaw-flow:dev
+    container_name: outlaw-flow-dev
     environment:
       - NODE_ENV=development
     volumes:
       - ../..:/app
       - /app/node_modules
     networks:
-      - claude-flow-network
+      - outlaw-flow-network
     command: ["bash"]
     stdin_open: true
     tty: true
@@ -87,8 +87,8 @@ services:
       context: ../..
       dockerfile: infrastructure/docker/Dockerfile
       target: builder
-    image: claude-flow:test
-    container_name: claude-flow-test
+    image: outlaw-flow:test
+    container_name: outlaw-flow-test
     environment:
       - NODE_ENV=test
       - CI=true
@@ -96,11 +96,11 @@ services:
       - ../..:/app
       - /app/node_modules
     networks:
-      - claude-flow-network
+      - outlaw-flow-network
     command: ["npm", "test"]
 
 volumes:
-  claude-flow-data:
+  outlaw-flow-data:
     driver: local
   mcp-data:
     driver: local
@@ -108,7 +108,7 @@ volumes:
     driver: local
 
 networks:
-  claude-flow-network:
+  outlaw-flow-network:
     driver: bridge
     ipam:
       config:

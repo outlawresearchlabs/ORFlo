@@ -1,4 +1,4 @@
-# Claude-Flow v2.0.0-alpha.1 Release Checklist
+# Outlaw-Flow v2.0.0-alpha.1 Release Checklist
 
 ## ✅ Completed Tasks
 
@@ -39,31 +39,31 @@
 ## 🚀 Alpha Release Summary
 
 **Version:** 2.0.0-alpha.1  
-**Package Name:** claude-flow  
-**NPX Installation:** `npx claude-flow@2.0.0-alpha.1`
+**Package Name:** outlaw-flow  
+**NPX Installation:** `npx outlaw-flow@2.0.0-alpha.1`
 
 ### Key Features for Alpha Users:
-1. **Hive Mind Quick Start:** `claude-flow hive-mind wizard`
-2. **Swarm Coordination:** `claude-flow swarm "build REST API"`
-3. **SPARC Development:** `claude-flow sparc <mode>`
+1. **Hive Mind Quick Start:** `outlaw-flow hive-mind wizard`
+2. **Swarm Coordination:** `outlaw-flow swarm "build REST API"`
+3. **SPARC Development:** `outlaw-flow sparc <mode>`
 4. **MCP Integration:** Full ruv-swarm toolkit
 5. **Enterprise Analytics:** Performance monitoring and metrics
 
 ### Installation Methods:
-- **NPX (Recommended):** `npx claude-flow@2.0.0-alpha.1 init --sparc`
-- **Global Install:** `npm install -g claude-flow@2.0.0-alpha.1`
+- **NPX (Recommended):** `npx outlaw-flow@2.0.0-alpha.1 init --sparc`
+- **Global Install:** `npm install -g outlaw-flow@2.0.0-alpha.1`
 - **Development:** Direct package usage
 
 ### First-Time Setup:
 ```bash
 # Initialize with SPARC methodology
-npx claude-flow@2.0.0-alpha.1 init --sparc
+npx outlaw-flow@2.0.0-alpha.1 init --sparc
 
 # Start Hive Mind wizard (recommended)
-claude-flow hive-mind wizard
+outlaw-flow hive-mind wizard
 
 # Begin swarm coordination
-claude-flow start --ui --swarm
+outlaw-flow start --ui --swarm
 ```
 
 ## 🔄 Next Steps for Beta Release
@@ -102,4 +102,4 @@ claude-flow start --ui --swarm
 
 **🚨 Alpha Release Note:** This is a pre-release version intended for early adopters and testing. Some features may have limitations, and the TypeScript build pipeline is temporarily simplified for rapid deployment.
 
-**Support:** Issues and feedback can be reported at https://github.com/ruvnet/claude-code-flow/issues
+**Support:** Issues and feedback can be reported at https://github.com/ruvnet/outlaw-flow/issues

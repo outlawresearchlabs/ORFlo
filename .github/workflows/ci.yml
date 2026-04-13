@@ -178,11 +178,11 @@ jobs:
 
       - name: Build CLI binary
         run: |
-          deno compile --allow-all --output=dist/claude-flow-${{ runner.os }} src/cli/index.ts
+          deno compile --allow-all --output=dist/outlaw-flow-${{ runner.os }} src/cli/index.ts
 
       - name: Test binary
         run: |
-          ./dist/claude-flow-${{ runner.os }} --version
+          ./dist/outlaw-flow-${{ runner.os }} --version
 
       - name: Build NPM package
         if: matrix.os == 'ubuntu-latest'
@@ -221,7 +221,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
-          chmod +x dist/claude-flow-Linux
+          chmod +x dist/outlaw-flow-Linux
           deno task test:claude-integration
         continue-on-error: true
 
@@ -289,7 +289,7 @@ jobs:
         if: steps.semantic-release.outputs.new_release_published == 'true'
         run: |
           # Submit to deno.land/x registry
-          curl -X POST "https://api.deno.land/webhook/gh/claude-flow" \
+          curl -X POST "https://api.deno.land/webhook/gh/outlaw-flow" \
             -H "Authorization: Bearer ${{ secrets.DENO_WEBHOOK_SECRET }}"
 
   # Monitoring and alerts
@@ -309,7 +309,7 @@ jobs:
         uses: 8398a7/action-slack@v3
         with:
           status: ${{ job.status }}
-          channel: '#claude-flow-deployments'
+          channel: '#outlaw-flow-deployments'
           webhook_url: ${{ secrets.SLACK_WEBHOOK }}
         if: always()
 

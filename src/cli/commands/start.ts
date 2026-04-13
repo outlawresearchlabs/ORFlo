@@ -1,5 +1,5 @@
 /**
- * Start command for Claude-Flow
+ * Start command for Outlaw-Flow
  * Re-exports the modular implementation
  */
 

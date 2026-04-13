@@ -1,5 +1,5 @@
 /**
- * Integration tests for Claude-Flow CLI
+ * Integration tests for Outlaw-Flow CLI
  */
 
 import { jest } from '@jest/globals';
@@ -43,9 +43,9 @@ describe('CLI Integration Tests', () => {
       });
 
       child.on('close', (code) => {
-        expect(stdout).toContain('Claude-Flow v2.0.0');
+        expect(stdout).toContain('Outlaw-Flow v2.0.0');
         expect(stdout).toContain('USAGE:');
-        expect(stdout).toContain('claude-flow <command> [options]');
+        expect(stdout).toContain('outlaw-flow <command> [options]');
         done();
       });
     }, 10000);
@@ -103,7 +103,7 @@ describe('CLI Integration Tests', () => {
       child.on('close', async (code) => {
         try {
           expect(code).toBe(0);
-          expect(stdout).toContain('Claude-Flow initialized');
+          expect(stdout).toContain('Outlaw-Flow initialized');
           
           // Check if .claude directory was created
           const claudeDir = path.join(testDir, '.claude');
@@ -287,7 +287,7 @@ describe('CLI Integration Tests', () => {
 
       child.on('close', (code) => {
         expect(code).toBe(1);
-        expect(stderr).toContain('Claude-Flow not initialized');
+        expect(stderr).toContain('Outlaw-Flow not initialized');
         done();
       });
     }, 10000);
@@ -315,7 +315,7 @@ describe('CLI Integration Tests', () => {
   describe('Configuration', () => {
     test('should handle configuration files', async () => {
       // Create a test config file
-      const configPath = path.join(testDir, 'claude-flow.json');
+      const configPath = path.join(testDir, 'outlaw-flow.json');
       const config = {
         version: '2.0.0',
         features: {

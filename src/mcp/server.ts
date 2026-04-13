@@ -28,7 +28,7 @@ import { RequestRouter } from './router.js';
 import { SessionManager, ISessionManager } from './session-manager.js';
 import { AuthManager, IAuthManager } from './auth.js';
 import { LoadBalancer, ILoadBalancer, RequestQueue } from './load-balancer.js';
-import { createClaudeFlowTools, ClaudeFlowToolContext } from './claude-flow-tools.js';
+import { createOutlawFlowTools, OutlawFlowToolContext } from './outlaw-flow-tools.js';
 import { createSwarmTools, SwarmToolContext } from './swarm-tools.js';
 import { createRuvSwarmTools, RuvSwarmToolContext, isRuvSwarmAvailable, initializeRuvSwarmIntegration } from './ruv-swarm-tools.js';
 import { platform, arch } from 'node:os';
@@ -64,7 +64,7 @@ export class MCPServer implements IMCPServer {
   private currentSession?: MCPSession | undefined;
 
   private readonly serverInfo = {
-    name: 'Claude-Flow MCP Server',
+    name: 'Outlaw-Flow MCP Server',
     version: '1.0.0',
   };
 
@@ -377,7 +377,7 @@ export class MCPServer implements IMCPServer {
         protocolVersion: this.supportedProtocolVersion,
         capabilities: this.serverCapabilities,
         serverInfo: this.serverInfo,
-        instructions: 'Claude-Flow MCP Server ready for tool execution',
+        instructions: 'Outlaw-Flow MCP Server ready for tool execution',
       };
 
       this.logger.info('Session initialized', {
@@ -500,18 +500,18 @@ export class MCPServer implements IMCPServer {
       },
     });
 
-    // Register Claude-Flow specific tools if orchestrator is available
+    // Register Outlaw-Flow specific tools if orchestrator is available
     if (this.orchestrator) {
-      const claudeFlowTools = createClaudeFlowTools(this.logger);
+      const claudeFlowTools = createOutlawFlowTools(this.logger);
       
       for (const tool of claudeFlowTools) {
         // Wrap the handler to inject orchestrator context
         const originalHandler = tool.handler;
         tool.handler = async (input: unknown, context?: MCPContext) => {
-          const claudeFlowContext: ClaudeFlowToolContext = {
+          const claudeFlowContext: OutlawFlowToolContext = {
             ...context,
             orchestrator: this.orchestrator,
-          } as ClaudeFlowToolContext;
+          } as OutlawFlowToolContext;
           
           return await originalHandler(input, claudeFlowContext);
         };
@@ -519,9 +519,9 @@ export class MCPServer implements IMCPServer {
         this.registerTool(tool);
       }
       
-      this.logger.info('Registered Claude-Flow tools', { count: claudeFlowTools.length });
+      this.logger.info('Registered Outlaw-Flow tools', { count: claudeFlowTools.length });
     } else {
-      this.logger.warn('Orchestrator not available - Claude-Flow tools not registered');
+      this.logger.warn('Orchestrator not available - Outlaw-Flow tools not registered');
     }
 
     // Register Swarm-specific tools if swarm components are available

@@ -1,6 +1,6 @@
-# Docker Testing Environment for claude-code-flow
+# Docker Testing Environment for outlaw-flow
 
-This directory contains a comprehensive Docker testing environment for claude-code-flow and ruv-swarm integration.
+This directory contains a comprehensive Docker testing environment for outlaw-flow and ruv-swarm integration.
 
 ## 🏗️ Architecture
 
@@ -19,9 +19,9 @@ The `Dockerfile` implements a multi-stage build process:
 
 The `docker-compose.yml` provides:
 
-- **claude-flow-dev**: Development environment with hot reloading
-- **claude-flow-test**: Automated testing environment
-- **claude-flow-prod**: Production-ready deployment
+- **outlaw-flow-dev**: Development environment with hot reloading
+- **outlaw-flow-test**: Automated testing environment
+- **outlaw-flow-prod**: Production-ready deployment
 - **ruv-swarm-integration**: Swarm coordination testing
 - **Database Services**: SQLite databases for both services
 - **Monitoring**: Performance monitoring and metrics collection
@@ -40,10 +40,10 @@ The `docker-compose.yml` provides:
 
 ```bash
 # Start development environment
-docker-compose up -d claude-flow-dev
+docker-compose up -d outlaw-flow-dev
 
 # View logs
-docker-compose logs -f claude-flow-dev
+docker-compose logs -f outlaw-flow-dev
 
 # Access the application
 open http://localhost:3000
@@ -56,8 +56,8 @@ open http://localhost:3000
 docker-compose --profile testing up test-runner
 
 # Run specific test suites
-docker-compose run --rm claude-flow-test npm run test:unit
-docker-compose run --rm claude-flow-test npm run test:integration
+docker-compose run --rm outlaw-flow-test npm run test:unit
+docker-compose run --rm outlaw-flow-test npm run test:integration
 ```
 
 ### 4. Swarm Integration Testing
@@ -124,7 +124,7 @@ Key environment variables:
 ```bash
 # Development
 NODE_ENV=development
-DEBUG=claude-flow:*
+DEBUG=outlaw-flow:*
 SWARM_MODE=true
 MCP_ENABLED=true
 
@@ -166,9 +166,9 @@ The environment uses strategic volume mounting:
 ./scripts/run-all-tests.sh
 
 # Run specific test categories
-docker-compose run --rm claude-flow-test npm run test:unit
-docker-compose run --rm claude-flow-test npm run test:integration
-docker-compose run --rm claude-flow-test npm run test:performance
+docker-compose run --rm outlaw-flow-test npm run test:unit
+docker-compose run --rm outlaw-flow-test npm run test:integration
+docker-compose run --rm outlaw-flow-test npm run test:performance
 ```
 
 ## 📂 Directory Structure
@@ -187,7 +187,7 @@ infrastructure/docker/testing/
 │   ├── run-all-tests.sh       # Comprehensive test runner
 │   └── performance-monitor.js  # Performance monitoring
 └── volumes/
-    ├── claude-flow/           # claude-code-flow specific data
+    ├── outlaw-flow/           # outlaw-flow specific data
     ├── ruv-swarm/             # ruv-swarm specific data
     └── shared/                # Cross-container shared data
 ```
@@ -239,7 +239,7 @@ The pipeline includes:
 docker-compose logs -f [service-name]
 
 # Execute interactive shell
-docker-compose exec claude-flow-dev /bin/bash
+docker-compose exec outlaw-flow-dev /bin/bash
 
 # Check container resource usage
 docker stats
@@ -285,10 +285,10 @@ Before deployment, verify:
 
 For issues or questions:
 
-- **GitHub Issues**: https://github.com/ruvnet/claude-code-flow/issues
-- **Documentation**: https://github.com/ruvnet/claude-code-flow/docs
+- **GitHub Issues**: https://github.com/ruvnet/outlaw-flow/issues
+- **Documentation**: https://github.com/ruvnet/outlaw-flow/docs
 - **Discord**: Community support channel
 
 ---
 
-**Note**: This Docker environment is optimized for testing claude-code-flow and ruv-swarm integration. For production deployments, review security configurations and resource limits.
+**Note**: This Docker environment is optimized for testing outlaw-flow and ruv-swarm integration. For production deployments, review security configurations and resource limits.

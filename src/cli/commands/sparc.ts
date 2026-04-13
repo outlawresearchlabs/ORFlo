@@ -364,11 +364,11 @@ ${mode.customInstructions}
 
 ## SPARC Development Environment
 
-You are working within the SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology using claude-flow orchestration features.
+You are working within the SPARC (Specification, Pseudocode, Architecture, Refinement, Completion) methodology using outlaw-flow orchestration features.
 
 ### Available Development Tools
-- **Memory Persistence**: Use \`npx claude-flow memory store <key> "<value>"\` to save progress and findings
-- **Memory Retrieval**: Use \`npx claude-flow memory query <search>\` to access previous work
+- **Memory Persistence**: Use \`npx outlaw-flow memory store <key> "<value>"\` to save progress and findings
+- **Memory Retrieval**: Use \`npx outlaw-flow memory query <search>\` to access previous work
 - **Namespace**: Your work is stored in the "${memoryNamespace}" namespace
 
 ### SPARC Methodology Integration
@@ -380,8 +380,8 @@ ${flags.tddPhase ? `
 
 ${flags.workflowStep ? `
 **Workflow Progress**: Step ${flags.workflowStep} of ${flags.totalSteps}
-- Review previous steps: \`npx claude-flow memory query previous_steps\`
-- Store this step's output: \`npx claude-flow memory store step_${flags.workflowStep}_output "<results>"\`
+- Review previous steps: \`npx outlaw-flow memory query previous_steps\`
+- Store this step's output: \`npx outlaw-flow memory store step_${flags.workflowStep}_output "<results>"\`
 ` : ''}
 
 ### Best Practices
@@ -393,13 +393,13 @@ ${flags.workflowStep ? `
 ### Memory Commands Examples
 \`\`\`bash
 # Store your progress
-npx claude-flow memory store ${memoryNamespace}_progress "Current status and findings"
+npx outlaw-flow memory store ${memoryNamespace}_progress "Current status and findings"
 
 # Check for previous work
-npx claude-flow memory query ${memoryNamespace}
+npx outlaw-flow memory query ${memoryNamespace}
 
 # Store phase-specific results
-npx claude-flow memory store ${memoryNamespace}_${flags.tddPhase || 'results'} "Phase output and decisions"
+npx outlaw-flow memory store ${memoryNamespace}_${flags.tddPhase || 'results'} "Phase output and decisions"
 \`\`\`
 
 ### Integration with Other SPARC Modes
@@ -467,8 +467,8 @@ async function executeClaudeWithSparc(
         ...process.env,
         CLAUDE_INSTANCE_ID: instanceId,
         CLAUDE_SPARC_MODE: "true",
-        CLAUDE_FLOW_MEMORY_ENABLED: "true",
-        CLAUDE_FLOW_MEMORY_NAMESPACE: flags.namespace || "sparc",
+        OUTLAW_FLOW_MEMORY_ENABLED: "true",
+        OUTLAW_FLOW_MEMORY_NAMESPACE: flags.namespace || "sparc",
       },
       stdio: "inherit",
     });
@@ -520,10 +520,10 @@ async function showSparcHelp(): Promise<void> {
   console.log("  --sequential            Wait between workflow steps (default: true)");
   console.log();
   console.log(blue("Examples:"));
-  console.log(`  ${yellow("claude-flow sparc modes")}                              # List all modes`);
-  console.log(`  ${yellow("claude-flow sparc run code")} "implement user auth"      # Run specific mode`);
-  console.log(`  ${yellow("claude-flow sparc tdd")} "payment processing system"    # Full TDD workflow`);
-  console.log(`  ${yellow("claude-flow sparc workflow")} project-workflow.json     # Custom workflow`);
+  console.log(`  ${yellow("outlaw-flow sparc modes")}                              # List all modes`);
+  console.log(`  ${yellow("outlaw-flow sparc run code")} "implement user auth"      # Run specific mode`);
+  console.log(`  ${yellow("outlaw-flow sparc tdd")} "payment processing system"    # Full TDD workflow`);
+  console.log(`  ${yellow("outlaw-flow sparc workflow")} project-workflow.json     # Custom workflow`);
   console.log();
   console.log(blue("TDD Workflow:"));
   console.log("  1. Specification - Define requirements and create pseudocode");
@@ -532,5 +532,5 @@ async function showSparcHelp(): Promise<void> {
   console.log("  4. Refactor Phase - Optimize and clean up code");
   console.log("  5. Integration - Verify complete solution");
   console.log();
-  console.log("For more information: https://github.com/ruvnet/claude-code-flow/docs/sparc.md");
+  console.log("For more information: https://github.com/ruvnet/outlaw-flow/docs/sparc.md");
 }

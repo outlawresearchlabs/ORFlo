@@ -1,4 +1,4 @@
-// enhanced-templates.js - Generate Claude Flow v2.0.0 enhanced templates
+// enhanced-templates.js - Generate Outlaw Flow v2.0.0 enhanced templates
 import { readFileSync } from 'fs';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
@@ -34,9 +34,9 @@ export function createEnhancedSettingsJson() {
 }
 
 export function createWrapperScript(type = 'unix') {
-  const filename = type === 'unix' ? 'claude-flow' : 
-                   type === 'windows' ? 'claude-flow.bat' : 
-                   'claude-flow.ps1';
+  const filename = type === 'unix' ? 'outlaw-flow' : 
+                   type === 'windows' ? 'outlaw-flow.bat' : 
+                   'outlaw-flow.ps1';
   
   const template = loadTemplate(filename);
   if (!template) {
@@ -64,7 +64,7 @@ Automatically detect performance bottlenecks in your swarm operations.
 
 ## Usage
 \`\`\`bash
-npx claude-flow analysis bottleneck-detect [options]
+npx outlaw-flow analysis bottleneck-detect [options]
 \`\`\`
 
 ## Options
@@ -75,13 +75,13 @@ npx claude-flow analysis bottleneck-detect [options]
 ## Examples
 \`\`\`bash
 # Detect bottlenecks in current swarm
-npx claude-flow analysis bottleneck-detect
+npx outlaw-flow analysis bottleneck-detect
 
 # Set custom threshold
-npx claude-flow analysis bottleneck-detect --threshold 500
+npx outlaw-flow analysis bottleneck-detect --threshold 500
 
 # Export results
-npx claude-flow analysis bottleneck-detect --export bottlenecks.json
+npx outlaw-flow analysis bottleneck-detect --export bottlenecks.json
 \`\`\`
 `,
       'token-usage': `# token-usage
@@ -90,7 +90,7 @@ Analyze token usage patterns and optimize for efficiency.
 
 ## Usage
 \`\`\`bash
-npx claude-flow analysis token-usage [options]
+npx outlaw-flow analysis token-usage [options]
 \`\`\`
 
 ## Options
@@ -101,13 +101,13 @@ npx claude-flow analysis token-usage [options]
 ## Examples
 \`\`\`bash
 # Last 24 hours token usage
-npx claude-flow analysis token-usage --period 24h
+npx outlaw-flow analysis token-usage --period 24h
 
 # By agent breakdown
-npx claude-flow analysis token-usage --by-agent
+npx outlaw-flow analysis token-usage --by-agent
 
 # Export detailed report
-npx claude-flow analysis token-usage --period 7d --export tokens.csv
+npx outlaw-flow analysis token-usage --period 7d --export tokens.csv
 \`\`\`
 `,
       'performance-report': `# performance-report
@@ -116,7 +116,7 @@ Generate comprehensive performance reports for swarm operations.
 
 ## Usage
 \`\`\`bash
-npx claude-flow analysis performance-report [options]
+npx outlaw-flow analysis performance-report [options]
 \`\`\`
 
 ## Options
@@ -127,13 +127,13 @@ npx claude-flow analysis performance-report [options]
 ## Examples
 \`\`\`bash
 # Generate HTML report
-npx claude-flow analysis performance-report --format html
+npx outlaw-flow analysis performance-report --format html
 
 # Compare swarms
-npx claude-flow analysis performance-report --compare swarm-123
+npx outlaw-flow analysis performance-report --compare swarm-123
 
 # Full metrics report
-npx claude-flow analysis performance-report --include-metrics --format markdown
+npx outlaw-flow analysis performance-report --include-metrics --format markdown
 \`\`\`
 `
     },
@@ -144,7 +144,7 @@ Automatically assign agents based on task analysis.
 
 ## Usage
 \`\`\`bash
-npx claude-flow automation auto-agent [options]
+npx outlaw-flow automation auto-agent [options]
 \`\`\`
 
 ## Options
@@ -155,13 +155,13 @@ npx claude-flow automation auto-agent [options]
 ## Examples
 \`\`\`bash
 # Auto-assign for task
-npx claude-flow automation auto-agent --task "Build REST API"
+npx outlaw-flow automation auto-agent --task "Build REST API"
 
 # Limit agents
-npx claude-flow automation auto-agent --task "Fix bugs" --max-agents 3
+npx outlaw-flow automation auto-agent --task "Fix bugs" --max-agents 3
 
 # Use specific strategy
-npx claude-flow automation auto-agent --strategy specialized
+npx outlaw-flow automation auto-agent --strategy specialized
 \`\`\`
 `,
       'smart-spawn': `# smart-spawn
@@ -170,7 +170,7 @@ Intelligently spawn agents based on workload analysis.
 
 ## Usage
 \`\`\`bash
-npx claude-flow automation smart-spawn [options]
+npx outlaw-flow automation smart-spawn [options]
 \`\`\`
 
 ## Options
@@ -181,13 +181,13 @@ npx claude-flow automation smart-spawn [options]
 ## Examples
 \`\`\`bash
 # Smart spawn with analysis
-npx claude-flow automation smart-spawn --analyze
+npx outlaw-flow automation smart-spawn --analyze
 
 # Set spawn threshold
-npx claude-flow automation smart-spawn --threshold 5
+npx outlaw-flow automation smart-spawn --threshold 5
 
 # Force topology
-npx claude-flow automation smart-spawn --topology hierarchical
+npx outlaw-flow automation smart-spawn --topology hierarchical
 \`\`\`
 `,
       'workflow-select': `# workflow-select
@@ -196,7 +196,7 @@ Automatically select optimal workflow based on task type.
 
 ## Usage
 \`\`\`bash
-npx claude-flow automation workflow-select [options]
+npx outlaw-flow automation workflow-select [options]
 \`\`\`
 
 ## Options
@@ -207,13 +207,13 @@ npx claude-flow automation workflow-select [options]
 ## Examples
 \`\`\`bash
 # Select workflow for task
-npx claude-flow automation workflow-select --task "Deploy to production"
+npx outlaw-flow automation workflow-select --task "Deploy to production"
 
 # With constraints
-npx claude-flow automation workflow-select --constraints "no-downtime,rollback"
+npx outlaw-flow automation workflow-select --constraints "no-downtime,rollback"
 
 # Preview mode
-npx claude-flow automation workflow-select --task "Database migration" --preview
+npx outlaw-flow automation workflow-select --task "Database migration" --preview
 \`\`\`
 `
     },
@@ -224,7 +224,7 @@ Initialize a new agent swarm with specified topology.
 
 ## Usage
 \`\`\`bash
-npx claude-flow swarm init [options]
+npx outlaw-flow swarm init [options]
 \`\`\`
 
 ## Options
@@ -235,13 +235,13 @@ npx claude-flow swarm init [options]
 ## Examples
 \`\`\`bash
 # Initialize hierarchical swarm
-npx claude-flow swarm init --topology hierarchical
+npx outlaw-flow swarm init --topology hierarchical
 
 # With agent limit
-npx claude-flow swarm init --topology mesh --max-agents 8
+npx outlaw-flow swarm init --topology mesh --max-agents 8
 
 # Parallel execution
-npx claude-flow swarm init --strategy parallel
+npx outlaw-flow swarm init --strategy parallel
 \`\`\`
 `,
       'agent-spawn': `# agent-spawn
@@ -250,7 +250,7 @@ Spawn a new agent in the current swarm.
 
 ## Usage
 \`\`\`bash
-npx claude-flow agent spawn [options]
+npx outlaw-flow agent spawn [options]
 \`\`\`
 
 ## Options
@@ -261,13 +261,13 @@ npx claude-flow agent spawn [options]
 ## Examples
 \`\`\`bash
 # Spawn coder agent
-npx claude-flow agent spawn --type coder
+npx outlaw-flow agent spawn --type coder
 
 # With custom name
-npx claude-flow agent spawn --type researcher --name "API Expert"
+npx outlaw-flow agent spawn --type researcher --name "API Expert"
 
 # With specific skills
-npx claude-flow agent spawn --type coder --skills "python,fastapi,testing"
+npx outlaw-flow agent spawn --type coder --skills "python,fastapi,testing"
 \`\`\`
 `,
       'task-orchestrate': `# task-orchestrate
@@ -276,7 +276,7 @@ Orchestrate complex tasks across the swarm.
 
 ## Usage
 \`\`\`bash
-npx claude-flow task orchestrate [options]
+npx outlaw-flow task orchestrate [options]
 \`\`\`
 
 ## Options
@@ -287,13 +287,13 @@ npx claude-flow task orchestrate [options]
 ## Examples
 \`\`\`bash
 # Orchestrate development task
-npx claude-flow task orchestrate --task "Implement user authentication"
+npx outlaw-flow task orchestrate --task "Implement user authentication"
 
 # High priority task
-npx claude-flow task orchestrate --task "Fix production bug" --priority critical
+npx outlaw-flow task orchestrate --task "Fix production bug" --priority critical
 
 # With specific strategy
-npx claude-flow task orchestrate --task "Refactor codebase" --strategy parallel
+npx outlaw-flow task orchestrate --task "Refactor codebase" --strategy parallel
 \`\`\`
 `
     },
@@ -304,7 +304,7 @@ Create a specialized swarm for GitHub repository management.
 
 ## Usage
 \`\`\`bash
-npx claude-flow github swarm [options]
+npx outlaw-flow github swarm [options]
 \`\`\`
 
 ## Options
@@ -315,13 +315,13 @@ npx claude-flow github swarm [options]
 ## Examples
 \`\`\`bash
 # Create GitHub swarm
-npx claude-flow github swarm --repository myorg/myrepo
+npx outlaw-flow github swarm --repository myorg/myrepo
 
 # With specific focus
-npx claude-flow github swarm --repository myorg/myrepo --focus security
+npx outlaw-flow github swarm --repository myorg/myrepo --focus security
 
 # Custom agent count
-npx claude-flow github swarm --repository myorg/myrepo --agents 6
+npx outlaw-flow github swarm --repository myorg/myrepo --agents 6
 \`\`\`
 `,
       'repo-analyze': `# repo-analyze
@@ -330,7 +330,7 @@ Deep analysis of GitHub repository with AI insights.
 
 ## Usage
 \`\`\`bash
-npx claude-flow github repo-analyze [options]
+npx outlaw-flow github repo-analyze [options]
 \`\`\`
 
 ## Options
@@ -341,13 +341,13 @@ npx claude-flow github repo-analyze [options]
 ## Examples
 \`\`\`bash
 # Basic analysis
-npx claude-flow github repo-analyze --repository myorg/myrepo
+npx outlaw-flow github repo-analyze --repository myorg/myrepo
 
 # Deep analysis
-npx claude-flow github repo-analyze --repository myorg/myrepo --deep
+npx outlaw-flow github repo-analyze --repository myorg/myrepo --deep
 
 # Specific areas
-npx claude-flow github repo-analyze --repository myorg/myrepo --include issues,prs
+npx outlaw-flow github repo-analyze --repository myorg/myrepo --include issues,prs
 \`\`\`
 `,
       'pr-enhance': `# pr-enhance
@@ -356,7 +356,7 @@ AI-powered pull request enhancements.
 
 ## Usage
 \`\`\`bash
-npx claude-flow github pr-enhance [options]
+npx outlaw-flow github pr-enhance [options]
 \`\`\`
 
 ## Options
@@ -368,13 +368,13 @@ npx claude-flow github pr-enhance [options]
 ## Examples
 \`\`\`bash
 # Enhance PR
-npx claude-flow github pr-enhance --pr-number 123
+npx outlaw-flow github pr-enhance --pr-number 123
 
 # Add tests
-npx claude-flow github pr-enhance --pr-number 123 --add-tests
+npx outlaw-flow github pr-enhance --pr-number 123 --add-tests
 
 # Full enhancement
-npx claude-flow github pr-enhance --pr-number 123 --add-tests --improve-docs
+npx outlaw-flow github pr-enhance --pr-number 123 --add-tests --improve-docs
 \`\`\`
 `,
       'issue-triage': `# issue-triage
@@ -383,7 +383,7 @@ Intelligent issue classification and triage.
 
 ## Usage
 \`\`\`bash
-npx claude-flow github issue-triage [options]
+npx outlaw-flow github issue-triage [options]
 \`\`\`
 
 ## Options
@@ -394,13 +394,13 @@ npx claude-flow github issue-triage [options]
 ## Examples
 \`\`\`bash
 # Triage issues
-npx claude-flow github issue-triage --repository myorg/myrepo
+npx outlaw-flow github issue-triage --repository myorg/myrepo
 
 # With auto-labeling
-npx claude-flow github issue-triage --repository myorg/myrepo --auto-label
+npx outlaw-flow github issue-triage --repository myorg/myrepo --auto-label
 
 # Full automation
-npx claude-flow github issue-triage --repository myorg/myrepo --auto-label --assign
+npx outlaw-flow github issue-triage --repository myorg/myrepo --auto-label --assign
 \`\`\`
 `,
       'code-review': `# code-review
@@ -409,7 +409,7 @@ Automated code review with swarm intelligence.
 
 ## Usage
 \`\`\`bash
-npx claude-flow github code-review [options]
+npx outlaw-flow github code-review [options]
 \`\`\`
 
 ## Options
@@ -420,13 +420,13 @@ npx claude-flow github code-review [options]
 ## Examples
 \`\`\`bash
 # Review PR
-npx claude-flow github code-review --pr-number 456
+npx outlaw-flow github code-review --pr-number 456
 
 # Security focus
-npx claude-flow github code-review --pr-number 456 --focus security
+npx outlaw-flow github code-review --pr-number 456 --focus security
 
 # With fix suggestions
-npx claude-flow github code-review --pr-number 456 --suggest-fixes
+npx outlaw-flow github code-review --pr-number 456 --suggest-fixes
 \`\`\`
 `
     },
@@ -437,7 +437,7 @@ Hook executed before task execution.
 
 ## Usage
 \`\`\`bash
-npx claude-flow hook pre-task [options]
+npx outlaw-flow hook pre-task [options]
 \`\`\`
 
 ## Options
@@ -448,13 +448,13 @@ npx claude-flow hook pre-task [options]
 ## Examples
 \`\`\`bash
 # Basic pre-task hook
-npx claude-flow hook pre-task --description "Building API endpoints"
+npx outlaw-flow hook pre-task --description "Building API endpoints"
 
 # With auto-spawn
-npx claude-flow hook pre-task --description "Complex refactoring" --auto-spawn-agents
+npx outlaw-flow hook pre-task --description "Complex refactoring" --auto-spawn-agents
 
 # Load context
-npx claude-flow hook pre-task --description "Continue feature" --load-context
+npx outlaw-flow hook pre-task --description "Continue feature" --load-context
 \`\`\`
 `,
       'post-task': `# post-task
@@ -463,7 +463,7 @@ Hook executed after task completion.
 
 ## Usage
 \`\`\`bash
-npx claude-flow hook post-task [options]
+npx outlaw-flow hook post-task [options]
 \`\`\`
 
 ## Options
@@ -474,13 +474,13 @@ npx claude-flow hook post-task [options]
 ## Examples
 \`\`\`bash
 # Basic post-task
-npx claude-flow hook post-task --task-id task-123
+npx outlaw-flow hook post-task --task-id task-123
 
 # With performance analysis
-npx claude-flow hook post-task --task-id task-123 --analyze-performance
+npx outlaw-flow hook post-task --task-id task-123 --analyze-performance
 
 # Update memory
-npx claude-flow hook post-task --task-id task-123 --update-memory
+npx outlaw-flow hook post-task --task-id task-123 --update-memory
 \`\`\`
 `,
       'pre-edit': `# pre-edit
@@ -489,7 +489,7 @@ Hook executed before file edits.
 
 ## Usage
 \`\`\`bash
-npx claude-flow hook pre-edit [options]
+npx outlaw-flow hook pre-edit [options]
 \`\`\`
 
 ## Options
@@ -500,13 +500,13 @@ npx claude-flow hook pre-edit [options]
 ## Examples
 \`\`\`bash
 # Pre-edit hook
-npx claude-flow hook pre-edit --file src/api.js
+npx outlaw-flow hook pre-edit --file src/api.js
 
 # With validation
-npx claude-flow hook pre-edit --file src/api.js --validate-syntax
+npx outlaw-flow hook pre-edit --file src/api.js --validate-syntax
 
 # Create backup
-npx claude-flow hook pre-edit --file src/api.js --backup
+npx outlaw-flow hook pre-edit --file src/api.js --backup
 \`\`\`
 `,
       'post-edit': `# post-edit
@@ -515,7 +515,7 @@ Hook executed after file edits.
 
 ## Usage
 \`\`\`bash
-npx claude-flow hook post-edit [options]
+npx outlaw-flow hook post-edit [options]
 \`\`\`
 
 ## Options
@@ -526,13 +526,13 @@ npx claude-flow hook post-edit [options]
 ## Examples
 \`\`\`bash
 # Post-edit hook
-npx claude-flow hook post-edit --file src/api.js
+npx outlaw-flow hook post-edit --file src/api.js
 
 # Store in memory
-npx claude-flow hook post-edit --file src/api.js --memory-key "api-changes"
+npx outlaw-flow hook post-edit --file src/api.js --memory-key "api-changes"
 
 # With formatting
-npx claude-flow hook post-edit --file src/api.js --format
+npx outlaw-flow hook post-edit --file src/api.js --format
 \`\`\`
 `,
       'session-end': `# session-end
@@ -541,7 +541,7 @@ Hook executed at session end.
 
 ## Usage
 \`\`\`bash
-npx claude-flow hook session-end [options]
+npx outlaw-flow hook session-end [options]
 \`\`\`
 
 ## Options
@@ -552,13 +552,13 @@ npx claude-flow hook session-end [options]
 ## Examples
 \`\`\`bash
 # End session
-npx claude-flow hook session-end
+npx outlaw-flow hook session-end
 
 # Export metrics
-npx claude-flow hook session-end --export-metrics
+npx outlaw-flow hook session-end --export-metrics
 
 # Full closure
-npx claude-flow hook session-end --export-metrics --generate-summary --persist-state
+npx outlaw-flow hook session-end --export-metrics --generate-summary --persist-state
 \`\`\`
 `
     },
@@ -569,7 +569,7 @@ Manage persistent memory storage.
 
 ## Usage
 \`\`\`bash
-npx claude-flow memory usage [options]
+npx outlaw-flow memory usage [options]
 \`\`\`
 
 ## Options
@@ -580,13 +580,13 @@ npx claude-flow memory usage [options]
 ## Examples
 \`\`\`bash
 # Store memory
-npx claude-flow memory usage --action store --key "project-config" --value '{"api": "v2"}'
+npx outlaw-flow memory usage --action store --key "project-config" --value '{"api": "v2"}'
 
 # Retrieve memory
-npx claude-flow memory usage --action retrieve --key "project-config"
+npx outlaw-flow memory usage --action retrieve --key "project-config"
 
 # List all keys
-npx claude-flow memory usage --action list
+npx outlaw-flow memory usage --action list
 \`\`\`
 `,
       'memory-persist': `# memory-persist
@@ -595,7 +595,7 @@ Persist memory across sessions.
 
 ## Usage
 \`\`\`bash
-npx claude-flow memory persist [options]
+npx outlaw-flow memory persist [options]
 \`\`\`
 
 ## Options
@@ -606,13 +606,13 @@ npx claude-flow memory persist [options]
 ## Examples
 \`\`\`bash
 # Export memory
-npx claude-flow memory persist --export memory-backup.json
+npx outlaw-flow memory persist --export memory-backup.json
 
 # Import memory
-npx claude-flow memory persist --import memory-backup.json
+npx outlaw-flow memory persist --import memory-backup.json
 
 # Compressed export
-npx claude-flow memory persist --export memory.gz --compress
+npx outlaw-flow memory persist --export memory.gz --compress
 \`\`\`
 `,
       'memory-search': `# memory-search
@@ -621,7 +621,7 @@ Search through stored memory.
 
 ## Usage
 \`\`\`bash
-npx claude-flow memory search [options]
+npx outlaw-flow memory search [options]
 \`\`\`
 
 ## Options
@@ -632,13 +632,13 @@ npx claude-flow memory search [options]
 ## Examples
 \`\`\`bash
 # Search memory
-npx claude-flow memory search --query "authentication"
+npx outlaw-flow memory search --query "authentication"
 
 # Pattern search
-npx claude-flow memory search --pattern "api-.*"
+npx outlaw-flow memory search --pattern "api-.*"
 
 # Limited results
-npx claude-flow memory search --query "config" --limit 10
+npx outlaw-flow memory search --query "config" --limit 10
 \`\`\`
 `
     },
@@ -649,7 +649,7 @@ Real-time swarm monitoring.
 
 ## Usage
 \`\`\`bash
-npx claude-flow swarm monitor [options]
+npx outlaw-flow swarm monitor [options]
 \`\`\`
 
 ## Options
@@ -660,13 +660,13 @@ npx claude-flow swarm monitor [options]
 ## Examples
 \`\`\`bash
 # Start monitoring
-npx claude-flow swarm monitor
+npx outlaw-flow swarm monitor
 
 # Custom interval
-npx claude-flow swarm monitor --interval 5000
+npx outlaw-flow swarm monitor --interval 5000
 
 # With metrics
-npx claude-flow swarm monitor --metrics
+npx outlaw-flow swarm monitor --metrics
 \`\`\`
 `,
       'agent-metrics': `# agent-metrics
@@ -675,7 +675,7 @@ View agent performance metrics.
 
 ## Usage
 \`\`\`bash
-npx claude-flow agent metrics [options]
+npx outlaw-flow agent metrics [options]
 \`\`\`
 
 ## Options
@@ -686,13 +686,13 @@ npx claude-flow agent metrics [options]
 ## Examples
 \`\`\`bash
 # All agents metrics
-npx claude-flow agent metrics
+npx outlaw-flow agent metrics
 
 # Specific agent
-npx claude-flow agent metrics --agent-id agent-001
+npx outlaw-flow agent metrics --agent-id agent-001
 
 # Last hour
-npx claude-flow agent metrics --period 1h
+npx outlaw-flow agent metrics --period 1h
 \`\`\`
 `,
       'real-time-view': `# real-time-view
@@ -701,7 +701,7 @@ Real-time view of swarm activity.
 
 ## Usage
 \`\`\`bash
-npx claude-flow monitoring real-time-view [options]
+npx outlaw-flow monitoring real-time-view [options]
 \`\`\`
 
 ## Options
@@ -712,13 +712,13 @@ npx claude-flow monitoring real-time-view [options]
 ## Examples
 \`\`\`bash
 # Start real-time view
-npx claude-flow monitoring real-time-view
+npx outlaw-flow monitoring real-time-view
 
 # Filter errors
-npx claude-flow monitoring real-time-view --filter errors
+npx outlaw-flow monitoring real-time-view --filter errors
 
 # Highlight pattern
-npx claude-flow monitoring real-time-view --highlight "API"
+npx outlaw-flow monitoring real-time-view --highlight "API"
 \`\`\`
 `
     },
@@ -729,7 +729,7 @@ Optimize swarm topology for current workload.
 
 ## Usage
 \`\`\`bash
-npx claude-flow optimization topology-optimize [options]
+npx outlaw-flow optimization topology-optimize [options]
 \`\`\`
 
 ## Options
@@ -740,13 +740,13 @@ npx claude-flow optimization topology-optimize [options]
 ## Examples
 \`\`\`bash
 # Analyze and suggest
-npx claude-flow optimization topology-optimize --analyze-first
+npx outlaw-flow optimization topology-optimize --analyze-first
 
 # Optimize for speed
-npx claude-flow optimization topology-optimize --target speed
+npx outlaw-flow optimization topology-optimize --target speed
 
 # Apply changes
-npx claude-flow optimization topology-optimize --target efficiency --apply
+npx outlaw-flow optimization topology-optimize --target efficiency --apply
 \`\`\`
 `,
       'parallel-execute': `# parallel-execute
@@ -755,7 +755,7 @@ Execute tasks in parallel for maximum efficiency.
 
 ## Usage
 \`\`\`bash
-npx claude-flow optimization parallel-execute [options]
+npx outlaw-flow optimization parallel-execute [options]
 \`\`\`
 
 ## Options
@@ -766,13 +766,13 @@ npx claude-flow optimization parallel-execute [options]
 ## Examples
 \`\`\`bash
 # Execute task list
-npx claude-flow optimization parallel-execute --tasks tasks.json
+npx outlaw-flow optimization parallel-execute --tasks tasks.json
 
 # Limit parallelism
-npx claude-flow optimization parallel-execute --tasks tasks.json --max-parallel 5
+npx outlaw-flow optimization parallel-execute --tasks tasks.json --max-parallel 5
 
 # Custom strategy
-npx claude-flow optimization parallel-execute --strategy adaptive
+npx outlaw-flow optimization parallel-execute --strategy adaptive
 \`\`\`
 `,
       'cache-manage': `# cache-manage
@@ -781,7 +781,7 @@ Manage operation cache for performance.
 
 ## Usage
 \`\`\`bash
-npx claude-flow optimization cache-manage [options]
+npx outlaw-flow optimization cache-manage [options]
 \`\`\`
 
 ## Options
@@ -792,13 +792,13 @@ npx claude-flow optimization cache-manage [options]
 ## Examples
 \`\`\`bash
 # View cache stats
-npx claude-flow optimization cache-manage --action view
+npx outlaw-flow optimization cache-manage --action view
 
 # Clear cache
-npx claude-flow optimization cache-manage --action clear
+npx outlaw-flow optimization cache-manage --action clear
 
 # Set limits
-npx claude-flow optimization cache-manage --max-size 100 --ttl 3600
+npx outlaw-flow optimization cache-manage --max-size 100 --ttl 3600
 \`\`\`
 `
     },
@@ -809,7 +809,7 @@ Train neural patterns from operations.
 
 ## Usage
 \`\`\`bash
-npx claude-flow training neural-train [options]
+npx outlaw-flow training neural-train [options]
 \`\`\`
 
 ## Options
@@ -820,13 +820,13 @@ npx claude-flow training neural-train [options]
 ## Examples
 \`\`\`bash
 # Train from recent ops
-npx claude-flow training neural-train --data recent
+npx outlaw-flow training neural-train --data recent
 
 # Specific model
-npx claude-flow training neural-train --model task-predictor
+npx outlaw-flow training neural-train --model task-predictor
 
 # Custom epochs
-npx claude-flow training neural-train --epochs 100
+npx outlaw-flow training neural-train --epochs 100
 \`\`\`
 `,
       'pattern-learn': `# pattern-learn
@@ -835,7 +835,7 @@ Learn patterns from successful operations.
 
 ## Usage
 \`\`\`bash
-npx claude-flow training pattern-learn [options]
+npx outlaw-flow training pattern-learn [options]
 \`\`\`
 
 ## Options
@@ -846,13 +846,13 @@ npx claude-flow training pattern-learn [options]
 ## Examples
 \`\`\`bash
 # Learn from all ops
-npx claude-flow training pattern-learn
+npx outlaw-flow training pattern-learn
 
 # High success only
-npx claude-flow training pattern-learn --threshold 0.9
+npx outlaw-flow training pattern-learn --threshold 0.9
 
 # Save patterns
-npx claude-flow training pattern-learn --save optimal-patterns
+npx outlaw-flow training pattern-learn --save optimal-patterns
 \`\`\`
 `,
       'model-update': `# model-update
@@ -861,7 +861,7 @@ Update neural models with new data.
 
 ## Usage
 \`\`\`bash
-npx claude-flow training model-update [options]
+npx outlaw-flow training model-update [options]
 \`\`\`
 
 ## Options
@@ -872,13 +872,13 @@ npx claude-flow training model-update [options]
 ## Examples
 \`\`\`bash
 # Update all models
-npx claude-flow training model-update
+npx outlaw-flow training model-update
 
 # Specific model
-npx claude-flow training model-update --model agent-selector
+npx outlaw-flow training model-update --model agent-selector
 
 # Incremental with validation
-npx claude-flow training model-update --incremental --validate
+npx outlaw-flow training model-update --incremental --validate
 \`\`\`
 `
     },
@@ -889,7 +889,7 @@ Create reusable workflow templates.
 
 ## Usage
 \`\`\`bash
-npx claude-flow workflow create [options]
+npx outlaw-flow workflow create [options]
 \`\`\`
 
 ## Options
@@ -900,13 +900,13 @@ npx claude-flow workflow create [options]
 ## Examples
 \`\`\`bash
 # Create workflow
-npx claude-flow workflow create --name "deploy-api"
+npx outlaw-flow workflow create --name "deploy-api"
 
 # From history
-npx claude-flow workflow create --name "test-suite" --from-history
+npx outlaw-flow workflow create --name "test-suite" --from-history
 
 # Interactive mode
-npx claude-flow workflow create --interactive
+npx outlaw-flow workflow create --interactive
 \`\`\`
 `,
       'workflow-execute': `# workflow-execute
@@ -915,7 +915,7 @@ Execute saved workflows.
 
 ## Usage
 \`\`\`bash
-npx claude-flow workflow execute [options]
+npx outlaw-flow workflow execute [options]
 \`\`\`
 
 ## Options
@@ -926,13 +926,13 @@ npx claude-flow workflow execute [options]
 ## Examples
 \`\`\`bash
 # Execute workflow
-npx claude-flow workflow execute --name "deploy-api"
+npx outlaw-flow workflow execute --name "deploy-api"
 
 # With parameters
-npx claude-flow workflow execute --name "test-suite" --params '{"env": "staging"}'
+npx outlaw-flow workflow execute --name "test-suite" --params '{"env": "staging"}'
 
 # Dry run
-npx claude-flow workflow execute --name "deploy-api" --dry-run
+npx outlaw-flow workflow execute --name "deploy-api" --dry-run
 \`\`\`
 `,
       'workflow-export': `# workflow-export
@@ -941,7 +941,7 @@ Export workflows for sharing.
 
 ## Usage
 \`\`\`bash
-npx claude-flow workflow export [options]
+npx outlaw-flow workflow export [options]
 \`\`\`
 
 ## Options
@@ -952,19 +952,19 @@ npx claude-flow workflow export [options]
 ## Examples
 \`\`\`bash
 # Export workflow
-npx claude-flow workflow export --name "deploy-api"
+npx outlaw-flow workflow export --name "deploy-api"
 
 # As YAML
-npx claude-flow workflow export --name "test-suite" --format yaml
+npx outlaw-flow workflow export --name "test-suite" --format yaml
 
 # With history
-npx claude-flow workflow export --name "deploy-api" --include-history
+npx outlaw-flow workflow export --name "deploy-api" --include-history
 \`\`\`
 `
     }
   };
 
-  return docs[category]?.[command] || `# ${command}\n\nCommand documentation for ${command} in category ${category}.\n\nUsage:\n\`\`\`bash\nnpx claude-flow ${category} ${command} [options]\n\`\`\`\n`;
+  return docs[category]?.[command] || `# ${command}\n\nCommand documentation for ${command} in category ${category}.\n\nUsage:\n\`\`\`bash\nnpx outlaw-flow ${category} ${command} [options]\n\`\`\`\n`;
 }
 
 // Command categories and their commands
@@ -985,9 +985,9 @@ export const COMMAND_STRUCTURE = {
 export function createHelperScript(name) {
   const scripts = {
     'setup-mcp.sh': `#!/bin/bash
-# Setup MCP server for Claude Flow
+# Setup MCP server for Outlaw Flow
 
-echo "🚀 Setting up Claude Flow MCP server..."
+echo "🚀 Setting up Outlaw Flow MCP server..."
 
 # Check if claude command exists
 if ! command -v claude &> /dev/null; then
@@ -997,34 +997,34 @@ if ! command -v claude &> /dev/null; then
 fi
 
 # Add MCP server
-echo "📦 Adding Claude Flow MCP server..."
-claude mcp add claude-flow npx claude-flow mcp start
+echo "📦 Adding Outlaw Flow MCP server..."
+claude mcp add outlaw-flow npx outlaw-flow mcp start
 
 echo "✅ MCP server setup complete!"
-echo "🎯 You can now use mcp__claude-flow__ tools in Claude Code"
+echo "🎯 You can now use mcp__outlaw-flow__ tools in Claude Code"
 `,
     'quick-start.sh': `#!/bin/bash
-# Quick start guide for Claude Flow
+# Quick start guide for Outlaw Flow
 
-echo "🚀 Claude Flow Quick Start"
+echo "🚀 Outlaw Flow Quick Start"
 echo "=========================="
 echo ""
 echo "1. Initialize a swarm:"
-echo "   npx claude-flow swarm init --topology hierarchical"
+echo "   npx outlaw-flow swarm init --topology hierarchical"
 echo ""
 echo "2. Spawn agents:"
-echo "   npx claude-flow agent spawn --type coder --name \"API Developer\""
+echo "   npx outlaw-flow agent spawn --type coder --name \"API Developer\""
 echo ""
 echo "3. Orchestrate tasks:"
-echo "   npx claude-flow task orchestrate --task \"Build REST API\""
+echo "   npx outlaw-flow task orchestrate --task \"Build REST API\""
 echo ""
 echo "4. Monitor progress:"
-echo "   npx claude-flow swarm monitor"
+echo "   npx outlaw-flow swarm monitor"
 echo ""
 echo "📚 For more examples, see .claude/commands/"
 `,
     'github-setup.sh': `#!/bin/bash
-# Setup GitHub integration for Claude Flow
+# Setup GitHub integration for Outlaw Flow
 
 echo "🔗 Setting up GitHub integration..."
 
@@ -1047,10 +1047,10 @@ fi
 
 echo ""
 echo "📦 GitHub swarm commands available:"
-echo "  - npx claude-flow github swarm"
-echo "  - npx claude-flow repo analyze"
-echo "  - npx claude-flow pr enhance"
-echo "  - npx claude-flow issue triage"
+echo "  - npx outlaw-flow github swarm"
+echo "  - npx outlaw-flow repo analyze"
+echo "  - npx outlaw-flow pr enhance"
+echo "  - npx outlaw-flow issue triage"
 `
   };
   
@@ -1061,7 +1061,7 @@ echo "  - npx claude-flow issue triage"
 function createWrapperScriptFallback(type) {
   if (type === 'unix') {
     return `#!/bin/bash
-# Claude Flow wrapper script for Unix-like systems
+# Outlaw Flow wrapper script for Unix-like systems
 
 # Find the directory where this script is located
 SCRIPT_DIR="$( cd "$( dirname "\${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
@@ -1076,16 +1076,16 @@ if [ -f "$SCRIPT_DIR/package.json" ] && [ -d "$SCRIPT_DIR/node_modules" ]; then
         # Use compiled version
         exec node "$SCRIPT_DIR/dist/cli.js" "$@"
     else
-        echo "Error: Could not find Claude Flow CLI files"
+        echo "Error: Could not find Outlaw Flow CLI files"
         exit 1
     fi
 else
     # Production mode - use npx alpha
-    exec npx claude-flow@alpha "$@"
+    exec npx outlaw-flow@alpha "$@"
 fi`;
   } else if (type === 'windows') {
     return `@echo off
-rem Claude Flow wrapper script for Windows
+rem Outlaw Flow wrapper script for Windows
 
 rem Check if package.json exists in current directory
 if exist "%~dp0package.json" (
@@ -1095,15 +1095,15 @@ if exist "%~dp0package.json" (
     ) else if exist "%~dp0dist\\cli.js" (
         node "%~dp0dist\\cli.js" %*
     ) else (
-        echo Error: Could not find Claude Flow CLI files
+        echo Error: Could not find Outlaw Flow CLI files
         exit /b 1
     )
 ) else (
     rem Production mode - use npx alpha
-    npx claude-flow@alpha %*
+    npx outlaw-flow@alpha %*
 )`;
   } else if (type === 'powershell') {
-    return `# Claude Flow wrapper script for PowerShell
+    return `# Outlaw Flow wrapper script for PowerShell
 
 $scriptPath = Split-Path -Parent $MyInvocation.MyCommand.Path
 
@@ -1114,12 +1114,12 @@ if (Test-Path "$scriptPath\\package.json") {
     } elseif (Test-Path "$scriptPath\\dist\\cli.js") {
         & node "$scriptPath\\dist\\cli.js" $args
     } else {
-        Write-Error "Could not find Claude Flow CLI files"
+        Write-Error "Could not find Outlaw Flow CLI files"
         exit 1
     }
 } else {
     # Production mode - use npx alpha
-    & npx claude-flow@alpha $args
+    & npx outlaw-flow@alpha $args
 }`;
   }
   return '';
@@ -1132,9 +1132,9 @@ function createEnhancedClaudeMdFallback() {
     return readFileSync(join(__dirname, 'CLAUDE.md'), 'utf8');
   } catch (error) {
     // If that fails, return a minimal version
-    return `# Claude Code Configuration for Claude Flow
+    return `# Claude Code Configuration for Outlaw Flow
 
-## 🚀 IMPORTANT: Claude Flow AI-Driven Development
+## 🚀 IMPORTANT: Outlaw Flow AI-Driven Development
 
 ### Claude Code Handles:
 - ✅ **ALL file operations** (Read, Write, Edit, MultiEdit)
@@ -1143,7 +1143,7 @@ function createEnhancedClaudeMdFallback() {
 - ✅ **ALL actual implementation** work
 - ✅ **Project navigation** and code analysis
 
-### Claude Flow MCP Tools Handle:
+### Outlaw Flow MCP Tools Handle:
 - 🧠 **Coordination only** - Orchestrating Claude Code's actions
 - 💾 **Memory management** - Persistent state across sessions
 - 🤖 **Neural features** - Cognitive patterns and learning
@@ -1156,10 +1156,10 @@ function createEnhancedClaudeMdFallback() {
 
 ## Quick Start
 
-1. Add MCP server: \`claude mcp add claude-flow npx claude-flow mcp start\`
-2. Initialize swarm: \`mcp__claude-flow__swarm_init { topology: "hierarchical" }\`
-3. Spawn agents: \`mcp__claude-flow__agent_spawn { type: "coder" }\`
-4. Orchestrate: \`mcp__claude-flow__task_orchestrate { task: "Build feature" }\`
+1. Add MCP server: \`claude mcp add outlaw-flow npx outlaw-flow mcp start\`
+2. Initialize swarm: \`mcp__outlaw-flow__swarm_init { topology: "hierarchical" }\`
+3. Spawn agents: \`mcp__outlaw-flow__agent_spawn { type: "coder" }\`
+4. Orchestrate: \`mcp__outlaw-flow__task_orchestrate { task: "Build feature" }\`
 
 See full documentation in \`.claude/commands/\`
 `;
@@ -1169,16 +1169,16 @@ See full documentation in \`.claude/commands/\`
 function createEnhancedSettingsJsonFallback() {
   return JSON.stringify({
     env: {
-      CLAUDE_FLOW_AUTO_COMMIT: "false",
-      CLAUDE_FLOW_AUTO_PUSH: "false",
-      CLAUDE_FLOW_HOOKS_ENABLED: "true",
-      CLAUDE_FLOW_TELEMETRY_ENABLED: "true",
-      CLAUDE_FLOW_REMOTE_EXECUTION: "true",
-      CLAUDE_FLOW_GITHUB_INTEGRATION: "true"
+      OUTLAW_FLOW_AUTO_COMMIT: "false",
+      OUTLAW_FLOW_AUTO_PUSH: "false",
+      OUTLAW_FLOW_HOOKS_ENABLED: "true",
+      OUTLAW_FLOW_TELEMETRY_ENABLED: "true",
+      OUTLAW_FLOW_REMOTE_EXECUTION: "true",
+      OUTLAW_FLOW_GITHUB_INTEGRATION: "true"
     },
     permissions: {
       allow: [
-        "Bash(npx claude-flow *)",
+        "Bash(npx outlaw-flow *)",
         "Bash(npm run lint)",
         "Bash(npm run test:*)",
         "Bash(npm test *)",
@@ -1205,44 +1205,44 @@ function createEnhancedSettingsJsonFallback() {
     hooks: {
       preEditHook: {
         command: "npx",
-        args: ["claude-flow", "hook", "pre-edit", "--file", "${file}", "--auto-assign-agents", "true", "--load-context", "true"],
+        args: ["outlaw-flow", "hook", "pre-edit", "--file", "${file}", "--auto-assign-agents", "true", "--load-context", "true"],
         alwaysRun: false,
         outputFormat: "json"
       },
       postEditHook: {
         command: "npx",
-        args: ["claude-flow", "hook", "post-edit", "--file", "${file}", "--format", "true", "--update-memory", "true", "--train-neural", "true"],
+        args: ["outlaw-flow", "hook", "post-edit", "--file", "${file}", "--format", "true", "--update-memory", "true", "--train-neural", "true"],
         alwaysRun: true,
         outputFormat: "json"
       },
       preCommandHook: {
         command: "npx",
-        args: ["claude-flow", "hook", "pre-command", "--command", "${command}", "--validate-safety", "true", "--prepare-resources", "true"],
+        args: ["outlaw-flow", "hook", "pre-command", "--command", "${command}", "--validate-safety", "true", "--prepare-resources", "true"],
         alwaysRun: false,
         outputFormat: "json"
       },
       postCommandHook: {
         command: "npx",
-        args: ["claude-flow", "hook", "post-command", "--command", "${command}", "--track-metrics", "true", "--store-results", "true"],
+        args: ["outlaw-flow", "hook", "post-command", "--command", "${command}", "--track-metrics", "true", "--store-results", "true"],
         alwaysRun: false,
         outputFormat: "json"
       },
       sessionEndHook: {
         command: "npx",
-        args: ["claude-flow", "hook", "session-end", "--generate-summary", "true", "--persist-state", "true", "--export-metrics", "true"],
+        args: ["outlaw-flow", "hook", "session-end", "--generate-summary", "true", "--persist-state", "true", "--export-metrics", "true"],
         alwaysRun: true,
         outputFormat: "json"
       }
     },
     mcpServers: {
-      "claude-flow": {
+      "outlaw-flow": {
         command: "npx",
-        args: ["claude-flow", "mcp", "start"],
+        args: ["outlaw-flow", "mcp", "start"],
         env: {
-          CLAUDE_FLOW_HOOKS_ENABLED: "true",
-          CLAUDE_FLOW_TELEMETRY_ENABLED: "true",
-          CLAUDE_FLOW_REMOTE_READY: "true",
-          CLAUDE_FLOW_GITHUB_INTEGRATION: "true"
+          OUTLAW_FLOW_HOOKS_ENABLED: "true",
+          OUTLAW_FLOW_TELEMETRY_ENABLED: "true",
+          OUTLAW_FLOW_REMOTE_READY: "true",
+          OUTLAW_FLOW_GITHUB_INTEGRATION: "true"
         }
       }
     },

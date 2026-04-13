@@ -254,7 +254,7 @@ EOF
 
 # Build allowed tools based on configuration
 build_allowed_tools() {
-    local tools="Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch,mcp__claude-flow__memory_store,mcp__claude-flow__memory_query,mcp__claude-flow__sparc_mode,mcp__claude-flow__workflow_create,mcp__claude-flow__health_check"
+    local tools="Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch,mcp__outlaw-flow__memory_store,mcp__outlaw-flow__memory_query,mcp__outlaw-flow__sparc_mode,mcp__outlaw-flow__workflow_create,mcp__outlaw-flow__health_check"
 
     echo "$tools"
 }

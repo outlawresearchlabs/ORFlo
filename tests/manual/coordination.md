@@ -1,7 +1,7 @@
 # Agent Coordination System
 
 ## Overview
-The Claude-Flow coordination system manages multiple AI agents working together on complex tasks. It provides intelligent task distribution, resource management, and inter-agent communication.
+The Outlaw-Flow coordination system manages multiple AI agents working together on complex tasks. It provides intelligent task distribution, resource management, and inter-agent communication.
 
 ## Agent Types and Capabilities
 - **Researcher**: Web search, information gathering, knowledge synthesis
@@ -19,27 +19,27 @@ The Claude-Flow coordination system manages multiple AI agents working together 
 ## Coordination Commands
 ```bash
 # Agent Management
-npx claude-flow agent spawn <type> --name <name> --priority <1-10>
-npx claude-flow agent list
-npx claude-flow agent info <agent-id>
-npx claude-flow agent terminate <agent-id>
+npx outlaw-flow agent spawn <type> --name <name> --priority <1-10>
+npx outlaw-flow agent list
+npx outlaw-flow agent info <agent-id>
+npx outlaw-flow agent terminate <agent-id>
 
 # Task Management  
-npx claude-flow task create <type> <description> --priority <1-10> --deps <task-ids>
-npx claude-flow task list --verbose
-npx claude-flow task status <task-id>
-npx claude-flow task cancel <task-id>
+npx outlaw-flow task create <type> <description> --priority <1-10> --deps <task-ids>
+npx outlaw-flow task list --verbose
+npx outlaw-flow task status <task-id>
+npx outlaw-flow task cancel <task-id>
 
 # System Monitoring
-npx claude-flow status --verbose
-npx claude-flow monitor --interval 5000
+npx outlaw-flow status --verbose
+npx outlaw-flow monitor --interval 5000
 ```
 
 ## Workflow Execution
 Workflows are defined in JSON format and can orchestrate complex multi-agent operations:
 ```bash
-npx claude-flow workflow examples/research-workflow.json
-npx claude-flow workflow examples/development-config.json --async
+npx outlaw-flow workflow examples/research-workflow.json
+npx outlaw-flow workflow examples/development-config.json --async
 ```
 
 ## Advanced Features
@@ -49,7 +49,7 @@ npx claude-flow workflow examples/development-config.json --async
 - **Metrics Collection**: Performance monitoring and optimization
 
 ## Configuration
-Coordination settings in `claude-flow.config.json`:
+Coordination settings in `outlaw-flow.config.json`:
 ```json
 {
   "orchestrator": {
@@ -82,7 +82,7 @@ Coordination settings in `claude-flow.config.json`:
 - Regular cleanup of completed tasks and inactive agents
 
 ## Troubleshooting
-- Check agent health with `npx claude-flow status`
-- View detailed logs with `npx claude-flow monitor`
+- Check agent health with `npx outlaw-flow status`
+- View detailed logs with `npx outlaw-flow monitor`
 - Restart stuck agents with terminate/spawn cycle
 - Use `--verbose` flags for detailed diagnostic information

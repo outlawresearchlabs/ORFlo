@@ -429,10 +429,10 @@ describe("Init Command Performance Tests", () => {
         "CLAUDE.md",
         "memory-bank.md",
         "coordination.md",
-        "memory/claude-flow-data.json",
+        "memory/outlaw-flow-data.json",
         "memory/agents/README.md",
         "memory/sessions/README.md",
-        "claude-flow"
+        "outlaw-flow"
       ];
 
       let createdFiles = 0;

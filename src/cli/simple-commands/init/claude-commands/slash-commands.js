@@ -1,7 +1,7 @@
 // slash-commands.js - Create Claude Code slash commands
 
 import { createSparcSlashCommand, createMainSparcCommand } from './sparc-commands.js';
-import { createClaudeFlowCommands } from './claude-flow-commands.js';
+import { createClaudeFlowCommands } from './outlaw-flow-commands.js';
 
 // Create Claude Code slash commands for SPARC modes
 export async function createClaudeSlashCommands(workingDir) {
@@ -26,7 +26,7 @@ export async function createClaudeSlashCommands(workingDir) {
     await Deno.writeTextFile(`${workingDir}/.claude/commands/sparc.md`, mainSparcCommand);
     console.log('  ✓ Created main slash command: /sparc');
     
-    // Create claude-flow specific commands
+    // Create outlaw-flow specific commands
     await createClaudeFlowCommands(workingDir);
     
   } catch (err) {

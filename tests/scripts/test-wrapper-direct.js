@@ -28,7 +28,7 @@ setTimeout(() => {
   console.log('================\n');
   
   // Check for expected messages
-  if (output.includes('Claude-Flow MCP Server (Wrapper Mode)')) {
+  if (output.includes('Outlaw-Flow MCP Server (Wrapper Mode)')) {
     console.log('✅ Wrapper mode confirmed');
   } else {
     console.log('❌ Wrapper mode not detected');

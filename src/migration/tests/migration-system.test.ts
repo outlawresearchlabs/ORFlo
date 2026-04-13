@@ -294,7 +294,7 @@ describe('Migration System', () => {
       
       // Create required files
       await fs.writeFile(path.join(commandsPath, 'sparc.md'), '# SPARC Command');
-      await fs.writeFile(path.join(commandsPath, 'claude-flow-help.md'), '# Help');
+      await fs.writeFile(path.join(commandsPath, 'outlaw-flow-help.md'), '# Help');
       await fs.writeFile(path.join(claudePath, 'BATCHTOOLS_GUIDE.md'), '# Guide');
 
       const result = await validator.validate(projectPath);

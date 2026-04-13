@@ -1,14 +1,14 @@
 # Agent Swarm Benchmarking Tool
 
-A comprehensive Python-based benchmarking tool for agent swarms that interfaces with the Claude Flow Advanced Swarm System. This tool measures performance, efficiency, and effectiveness of different swarm strategies and coordination modes.
+A comprehensive Python-based benchmarking tool for agent swarms that interfaces with the Outlaw Flow Advanced Swarm System. This tool measures performance, efficiency, and effectiveness of different swarm strategies and coordination modes.
 
 ## 🚀 Features
 
-- **Complete Strategy Coverage**: Supports all claude-flow swarm strategies (auto, research, development, analysis, testing, optimization, maintenance)
+- **Complete Strategy Coverage**: Supports all outlaw-flow swarm strategies (auto, research, development, analysis, testing, optimization, maintenance)
 - **Multiple Coordination Modes**: Tests centralized, distributed, hierarchical, mesh, and hybrid coordination patterns
 - **Comprehensive Metrics**: Tracks performance, resource usage, quality metrics, and coordination efficiency
 - **Multiple Output Formats**: Exports results to JSON, SQLite, CSV, and HTML formats
-- **CLI Interface**: Command-line interface matching claude-flow swarm command structure
+- **CLI Interface**: Command-line interface matching outlaw-flow swarm command structure
 - **Test-Driven Development**: Built using TDD methodology with comprehensive test coverage
 - **Modular Architecture**: Clean, extensible design with pluggable components
 

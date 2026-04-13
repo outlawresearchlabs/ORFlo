@@ -11,7 +11,7 @@ export async function createClaudeConfig(options: InitOptions): Promise<void> {
     version: "1.0.71",
     project: {
       name: path.basename(process.cwd()),
-      type: "claude-flow",
+      type: "outlaw-flow",
       created: new Date().toISOString()
     },
     features: {
@@ -144,7 +144,7 @@ async function createSwarmConfig(): Promise<void> {
   
   const swarmConfig = {
     version: "1.0.71",
-    description: "Swarm orchestration configuration for Claude-Flow",
+    description: "Swarm orchestration configuration for Outlaw-Flow",
     strategies: {
       research: {
         description: "Multi-agent research coordination",

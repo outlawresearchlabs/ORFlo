@@ -1,8 +1,8 @@
-# Claude Flow v2.0.0 Web UI Integration Guide
+# Outlaw Flow v2.0.0 Web UI Integration Guide
 
 ## 🎯 Overview
 
-This guide provides comprehensive instructions for integrating all 71+ Claude Flow tools into the Web UI, ensuring complete functionality and seamless user experience.
+This guide provides comprehensive instructions for integrating all 71+ Outlaw Flow tools into the Web UI, ensuring complete functionality and seamless user experience.
 
 ## 📊 Current Implementation Status
 
@@ -38,7 +38,7 @@ This guide provides comprehensive instructions for integrating all 71+ Claude Fl
 #### Current Web Server Tools (7/71+)
 ```javascript
 // Currently exposed in web-server.js
-1. claude-flow/execute
+1. outlaw-flow/execute
 2. swarm/orchestrate
 3. system/health
 4. memory/manage
@@ -140,17 +140,17 @@ Create a comprehensive tool registry that includes all MCP tools:
 
 ```javascript
 // src/cli/simple-commands/tool-registry.js
-export const CLAUDE_FLOW_TOOLS = {
+export const OUTLAW_FLOW_TOOLS = {
   // Neural Tools
   neural: [
     {
       name: 'neural/status',
-      handler: 'mcp__claude-flow__neural_status',
+      handler: 'mcp__outlaw-flow__neural_status',
       description: 'Check neural network status'
     },
     {
       name: 'neural/train',
-      handler: 'mcp__claude-flow__neural_train',
+      handler: 'mcp__outlaw-flow__neural_train',
       description: 'Train neural patterns with WASM'
     },
     // ... all 15 neural tools
@@ -160,7 +160,7 @@ export const CLAUDE_FLOW_TOOLS = {
   memory: [
     {
       name: 'memory/search',
-      handler: 'mcp__claude-flow__memory_search',
+      handler: 'mcp__outlaw-flow__memory_search',
       description: 'Search memory patterns'
     },
     // ... all 10 memory tools
@@ -170,7 +170,7 @@ export const CLAUDE_FLOW_TOOLS = {
   analytics: [
     {
       name: 'analytics/performance',
-      handler: 'mcp__claude-flow__performance_report',
+      handler: 'mcp__outlaw-flow__performance_report',
       description: 'Generate performance reports'
     },
     // ... all 13 analytics tools
@@ -190,7 +190,7 @@ handleToolsList(ws, message) {
   const tools = [];
   
   // Import tool registry
-  Object.entries(CLAUDE_FLOW_TOOLS).forEach(([category, categoryTools]) => {
+  Object.entries(OUTLAW_FLOW_TOOLS).forEach(([category, categoryTools]) => {
     categoryTools.forEach(tool => {
       tools.push({
         name: tool.name,
@@ -232,7 +232,7 @@ export class MCPToolBridge {
   async executeTool(toolName, args) {
     return new Promise((resolve, reject) => {
       const mcpProcess = spawn('npx', [
-        'claude-flow',
+        'outlaw-flow',
         'mcp',
         'call',
         toolName,
@@ -587,4 +587,4 @@ async function executeBatchTools(tools) {
 
 ---
 
-This integration guide provides the complete roadmap for implementing all 71+ Claude Flow tools in the Web UI. Follow these steps systematically to ensure a robust, secure, and performant implementation.
+This integration guide provides the complete roadmap for implementing all 71+ Outlaw Flow tools in the Web UI. Follow these steps systematically to ensure a robust, secure, and performant implementation.

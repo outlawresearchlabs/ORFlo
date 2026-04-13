@@ -4,12 +4,12 @@
 version: '3.8'
 
 services:
-  claude-flow-test:
+  outlaw-flow-test:
     build:
       context: ../../..
       dockerfile: infrastructure/docker/testing/Dockerfile
       target: testing
-    container_name: claude-flow-test
+    container_name: outlaw-flow-test
     environment:
       - NODE_ENV=test
       - CI=true
@@ -17,8 +17,8 @@ services:
       - JEST_JUNIT_OUTPUT_DIR=/app/test-results
       - JEST_JUNIT_OUTPUT_NAME=junit.xml
     volumes:
-      - claude-flow-test-results:/app/test-results
-      - claude-flow-coverage:/app/coverage
+      - outlaw-flow-test-results:/app/test-results
+      - outlaw-flow-coverage:/app/coverage
     depends_on:
       - test-db
     networks:
@@ -26,7 +26,7 @@ services:
 
   test-db:
     image: sqlite:latest
-    container_name: claude-flow-test-db
+    container_name: outlaw-flow-test-db
     environment:
       - SQLITE_DATABASE=test.db
     volumes:
@@ -40,15 +40,15 @@ services:
       context: ../../..
       dockerfile: infrastructure/docker/testing/Dockerfile
       target: testing
-    container_name: claude-flow-integration-test
+    container_name: outlaw-flow-integration-test
     environment:
       - NODE_ENV=test
       - TEST_TYPE=integration
       - CI=true
     volumes:
-      - claude-flow-test-results:/app/test-results
+      - outlaw-flow-test-results:/app/test-results
     depends_on:
-      - claude-flow-test
+      - outlaw-flow-test
       - test-db
     networks:
       - claude-test-network
@@ -60,17 +60,17 @@ services:
       context: ../../..
       dockerfile: infrastructure/docker/testing/Dockerfile
       target: testing
-    container_name: claude-flow-e2e-test
+    container_name: outlaw-flow-e2e-test
     environment:
       - NODE_ENV=test
       - TEST_TYPE=e2e
       - CI=true
       - HEADLESS=true
     volumes:
-      - claude-flow-test-results:/app/test-results
-      - claude-flow-coverage:/app/coverage
+      - outlaw-flow-test-results:/app/test-results
+      - outlaw-flow-coverage:/app/coverage
     depends_on:
-      - claude-flow-test
+      - outlaw-flow-test
       - test-db
     networks:
       - claude-test-network
@@ -82,15 +82,15 @@ services:
       context: ../../..
       dockerfile: infrastructure/docker/testing/Dockerfile
       target: testing
-    container_name: claude-flow-performance-test
+    container_name: outlaw-flow-performance-test
     environment:
       - NODE_ENV=test
       - TEST_TYPE=performance
       - CI=true
     volumes:
-      - claude-flow-test-results:/app/test-results
+      - outlaw-flow-test-results:/app/test-results
     depends_on:
-      - claude-flow-test
+      - outlaw-flow-test
       - test-db
     networks:
       - claude-test-network
@@ -99,18 +99,18 @@ services:
   # Test result aggregator
   test-aggregator:
     image: node:20-alpine
-    container_name: claude-flow-test-aggregator
+    container_name: outlaw-flow-test-aggregator
     working_dir: /app
     environment:
       - NODE_ENV=test
     volumes:
-      - claude-flow-test-results:/app/test-results
+      - outlaw-flow-test-results:/app/test-results
       - ./scripts:/app/scripts
     networks:
       - claude-test-network
     command: ["node", "/app/scripts/aggregate-test-results.js"]
     depends_on:
-      - claude-flow-test
+      - outlaw-flow-test
       - integration-test
       - e2e-test
       - performance-test
@@ -123,9 +123,9 @@ networks:
         - subnet: 172.21.0.0/16
 
 volumes:
-  claude-flow-test-results:
+  outlaw-flow-test-results:
     driver: local
-  claude-flow-coverage:
+  outlaw-flow-coverage:
     driver: local
   test-db-data:
     driver: local

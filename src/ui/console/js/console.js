@@ -137,7 +137,7 @@ class ClaudeCodeConsole {
     this.wsClient.on('connected', () => {
       this.updateConnectionStatus(true, false);
       this.terminal.writeSuccess('Connected to Claude Code server');
-      this.terminal.setPrompt('claude-flow>');
+      this.terminal.setPrompt('outlaw-flow>');
     });
     
     this.wsClient.on('disconnected', (info) => {
@@ -328,8 +328,8 @@ class ClaudeCodeConsole {
       this.handleStreamingOutput(message.params);
     }
     
-    // Handle Claude Flow notifications
-    if (message.method && message.method.startsWith('claude-flow/')) {
+    // Handle Outlaw Flow notifications
+    if (message.method && message.method.startsWith('outlaw-flow/')) {
       this.handleClaudeFlowNotification(message);
     }
   }
@@ -383,26 +383,26 @@ class ClaudeCodeConsole {
   }
   
   /**
-   * Handle Claude Flow notifications
+   * Handle Outlaw Flow notifications
    */
   handleClaudeFlowNotification(message) {
     const { method, params } = message;
     
     switch (method) {
-      case 'claude-flow/started':
-        this.terminal.writeSuccess(`Claude Flow started in ${params.mode} mode`);
+      case 'outlaw-flow/started':
+        this.terminal.writeSuccess(`Outlaw Flow started in ${params.mode} mode`);
         break;
         
-      case 'claude-flow/stopped':
-        this.terminal.writeInfo('Claude Flow stopped');
+      case 'outlaw-flow/stopped':
+        this.terminal.writeInfo('Outlaw Flow stopped');
         break;
         
-      case 'claude-flow/error':
-        this.terminal.writeError(`Claude Flow error: ${params.message}`);
+      case 'outlaw-flow/error':
+        this.terminal.writeError(`Outlaw Flow error: ${params.message}`);
         break;
         
       default:
-        this.terminal.writeInfo(`Claude Flow: ${method} - ${JSON.stringify(params)}`);
+        this.terminal.writeInfo(`Outlaw Flow: ${method} - ${JSON.stringify(params)}`);
     }
   }
   

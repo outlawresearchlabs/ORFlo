@@ -37,12 +37,12 @@ init_results() {
     echo '{"test_start": "'$(date -Iseconds)'", "install_method": "'$INSTALL_METHOD'", "results": {}}' > /test/results/test_results.json
 }
 
-# Get claude-flow command based on install method
+# Get outlaw-flow command based on install method
 get_command() {
     if [ "$INSTALL_METHOD" = "npx" ]; then
-        echo "npx claude-flow@2.0.0"
+        echo "npx outlaw-flow@2.0.0"
     else
-        echo "./node_modules/.bin/claude-flow"
+        echo "./node_modules/.bin/outlaw-flow"
     fi
 }
 

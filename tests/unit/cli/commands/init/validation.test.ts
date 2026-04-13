@@ -39,8 +39,8 @@ describe("Init Command Validation Tests", () => {
 
       await command.output();
 
-      // Validate claude-flow-data.json
-      const dataPath = join(testDir, "memory/claude-flow-data.json");
+      // Validate outlaw-flow-data.json
+      const dataPath = join(testDir, "memory/outlaw-flow-data.json");
       assertExists(await exists(dataPath));
 
       const dataContent = await Deno.readTextFile(dataPath);
@@ -185,7 +185,7 @@ describe("Init Command Validation Tests", () => {
 
       await command.output();
 
-      const executablePath = join(testDir, "claude-flow");
+      const executablePath = join(testDir, "outlaw-flow");
       assertExists(await exists(executablePath));
 
       // Check file stats
@@ -318,8 +318,8 @@ describe("Init Command Validation Tests", () => {
       }
 
       // Should include command examples
-      assertStringIncludes(claudeContent, "claude-flow");
-      assertStringIncludes(claudeContent, "./claude-flow");
+      assertStringIncludes(claudeContent, "outlaw-flow");
+      assertStringIncludes(claudeContent, "./outlaw-flow");
     });
 
     it("should validate SPARC CLAUDE.md content", async () => {
@@ -357,9 +357,9 @@ describe("Init Command Validation Tests", () => {
       }
 
       // Should include SPARC command examples
-      assertStringIncludes(claudeContent, "npx claude-flow sparc modes");
-      assertStringIncludes(claudeContent, "npx claude-flow sparc run");
-      assertStringIncludes(claudeContent, "npx claude-flow sparc tdd");
+      assertStringIncludes(claudeContent, "npx outlaw-flow sparc modes");
+      assertStringIncludes(claudeContent, "npx outlaw-flow sparc run");
+      assertStringIncludes(claudeContent, "npx outlaw-flow sparc tdd");
 
       // Should include all SPARC modes
       const sparcModes = [
@@ -477,9 +477,9 @@ describe("Init Command Validation Tests", () => {
       const coordContent = await Deno.readTextFile(join(testDir, "coordination.md"));
 
       // All should reference the local executable
-      assertStringIncludes(claudeContent, "./claude-flow");
-      assertStringIncludes(memoryContent, "claude-flow");
-      assertStringIncludes(coordContent, "claude-flow");
+      assertStringIncludes(claudeContent, "./outlaw-flow");
+      assertStringIncludes(memoryContent, "outlaw-flow");
+      assertStringIncludes(coordContent, "outlaw-flow");
 
       // All should reference the memory system consistently
       assertStringIncludes(claudeContent, "memory");
@@ -569,7 +569,7 @@ describe("Init Command Validation Tests", () => {
 
       await command.output();
 
-      const dataContent = await Deno.readTextFile(join(testDir, "memory/claude-flow-data.json"));
+      const dataContent = await Deno.readTextFile(join(testDir, "memory/outlaw-flow-data.json"));
       const data = JSON.parse(dataContent);
 
       // Validate timestamp format

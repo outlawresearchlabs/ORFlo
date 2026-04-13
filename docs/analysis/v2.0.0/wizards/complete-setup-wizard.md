@@ -1,8 +1,8 @@
-# Claude Flow v2.0.0 - Complete Setup Wizard Design
+# Outlaw Flow v2.0.0 - Complete Setup Wizard Design
 
 ## Overview
 
-This document outlines a comprehensive, user-friendly setup wizard that guides users through Claude Flow installation and configuration in under 2 minutes.
+This document outlines a comprehensive, user-friendly setup wizard that guides users through Outlaw Flow installation and configuration in under 2 minutes.
 
 ## Wizard Flow
 
@@ -11,14 +11,14 @@ This document outlines a comprehensive, user-friendly setup wizard that guides u
 ```
 ╭─────────────────────────────────────────────────────────────╮
 │                                                             │
-│     🌊 Welcome to Claude Flow v2.0.0 Setup Wizard          │
+│     🌊 Welcome to Outlaw Flow v2.0.0 Setup Wizard          │
 │                                                             │
 │     Enterprise-Grade AI Agent Orchestration Platform        │
 │                                                             │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  This wizard will help you:                                 │
-│  ✓ Install Claude Flow and dependencies                    │
+│  ✓ Install Outlaw Flow and dependencies                    │
 │  ✓ Configure your first AI agent swarm                     │
 │  ✓ Set up GitHub integration (optional)                    │
 │  ✓ Initialize your project with best practices             │
@@ -44,7 +44,7 @@ Checking environment...
 │  🚀 Choose Installation Method                              │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
-│  How would you like to use Claude Flow?                    │
+│  How would you like to use Outlaw Flow?                    │
 │                                                             │
 │  ❯ Quick Start (Recommended)                                │
 │    Use npx for immediate access without installation        │
@@ -140,7 +140,7 @@ Checking environment...
 │    Skip for now                                             │
 │                                                             │
 │  Note: You can always add GitHub later with:               │
-│  claude-flow github setup                                   │
+│  outlaw-flow github setup                                   │
 │                                                             │
 ╰─────────────────────────────────────────────────────────────╯
 ```
@@ -163,7 +163,7 @@ Checking environment...
 │  This will create:                                          │
 │  • .claude/ directory with configuration                    │
 │  • CLAUDE.md with project instructions                      │
-│  • Local wrapper script (./claude-flow)                     │
+│  • Local wrapper script (./outlaw-flow)                     │
 │  • Initialize swarm with 5 agents                           │
 │                                                             │
 │  Proceed? [Y/n]                                             │
@@ -175,7 +175,7 @@ Checking environment...
 
 ```
 ╭─────────────────────────────────────────────────────────────╮
-│  🚀 Setting Up Claude Flow                                  │
+│  🚀 Setting Up Outlaw Flow                                  │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  Creating project structure...                              │
@@ -200,7 +200,7 @@ Checking environment...
 
 ```
 ╭─────────────────────────────────────────────────────────────╮
-│  🎉 Claude Flow Successfully Initialized!                   │
+│  🎉 Outlaw Flow Successfully Initialized!                   │
 ├─────────────────────────────────────────────────────────────┤
 │                                                             │
 │  Your AI development team is ready:                         │
@@ -214,21 +214,21 @@ Checking environment...
 │  Quick Start Commands:                                      │
 │  ┌─────────────────────────────────────────────┐           │
 │  │ # Check status                              │           │
-│  │ ./claude-flow status                        │           │
+│  │ ./outlaw-flow status                        │           │
 │  │                                             │           │
 │  │ # Start development                         │           │
-│  │ ./claude-flow task "Build user auth"       │           │
+│  │ ./outlaw-flow task "Build user auth"       │           │
 │  │                                             │           │
 │  │ # Open dashboard                           │           │
-│  │ ./claude-flow start --ui                   │           │
+│  │ ./outlaw-flow start --ui                   │           │
 │  └─────────────────────────────────────────────┘           │
 │                                                             │
 │  📚 Next steps:                                             │
-│  1. Run './claude-flow tutorial' for interactive guide     │
+│  1. Run './outlaw-flow tutorial' for interactive guide     │
 │  2. Read CLAUDE.md for project-specific instructions       │
-│  3. Visit https://docs.claude-flow.ai for full docs        │
+│  3. Visit https://docs.outlaw-flow.ai for full docs        │
 │                                                             │
-│  Need help? Run './claude-flow help' or visit our Discord  │
+│  Need help? Run './outlaw-flow help' or visit our Discord  │
 │                                                             │
 ╰─────────────────────────────────────────────────────────────╯
 ```
@@ -365,4 +365,4 @@ interface WizardState {
 4. **Satisfaction**: >90% find wizard helpful
 5. **Support Reduction**: 60% fewer setup questions
 
-This wizard design transforms the Claude Flow setup from a complex manual process into a delightful, guided experience that gets users productive in minutes.
+This wizard design transforms the Outlaw Flow setup from a complex manual process into a delightful, guided experience that gets users productive in minutes.

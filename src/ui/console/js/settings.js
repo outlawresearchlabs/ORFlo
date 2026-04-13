@@ -28,7 +28,7 @@ export class SettingsManager {
       enableSounds: false,
       maxLines: 1000,
       
-      // Claude Flow settings
+      // Outlaw Flow settings
       defaultMode: 'coder',
       swarmStrategy: 'development',
       coordinationMode: 'centralized',
@@ -132,7 +132,7 @@ export class SettingsManager {
       }
     });
     
-    // Claude Flow settings
+    // Outlaw Flow settings
     this.bindSetting('defaultMode', 'change');
     this.bindSetting('swarmStrategy', 'change');
     this.bindSetting('coordinationMode', 'change');
@@ -545,9 +545,9 @@ export class SettingsManager {
   }
   
   /**
-   * Get Claude Flow configuration
+   * Get Outlaw Flow configuration
    */
-  getClaudeFlowConfig() {
+  getOutlawFlowConfig() {
     return {
       defaultMode: this.get('defaultMode'),
       swarmStrategy: this.get('swarmStrategy'),

@@ -155,8 +155,8 @@ describe("Init Command Unit Tests", () => {
     it("should create valid JSON files", async () => {
       await initCommand([], {});
 
-      // Check claude-flow-data.json is valid JSON
-      const dataPath = join(testDir, "memory/claude-flow-data.json");
+      // Check outlaw-flow-data.json is valid JSON
+      const dataPath = join(testDir, "memory/outlaw-flow-data.json");
       assertExists(await exists(dataPath));
 
       const data = JSON.parse(await Deno.readTextFile(dataPath));

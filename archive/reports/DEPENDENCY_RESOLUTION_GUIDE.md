@@ -15,7 +15,7 @@ The ruv-swarm package dependency was failing to install due to an incorrect file
 ### Solution Implemented
 
 #### 1. Path Correction
-Fixed the relative path in `/workspaces/ruv-FANN/claude-code-flow/claude-code-flow/package.json`:
+Fixed the relative path in `/workspaces/ruv-FANN/outlaw-flow/outlaw-flow/package.json`:
 
 ```json
 // BEFORE (incorrect):
@@ -75,7 +75,7 @@ For future installations or when working with similar projects:
 
 1. **Check File Paths**: Always verify relative paths in package.json
    ```bash
-   cd /workspaces/ruv-FANN/claude-code-flow/claude-code-flow
+   cd /workspaces/ruv-FANN/outlaw-flow/outlaw-flow
    ls ../../ruv-swarm/npm/  # Should exist and contain package.json
    ```
 

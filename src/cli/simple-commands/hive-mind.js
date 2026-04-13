@@ -1,5 +1,5 @@
 /**
- * Hive Mind command for Claude-Flow v2.0.0
+ * Hive Mind command for Outlaw-Flow v2.0.0
  * Advanced swarm intelligence with collective decision-making
  */
 
@@ -27,10 +27,10 @@ import { SwarmCommunication } from './hive-mind/communication.js';
 
 function showHiveMindHelp() {
   console.log(`
-${chalk.yellow('🧠 Claude Flow Hive Mind System')}
+${chalk.yellow('🧠 Outlaw Flow Hive Mind System')}
 
 ${chalk.bold('USAGE:')}
-  claude-flow hive-mind [subcommand] [options]
+  outlaw-flow hive-mind [subcommand] [options]
 
 ${chalk.bold('SUBCOMMANDS:')}
   ${chalk.green('init')}         Initialize hive mind system
@@ -43,25 +43,25 @@ ${chalk.bold('SUBCOMMANDS:')}
 
 ${chalk.bold('EXAMPLES:')}
   ${chalk.gray('# Initialize hive mind')}
-  claude-flow hive-mind init
+  outlaw-flow hive-mind init
 
   ${chalk.gray('# Spawn swarm with interactive wizard')}
-  claude-flow hive-mind spawn
+  outlaw-flow hive-mind spawn
 
   ${chalk.gray('# Quick spawn with objective')}
-  claude-flow hive-mind spawn "Build microservices architecture"
+  outlaw-flow hive-mind spawn "Build microservices architecture"
 
   ${chalk.gray('# View current status')}
-  claude-flow hive-mind status
+  outlaw-flow hive-mind status
 
   ${chalk.gray('# Interactive wizard')}
-  claude-flow hive-mind wizard
+  outlaw-flow hive-mind wizard
 
   ${chalk.gray('# Spawn with Claude Code coordination')}
-  claude-flow hive-mind spawn "Build REST API" --claude
+  outlaw-flow hive-mind spawn "Build REST API" --claude
 
   ${chalk.gray('# Auto-spawn coordinated Claude Code instances')}
-  claude-flow hive-mind spawn "Research AI trends" --auto-spawn --verbose
+  outlaw-flow hive-mind spawn "Research AI trends" --auto-spawn --verbose
 
 ${chalk.bold('KEY FEATURES:')}
   ${chalk.cyan('🐝')} Queen-led coordination with worker specialization
@@ -91,7 +91,7 @@ ${chalk.bold('OPTIONS:')}
   --enable-permissions   Enable interactive permission prompts
 
 ${chalk.bold('For more information:')}
-${chalk.blue('https://github.com/ruvnet/claude-code-flow/docs/hive-mind.md')}
+${chalk.blue('https://github.com/ruvnet/outlaw-flow/docs/hive-mind.md')}
 `);
 }
 
@@ -207,8 +207,8 @@ async function initHiveMind(flags) {
     console.log(chalk.green('✓') + ' Initialized SQLite database');
     console.log(chalk.green('✓') + ' Created configuration file');
     console.log('\n' + chalk.yellow('Next steps:'));
-    console.log('  1. Run ' + chalk.cyan('claude-flow hive-mind spawn') + ' to create your first swarm');
-    console.log('  2. Use ' + chalk.cyan('claude-flow hive-mind wizard') + ' for interactive setup');
+    console.log('  1. Run ' + chalk.cyan('outlaw-flow hive-mind spawn') + ' to create your first swarm');
+    console.log('  2. Use ' + chalk.cyan('outlaw-flow hive-mind wizard') + ' for interactive setup');
     
   } catch (error) {
     spinner.fail('Failed to initialize Hive Mind system');
@@ -360,7 +360,7 @@ async function spawnSwarm(args, flags) {
   
   if (!objective && !flags.wizard) {
     console.error(chalk.red('Error: Please provide an objective or use --wizard flag'));
-    console.log('Example: claude-flow hive-mind spawn "Build REST API"');
+    console.log('Example: outlaw-flow hive-mind spawn "Build REST API"');
     return;
   }
   
@@ -579,14 +579,14 @@ async function spawnSwarm(args, flags) {
     
     // Enhanced coordination instructions with MCP tools
     console.log('\n' + chalk.green('✓') + ' Swarm is ready for coordination');
-    console.log(chalk.gray('Use "claude-flow hive-mind status" to view swarm activity'));
+    console.log(chalk.gray('Use "outlaw-flow hive-mind status" to view swarm activity'));
     
     // Offer to spawn Claude Code instances with coordination instructions
     if (flags.claude || flags.spawn) {
       await spawnClaudeCodeInstances(swarmId, hiveMind.config.name, objective, workers, flags);
     } else {
       console.log('\n' + chalk.blue('💡 Pro Tip:') + ' Add --claude to spawn coordinated Claude Code instances');
-      console.log(chalk.gray('   claude-flow hive-mind spawn "objective" --claude'));
+      console.log(chalk.gray('   outlaw-flow hive-mind spawn "objective" --claude'));
     }
     
   } catch (error) {
@@ -636,7 +636,7 @@ async function showStatus(flags) {
     
     if (!existsSync(dbPath)) {
       console.error(chalk.red('Error: Hive Mind not initialized'));
-      console.log('Run "claude-flow hive-mind init" first');
+      console.log('Run "outlaw-flow hive-mind init" first');
       return;
     }
     
@@ -1115,7 +1115,7 @@ export async function hiveMindCommand(args, flags) {
       
     default:
       console.error(chalk.red(`Unknown subcommand: ${subcommand}`));
-      console.log('Run "claude-flow hive-mind help" for usage information');
+      console.log('Run "outlaw-flow hive-mind help" for usage information');
       exit(1);
   }
 }
@@ -1477,7 +1477,7 @@ async function spawnClaudeCodeInstances(swarmId, swarmName, objective, workers, 
     console.log(chalk.cyan('Worker Count:'), workers.length);
     console.log(chalk.cyan('Worker Types:'), Object.keys(workerGroups).join(', '));
     console.log(chalk.cyan('Consensus Algorithm:'), flags.consensus || 'majority');
-    console.log(chalk.cyan('MCP Tools:'), 'Full Claude-Flow integration enabled');
+    console.log(chalk.cyan('MCP Tools:'), 'Full Outlaw-Flow integration enabled');
     
     try {
       // Check if claude command exists
@@ -1556,7 +1556,7 @@ async function spawnClaudeCodeInstances(swarmId, swarmName, objective, workers, 
     console.log(chalk.gray('─'.repeat(30)));
     console.log('• Use --auto-spawn to launch instances automatically');
     console.log('• Add --verbose for detailed coordination context');
-    console.log('• Monitor with: claude-flow hive-mind status');
+    console.log('• Monitor with: outlaw-flow hive-mind status');
     console.log('• Share memories: mcp__ruv-swarm__memory_usage');
     
   } catch (error) {
@@ -1594,34 +1594,34 @@ ${workerTypes.map(type => `• ${type}: ${workerGroups[type].length} agents`).jo
 🔧 AVAILABLE MCP TOOLS FOR HIVE MIND COORDINATION:
 
 1️⃣ **COLLECTIVE INTELLIGENCE**
-   mcp__claude-flow__consensus_vote    - Democratic decision making
-   mcp__claude-flow__memory_share      - Share knowledge across the hive
-   mcp__claude-flow__neural_sync       - Synchronize neural patterns
-   mcp__claude-flow__swarm_think       - Collective problem solving
+   mcp__outlaw-flow__consensus_vote    - Democratic decision making
+   mcp__outlaw-flow__memory_share      - Share knowledge across the hive
+   mcp__outlaw-flow__neural_sync       - Synchronize neural patterns
+   mcp__outlaw-flow__swarm_think       - Collective problem solving
 
 2️⃣ **QUEEN COORDINATION**
-   mcp__claude-flow__queen_command     - Issue directives to workers
-   mcp__claude-flow__queen_monitor     - Monitor swarm health
-   mcp__claude-flow__queen_delegate    - Delegate complex tasks
-   mcp__claude-flow__queen_aggregate   - Aggregate worker results
+   mcp__outlaw-flow__queen_command     - Issue directives to workers
+   mcp__outlaw-flow__queen_monitor     - Monitor swarm health
+   mcp__outlaw-flow__queen_delegate    - Delegate complex tasks
+   mcp__outlaw-flow__queen_aggregate   - Aggregate worker results
 
 3️⃣ **WORKER MANAGEMENT**
-   mcp__claude-flow__agent_spawn       - Create specialized workers
-   mcp__claude-flow__agent_assign      - Assign tasks to workers
-   mcp__claude-flow__agent_communicate - Inter-agent communication
-   mcp__claude-flow__agent_metrics     - Track worker performance
+   mcp__outlaw-flow__agent_spawn       - Create specialized workers
+   mcp__outlaw-flow__agent_assign      - Assign tasks to workers
+   mcp__outlaw-flow__agent_communicate - Inter-agent communication
+   mcp__outlaw-flow__agent_metrics     - Track worker performance
 
 4️⃣ **TASK ORCHESTRATION**
-   mcp__claude-flow__task_create       - Create hierarchical tasks
-   mcp__claude-flow__task_distribute   - Distribute work efficiently
-   mcp__claude-flow__task_monitor      - Track task progress
-   mcp__claude-flow__task_aggregate    - Combine task results
+   mcp__outlaw-flow__task_create       - Create hierarchical tasks
+   mcp__outlaw-flow__task_distribute   - Distribute work efficiently
+   mcp__outlaw-flow__task_monitor      - Track task progress
+   mcp__outlaw-flow__task_aggregate    - Combine task results
 
 5️⃣ **MEMORY & LEARNING**
-   mcp__claude-flow__memory_store      - Store collective knowledge
-   mcp__claude-flow__memory_retrieve   - Access shared memory
-   mcp__claude-flow__neural_train      - Learn from experiences
-   mcp__claude-flow__pattern_recognize - Identify patterns
+   mcp__outlaw-flow__memory_store      - Store collective knowledge
+   mcp__outlaw-flow__memory_retrieve   - Access shared memory
+   mcp__outlaw-flow__neural_train      - Learn from experiences
+   mcp__outlaw-flow__pattern_recognize - Identify patterns
 
 📋 HIVE MIND EXECUTION PROTOCOL:
 
@@ -1629,10 +1629,10 @@ As the Queen coordinator, you must:
 
 1. **INITIALIZE THE HIVE** (Single BatchTool Message):
    [BatchTool]:
-   ${workerTypes.map(type => `   mcp__claude-flow__agent_spawn { "type": "${type}", "count": ${workerGroups[type].length} }`).join('\n')}
-   mcp__claude-flow__memory_store { "key": "hive/objective", "value": "${objective}" }
-   mcp__claude-flow__memory_store { "key": "hive/queen", "value": "${queenType}" }
-   mcp__claude-flow__swarm_think { "topic": "initial_strategy" }
+   ${workerTypes.map(type => `   mcp__outlaw-flow__agent_spawn { "type": "${type}", "count": ${workerGroups[type].length} }`).join('\n')}
+   mcp__outlaw-flow__memory_store { "key": "hive/objective", "value": "${objective}" }
+   mcp__outlaw-flow__memory_store { "key": "hive/queen", "value": "${queenType}" }
+   mcp__outlaw-flow__swarm_think { "topic": "initial_strategy" }
    TodoWrite { "todos": [/* Create 5-10 high-level tasks */] }
 
 2. **ESTABLISH COLLECTIVE INTELLIGENCE**:

@@ -39,7 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Security hardening** with non-root containers and best practices implementation
 
 #### **Enhanced CLI Capabilities**
-- **Advanced swarm coordination commands** with `npx claude-flow swarm`
+- **Advanced swarm coordination commands** with `npx outlaw-flow swarm`
 - **GitHub integration commands** accessible through enhanced CLI interface
 - **Improved error handling** and validation with detailed error messages
 - **Enhanced UI** with `--ui` flag support for interactive management
@@ -92,7 +92,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Enhanced package installation** reliability
 
 #### **Version Compatibility**
-- **Aligned Node.js requirements** across claude-code-flow and ruv-swarm
+- **Aligned Node.js requirements** across outlaw-flow and ruv-swarm
 - **Fixed better-sqlite3 version** conflicts for cross-platform compatibility
 - **Resolved npm installation** issues in Docker environments
 - **Enhanced cross-platform** compatibility validation
@@ -174,35 +174,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 1. **Uninstall previous version** (if installed globally):
    ```bash
-   npm uninstall -g claude-flow
+   npm uninstall -g outlaw-flow
    ```
 
 2. **Install v2.0.0**:
    ```bash
-   npm install -g claude-flow@2.0.0
+   npm install -g outlaw-flow@2.0.0
    ```
 
 3. **Verify installation**:
    ```bash
-   claude-flow --version  # Should show 2.0.0
-   claude-flow --help     # Verify all commands available
+   outlaw-flow --version  # Should show 2.0.0
+   outlaw-flow --help     # Verify all commands available
    ```
 
 ### Configuration Updates
 
 1. **Initialize new features**:
    ```bash
-   npx claude-flow init --sparc
+   npx outlaw-flow init --sparc
    ```
 
 2. **Test swarm capabilities**:
    ```bash
-   npx claude-flow swarm init
+   npx outlaw-flow swarm init
    ```
 
 3. **Explore GitHub integration**:
    ```bash
-   npx claude-flow github --help
+   npx outlaw-flow github --help
    ```
 
 ### Breaking Changes
@@ -228,26 +228,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 #### Swarm Coordination
 ```bash
 # Initialize swarm
-npx claude-flow swarm init
+npx outlaw-flow swarm init
 
 # Spawn agents
-npx claude-flow agent spawn researcher
-npx claude-flow agent spawn coder
+npx outlaw-flow agent spawn researcher
+npx outlaw-flow agent spawn coder
 
 # Orchestrate tasks
-npx claude-flow task orchestrate "complex development task"
+npx outlaw-flow task orchestrate "complex development task"
 ```
 
 #### GitHub Integration
 ```bash
 # Automated PR management
-npx claude-flow github pr-manager "review and merge feature branch"
+npx outlaw-flow github pr-manager "review and merge feature branch"
 
 # Issue tracking
-npx claude-flow github issue-tracker "manage project issues"
+npx outlaw-flow github issue-tracker "manage project issues"
 
 # Release coordination
-npx claude-flow github release-manager "prepare v2.0.0 release"
+npx outlaw-flow github release-manager "prepare v2.0.0 release"
 ```
 
 #### Docker Development
@@ -265,16 +265,16 @@ After migration, verify functionality:
 
 ```bash
 # Basic functionality
-claude-flow --version
-claude-flow --help
-claude-flow status
+outlaw-flow --version
+outlaw-flow --help
+outlaw-flow status
 
 # Swarm features
-claude-flow swarm init
-claude-flow agent list
+outlaw-flow swarm init
+outlaw-flow agent list
 
 # GitHub integration
-claude-flow github --help
+outlaw-flow github --help
 
 # Docker testing
 cd infrastructure/docker && docker-compose up
@@ -299,7 +299,7 @@ cd infrastructure/docker && docker-compose up
 ## [1.0.0] - 2025-01-01
 
 ### Added
-- Initial release of claude-flow
+- Initial release of outlaw-flow
 - Basic AI agent orchestration
 - CLI interface for agent management
 - Core workflow automation
@@ -307,4 +307,4 @@ cd infrastructure/docker && docker-compose up
 
 ---
 
-*For older versions, see the [releases page](https://github.com/ruvnet/claude-code-flow/releases).*
+*For older versions, see the [releases page](https://github.com/ruvnet/outlaw-flow/releases).*

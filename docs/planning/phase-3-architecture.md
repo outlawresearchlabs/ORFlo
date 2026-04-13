@@ -1,5 +1,5 @@
 # Phase 3: Architecture Design
-## Claude-Flow System Architecture
+## Outlaw-Flow System Architecture
 
 ### System Overview
 
@@ -570,20 +570,20 @@ services:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: claude-flow-orchestrator
+  name: outlaw-flow-orchestrator
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: claude-flow
+      app: outlaw-flow
   template:
     metadata:
       labels:
-        app: claude-flow
+        app: outlaw-flow
     spec:
       containers:
       - name: orchestrator
-        image: claude-flow:latest
+        image: outlaw-flow:latest
         env:
         - name: MODE
           value: production

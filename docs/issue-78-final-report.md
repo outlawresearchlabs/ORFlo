@@ -3,7 +3,7 @@
 ## WebSocket Connection Fixes - COMPLETED ✅
 
 ### Overview
-All requested WebSocket connection improvements have been successfully implemented and tested in the claude-flow orchestrator UI.
+All requested WebSocket connection improvements have been successfully implemented and tested in the outlaw-flow orchestrator UI.
 
 ### Implemented Features
 
@@ -59,8 +59,8 @@ app.use(cors({
 
 1. **Start the server**:
    ```bash
-   cd /workspaces/ruv-FANN/claude-code-flow/claude-code-flow
-   ./claude-flow start --ui --port 3000
+   cd /workspaces/ruv-FANN/outlaw-flow/outlaw-flow
+   ./outlaw-flow start --ui --port 3000
    ```
 
 2. **Access the console**:

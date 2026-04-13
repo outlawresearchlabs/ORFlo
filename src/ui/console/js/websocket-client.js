@@ -411,7 +411,7 @@ export class WebSocketClient {
     const params = {
       protocolVersion: { major: 2024, minor: 11, patch: 5 },
       clientInfo: {
-        name: 'Claude Flow v2',
+        name: 'Outlaw Flow v2',
         version: '2.0.0',
         ...clientInfo
       },
@@ -434,12 +434,12 @@ export class WebSocketClient {
   }
   
   /**
-   * Execute Claude Flow command
+   * Execute Outlaw Flow command
    */
   async executeCommand(command, args = {}) {
     try {
       const result = await this.sendRequest('tools/call', {
-        name: 'claude-flow/execute',
+        name: 'outlaw-flow/execute',
         arguments: { command, args }
       });
       

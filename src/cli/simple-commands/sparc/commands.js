@@ -529,13 +529,13 @@ export function showSparcCommandsHelp() {
   
   console.log();
   console.log('Usage:');
-  console.log('  claude-flow sparc-<command> "<task-description>" [options]');
+  console.log('  outlaw-flow sparc-<command> "<task-description>" [options]');
   console.log();
   console.log('Examples:');
-  console.log('  claude-flow sparc-dev "build user authentication system"');
-  console.log('  claude-flow sparc-api "create REST API for e-commerce" --swarm');
-  console.log('  claude-flow sparc-test "comprehensive testing for payment module"');
-  console.log('  claude-flow sparc-security "security audit for web application"');
+  console.log('  outlaw-flow sparc-dev "build user authentication system"');
+  console.log('  outlaw-flow sparc-api "create REST API for e-commerce" --swarm');
+  console.log('  outlaw-flow sparc-test "comprehensive testing for payment module"');
+  console.log('  outlaw-flow sparc-security "security audit for web application"');
 }
 
 export default {

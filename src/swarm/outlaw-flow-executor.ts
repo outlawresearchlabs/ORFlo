@@ -1,7 +1,7 @@
 import { getErrorMessage } from '../utils/error-handler.js';
 /**
- * Claude Flow SPARC Executor
- * Executes tasks using the full claude-flow SPARC system in non-interactive mode
+ * Outlaw Flow SPARC Executor
+ * Executes tasks using the full outlaw-flow SPARC system in non-interactive mode
  */
 
 import type { TaskDefinition, AgentState, TaskResult } from './types.js';
@@ -10,7 +10,7 @@ import * as path from 'node:path';
 import { spawn } from 'node:child_process';
 import { getClaudeFlowBin } from '../utils/paths.js';
 
-export interface ClaudeFlowExecutorConfig {
+export interface OutlawFlowExecutorConfig {
   logger?: Logger;
   claudeFlowPath?: string;
   enableSparc?: boolean;
@@ -18,17 +18,17 @@ export interface ClaudeFlowExecutorConfig {
   timeoutMinutes?: number;
 }
 
-export class ClaudeFlowExecutor {
+export class OutlawFlowExecutor {
   private logger: Logger;
   private claudeFlowPath: string;
   private enableSparc: boolean;
   private verbose: boolean;
   private timeoutMinutes: number;
 
-  constructor(config: ClaudeFlowExecutorConfig = {}) {
+  constructor(config: OutlawFlowExecutorConfig = {}) {
     this.logger = config.logger || new Logger(
       { level: 'info', format: 'text', destination: 'console' },
-      { component: 'ClaudeFlowExecutor' }
+      { component: 'OutlawFlowExecutor' }
     );
     this.claudeFlowPath = config.claudeFlowPath || getClaudeFlowBin();
     this.enableSparc = config.enableSparc ?? true;
@@ -41,7 +41,7 @@ export class ClaudeFlowExecutor {
     agent: AgentState,
     targetDir?: string
   ): Promise<TaskResult> {
-    this.logger.info('Executing task with Claude Flow SPARC', {
+    this.logger.info('Executing task with Outlaw Flow SPARC', {
       taskId: task.id.id,
       taskName: task.name,
       agentType: agent.type,
@@ -82,7 +82,7 @@ export class ClaudeFlowExecutor {
         error: result.error
       };
     } catch (error) {
-      this.logger.error('Failed to execute Claude Flow SPARC command', { 
+      this.logger.error('Failed to execute Outlaw Flow SPARC command', { 
         error: (error instanceof Error ? error.message : String(error)),
         taskId: task.id.id 
       });
@@ -201,8 +201,8 @@ export class ClaudeFlowExecutor {
         shell: true,
         env: {
           ...process.env,
-          CLAUDE_FLOW_NON_INTERACTIVE: 'true',
-          CLAUDE_FLOW_AUTO_CONFIRM: 'true'
+          OUTLAW_FLOW_NON_INTERACTIVE: 'true',
+          OUTLAW_FLOW_AUTO_CONFIRM: 'true'
         }
       });
 
@@ -262,4 +262,4 @@ export class ClaudeFlowExecutor {
 }
 
 // Export for use in swarm coordinator
-export default ClaudeFlowExecutor;
+export default OutlawFlowExecutor;

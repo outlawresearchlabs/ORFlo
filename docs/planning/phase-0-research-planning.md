@@ -24,7 +24,7 @@ This phase establishes the foundation for the Claude-Code-Flow CLI, a sophistica
 #### 2. Core Architecture Pattern
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    Claude-Flow CLI                          │
+│                    Outlaw-Flow CLI                          │
 ├─────────────────────────────────────────────────────────────┤
 │  ┌─────────────┐  ┌──────────────┐  ┌──────────────────┐  │
 │  │   Terminal   │  │   Memory     │  │  Coordination    │  │

@@ -47,12 +47,12 @@ export class ViewManager {
    */
   setupDOMContainer() {
     // Create main container
-    this.containerElement = document.getElementById('claude-flow-ui') || 
+    this.containerElement = document.getElementById('outlaw-flow-ui') || 
                            document.createElement('div');
     
     if (!this.containerElement.id) {
-      this.containerElement.id = 'claude-flow-ui';
-      this.containerElement.className = 'claude-flow-main-container';
+      this.containerElement.id = 'outlaw-flow-ui';
+      this.containerElement.className = 'outlaw-flow-main-container';
       document.body.appendChild(this.containerElement);
     }
 
@@ -64,12 +64,12 @@ export class ViewManager {
    * Add CSS styles for view transitions
    */
   addTransitionStyles() {
-    if (document.getElementById('claude-flow-styles')) return;
+    if (document.getElementById('outlaw-flow-styles')) return;
 
     const styles = document.createElement('style');
-    styles.id = 'claude-flow-styles';
+    styles.id = 'outlaw-flow-styles';
     styles.textContent = `
-      .claude-flow-main-container {
+      .outlaw-flow-main-container {
         width: 100%;
         height: 100vh;
         overflow: hidden;
@@ -79,7 +79,7 @@ export class ViewManager {
         color: #ffffff;
       }
 
-      .claude-flow-view {
+      .outlaw-flow-view {
         position: absolute;
         top: 0;
         left: 0;
@@ -93,21 +93,21 @@ export class ViewManager {
         box-sizing: border-box;
       }
 
-      .claude-flow-view.entering {
+      .outlaw-flow-view.entering {
         opacity: 0;
         transform: translateX(50px);
       }
 
-      .claude-flow-view.exiting {
+      .outlaw-flow-view.exiting {
         opacity: 0;
         transform: translateX(-50px);
       }
 
-      .claude-flow-view.hidden {
+      .outlaw-flow-view.hidden {
         display: none;
       }
 
-      .claude-flow-header {
+      .outlaw-flow-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -116,23 +116,23 @@ export class ViewManager {
         border-bottom: 1px solid #333;
       }
 
-      .claude-flow-title {
+      .outlaw-flow-title {
         font-size: 24px;
         font-weight: bold;
         color: #00d4ff;
       }
 
-      .claude-flow-breadcrumb {
+      .outlaw-flow-breadcrumb {
         font-size: 14px;
         color: #888;
       }
 
-      .claude-flow-content {
+      .outlaw-flow-content {
         flex: 1;
         overflow-y: auto;
       }
 
-      .claude-flow-loading {
+      .outlaw-flow-loading {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -141,7 +141,7 @@ export class ViewManager {
         color: #888;
       }
 
-      .claude-flow-error {
+      .outlaw-flow-error {
         background: #ff4444;
         color: white;
         padding: 15px;
@@ -151,15 +151,15 @@ export class ViewManager {
 
       /* Responsive design */
       @media (max-width: 768px) {
-        .claude-flow-main-container {
+        .outlaw-flow-main-container {
           padding: 10px;
         }
         
-        .claude-flow-view {
+        .outlaw-flow-view {
           padding: 10px;
         }
         
-        .claude-flow-title {
+        .outlaw-flow-title {
           font-size: 20px;
         }
       }
@@ -288,20 +288,20 @@ export class ViewManager {
    */
   async createDOMView(viewId, viewConfig) {
     const element = document.createElement('div');
-    element.className = 'claude-flow-view hidden';
+    element.className = 'outlaw-flow-view hidden';
     element.id = `view-${viewId}`;
 
     // Create view header
     const header = document.createElement('div');
-    header.className = 'claude-flow-header';
+    header.className = 'outlaw-flow-header';
     
     const titleSection = document.createElement('div');
     const title = document.createElement('h1');
-    title.className = 'claude-flow-title';
+    title.className = 'outlaw-flow-title';
     title.textContent = `${viewConfig.icon} ${viewConfig.name}`;
     
     const breadcrumb = document.createElement('div');
-    breadcrumb.className = 'claude-flow-breadcrumb';
+    breadcrumb.className = 'outlaw-flow-breadcrumb';
     breadcrumb.textContent = viewConfig.description;
     
     titleSection.appendChild(title);
@@ -310,7 +310,7 @@ export class ViewManager {
 
     // Create view content
     const content = document.createElement('div');
-    content.className = 'claude-flow-content';
+    content.className = 'outlaw-flow-content';
     content.id = `content-${viewId}`;
 
     element.appendChild(header);
@@ -377,7 +377,7 @@ export class ViewManager {
     return {
       render: (params) => {
         container.innerHTML = `
-          <div class="claude-flow-loading">
+          <div class="outlaw-flow-loading">
             <div>
               <h2>${viewConfig.name}</h2>
               <p>${viewConfig.description}</p>

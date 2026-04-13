@@ -306,7 +306,7 @@ function showHooksHelp() {
 🔗 Hooks Commands - Lifecycle Event Management
 
 USAGE:
-  claude-flow hooks <command> [options]
+  outlaw-flow hooks <command> [options]
 
 COMMANDS:
   pre-task      Execute before task begins (preparation & setup)
@@ -340,19 +340,19 @@ SESSION-END OPTIONS:
 
 EXAMPLES:
   # Pre-task preparation
-  claude-flow hooks pre-task --description "Build API" --task-id task-123 --agent-id agent-456
+  outlaw-flow hooks pre-task --description "Build API" --task-id task-123 --agent-id agent-456
 
   # Post-task with analysis
-  claude-flow hooks post-task --task-id task-123 --analyze-performance --generate-insights
+  outlaw-flow hooks post-task --task-id task-123 --analyze-performance --generate-insights
 
   # Pre-edit preparation
-  claude-flow hooks pre-edit --file "src/api.js" --operation edit
+  outlaw-flow hooks pre-edit --file "src/api.js" --operation edit
 
   # Post-edit coordination
-  claude-flow hooks post-edit --file "src/api.js" --memory-key "swarm/123/edits/timestamp"
+  outlaw-flow hooks post-edit --file "src/api.js" --memory-key "swarm/123/edits/timestamp"
 
   # Session cleanup with export
-  claude-flow hooks session-end --export-metrics --generate-summary --swarm-id swarm-123
+  outlaw-flow hooks session-end --export-metrics --generate-summary --swarm-id swarm-123
 
 🎯 Hooks enable:
   • Automated preparation & cleanup

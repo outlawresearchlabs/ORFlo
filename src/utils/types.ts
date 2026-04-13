@@ -1,5 +1,5 @@
 /**
- * Core type definitions for Claude-Flow
+ * Core type definitions for Outlaw-Flow
  */
 
 // Logging configuration interface

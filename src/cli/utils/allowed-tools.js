@@ -1,5 +1,5 @@
 /**
- * Safe permissions configuration for claude-flow.
+ * Safe permissions configuration for outlaw-flow.
  * Replaces --dangerously-skip-permissions with granular tool allowlists.
  */
 
@@ -8,22 +8,22 @@ const CORE_TOOLS = 'Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch';
 
 // MCP tools for swarm coordination
 const SWARM_MCP_TOOLS = [
-  'mcp__claude-flow__agent_spawn',
-  'mcp__claude-flow__task_create',
-  'mcp__claude-flow__task_orchestrate',
-  'mcp__claude-flow__swarm_status',
-  'mcp__claude-flow__swarm_monitor',
-  'mcp__claude-flow__memory_store',
-  'mcp__claude-flow__memory_query',
-  'mcp__claude-flow__memory_search',
-  'mcp__claude-flow__coordination_sync',
-  'mcp__claude-flow__topology_optimize',
-  'mcp__claude-flow__load_balance',
-  'mcp__claude-flow__neural_status',
-  'mcp__claude-flow__neural_predict',
-  'mcp__claude-flow__health_check',
-  'mcp__claude-flow__benchmark_run',
-  'mcp__claude-flow__performance_report',
+  'mcp__outlaw-flow__agent_spawn',
+  'mcp__outlaw-flow__task_create',
+  'mcp__outlaw-flow__task_orchestrate',
+  'mcp__outlaw-flow__swarm_status',
+  'mcp__outlaw-flow__swarm_monitor',
+  'mcp__outlaw-flow__memory_store',
+  'mcp__outlaw-flow__memory_query',
+  'mcp__outlaw-flow__memory_search',
+  'mcp__outlaw-flow__coordination_sync',
+  'mcp__outlaw-flow__topology_optimize',
+  'mcp__outlaw-flow__load_balance',
+  'mcp__outlaw-flow__neural_status',
+  'mcp__outlaw-flow__neural_predict',
+  'mcp__outlaw-flow__health_check',
+  'mcp__outlaw-flow__benchmark_run',
+  'mcp__outlaw-flow__performance_report',
   'mcp__ruv-swarm__agent_spawn',
   'mcp__ruv-swarm__task_orchestrate',
   'mcp__ruv-swarm__swarm_status',
@@ -38,11 +38,11 @@ const SWARM_ALLOWED_TOOLS = CORE_TOOLS + ',' + SWARM_MCP_TOOLS;
 
 // SPARC MCP tools (subset for focused development)
 const SPARC_MCP_TOOLS = [
-  'mcp__claude-flow__memory_store',
-  'mcp__claude-flow__memory_query',
-  'mcp__claude-flow__sparc_mode',
-  'mcp__claude-flow__workflow_create',
-  'mcp__claude-flow__health_check',
+  'mcp__outlaw-flow__memory_store',
+  'mcp__outlaw-flow__memory_query',
+  'mcp__outlaw-flow__sparc_mode',
+  'mcp__outlaw-flow__workflow_create',
+  'mcp__outlaw-flow__health_check',
 ].join(',');
 
 // Tools allowed for SPARC execution
@@ -50,14 +50,14 @@ const SPARC_ALLOWED_TOOLS = CORE_TOOLS + ',' + SPARC_MCP_TOOLS;
 
 // GitHub MCP tools
 const GITHUB_MCP_TOOLS = [
-  'mcp__claude-flow__github_repo_analyze',
-  'mcp__claude-flow__github_pr_manage',
-  'mcp__claude-flow__github_issue_track',
-  'mcp__claude-flow__github_release_coord',
-  'mcp__claude-flow__github_workflow_auto',
-  'mcp__claude-flow__github_code_review',
-  'mcp__claude-flow__github_sync_coord',
-  'mcp__claude-flow__github_metrics',
+  'mcp__outlaw-flow__github_repo_analyze',
+  'mcp__outlaw-flow__github_pr_manage',
+  'mcp__outlaw-flow__github_issue_track',
+  'mcp__outlaw-flow__github_release_coord',
+  'mcp__outlaw-flow__github_workflow_auto',
+  'mcp__outlaw-flow__github_code_review',
+  'mcp__outlaw-flow__github_sync_coord',
+  'mcp__outlaw-flow__github_metrics',
 ].join(',');
 
 // Tools allowed for GitHub integration
@@ -65,10 +65,10 @@ const GITHUB_ALLOWED_TOOLS = CORE_TOOLS + ',' + GITHUB_MCP_TOOLS;
 
 // Bash patterns allowed via settings.json permissions.allow
 const SWARM_ALLOWED_BASH_PATTERNS = [
-  // claude-flow and ruv-swarm commands
-  'Bash(npx claude-flow *)',
+  // outlaw-flow and ruv-swarm commands
+  'Bash(npx outlaw-flow *)',
   'Bash(npx ruv-swarm *)',
-  'Bash(npx claude-flow@alpha *)',
+  'Bash(npx outlaw-flow@alpha *)',
   // Package management
   'Bash(npm *)',
   'Bash(npx *)',
