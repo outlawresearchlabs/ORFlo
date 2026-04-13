@@ -366,6 +366,7 @@ export class TaskExecutorV2 extends TaskExecutor {
     args.push('--metadata', JSON.stringify({
       environment: this.environment.terminalType,
       interactive: this.environment.isInteractive,
+      sandbox: this.environment.sandbox,
       executor: 'v2'
     }));
 

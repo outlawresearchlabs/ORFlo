@@ -6,7 +6,7 @@ Security-hardened AI agent orchestration. Based on [claude-flow](https://github.
 
 `claude-flow` defaulted to `--dangerously-skip-permissions` on every Claude Code spawn path — swarm, SPARC, hive-mind, GitHub integration, batch tasks. This flag bypasses **all** permission prompts, allowing arbitrary shell execution, unrestricted file access, and uncontrolled network requests with no audit trail.
 
-We replaced it with granular `--allowedTools` allowlists, `permissions.allow`/`permissions.deny` lists, and (coming) a SafeBash MCP server with OS sandbox support. Every spawn path now restricts tools by default. See [SECURITY.md](./SECURITY.md) for full details.
+We replaced it with granular `--allowedTools` allowlists, `permissions.allow`/`permissions.deny` lists, and a SafeBash MCP server with OS sandbox support. Every spawn path now restricts tools by default. See [SECURITY.md](./SECURITY.md) for full details.
 
 ## Quick start
 
@@ -33,13 +33,13 @@ outlaw-flow swarm "Deploy staging"
 | Change | Upstream (claude-flow) | Outlaw-flow |
 |--------|----------|-------------|
 | Permission model | `--dangerously-skip-permissions` (bypasses all) | `--allowedTools` with mode-specific allowlists |
-| Bash restrictions | 4 deny patterns | 25+ deny patterns |
+| Bash restrictions | 4 deny patterns | 25+ deny patterns, replaced by SafeBash MCP |
 | Tool allowlists | None (all tools available) | Swarm, SPARC, GitHub each get scoped tools |
 | CI/Docker/SSH | `--dangerously-skip-permissions` | `--non-interactive` + allowlists |
 | Bare spawns | Several paths spawned Claude with no restrictions | All paths apply allowlists unconditionally |
 | `allowed-tools.js` | Did not exist | Central allowlist module |
 | Download-execute chain | No prevention | `curl -o`/`wget -q` removed, `chmod +x` restricted, temp-dir execution denied |
-| SafeBash MCP server | Not present | (coming) Semantic command analysis + OS sandbox |
+| SafeBash MCP server | Not present | Semantic command analysis + OS sandbox (replaces raw Bash) |
 
 ## Architecture
 
@@ -48,7 +48,7 @@ outlaw-flow swarm "Deploy staging"
 - **Memory** — Persistent key-value store with namespace support
 - **MCP server** — Model Context Protocol integration for Claude Code
 - **Swarm executor** — Spawns and manages Claude Code instances with scoped permissions
-- **SafeBash** (coming) — Semantic command analysis MCP server with OS sandbox support
+- **SafeBash** — Semantic command analysis MCP server with OS sandbox support (replaces raw Bash)
 
 ## Commands
 
@@ -72,11 +72,19 @@ outlaw-flow --help                # Full command reference
 
 See [SECURITY.md](./SECURITY.md) for:
 
-- Full allowlist/deny list contents
-- Mode-specific tool breakdowns
-- Download-execute chain prevention details
+- SafeBash 6-check pipeline (subshell, injection, binary allowlist, path resolver, redirect guard, taint tracker)
+- OS sandbox layer (bubblewrap on Linux, sandbox-exec on macOS)
 - Migration guide from `--dangerously-skip-permissions`
 - File-level change reference
+
+### SafeBash quick check
+
+```bash
+outlaw-flow safe-bash check "npm install"          # ✅ allowed
+outlaw-flow safe-bash check "node --require /tmp/x" # ❌ injection flag blocked
+outlaw-flow safe-bash check "sudo rm -rf /"         # ❌ binary blocked
+outlaw-flow safe-bash check "curl -fsSL https://example.com > /tmp/x" # ❌ redirect outside project
+```
 
 **Download-execute chain prevention**: `curl -o` and `wget -q` are removed from the allow list (use `curl -fsSL` to fetch + `Write` tool to save). `chmod +x` restricted to project-relative paths (`./*`). Runtime deny rules block `node`/`npx`/`bun` from executing files in `/tmp`, `/var/tmp`, `/dev/shm`.
 

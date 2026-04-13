@@ -495,6 +495,11 @@ export class TaskExecutor extends EventEmitter {
       args.push('--output-format', options.outputFormat);
     }
 
+    // Add sandbox metadata if configured
+    if (this.config.sandboxed) {
+      args.push('--metadata', JSON.stringify({ sandboxed: true }));
+    }
+
     return {
       command: options.claudePath || 'claude',
       args,

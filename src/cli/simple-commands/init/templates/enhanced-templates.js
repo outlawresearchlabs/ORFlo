@@ -1178,29 +1178,16 @@ function createEnhancedSettingsJsonFallback() {
     },
     permissions: {
       allow: [
-        "Bash(npx outlaw-flow *)",
-        "Bash(npm run lint)",
-        "Bash(npm run test:*)",
-        "Bash(npm test *)",
-        "Bash(git status)",
-        "Bash(git diff *)",
-        "Bash(git log *)",
-        "Bash(git add *)",
-        "Bash(git commit *)",
-        "Bash(git push)",
-        "Bash(git config *)",
-        "Bash(gh *)",
-        "Bash(node *)",
-        "Bash(which *)",
-        "Bash(pwd)",
-        "Bash(ls *)"
+        "mcp__safe-bash__safe_bash",
+        "Read",
+        "Write",
+        "Edit",
+        "Glob",
+        "Grep",
+        "WebSearch",
+        "WebFetch"
       ],
-      deny: [
-        "Bash(rm -rf /)",
-        "Bash(curl * | bash)",
-        "Bash(wget * | sh)",
-        "Bash(eval *)"
-      ]
+      deny: []
     },
     hooks: {
       preEditHook: {
@@ -1243,6 +1230,13 @@ function createEnhancedSettingsJsonFallback() {
           OUTLAW_FLOW_TELEMETRY_ENABLED: "true",
           OUTLAW_FLOW_REMOTE_READY: "true",
           OUTLAW_FLOW_GITHUB_INTEGRATION: "true"
+        }
+      },
+      "safe-bash": {
+        command: "npx",
+        args: ["outlaw-flow", "safe-bash", "start"],
+        env: {
+          OUTLAW_FLOW_SAFE_BASH_LOG_LEVEL: "info"
         }
       }
     },
