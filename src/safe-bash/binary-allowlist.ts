@@ -43,7 +43,7 @@ const BLOCKED_BINARIES = new Set([
   'mkfifo',
   'strace', 'ltrace',
   'gdb',
-  'python', 'python3', 'perl', 'ruby', // Interpreters — allowed only via injection-detector
+  'python', 'python3', 'perl', 'ruby', // Interpreters blocked entirely; use safe_bash for execution
 ]);
 
 /**

@@ -12,7 +12,6 @@ import {
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
 import { exec } from 'child_process';
-import * as path from 'path';
 import { parseShellCommand } from './shell-parser.js';
 import { checkInjection } from './injection-detector.js';
 import { checkBinary } from './binary-allowlist.js';
@@ -27,7 +26,8 @@ import type {
   SandboxCapabilities,
 } from './types.js';
 
-const NETWORK_BINARIES = ['curl', 'wget', 'ssh', 'scp', 'rsync', 'nc', 'ncat'];
+/** Binaries that require allowNetwork=true. Only includes binaries already in the allowlist. */
+const NETWORK_BINARIES = ['curl'];
 
 export class SafeBashMCPServer {
   private server: Server;
@@ -234,41 +234,19 @@ export class SafeBashMCPServer {
       };
     }
 
-    // 4. Path resolution and bounds checking
+    // 4. Path resolution and bounds checking (includes redirect targets)
     const pathResult = resolveAndCheckPaths(parsed, this.projectRoot, this.writablePaths);
     if (!pathResult.safe) {
+      // Map redirect violations to the 'redirect' failedCheck, others to 'path'
+      const hasRedirectViolation = pathResult.violations.some(v => v.type === 'redirect-outside-project');
       return {
         safe: false,
         reason: pathResult.violations.map(v => v.reason).join('; '),
-        failedCheck: 'path',
+        failedCheck: hasRedirectViolation ? 'redirect' : 'path',
       };
     }
 
-    // 5. Redirect guard — writes outside project blocked
-    for (const redirect of parsed.redirects) {
-      if ((redirect.type === 'write' || redirect.type === 'append' || redirect.type === 'stderr-write')) {
-        if (redirect.targetResolved && !redirect.targetResolved.startsWith(this.projectRoot)) {
-          return {
-            safe: false,
-            reason: `Redirect target outside project: ${redirect.target} -> ${redirect.targetResolved}`,
-            failedCheck: 'redirect',
-          };
-        }
-        // Also check unresolved targets
-        if (!redirect.targetResolved && looksLikeAbsolutePath(redirect.target)) {
-          const resolved = path.resolve(workingDir, redirect.target);
-          if (!resolved.startsWith(this.projectRoot)) {
-            return {
-              safe: false,
-              reason: `Redirect target outside project: ${redirect.target}`,
-              failedCheck: 'redirect',
-            };
-          }
-        }
-      }
-    }
-
-    // 6. Taint tracking check
+    // 5. Taint tracking check
     const taintResult = this.taintTracker.checkExecution(parsed);
     if (!taintResult.safe) {
       return {
@@ -345,8 +323,4 @@ function executeCommand(
       });
     });
   });
-}
-
-function looksLikeAbsolutePath(p: string): boolean {
-  return p.startsWith('/') || p.startsWith('~');
 }

@@ -185,6 +185,8 @@ function isInBlockedExecDir(resolved: string): boolean {
  */
 function looksLikePath(s: string): boolean {
   if (!s || s.startsWith('-')) return false;
+  // Exclude URLs and protocol specifiers
   if (s.startsWith('http://') || s.startsWith('https://') || s.startsWith('ftp://')) return false;
+  if (s.startsWith('npm:') || s.startsWith('node:') || s.startsWith('file://')) return false;
   return s.startsWith('/') || s.startsWith('./') || s.startsWith('../') || s.includes('/');
 }

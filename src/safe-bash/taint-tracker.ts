@@ -12,19 +12,25 @@ import type { ParsedCommand, TaintCheckResult } from './types.js';
 /** Interpreters that execute their first non-flag argument */
 const INTERPRETERS = new Set(['node', 'bun', 'deno', 'python', 'python3', 'perl', 'ruby']);
 
+/** Directories to skip when walking */
+const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', '.next', '__pycache__']);
+
 export class TaintTracker {
   private projectRoot: string;
   private sessionStartTime: number;
   /** Files that existed at session start (trusted) */
-  private initialFiles: Set<string> = new Set();
+  private initialFiles: Map<string, number> = new Map(); // path -> mtimeMs
   /** Files written by the Write tool during this session (tainted) */
   private writeToolFiles: Map<string, { timestamp: number }> = new Map();
   /** Files written by safe_bash during this session (medium trust) */
   private safeBashFiles: Map<string, { timestamp: number }> = new Map();
+  /** Timestamp of last command execution, for incremental scans */
+  private lastExecTime: number;
 
   constructor(projectRoot: string) {
     this.projectRoot = projectRoot;
     this.sessionStartTime = Date.now();
+    this.lastExecTime = this.sessionStartTime;
   }
 
   /**
@@ -38,7 +44,7 @@ export class TaintTracker {
         try {
           const stat = fs.statSync(file);
           if (stat.mtimeMs < this.sessionStartTime) {
-            this.initialFiles.add(file);
+            this.initialFiles.set(file, stat.mtimeMs);
           }
         } catch {
           // Skip files that can't be stat'd
@@ -95,9 +101,7 @@ export class TaintTracker {
         try {
           const stat = fs.statSync(resolved);
           if (stat.mtimeMs > this.sessionStartTime) {
-            // File modified after session start and not tracked — potentially tainted
-            // Only flag if it's in the writeToolFiles map
-            // (safe_bash files are tracked separately)
+            // File modified after session start and not tracked — only flag if in writeToolFiles
           }
         } catch {
           // File doesn't exist — can't be executed
@@ -117,29 +121,35 @@ export class TaintTracker {
   }
 
   /**
-   * Scan for files modified after the last command execution.
+   * Scan for files modified since the last command execution.
    * Called after each safe_bash execution to update tracking.
+   * Uses incremental mtime comparison instead of full walk.
    */
   postExecScan(): void {
-    // Check for new files in project dir created by this command
+    const now = Date.now();
+    const since = this.lastExecTime;
+
     try {
       const files = walkDir(this.projectRoot);
       for (const file of files) {
-        if (!this.initialFiles.has(file) && !this.writeToolFiles.has(file) && !this.safeBashFiles.has(file)) {
-          try {
-            const stat = fs.statSync(file);
-            if (stat.mtimeMs > this.sessionStartTime && stat.mtimeMs > Date.now() - 5000) {
-              // Recently created file — likely from this safe_bash execution
-              this.safeBashFiles.set(file, { timestamp: Date.now() });
-            }
-          } catch {
-            // Skip
+        if (this.writeToolFiles.has(file) || this.safeBashFiles.has(file)) {
+          continue; // Already tracked
+        }
+        try {
+          const stat = fs.statSync(file);
+          // Only pick up files modified since last exec, not the entire session
+          if (stat.mtimeMs > since && stat.mtimeMs <= now) {
+            this.safeBashFiles.set(file, { timestamp: Date.now() });
           }
+        } catch {
+          // Skip
         }
       }
     } catch {
       // Project dir might not exist
     }
+
+    this.lastExecTime = now;
   }
 
   /**
@@ -159,8 +169,7 @@ function walkDir(dir: string): string[] {
     const entries = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of entries) {
       const fullPath = path.join(dir, entry.name);
-      // Skip node_modules, .git, and other large directories
-      if (entry.isDirectory() && !shouldSkipDir(entry.name)) {
+      if (entry.isDirectory() && !SKIP_DIRS.has(entry.name)) {
         results.push(...walkDir(fullPath));
       } else if (entry.isFile()) {
         results.push(fullPath);
@@ -170,11 +179,4 @@ function walkDir(dir: string): string[] {
     // Skip directories we can't read
   }
   return results;
-}
-
-/**
- * Directories to skip when walking the project tree.
- */
-function shouldSkipDir(name: string): boolean {
-  return name === 'node_modules' || name === '.git' || name === 'dist' || name === '.next' || name === '__pycache__';
 }

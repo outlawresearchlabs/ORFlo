@@ -69,4 +69,18 @@ describe('shell-parser', () => {
     expect(result.binaryName).toBe('');
     expect(result.args).toEqual([]);
   });
+
+  test('parses redirect with quoted target', () => {
+    const result = parseShellCommand('echo hello > "my output.txt"');
+    expect(result.redirects).toHaveLength(1);
+    expect(result.redirects[0].type).toBe('write');
+    expect(result.redirects[0].target).toBe('my output.txt');
+  });
+
+  test('parses redirect with single-quoted target', () => {
+    const result = parseShellCommand("echo hello > 'my output.txt'");
+    expect(result.redirects).toHaveLength(1);
+    expect(result.redirects[0].type).toBe('write');
+    expect(result.redirects[0].target).toBe('my output.txt');
+  });
 });

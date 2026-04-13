@@ -121,10 +121,14 @@ function wrapInSandboxExec(
 ): SandboxResult {
   const profile = buildSandboxExecProfile(options);
 
-  // Write profile to a temp file
-  const profilePath = `/tmp/outlaw-flow-sandbox-${Date.now()}.sb`;
+  // Write profile to .claude/ within project (not /tmp — avoids predictable-path attacks)
+  const profileDir = path.join(options.projectRoot, '.claude');
+  const profilePath = path.join(profileDir, `sandbox-${Date.now()}.sb`);
   try {
     const fs = require('fs');
+    if (!fs.existsSync(profileDir)) {
+      fs.mkdirSync(profileDir, { recursive: true });
+    }
     fs.writeFileSync(profilePath, profile, 'utf8');
   } catch {
     // Can't write profile — fall back to no sandbox
