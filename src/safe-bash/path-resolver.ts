@@ -122,7 +122,6 @@ function isExecutionTarget(binaryName: string, arg: string, allArgs: string[]): 
   const interpreters = ['node', 'bun', 'deno', 'python', 'python3', 'perl', 'ruby'];
   if (interpreters.includes(binaryName)) {
     // First non-flag argument to an interpreter is the execution target
-    const argIndex = allArgs.indexOf(arg);
     const nonFlagArgs = allArgs.filter(a => !a.startsWith('-'));
     return nonFlagArgs.length > 0 && nonFlagArgs[0] === arg;
   }

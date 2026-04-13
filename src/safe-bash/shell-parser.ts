@@ -172,7 +172,8 @@ function extractRedirects(cmd: string): {
   // We need to respect quoting
   // Quoted targets must be matched first, otherwise [^\s;...] greedily grabs the opening quote
   const redirectPattern = /(?:^|\s)(2>|>>|>|<)\s*(?:"([^"]*)"|'([^']*)'|([^\s;|&><)]+))/g;
-  let cleaned = cmd;
+  // Collect match positions for removal (working from end to start to preserve indices)
+  const removals: { start: number; end: number }[] = [];
   let match;
 
   while ((match = redirectPattern.exec(cmd)) !== null) {
@@ -199,9 +200,14 @@ function extractRedirects(cmd: string): {
     }
 
     redirects.push({ type, target });
+    removals.push({ start: match.index, end: match.index + match[0].length });
+  }
 
-    // Remove the redirect from the cleaned string
-    cleaned = cleaned.replace(match[0], ' ');
+  // Remove matched redirects from end to start (preserves earlier indices)
+  let cleaned = cmd;
+  for (let i = removals.length - 1; i >= 0; i--) {
+    const { start, end } = removals[i];
+    cleaned = cleaned.slice(0, start) + ' ' + cleaned.slice(end);
   }
 
   return { cleaned: cleaned.replace(/\s+/g, ' ').trim(), redirects };

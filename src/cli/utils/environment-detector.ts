@@ -179,9 +179,6 @@ function generateRecommendations(env: ExecutionEnvironment): void {
 }
 
 /**
- * Shows environment warnings to the user
- */
-/**
  * Detects OS sandbox capabilities (bubblewrap on Linux, sandbox-exec on macOS)
  */
 function detectSandboxCapabilities(): SandboxCapabilities {
@@ -206,8 +203,8 @@ function detectSandboxCapabilities(): SandboxCapabilities {
 
 function findBinaryOnPath(name: string): string | null {
   try {
-    const { execSync } = require('child_process');
-    const result = execSync(`which ${name} 2>/dev/null`, { encoding: 'utf8' }).trim();
+    const { execFileSync } = require('child_process');
+    const result = execFileSync('which', [name], { encoding: 'utf8' }).trim();
     return result || null;
   } catch {
     return null;

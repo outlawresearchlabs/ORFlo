@@ -9,7 +9,7 @@ import type { ParsedCommand, InjectionCheckResult } from './types.js';
 
 /** Flags blocked per binary */
 const INJECTION_FLAGS: Record<string, string[]> = {
-  node: ['--require', '-r', '-e', '--eval', '-p', '--print', '--eval', '-i'],
+  node: ['--require', '-r', '-e', '--eval', '-p', '--print', '-i'],
   npm: ['--node-options', '-c', '--eval'],
   npx: ['--node-options', '-c', '--eval'],
   python: ['-c'],

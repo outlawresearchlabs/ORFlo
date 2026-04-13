@@ -94,19 +94,6 @@ export class TaintTracker {
       if (this.writeToolFiles.has(resolved)) {
         taintedFiles.push(arg);
       }
-
-      // Check if the file was modified after session start but not in initial snapshot
-      // and not written by safe_bash
-      if (!this.initialFiles.has(resolved) && !this.safeBashFiles.has(resolved)) {
-        try {
-          const stat = fs.statSync(resolved);
-          if (stat.mtimeMs > this.sessionStartTime) {
-            // File modified after session start and not tracked — only flag if in writeToolFiles
-          }
-        } catch {
-          // File doesn't exist — can't be executed
-        }
-      }
     }
 
     if (taintedFiles.length > 0) {

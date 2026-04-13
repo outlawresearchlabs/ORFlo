@@ -256,7 +256,7 @@ export class SafeBashMCPServer {
       };
     }
 
-    // 7. Network check
+    // 6. Network check
     if (!allowNetwork && NETWORK_BINARIES.includes(parsed.binaryName.toLowerCase())) {
       return {
         safe: false,

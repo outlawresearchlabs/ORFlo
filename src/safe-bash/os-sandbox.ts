@@ -8,6 +8,8 @@
  */
 
 import { execSync } from 'child_process';
+import * as crypto from 'crypto';
+import * as fs from 'fs';
 import * as path from 'path';
 import type { SandboxCapabilities, SandboxOptions, SandboxResult } from './types.js';
 
@@ -123,9 +125,8 @@ function wrapInSandboxExec(
 
   // Write profile to .claude/ within project (not /tmp — avoids predictable-path attacks)
   const profileDir = path.join(options.projectRoot, '.claude');
-  const profilePath = path.join(profileDir, `sandbox-${Date.now()}.sb`);
+  const profilePath = path.join(profileDir, `sandbox-${Date.now()}-${crypto.randomUUID?.() ?? Math.random().toString(36).slice(2)}.sb`);
   try {
-    const fs = require('fs');
     if (!fs.existsSync(profileDir)) {
       fs.mkdirSync(profileDir, { recursive: true });
     }
