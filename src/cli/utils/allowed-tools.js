@@ -146,17 +146,6 @@ const SWARM_DENIED_BASH_PATTERNS = [
   'Bash(bun /dev/shm/*)',
 ];
 
-module.exports = {
-  CORE_TOOLS,
-  SAFE_BASH_MCP_TOOL,
-  SWARM_ALLOWED_TOOLS,
-  SPARC_ALLOWED_TOOLS,
-  GITHUB_ALLOWED_TOOLS,
-  SWARM_ALLOWED_BASH_PATTERNS,
-  SWARM_DENIED_BASH_PATTERNS,
-};
-
-// ESM named exports for TypeScript consumers
 export {
   CORE_TOOLS,
   SAFE_BASH_MCP_TOOL,

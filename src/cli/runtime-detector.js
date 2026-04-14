@@ -3,6 +3,9 @@
  * Cross-platform detection and compatibility layer for Node.js and Deno
  */
 
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
 // Runtime detection
 const isNode = typeof process !== 'undefined' && process.versions && process.versions.node;
 const isDeno = typeof Deno !== 'undefined';

@@ -5,6 +5,7 @@
  */
 
 import { printSuccess, printError, printWarning, printInfo } from '../utils.js';
+import crypto from 'crypto';
 
 // GitHub API Configuration
 const GITHUB_API_BASE = 'https://api.github.com';
@@ -382,7 +383,6 @@ class GitHubAPIClient {
       return true;
     }
 
-    const crypto = require('crypto');
     const hmac = crypto.createHmac('sha256', GITHUB_WEBHOOK_SECRET);
     hmac.update(payload);
     const expectedSignature = `sha256=${hmac.digest('hex')}`;

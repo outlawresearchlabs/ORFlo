@@ -4,7 +4,7 @@
  */
 
 import { readdir, stat, mkdir, readFile, writeFile, unlink, rmdir } from 'fs/promises';
-import { existsSync } from 'fs';
+import { existsSync, mkdirSync as fsMkdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import process from 'process';
@@ -56,8 +56,7 @@ export const remove = async (path) => {
 };
 
 export const mkdirSync = (path, options = {}) => {
-  const fs = require('fs');
-  fs.mkdirSync(path, { recursive: options.recursive });
+  fsMkdirSync(path, { recursive: options.recursive });
 };
 
 export const mkdirAsync = async (path, options = {}) => {

@@ -5,10 +5,10 @@
  * Uses blessed for terminal UI
  */
 
-const blessed = require('blessed');
-const fs = require('fs').promises;
-const path = require('path');
-const { spawn } = require('child_process');
+import blessed from 'blessed';
+import { promises as fs } from 'fs';
+import path from 'path';
+import { spawn, exec } from 'child_process';
 
 class SwarmUI {
   constructor() {
@@ -564,10 +564,9 @@ class SwarmUI {
 
   async stopSwarm() {
     this.log('Stopping all swarm operations...');
-    
+
     try {
       // Kill all swarm processes (simplified)
-      const { exec } = require('child_process');
       exec('pkill -f "outlaw-flow swarm"', (error) => {
         if (error) {
           this.log(`Error stopping swarm: ${error.message}`, 'error');
@@ -587,9 +586,8 @@ class SwarmUI {
 
   async executeCommand(command) {
     this.log(`Executing command: ${command}`);
-    
+
     try {
-      const { exec } = require('child_process');
       exec(command, (error, stdout, stderr) => {
         if (error) {
           this.log(`Command error: ${error.message}`, 'error');
@@ -655,8 +653,9 @@ process.on('unhandledRejection', (error) => {
   process.exit(1);
 });
 
-if (require.main === module) {
+if (process.argv[1] && process.argv[1] === new URL(import.meta.url).pathname) {
   main();
 }
 
-module.exports = SwarmUI;
+export { SwarmUI };
+export default SwarmUI;

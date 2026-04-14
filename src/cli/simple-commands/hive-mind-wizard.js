@@ -1,7 +1,8 @@
-const chalk = require('chalk');
-const path = require('path');
-const fs = require('fs');
-const sqlite3 = require('sqlite3').verbose();
+import chalk from 'chalk';
+import path from 'path';
+import fs from 'fs';
+import sqlite3 from 'sqlite3';
+const verboseSqlite3 = sqlite3.verbose();
 
 // Interactive Wizard Implementation
 async function runInteractiveWizard() {
@@ -117,7 +118,7 @@ async function initializeHiveMind() {
     
     // Initialize SQLite database
     const dbPath = path.join(hiveMindDir, 'hive.db');
-    const db = new sqlite3.Database(dbPath);
+    const db = new verboseSqlite3.Database(dbPath);
     
     await new Promise((resolve, reject) => {
         db.serialize(() => {
@@ -204,7 +205,7 @@ async function createSwarm(objective, config) {
         
         // Open database
         const dbPath = path.join(process.cwd(), '.hive-mind', 'hive.db');
-        const db = new sqlite3.Database(dbPath);
+        const db = new verboseSqlite3.Database(dbPath);
         
         await new Promise((resolve, reject) => {
             db.serialize(() => {
@@ -276,4 +277,4 @@ async function createSwarm(objective, config) {
     }
 }
 
-module.exports = { runInteractiveWizard };
+export { runInteractiveWizard };
