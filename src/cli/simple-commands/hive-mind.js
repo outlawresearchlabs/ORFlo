@@ -152,16 +152,20 @@ async function initHiveMind(flags) {
       
       CREATE TABLE IF NOT EXISTS collective_memory (
         id TEXT PRIMARY KEY,
-        swarm_id TEXT,
+        swarm_id TEXT NOT NULL,
         key TEXT NOT NULL,
-        value TEXT,
+        value BLOB,
         type TEXT DEFAULT 'knowledge',
         confidence REAL DEFAULT 1.0,
         created_by TEXT,
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        created_at INTEGER DEFAULT (strftime('%s','now')),
+        accessed_at INTEGER DEFAULT (strftime('%s','now')),
+        access_count INTEGER DEFAULT 0,
+        compressed INTEGER DEFAULT 0,
+        size INTEGER DEFAULT 0,
         FOREIGN KEY (swarm_id) REFERENCES swarms(id)
       );
-      
+
       CREATE TABLE IF NOT EXISTS consensus_decisions (
         id TEXT PRIMARY KEY,
         swarm_id TEXT,
@@ -427,11 +431,12 @@ async function spawnSwarm(args, flags) {
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
         objective TEXT,
-        queen_type TEXT,
+        queen_type TEXT DEFAULT 'strategic',
         status TEXT DEFAULT 'active',
-        created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
       );
-      
+
       CREATE TABLE IF NOT EXISTS agents (
         id TEXT PRIMARY KEY,
         swarm_id TEXT NOT NULL,
@@ -443,17 +448,47 @@ async function spawnSwarm(args, flags) {
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (swarm_id) REFERENCES swarms(id)
       );
-      
+
       CREATE TABLE IF NOT EXISTS tasks (
         id TEXT PRIMARY KEY,
         swarm_id TEXT NOT NULL,
         agent_id TEXT,
         description TEXT,
         status TEXT DEFAULT 'pending',
+        priority INTEGER DEFAULT 5,
         result TEXT,
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        completed_at DATETIME,
         FOREIGN KEY (swarm_id) REFERENCES swarms(id),
         FOREIGN KEY (agent_id) REFERENCES agents(id)
+      );
+
+      CREATE TABLE IF NOT EXISTS collective_memory (
+        id TEXT PRIMARY KEY,
+        swarm_id TEXT NOT NULL,
+        key TEXT NOT NULL,
+        value BLOB,
+        type TEXT DEFAULT 'knowledge',
+        confidence REAL DEFAULT 1.0,
+        created_by TEXT,
+        created_at INTEGER DEFAULT (strftime('%s','now')),
+        accessed_at INTEGER DEFAULT (strftime('%s','now')),
+        access_count INTEGER DEFAULT 0,
+        compressed INTEGER DEFAULT 0,
+        size INTEGER DEFAULT 0,
+        FOREIGN KEY (swarm_id) REFERENCES swarms(id)
+      );
+
+      CREATE TABLE IF NOT EXISTS consensus_decisions (
+        id TEXT PRIMARY KEY,
+        swarm_id TEXT,
+        topic TEXT NOT NULL,
+        decision TEXT,
+        votes TEXT,
+        algorithm TEXT DEFAULT 'majority',
+        confidence REAL,
+        created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+        FOREIGN KEY (swarm_id) REFERENCES swarms(id)
       );
     `);
       spinner.text = 'Database schema created successfully';
@@ -461,7 +496,56 @@ async function spawnSwarm(args, flags) {
       console.error('Database schema creation failed:', error);
       throw new Error(`Failed to create database schema: ${error.message}`);
     }
-    
+
+    // Migrate existing tables: add missing columns if upgrading from older schema
+    try {
+      const tableInfo = {};
+
+      // Collect existing columns for each table
+      for (const table of ['swarms', 'agents', 'tasks', 'collective_memory']) {
+        try {
+          const cols = db.prepare(`PRAGMA table_info(${table})`).all();
+          tableInfo[table] = new Set(cols.map(c => c.name));
+        } catch (e) {
+          // Table doesn't exist yet, skip
+        }
+      }
+
+      // Add missing columns to swarms
+      if (tableInfo.swarms && !tableInfo.swarms.has('updated_at')) {
+        db.exec(`ALTER TABLE swarms ADD COLUMN updated_at DATETIME DEFAULT CURRENT_TIMESTAMP`);
+      }
+
+      // Add missing columns to tasks
+      if (tableInfo.tasks) {
+        if (!tableInfo.tasks.has('priority')) {
+          db.exec(`ALTER TABLE tasks ADD COLUMN priority INTEGER DEFAULT 5`);
+        }
+        if (!tableInfo.tasks.has('completed_at')) {
+          db.exec(`ALTER TABLE tasks ADD COLUMN completed_at DATETIME`);
+        }
+      }
+
+      // Add missing columns to collective_memory
+      if (tableInfo.collective_memory) {
+        if (!tableInfo.collective_memory.has('accessed_at')) {
+          db.exec(`ALTER TABLE collective_memory ADD COLUMN accessed_at INTEGER DEFAULT (strftime('%s','now'))`);
+        }
+        if (!tableInfo.collective_memory.has('access_count')) {
+          db.exec(`ALTER TABLE collective_memory ADD COLUMN access_count INTEGER DEFAULT 0`);
+        }
+        if (!tableInfo.collective_memory.has('compressed')) {
+          db.exec(`ALTER TABLE collective_memory ADD COLUMN compressed INTEGER DEFAULT 0`);
+        }
+        if (!tableInfo.collective_memory.has('size')) {
+          db.exec(`ALTER TABLE collective_memory ADD COLUMN size INTEGER DEFAULT 0`);
+        }
+      }
+    } catch (migrationError) {
+      // Non-fatal: migration errors mean columns already exist or tables are empty
+      // Continue anyway
+    }
+
     // Create swarm record with safe ID generation
     spinner.text = 'Creating swarm record...';
     const timestamp = Date.now();
