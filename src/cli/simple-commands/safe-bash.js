@@ -53,11 +53,15 @@ export async function safeBashCommand(subArgs, flags) {
       }
 
       try {
-        const { parseShellCommand } = await import('../../safe-bash/shell-parser.js');
-        const { checkInjection } = await import('../../safe-bash/injection-detector.js');
-        const { checkBinary } = await import('../../safe-bash/binary-allowlist.js');
-        const { resolveAndCheckPaths } = await import('../../safe-bash/path-resolver.js');
-        const { detectSandboxCapabilitiesSync } = await import('../../safe-bash/os-sandbox.js');
+        // Register tsx for .ts imports when running under plain node
+        if (!process[Symbol.for('tsx:registered')]) {
+          await import('tsx/esm');
+        }
+        const { parseShellCommand } = await import('../../safe-bash/shell-parser.ts');
+        const { checkInjection } = await import('../../safe-bash/injection-detector.ts');
+        const { checkBinary } = await import('../../safe-bash/binary-allowlist.ts');
+        const { resolveAndCheckPaths } = await import('../../safe-bash/path-resolver.ts');
+        const { detectSandboxCapabilitiesSync } = await import('../../safe-bash/os-sandbox.ts');
 
         const parsed = parseShellCommand(testCommand);
         const injection = checkInjection(parsed);

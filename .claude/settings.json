@@ -82,11 +82,10 @@
       }
     },
     "safe-bash": {
-      "command": "node",
+      "command": "npx",
       "args": [
-        "./src/cli/simple-cli.js",
-        "safe-bash",
-        "start"
+        "tsx",
+        "./src/safe-bash/safe-bash-server.ts"
       ],
       "env": {
         "OUTLAW_FLOW_SAFE_BASH_LOG_LEVEL": "info"
