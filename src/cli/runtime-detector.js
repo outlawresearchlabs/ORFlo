@@ -1,6 +1,10 @@
 /**
  * Runtime Environment Detection
  * Cross-platform detection and compatibility layer for Node.js and Deno
+ *
+ * Note: This file uses `import { createRequire } from 'module'` which is
+ * Node.js-only. Deno support is aspirational — if Deno compat is needed,
+ * gate the import behind a dynamic import() in an async init function.
  */
 
 import { createRequire } from 'module';
@@ -9,7 +13,7 @@ import { createRequire } from 'module';
 const isNode = typeof process !== 'undefined' && process.versions && process.versions.node;
 const isDeno = typeof Deno !== 'undefined';
 
-// CJS require for Node.js; Deno has no createRequire so provide a stub that throws
+// CJS require for Node.js; stub for other runtimes
 const require = isNode
   ? createRequire(import.meta.url)
   : () => { throw new Error('require not available in this runtime'); };
