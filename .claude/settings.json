@@ -18,36 +18,50 @@
       "WebSearch",
       "WebFetch"
     ],
-    "deny": []
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(curl * | bash)",
+      "Bash(wget * | sh)",
+      "Bash(eval *)",
+      "Bash(node /tmp/*)",
+      "Bash(node /var/tmp/*)",
+      "Bash(node /dev/shm/*)",
+      "Bash(npx /tmp/*)",
+      "Bash(npx /var/tmp/*)",
+      "Bash(npx /dev/shm/*)",
+      "Bash(bun /tmp/*)",
+      "Bash(bun /var/tmp/*)",
+      "Bash(bun /dev/shm/*)"
+    ]
   },
   "hooks": {
     "preEditHook": {
       "command": "node",
-      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "pre-edit", "--file", "${file}", "--auto-assign-agents", "true", "--load-context", "true"],
+      "args": ["./src/cli/simple-cli.js", "hooks", "pre-edit", "--file", "${file}", "--auto-assign-agents", "true", "--load-context", "true"],
       "alwaysRun": false,
       "outputFormat": "json"
     },
     "postEditHook": {
       "command": "node",
-      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "post-edit", "--file", "${file}", "--format", "true", "--update-memory", "true", "--train-neural", "true"],
+      "args": ["./src/cli/simple-cli.js", "hooks", "post-edit", "--file", "${file}", "--format", "true", "--update-memory", "true", "--train-neural", "true"],
       "alwaysRun": true,
       "outputFormat": "json"
     },
     "preCommandHook": {
       "command": "node",
-      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "pre-command", "--command", "${command}", "--validate-safety", "true", "--prepare-resources", "true"],
+      "args": ["./src/cli/simple-cli.js", "hooks", "pre-command", "--command", "${command}", "--validate-safety", "true", "--prepare-resources", "true"],
       "alwaysRun": false,
       "outputFormat": "json"
     },
     "postCommandHook": {
       "command": "node",
-      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "post-command", "--command", "${command}", "--track-metrics", "true", "--store-results", "true"],
+      "args": ["./src/cli/simple-cli.js", "hooks", "post-command", "--command", "${command}", "--track-metrics", "true", "--store-results", "true"],
       "alwaysRun": false,
       "outputFormat": "json"
     },
     "sessionEndHook": {
       "command": "node",
-      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "session-end", "--generate-summary", "true", "--persist-state", "true", "--export-metrics", "true"],
+      "args": ["./src/cli/simple-cli.js", "hooks", "session-end", "--generate-summary", "true", "--persist-state", "true", "--export-metrics", "true"],
       "alwaysRun": true,
       "outputFormat": "json"
     }
@@ -56,7 +70,7 @@
     "outlaw-flow": {
       "command": "node",
       "args": [
-        "/home/ngrant/ORFlo/src/cli/simple-cli.js",
+        "./src/cli/simple-cli.js",
         "mcp",
         "start"
       ],
@@ -70,7 +84,7 @@
     "safe-bash": {
       "command": "node",
       "args": [
-        "/home/ngrant/ORFlo/src/cli/simple-cli.js",
+        "./src/cli/simple-cli.js",
         "safe-bash",
         "start"
       ],

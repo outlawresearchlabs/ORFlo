@@ -87,7 +87,7 @@ Message 6: Write "package.json"
 ### 1. Add MCP Server (Stdio - No Port Needed)
 ```bash
 # Add Outlaw Flow MCP server to Claude Code using stdio
-claude mcp add outlaw-flow node /home/ngrant/ORFlo/src/cli/simple-cli.js mcp start
+claude mcp add outlaw-flow node ./src/cli/simple-cli.js mcp start
 ```
 
 ### 2. Use MCP Tools for Coordination in Claude Code
@@ -165,9 +165,9 @@ Once configured, Outlaw Flow MCP tools enhance Claude Code's coordination:
 **What Actually Happens:**
 1. The swarm sets up a coordination framework
 2. Each agent MUST use Outlaw Flow hooks for coordination:
-   - `node /home/ngrant/ORFlo/src/cli/simple-cli.js hook pre-task` before starting
-   - `node /home/ngrant/ORFlo/src/cli/simple-cli.js hook post-edit` after each file operation
-   - `node /home/ngrant/ORFlo/src/cli/simple-cli.js hook notification` to share decisions
+   - `node ./src/cli/simple-cli.js hooks pre-task` before starting
+   - `node ./src/cli/simple-cli.js hooks post-edit` after each file operation
+   - `node ./src/cli/simple-cli.js hooks notification` to share decisions
 3. Claude Code uses its native Read, WebSearch, and Task tools
 4. The swarm coordinates through shared memory and hooks
 5. Results are synthesized by Claude Code with full coordination history
@@ -332,27 +332,27 @@ When you spawn an agent using the Task tool, that agent MUST:
 **1️⃣ BEFORE Starting Work:**
 ```bash
 # Check previous work and load context
-node /home/ngrant/ORFlo/src/cli/simple-cli.js hook pre-task --description "[agent task]" --auto-spawn-agents false
-node /home/ngrant/ORFlo/src/cli/simple-cli.js hook session-restore --session-id "swarm-[id]" --load-memory true
+node ./src/cli/simple-cli.js hooks pre-task --description "[agent task]" --auto-spawn-agents false
+node ./src/cli/simple-cli.js hooks session-restore --session-id "swarm-[id]" --load-memory true
 ```
 
 **2️⃣ DURING Work (After EVERY Major Step):**
 ```bash
 # Store progress in memory after each file operation
-node /home/ngrant/ORFlo/src/cli/simple-cli.js hook post-edit --file "[filepath]" --memory-key "swarm/[agent]/[step]"
+node ./src/cli/simple-cli.js hooks post-edit --file "[filepath]" --memory-key "swarm/[agent]/[step]"
 
 # Store decisions and findings
-node /home/ngrant/ORFlo/src/cli/simple-cli.js hook notification --message "[what was done]" --telemetry true
+node ./src/cli/simple-cli.js hooks notification --message "[what was done]" --telemetry true
 
 # Check coordination with other agents
-node /home/ngrant/ORFlo/src/cli/simple-cli.js hook pre-search --query "[what to check]" --cache-results true
+node ./src/cli/simple-cli.js hooks pre-search --query "[what to check]" --cache-results true
 ```
 
 **3️⃣ AFTER Completing Work:**
 ```bash
 # Save all results and learnings
-node /home/ngrant/ORFlo/src/cli/simple-cli.js hook post-task --task-id "[task]" --analyze-performance true
-node /home/ngrant/ORFlo/src/cli/simple-cli.js hook session-end --export-metrics true --generate-summary true
+node ./src/cli/simple-cli.js hooks post-task --task-id "[task]" --analyze-performance true
+node ./src/cli/simple-cli.js hooks session-end --export-metrics true --generate-summary true
 ```
 
 ### 🎯 AGENT PROMPT TEMPLATE
@@ -363,10 +363,10 @@ When spawning agents, ALWAYS include these coordination instructions:
 You are the [Agent Type] agent in a coordinated swarm.
 
 MANDATORY COORDINATION:
-1. START: Run `node /home/ngrant/ORFlo/src/cli/simple-cli.js hook pre-task --description "[your task]"`
-2. DURING: After EVERY file operation, run `node /home/ngrant/ORFlo/src/cli/simple-cli.js hook post-edit --file "[file]" --memory-key "agent/[step]"`
-3. MEMORY: Store ALL decisions using `node /home/ngrant/ORFlo/src/cli/simple-cli.js hook notification --message "[decision]"`
-4. END: Run `node /home/ngrant/ORFlo/src/cli/simple-cli.js hook post-task --task-id "[task]" --analyze-performance true`
+1. START: Run `node ./src/cli/simple-cli.js hooks pre-task --description "[your task]"`
+2. DURING: After EVERY file operation, run `node ./src/cli/simple-cli.js hooks post-edit --file "[file]" --memory-key "agent/[step]"`
+3. MEMORY: Store ALL decisions using `node ./src/cli/simple-cli.js hooks notification --message "[decision]"`
+4. END: Run `node ./src/cli/simple-cli.js hooks post-task --task-id "[task]" --analyze-performance true`
 
 Your specific task: [detailed task description]
 

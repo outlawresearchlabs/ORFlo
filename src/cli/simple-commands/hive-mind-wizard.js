@@ -1,4 +1,6 @@
-import chalk from 'chalk';
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+const chalk = require('chalk');
 import path from 'path';
 import fs from 'fs';
 import sqlite3 from 'sqlite3';
