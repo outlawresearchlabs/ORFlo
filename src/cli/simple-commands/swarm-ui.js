@@ -6,6 +6,8 @@
  */
 
 import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { resolve } from 'path';
 const require = createRequire(import.meta.url);
 const blessed = require('blessed');
 import { promises as fs } from 'fs';
@@ -655,8 +657,12 @@ process.on('unhandledRejection', (error) => {
   process.exit(1);
 });
 
-// ESM entry point detection
-main();
+// Run when executed directly (node swarm-ui.js), not when imported for the class
+const __filename = fileURLToPath(import.meta.url);
+if (process.argv[1] && resolve(process.argv[1]) === __filename) {
+  main();
+}
 
-export { SwarmUI };
+export { SwarmUI, main };
+
 export default SwarmUI;
