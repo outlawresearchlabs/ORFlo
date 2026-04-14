@@ -9,76 +9,54 @@
   },
   "permissions": {
     "allow": [
-      "Bash(npx outlaw-flow *)",
-      "Bash(npm run lint)",
-      "Bash(npm run test:*)",
-      "Bash(npm test *)",
-      "Bash(git status)",
-      "Bash(git diff *)",
-      "Bash(git log *)",
-      "Bash(git add *)",
-      "Bash(git commit *)",
-      "Bash(git push)",
-      "Bash(git config *)",
-      "Bash(gh *)",
-      "Bash(node *)",
-      "Bash(which *)",
-      "Bash(pwd)",
-      "Bash(ls *)"
+      "mcp__safe-bash__safe_bash",
+      "Read",
+      "Write",
+      "Edit",
+      "Glob",
+      "Grep",
+      "WebSearch",
+      "WebFetch"
     ],
-    "deny": [
-      "Bash(rm -rf /)",
-      "Bash(curl * | bash)",
-      "Bash(wget * | sh)",
-      "Bash(eval *)",
-      "Bash(node /tmp/*)",
-      "Bash(node /var/tmp/*)",
-      "Bash(node /dev/shm/*)",
-      "Bash(npx /tmp/*)",
-      "Bash(npx /var/tmp/*)",
-      "Bash(npx /dev/shm/*)",
-      "Bash(bun /tmp/*)",
-      "Bash(bun /var/tmp/*)",
-      "Bash(bun /dev/shm/*)"
-    ]
+    "deny": []
   },
   "hooks": {
     "preEditHook": {
-      "command": "npx",
-      "args": ["outlaw-flow", "hook", "pre-edit", "--file", "${file}", "--auto-assign-agents", "true", "--load-context", "true"],
+      "command": "node",
+      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "pre-edit", "--file", "${file}", "--auto-assign-agents", "true", "--load-context", "true"],
       "alwaysRun": false,
       "outputFormat": "json"
     },
     "postEditHook": {
-      "command": "npx",
-      "args": ["outlaw-flow", "hook", "post-edit", "--file", "${file}", "--format", "true", "--update-memory", "true", "--train-neural", "true"],
+      "command": "node",
+      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "post-edit", "--file", "${file}", "--format", "true", "--update-memory", "true", "--train-neural", "true"],
       "alwaysRun": true,
       "outputFormat": "json"
     },
     "preCommandHook": {
-      "command": "npx",
-      "args": ["outlaw-flow", "hook", "pre-command", "--command", "${command}", "--validate-safety", "true", "--prepare-resources", "true"],
+      "command": "node",
+      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "pre-command", "--command", "${command}", "--validate-safety", "true", "--prepare-resources", "true"],
       "alwaysRun": false,
       "outputFormat": "json"
     },
     "postCommandHook": {
-      "command": "npx",
-      "args": ["outlaw-flow", "hook", "post-command", "--command", "${command}", "--track-metrics", "true", "--store-results", "true"],
+      "command": "node",
+      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "post-command", "--command", "${command}", "--track-metrics", "true", "--store-results", "true"],
       "alwaysRun": false,
       "outputFormat": "json"
     },
     "sessionEndHook": {
-      "command": "npx",
-      "args": ["outlaw-flow", "hook", "session-end", "--generate-summary", "true", "--persist-state", "true", "--export-metrics", "true"],
+      "command": "node",
+      "args": ["/home/ngrant/ORFlo/src/cli/simple-cli.js", "hooks", "session-end", "--generate-summary", "true", "--persist-state", "true", "--export-metrics", "true"],
       "alwaysRun": true,
       "outputFormat": "json"
     }
   },
   "mcpServers": {
     "outlaw-flow": {
-      "command": "npx",
+      "command": "node",
       "args": [
-        "outlaw-flow",
+        "/home/ngrant/ORFlo/src/cli/simple-cli.js",
         "mcp",
         "start"
       ],
@@ -87,6 +65,17 @@
         "OUTLAW_FLOW_TELEMETRY_ENABLED": "true",
         "OUTLAW_FLOW_REMOTE_READY": "true",
         "OUTLAW_FLOW_GITHUB_INTEGRATION": "true"
+      }
+    },
+    "safe-bash": {
+      "command": "node",
+      "args": [
+        "/home/ngrant/ORFlo/src/cli/simple-cli.js",
+        "safe-bash",
+        "start"
+      ],
+      "env": {
+        "OUTLAW_FLOW_SAFE_BASH_LOG_LEVEL": "info"
       }
     }
   },
